@@ -2,10 +2,13 @@ export interface IUser {
     id: String
     username: String
     password: String
+    contact: Icontact
+}
+
+export interface Icontact {
     email: String
     telephone: String
 }
-
 
 export class User {
     

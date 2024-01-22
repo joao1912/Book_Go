@@ -1,16 +1,27 @@
-import { IUser } from "../../../entities/User";
+import { IGetAll } from "../repositories/user/IGetAll";
+import { prisma } from "../../../../prisma/db";
 
-export interface IGetAll {
-    execute(): Promise<IUser[]>
-}
 
-export class GetAll {
+export class GetAll implements IGetAll {
     
-    execute() {
+    async execute() {
 
+        const users = await prisma.user.findMany({
+            select: {
+                id: true,
+                username: true,
+                password: true,
+                contact: {
+                  select: {
+                    email: true,
+                    telephone: true
+                  }
+                }
+            }
+        })
 
+        return users
 
     }
 
 }
-
