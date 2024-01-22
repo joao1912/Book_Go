@@ -1,7 +1,8 @@
-import { GetAll } from "./adapters/ormAdapter/prismaAdapter/GetAll";
-import { GetAllUsers } from "./usecases/user/getAllUsers";
+import { Server } from "./server";
+import HTTPAdapter from "./adapters/HTTPAdapter/protocol";
+import dotenv from "dotenv";
+dotenv.config();
 
-const ormGetAll = new GetAll() 
+const server = new Server(HTTPAdapter)
 
-const getAllUsers = new GetAllUsers(ormGetAll)
-
+server.start()
