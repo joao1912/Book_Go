@@ -1,8 +1,8 @@
-import { IGetAll } from "../../repositories/user/IGetAll";
+import { IGetAll } from "../../repositories/user/IGetAllUsers";
 import { prisma } from "../../../../../prisma/db";
 
 
-export class GetAll implements IGetAll {
+export class GetAllUsers implements IGetAll {
     
     async execute() {
 
