@@ -1,5 +1,5 @@
-import { IGetAll } from "../repositories/user/IGetAll";
-import { prisma } from "../../../../prisma/db";
+import { IGetAll } from "../../repositories/user/IGetAll";
+import { prisma } from "../../../../../prisma/db";
 
 
 export class GetAll implements IGetAll {
