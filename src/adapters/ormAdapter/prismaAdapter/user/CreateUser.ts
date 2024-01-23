@@ -4,21 +4,36 @@ import { ICreateUser } from "../../repositories/user/ICreateUser";
 
  export class CreateUser implements ICreateUser {
   
-    async execute(user: Omit<IUser, "id">) {
+    async execute({username, contact, password}: Omit<IUser, "id">) {
 
 
-        const users = await prisma.user.create({
+        const user = await prisma.user.create({
             data: {
-                username: user.username,
-                password: user.password,
+                username: username,
+                password: password,
                 contact: {
-                    email: user.contact.email,
-                    telephone: user.contact.telephone
-                  }
+                    create: {
+                        email: contact.email,
+                        telephone: contact.telephone
+                      }
+                }
+               
               },
+              select: {
+                id: true,
+                username: true,
+                password: true,
+                contact: {
+                  select: {
+                    email: true,
+                    telephone: true
+                  }
+                }
+            }
+             
                 
         })
-        return users
+        return user
 
     }
  }

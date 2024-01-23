@@ -4,22 +4,38 @@ import { IUpdateUser } from "../../repositories/user/IUpdateUser";
 
  export class CreateUser implements IUpdateUser{
   
-    async execute(user) {
+    async execute({id,username, password, contact}: Partial<IUser>) {
 
 
         const users = await prisma.user.update({
             where: {
-                id: user.id
+                id: id
             },
             
             data: {
-                username: user.username || undefined,
-                password: user.password || undefined,
+                username: username || undefined,
+                password: password || undefined,
+
                 contact: {
-                    email: user.contact.email || undefined,
-                    telephone: user.contact.telephone || undefined
+                    update: {
+                    data: {   
+                        email: contact?.email || undefined,
+                        telephone: contact?.telephone || undefined}
+                 
                   }
+                }
               },
+              select: {
+                id: true,
+                username: true,
+                password: true,
+                contact: {
+                  select: {
+                    email: true,
+                    telephone: true
+                  }
+                }
+            }
                 
         })
         return users

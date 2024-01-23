@@ -1,5 +1,5 @@
 import { IUser } from "../../../../entities/User"
 
 export interface IUpdateUser {
-    execute(user: ): Promise<IUser[]>
+    execute(user: Partial<IUser> ): Promise<IUser>
 }
