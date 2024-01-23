@@ -1,24 +1,24 @@
 export interface IUser {
-    id: String
-    username: String
-    password: String
+    id: string
+    username: string
+    password: string
     contact: Icontact
 }
 
 export interface Icontact {
-    email: String
-    telephone: String
+    email: string
+    telephone: string
 }
 
 export class User {
     
-    readonly id: String
-    readonly username: String
-    readonly password: String
-    readonly email: String
-    readonly telephone: String
+    readonly id: string
+    readonly username: string
+    readonly password: string
+    readonly email: string
+    readonly telephone: string
 
-    constructor(id: String, username: String, email: String, telephone: String, password: String) {
+    constructor(id: string, username: string, email: string, telephone: string, password: string) {
         this.id = id
         this.username = username
         this.email = email
