@@ -17,13 +17,15 @@ export class User {
     readonly password: string
     readonly email: string
     readonly telephone: string
+    readonly favoritesBooks: number[]
 
-    constructor(id: string, username: string, email: string, telephone: string, password: string) {
+    constructor(id: string, username: string, email: string, telephone: string, password: string, favoritesBooks = []) {
         this.id = id
         this.username = username
         this.email = email
         this.telephone = telephone
         this.password = password
+        this.favoritesBooks = favoritesBooks
     }
 
     getUser() {

@@ -2,7 +2,7 @@ import { prisma } from "../../../../../prisma/db";
 import { IUser } from "../../../../entities/User";
 import { IUpdateUser } from "../../repositories/user/IUpdateUser";
 
- export class CreateUser implements IUpdateUser{
+ export class UpdateUser implements IUpdateUser{
   
     async execute({id,username, password, contact}: Partial<IUser>) {
 
