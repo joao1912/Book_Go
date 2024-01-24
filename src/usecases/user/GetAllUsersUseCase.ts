@@ -2,7 +2,7 @@ import { IGetAllUsers } from "../../adapters/ormAdapter/repositories/user/IGetAl
 
 // a classe vai receber como argumento(ormAdapter) o metodo do prisma que vai relizar a operação
 
-export class GetAllUsers {
+export class GetAllUsersUseCase {
 
     protected userService: IGetAllUsers
     constructor(ormAdapter: IGetAllUsers) {

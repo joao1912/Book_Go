@@ -23,6 +23,10 @@ export class Finance {
 
     }
 
+    getId() {
+        return this.id
+    }
+
     public getPayment() {
         return this.payment
     }

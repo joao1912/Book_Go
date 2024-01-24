@@ -18,6 +18,10 @@ export class Comment {
         this.comment = comment;
     }
 
+    getId() {
+        return this.id
+    }
+
     getBookId() {
         return this.bookId
     }
