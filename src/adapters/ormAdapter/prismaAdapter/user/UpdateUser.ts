@@ -5,9 +5,10 @@ import { IUpdateUser } from "../../repositories/user/IUpdateUser";
  export class UpdateUser implements IUpdateUser{
   
     async execute({id,username, password, contact}: Partial<IUser>) {
+       
 
-
-        const users = await prisma.user.update({
+        try {
+          const user = await prisma.user.update({
             where: {
                 id: id
             },
@@ -38,7 +39,20 @@ import { IUpdateUser } from "../../repositories/user/IUpdateUser";
             }
                 
         })
-        return users
+
+        for (let prop in user){
+          if (prop == undefined ){
+            console.log(prop)
+              delete user[prop]
+             
+          }
+        }
+        return user
+        } catch (error) {
+          throw new Error("Something happened: " + error)
+        }
+       
+        // return users
 
     }
  }
