@@ -1,10 +1,19 @@
-import { createUser } from "../../src/adapters/ormAdapter/protocols"
+import { createUser, deleteUser } from "../../src/adapters/ormAdapter/protocols"
 import { IUser } from "../../src/entities/User"
 import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
+import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
 
 
 
 describe('testes do orm prisma, user repository', () => {
+
+    it('deve deletar um usuario por id', async () => {
+
+        const deleteUserUseCase = new DeleteUserUseCase(deleteUser)
+
+        
+
+    })
 
     it('deve retornar o id do usuario criado', async () => {
 
