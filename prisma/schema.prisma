@@ -20,9 +20,17 @@ model User {
 
   updateAt DateTime @updatedAt
 
-  contact Contact @relation(fields: [fk_id_contact], references: [id])
-
   fk_id_contact String @unique
+
+  reservations Reservation?
+
+  favorites Favorite?
+
+  comments Comment?
+
+  finances Finance?
+
+  contact Contact @relation(fields: [fk_id_contact], references: [id], onDelete: Cascade)
 
   @@map("users")
 
@@ -43,4 +51,203 @@ model Contact {
   user User?
 
   @@map("contacts")
+}
+
+model Book {
+
+  id String @id @default(uuid())
+
+  title String
+
+  price Float
+
+  synopsis String  
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  favorites Favorite?
+
+  comments Comment?
+
+  reservations Reservation?
+
+  finances Finance?
+
+  stock Stock?
+
+  books_tags Book_tag?
+
+  books_authors Book_author?
+
+}
+
+model Favorite {
+
+  id String @id @default(uuid())
+
+  fk_id_book String @unique
+
+  fk_id_user String @unique
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [fk_id_user], references: [id], onDelete: Cascade)
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@map("favorites")
+
+}
+
+model Comment {
+
+  id String @id @default(uuid())
+
+  fk_id_book String @unique
+
+  fk_id_user String @unique
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [fk_id_user], references: [id])
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@map("comments")
+
+}
+
+model Reservation {
+
+  id String @id @default(uuid())
+
+  price Float
+
+  fk_id_book String @unique
+
+  fk_id_user String @unique
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [fk_id_user], references: [id])
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@map("reservations")
+
+}
+
+model Finance {
+
+  id String @id @default(uuid())
+
+  payments String
+
+  total Float
+
+  fk_id_book String @unique
+
+  fk_id_user String @unique
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  user User @relation(fields: [fk_id_user], references: [id])
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@map("finances")
+}
+
+model Stock {
+
+  id String @id @default(uuid())
+
+  quantity Int
+
+  fk_id_book String @unique
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@map("stock")
+
+}
+
+model Author {
+
+  id String @id @default(uuid())
+
+  name String
+
+  description String
+
+  books_authors Book_author?
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  @@map("authors")
+
+}
+
+model Tag {
+
+  id String @id @default(uuid())
+
+  genre String
+
+  books_tags Book_tag?
+
+  createdAt DateTime  @default(now())
+
+  updateAt DateTime @updatedAt
+
+  @@map("tags")
+
+}
+
+model Book_author {
+
+  fk_id_author String @unique
+
+  fk_id_book String @unique
+
+  author Author @relation(fields: [fk_id_author], references: [id])
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@id([fk_id_author, fk_id_book])
+
+  @@map("books_authors")
+
+}
+
+model Book_tag {
+
+  fk_id_tag String @unique
+
+  fk_id_book String @unique
+
+  tag Tag @relation(fields: [fk_id_tag], references: [id])
+
+  book Book @relation(fields: [fk_id_book], references: [id])
+
+  @@id([fk_id_tag, fk_id_book])
+
+  @@map("books_tags")
+
 }
