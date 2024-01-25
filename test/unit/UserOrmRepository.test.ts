@@ -1,6 +1,7 @@
-import { createUser } from "../../src/adapters/ormAdapter/protocols"
+import { createUser, updateUser } from "../../src/adapters/ormAdapter/protocols"
 import { IUser } from "../../src/entities/User"
 import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
+import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
 
 
 
@@ -10,7 +11,7 @@ describe('testes do orm prisma, user repository', () => {
 
         const createUserUseCase = new CreateUserUseCase(createUser)
 
-        const userByCreate: Omit<IUser, 'id'> = {
+        const userToBeCreated: Omit<IUser, 'id'> = {
             username: 'cleiton',
             password: 'cleiton123',
             contact: {
@@ -19,10 +20,32 @@ describe('testes do orm prisma, user repository', () => {
             }
         }
 
-        const user = await createUserUseCase.execute(userByCreate)
+        const user = await createUserUseCase.execute(userToBeCreated)
 
         expect(user).toHaveProperty('id')
 
     })
 
+
+    it ('deve mudar todos os usuario, exceto o username', async() => {
+
+        const updateUserUseCase = new UpdateUserUseCase(updateUser) 
+
+        const updateToDo: Partial <IUser> = {
+            password: '123cleitinho',
+            contact: {
+                email: 'cleitao@hotmail.com',
+                telephone: '51438888493'
+            }
+        }
+
+        const upUser = await updateUserUseCase.execute(updateToDo)
+        console.log("Up user: ", upUser)
+        expect(upUser).toEqual(updateToDo)
+
+
+
+
+    })
 })
+
