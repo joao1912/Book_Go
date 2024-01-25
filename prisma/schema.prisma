@@ -20,8 +20,6 @@ model User {
 
   updateAt DateTime @updatedAt
 
-  fk_id_contact String @unique
-
   reservations Reservation?
 
   favorites Favorite?
@@ -30,7 +28,7 @@ model User {
 
   finances Finance?
 
-  contact Contact @relation(fields: [fk_id_contact], references: [id], onDelete: Cascade)
+  contact Contact?
 
   @@map("users")
 
@@ -48,7 +46,9 @@ model Contact {
 
   updateAt DateTime @updatedAt
 
-  user User?
+  fk_id_user String @unique
+
+  user User @relation(fields: [fk_id_user], references: [id], onDelete: Cascade)
 
   @@map("contacts")
 }
