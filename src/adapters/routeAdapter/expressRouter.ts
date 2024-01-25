@@ -17,7 +17,7 @@ export class ExpressRouter implements IRouterAdapterRepository {
 
     get(rota: string, controller: any, plugins: any[] = []): void {
 
-        this.Router.get(rota, ...[controller, ...plugins])
+        this.Router.get(rota, ...[plugins, ...controller])
     
     }
 
