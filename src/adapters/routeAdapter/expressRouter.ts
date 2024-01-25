@@ -6,13 +6,19 @@ export class ExpressRouter implements IRouterAdapterRepository {
 
     protected Router: Router
     constructor() {
-        this.Router = express.Router()
+        this.Router = Router()
     }
 
-    get(rota: string, controller: any): void {
-        
-        this.Router.get(rota, controller)
+    getRoute() {
 
+        return this.Router
+
+    }
+
+    get(rota: string, controller: any, plugins: any[] = []): void {
+
+        this.Router.get(rota, ...[controller, ...plugins])
+    
     }
 
     post(rota: string, controller: any): void {

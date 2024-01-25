@@ -1,7 +1,7 @@
 
 export interface IRouterAdapterRepository {
 
-    get(rota: string, controller: any): void;
+    get(rota: string, controller: any, plugins: any[]): void;
 
     post(rota: string, controller: any): void;
 

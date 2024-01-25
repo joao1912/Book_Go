@@ -1,4 +1,4 @@
 import { ExpressRouter } from "./expressRouter";
-const Router = new ExpressRouter()
+const Router = ExpressRouter
 
 export default Router
