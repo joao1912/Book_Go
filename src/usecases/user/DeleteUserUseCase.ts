@@ -13,7 +13,7 @@ export class DeleteUserUseCase {
 
         try {
             
-            await this.userService.execute(id)
+            return await this.userService.execute(id)
 
         } catch (error) {
 
