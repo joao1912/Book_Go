@@ -12,9 +12,13 @@ model User {
 
   id  String  @id @default(uuid())
 
-  username String
+  username String 
 
   password String
+
+  email String @unique
+  
+  telephone String  @unique
 
   createdAt DateTime  @default(now())
 
@@ -28,30 +32,10 @@ model User {
 
   finances Finance?
 
-  contact Contact?
-
   @@map("users")
 
 }
 
-model Contact {
-
-  id String @id @default(uuid())
-  
-  email String @unique
-  
-  telephone String  @unique
-
-  createdAt DateTime  @default(now())
-
-  updateAt DateTime @updatedAt
-
-  fk_id_user String @unique
-
-  user User @relation(fields: [fk_id_user], references: [id], onDelete: Cascade)
-
-  @@map("contacts")
-}
 
 model Book {
 

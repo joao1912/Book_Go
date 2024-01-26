@@ -12,12 +12,9 @@ export class GetById implements IGetById {
                 id: true,
                 username: true,
                 password: true,
-                contact: {
-                  select: {
-                    email: true,
-                    telephone: true
-                  }
-                }
+                email: true,
+                telephone: true
+                  
             }
         })
 

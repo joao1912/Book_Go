@@ -1,14 +1,11 @@
-export interface IUser {
+export interface IUser  {
     id: string
     username: string
     password: string
-    contact: Icontact
-}
-
-export interface Icontact {
-    email: string
+    email: string 
     telephone: string
 }
+
 
 export class User {
     
