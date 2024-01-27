@@ -1,5 +1,5 @@
 import { ICreateUser } from "../../adapters/ormAdapter/repositories/user/ICreateUser"
-import { IUser } from "../../entities/User"
+import { IUser, User } from "../../entities/User"
 
 export class CreateUserUseCase {
 
@@ -10,7 +10,9 @@ export class CreateUserUseCase {
 
     async execute(userData: Omit<IUser, 'id'>) {
 
-        return await this.userService.execute(userData)
+        const user = await this.userService.execute(userData)
+
+        const userInstance = new User()
 
     }
 
