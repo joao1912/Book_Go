@@ -1,6 +1,6 @@
-import { User } from "../../../../entities/User"
+import { IUser } from "../../../../entities/User"
 
 
 export interface ICreateUser {
-    execute(user: Omit<User, "id">): Promise<User>
+    execute(user: Omit<IUser, "id">): Promise<IUser>
 }
