@@ -1,37 +1,35 @@
 export interface IComment {
-    userId: number;
-    bookId: number;
+    id: string;
+    bookId: string;
+    userId: string;
     comment: string;
 }
 
 export class Comment {
 
-    readonly id: string;
-    readonly userId: number;
-    readonly bookId: number;
-    readonly comment: string;
+    readonly props: IComment
 
-    constructor(id: string, userId: number, bookId: number, comment: string) {
-        this.id = id
-        this.bookId = bookId;
-        this.userId = userId;
-        this.comment = comment;
+    constructor(props: IComment) {
+        
+        const { id, bookId, userId, comment } = props;
+
+        this.props = props
     }
 
     getId() {
-        return this.id
+        return this.props.id
     }
 
     getBookId() {
-        return this.bookId
+        return this.props.bookId
     }
 
     getUserId() {
-        return this.userId
+        return this.props.userId
     }
 
     getComment() {
-        return this.comment
+        return this.props.comment
     }
 
 }

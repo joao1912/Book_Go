@@ -91,6 +91,8 @@ model Comment {
 
   id String @id @default(uuid())
 
+  comment String
+
   fk_id_book String @unique
 
   fk_id_user String @unique
