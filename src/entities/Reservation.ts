@@ -6,32 +6,28 @@ export interface IReservation {
 }
 
 export class Reservation {
-    readonly id: string;
-    readonly userId: string;
-    readonly bookId: string;
-    readonly price: number;
+    readonly props: IReservation
 
-    constructor(id: string, userId: string, bookId: string, price: number) {
-        this.id = id
-        this.userId = userId
-        this.bookId = bookId
-        this.price = price
+    constructor(props: IReservation) {
+        const {id, userId, bookId, price} = props
+
+        this.props = props
     }
 
-    getId() {
-        return this.id
+    get ReservationId() {
+        return this.props.id
     }
 
-    getUserId() {
-        return this.userId
+    get UserId() {
+        return this.props.userId
     }
 
-    getBookId() {
-        return this.bookId
+    get BookId() {
+        return this.props.bookId
     }
 
-    getPrice() {
-        return this.price
+    get Price() {
+        return this.props.price
     }
      
 }
