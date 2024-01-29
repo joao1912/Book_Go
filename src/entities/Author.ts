@@ -1,33 +1,26 @@
-
-
 export interface IAuthor {
     id: string;
     name: string;
     description: string;
 }
 
-
-export class Author{
-    readonly id: string;
-    readonly name: string;
-    readonly description: string;
+export class Author {
    
-    constructor(id: string, name: string, description: string){
-    this.id = id
-    this.name = name
-    this.description = description
+    readonly props: IAuthor
 
+    constructor(props: IAuthor){
    
+        const {id, name, description} = props
+
+        this.props = props
       
     }
    
-       get Author(){
-           return {
-               name: this.name,
-               description: this.description
-           }
-       }
-       
-   
-   
-   }
+    get Author(){
+        return {
+            name: this.props.name,
+            description: this.props.description
+        }
+    }
+          
+}

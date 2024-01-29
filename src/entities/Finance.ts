@@ -1,4 +1,5 @@
 export interface IFinance {
+    id: string;
     payment: number;
     bookId: string;
     userId: string;
@@ -7,40 +8,34 @@ export interface IFinance {
 
 export class Finance {
 
-    readonly id: string;
-    readonly payment: number;
-    readonly bookId: string;
-    readonly userId: string;
-    readonly total: number;
+    readonly props: IFinance
 
-    constructor(id: string ,payment: number, bookId: string, userId: string, total: number) {
+    constructor(props: IFinance) {
 
-        this.id = id
-        this.payment = payment
-        this.bookId = bookId
-        this.userId = userId
-        this.total = total
+        const { id, bookId, payment, total, userId } = props
+
+        this.props = props
 
     }
 
     getId() {
-        return this.id
+        return this.props.id
     }
 
     public getPayment() {
-        return this.payment
+        return this.props.payment
     }
 
     public getBookId() {
-        return this.bookId
+        return this.props.bookId
     }
 
     public getUserId() {
-        return this.userId
+        return this.props.userId
     }
 
     public getTotal() {
-        return this.total
+        return this.props.total
     }
 
 }
