@@ -2,7 +2,6 @@ import { ICreateUser } from "../../adapters/ormAdapter/repositories/user/ICreate
 import { User } from "../../entities/User"
 
 
-
 export class CreateUserUseCase {
 
     protected userService: ICreateUser
