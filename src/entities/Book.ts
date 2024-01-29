@@ -3,35 +3,32 @@ export interface IBook {
     title: string;
     synopsis: string;
     price: string
+    readonly genre: string[];
 
 }
 
 
 export class Book {
- readonly id: string;
- readonly title: string;
- readonly synopsis: string;
- readonly price: number
- readonly genre: string[];
+
+    public readonly props: IBook
 
 
- constructor(id: string, title: string, synopsis:string, genre: string, price: number){
-    this.id = id
-    this.title = title
-    this.synopsis = synopsis
-    this.price = price;
-    this.genre = [genre];
+ constructor(props: IBook){
+   
+    const {id, title, synopsis, genre, price} = props
+   this.props = props
+
 
    
  }
 
     get Book(){
         return {
-            id: this.id,
-            title: this.title,
-            synopsis: this.synopsis,
-            price: this.price,
-            genre: this.genre,
+            id: this.props.id,
+            title: this.props.title,
+            synopsis: this.props.synopsis,
+            price: this.props.price,
+            genre: this.props.genre,
     
         }
     }

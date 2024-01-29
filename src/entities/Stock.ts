@@ -6,24 +6,21 @@ export interface IStock {
 
 
 export class Stock {
- readonly id: string;
- readonly quantity: number;
- readonly fk_id_book: string;
+ readonly props: IStock;
 
 
- constructor(id: string,  quantity: number,  fk_id_book: string){
-    this.id = id
- 
-    this.quantity = quantity;
-    this.fk_id_book = fk_id_book
+ constructor(props: IStock){
+   const {id,  quantity,  fk_id_book} = props
    
+   this.props = props
+ 
  }
 
     get Stock(){
         return {
-            id: this.id,
-                  quantity:this.quantity,
-            fk_id_book: this.fk_id_book
+            id: this.props.id,
+            quantity:this.props.quantity,
+            fk_id_book: this.props.fk_id_book
     
         }
     }
