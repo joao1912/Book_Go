@@ -4,40 +4,32 @@ export interface IUser  {
     password: string
     email: string 
     telephone: string
+    favoritesBooks?: number[]
 }
 
 
 export class User {
     
-    readonly id: string
-    readonly username: string
-    readonly password: string
-    readonly email: string
-    readonly telephone: string
-    readonly favoritesBooks: number[]
+    readonly props: IUser
 
-    constructor(id: string, username: string, email: string, telephone: string, password: string, favoritesBooks = []) {
-        this.id = id
-        this.username = username
-        this.email = email
-        this.telephone = telephone
-        this.password = password
-        this.favoritesBooks = favoritesBooks
+
+    constructor(props: IUser) {
+     
+      const  {id, username,  password, email, telephone, favoritesBooks = []} = props
+        this.props = props
     }
 
-    getUser() {
+   
+    get User() {
         return {
-            id: this.id,
-            username: this.username,
-            password: this.password
+            id: this.props.id,
+            username: this.props.username,
+            password: this.props.password,
+            email: this.props.email,
+            telephone: this.props.telephone,
         }
     }
 
-    getContacts() {
-        return {
-            telephone: this.telephone,
-            email: this.email,
-        }
-    }
+
 
 }

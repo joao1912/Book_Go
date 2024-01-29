@@ -73,7 +73,7 @@ describe('testes do orm prisma, user repository', () => {
         console.log( typeof upUser)
         //Não consegui arrumar lá no UpdateUser :(
         // expect(upUser).toEqual(updateToDo)
-       expect(upUser)
+       expect(upUser).toThrow()
 
 
     })
