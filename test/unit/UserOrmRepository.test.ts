@@ -15,7 +15,7 @@ describe('testes do orm prisma, user repository', () => {
         const createUserUseCase = new CreateUserUseCase(createUser)
 
         const userToBeUpdated: Omit<IUser, 'id'> = {
-            username: 'cleiton_teste',
+            username: 'cleiton_teste1',
             password: 'cleiton123_teste1',
             email: 'cleiton_teste1@gmail.com',
              telephone: '5548978453627_teste1'
@@ -23,7 +23,7 @@ describe('testes do orm prisma, user repository', () => {
         }
 
         const userToBeDeleted: Omit<IUser, 'id'> = {
-            username: 'cleiton_teste',
+            username: 'cleiton_teste2',
             password: 'cleiton123_teste2',
                 email: 'cleiton_teste2@gmail.com',
                 telephone: '5548978453627_teste2'
@@ -43,7 +43,7 @@ describe('testes do orm prisma, user repository', () => {
         const createUserUseCase = new CreateUserUseCase(createUser)
 
         const userToBeCreated: Omit<IUser, 'id'> = {
-            username: 'cleiton',
+            username: 'cleiton4',
             password: 'cleiton123',
                 email: 'cleiton1@gmail.com',
                 telephone: '5548978453627'
@@ -83,8 +83,6 @@ describe('testes do orm prisma, user repository', () => {
         const deleteUserUseCase = new DeleteUserUseCase(deleteUser)
 
         const result = await deleteUserUseCase.execute(userIdToDelete)
-
-        console.log()
         
         expect(result).toStrictEqual({
             message: `O usuário de id: ${userIdToDelete} foi excluído com sucesso.`

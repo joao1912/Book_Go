@@ -16,7 +16,6 @@ import { ICreateUser } from "../../repositories/user/ICreateUser";
                 email: email,
                 telephone: telephone 
                    
-               
               },
               select: {
                 id: true,
