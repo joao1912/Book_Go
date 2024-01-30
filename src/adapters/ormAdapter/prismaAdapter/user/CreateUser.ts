@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { IUser } from "../../../../entities/User";
 import { ICreateUser } from "../../repositories/user/ICreateUser";
 

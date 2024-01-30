@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { IBook } from "../../../../entities/Book";
 import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 

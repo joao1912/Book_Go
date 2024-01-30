@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { Comment } from "../../../../entities/Comment";
 import { IGetAllComments } from "../../repositories/comment/IGetAllComments";
 

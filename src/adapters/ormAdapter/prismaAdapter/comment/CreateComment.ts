@@ -1,6 +1,6 @@
 import { IComment, Comment } from "../../../../entities/Comment";
 import { ICreateComment } from "../../repositories/comment/ICreateComment";
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 
 export class CreateComment implements ICreateComment {
 

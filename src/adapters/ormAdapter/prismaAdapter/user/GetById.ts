@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { IGetById } from "../../repositories/user/IGetById";
 
 export class GetById implements IGetById {

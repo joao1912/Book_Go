@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { IDeleteAllUsers } from "../../repositories/user/IDeleteAllUsers";
 
 export class DeleteAllUsers implements IDeleteAllUsers {

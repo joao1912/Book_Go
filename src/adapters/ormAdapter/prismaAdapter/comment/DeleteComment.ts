@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { IDeleteComment, IDeleteMessage } from "../../repositories/comment/IDeleteComment";
 
 export class DeleteComment implements IDeleteComment {

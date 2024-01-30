@@ -1,5 +1,5 @@
 import { IDeleteMessage, IDeleteUser } from "../../repositories/user/IDeleteUser";
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 
 export class DeleteUser implements IDeleteUser {
 

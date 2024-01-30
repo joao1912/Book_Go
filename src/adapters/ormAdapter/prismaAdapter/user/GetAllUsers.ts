@@ -1,5 +1,5 @@
 import { IGetAllUsers } from "../../repositories/user/IGetAllUsers";
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 
 
 export class GetAllUsers implements IGetAllUsers {

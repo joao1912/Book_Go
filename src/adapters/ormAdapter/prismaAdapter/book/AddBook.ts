@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../prisma/db";
+import { prisma } from "../db";
 import { IBook, Book } from "../../../../entities/Book";
 import { IAddBook } from "../../repositories/book/IAddBook";
 
@@ -57,7 +57,7 @@ export class AddBook implements IAddBook {
         
        
 
-        return book1
+        return book
 
     }
 }
