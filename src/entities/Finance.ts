@@ -1,6 +1,6 @@
 export interface IFinance {
     id: string;
-    payment: number;
+    payment: string;
     bookId: string;
     userId: string;
     total: number;
