@@ -1,7 +1,9 @@
+import { IBook } from "./Book";
+
 export interface IStock {
     id: string;
-    quantity: string;
-    fk_id_book: string;
+    quantity: number;
+    book: IBook
 }
 
 
@@ -10,7 +12,7 @@ export class Stock {
 
 
  constructor(props: IStock){
-   const {id,  quantity,  fk_id_book} = props
+   const {id,  quantity, book} = props
    
    this.props = props
  
@@ -20,7 +22,7 @@ export class Stock {
         return {
             id: this.props.id,
             quantity:this.props.quantity,
-            fk_id_book: this.props.fk_id_book
+            book: this.props.book
     
         }
     }

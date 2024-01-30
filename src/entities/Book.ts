@@ -1,6 +1,7 @@
 export interface IBook {
     id: string
     title: string;
+    author: string
     synopsis: string;
     price: number
     genre: string;
@@ -15,7 +16,7 @@ export class Book {
 
  constructor(props: IBook){
    
-    const {id, title, synopsis, genre, price} = props
+    const {id, title, synopsis, genre, price, author} = props
    this.props = props
 
 

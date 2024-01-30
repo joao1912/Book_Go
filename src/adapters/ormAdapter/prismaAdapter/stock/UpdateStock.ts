@@ -1,16 +1,11 @@
 import { prisma } from "../db";
-import { IBook } from "../../../../entities/Book";
-import { IUpdateBook } from "../../repositories/book/IUpdateBook";
+import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
+import { IStock } from "../../../../entities/Stock";
 
-export class UpdateBook implements IUpdateBook {
+export class UpdateStock implements IUpdateStock {
   async execute({
-    id,
-    title,
-    synopsis,
-    price,
-    genre,
-    author,
-  }: Partial<IBook>): Promise<Partial<IBook>> {
+    id, quantity, book,
+  }: Partial<IStock>): Promise<Partial<IStock>> {
     try {
       const book = await prisma.book.update({
         where: {

@@ -176,9 +176,9 @@ model Author {
 
   id String @id @default(uuid())
 
-  name String
+  name String @unique
 
-  description String
+  description String?
 
   books_authors Book_author?
 

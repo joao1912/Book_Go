@@ -1,8 +1,8 @@
 
-export interface IDeleteMessage {
+export interface IDeleteMessageBook {
     message: string
 }
 
 export interface IDeleteBook {
-    execute(id: String ): Promise<IDeleteMessage>
+    execute(id: String ): Promise<IDeleteMessageBook>
 }
