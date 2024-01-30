@@ -3,36 +3,18 @@ import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
 import { IStock } from "../../../../entities/Stock";
 
 export class UpdateStock implements IUpdateStock {
-  async execute({
-    id, quantity, book,
-  }: Partial<IStock>): Promise<Partial<IStock>> {
+  async execute({id, quantity, book  }: Partial<IStock>): Promise<Partial<IStock>> {
     try {
-      const book = await prisma.book.update({
+      const stockData = await prisma.book.update({
         where: {
-          id: id,
+          id: book?.id,
         },
 
         data: {
-          title: title || undefined,
-          synopsis: synopsis || undefined,
-          price: price || undefined,
-          books_authors: {
+          stock: {
             update: {
-              author: {
-                update: {
-                  name: author || undefined,
-                },
-              },
-            },
-          },
-          books_tags: {
-            update: {
-              tag: {
-                update: {
-                  genre: genre || undefined,
-                },
-              },
-            },
+              quantity: quantity 
+            }
           },
         },
         select: {
@@ -54,25 +36,45 @@ export class UpdateStock implements IUpdateStock {
               },
             },
           },
+          stock: {
+            select: {
+              id: true,
+              quantity: true,
+            },
+          },
         },
       });
-      if (typeof book.books_tags?.tag.genre != "string") {
+      if (typeof stockData.books_tags?.tag.genre != "string") {
         throw new Error("Internal server error: Genre must be a string type");
       }
-      if (typeof book.books_authors?.author != "string") {
+      if (typeof stockData.books_authors?.author != "string") {
         throw new Error("Internal server error: Author must be a string type");
       }
 
-      let UpdatedBook = {
-        id: book.id,
-        title: book.title,
-        author: book.books_authors?.author || "",
-        price: book.price,
-        synopsis: book.synopsis,
-        genre: book.books_tags?.tag.genre || "",
-      };
+      if (typeof stockData.stock?.id != "string"){
+        throw new Error("Internal server error: Id must be a string type");
 
-      return UpdatedBook;
+      } 
+      if (typeof stockData.stock?.quantity != "number"){
+        throw new Error("Internal server error: Quantity must be a number type");
+
+      }
+
+      let stock = ({
+        id: stockData.stock?.id,
+        quantity: stockData.stock?.quantity,
+        book: {
+          id: stockData.id,
+          title: stockData.title,
+          author: stockData.books_authors?.author,
+          price: stockData.price,
+          synopsis: stockData.synopsis,
+          genre: stockData.books_tags?.tag.genre,
+      }
+    });
+
+    return stock
+
     } catch (error) {
       throw new Error("Something happened: " + error);
     }
