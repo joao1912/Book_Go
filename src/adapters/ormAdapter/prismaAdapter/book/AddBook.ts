@@ -14,38 +14,50 @@ export class AddBook implements IAddBook {
                 title: title,
                 price: price,
                 synopsis: synopsis,                     
-                // books_tags: {
-                //  tag:{
-                //     create:{
-                //         genre:genre
-                //     }
-                //  }
+                books_tags: {
+                 create: {
+                    tag: {
+                        create:{
+                            genre: genre
+                        }
+                    }
+                 }
+                 }
 
-                    
-                //   }
-
-                        
-                     
-
-                    
-                //     connect:{
-                //     }
-                // } 
-                   
               },
               select: {
                 id: true,
                 title: true,
                 synopsis: true,
                 price: true,
-                genre: true
+                books_tags:{
+                    select:{
+                        tag: {
+                            select: {
+                                genre: true
+                            }
+                        }
+                    }
+                }
                   }
                 
             
              
                 
         })
-        return book
+
+        let book1 = {
+            
+            id: book.id, 
+            title: book.title,
+            price: book.price,
+            synopsis: book.synopsis,
+           genre: book.books_tags?.tag.genre || ""
+        }
+        
+       
+
+        return book1
 
     }
 }

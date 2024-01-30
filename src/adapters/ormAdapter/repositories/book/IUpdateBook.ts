@@ -1,5 +1,5 @@
-import { Book } from "../../../../entities/Book"
+import {IBook } from "../../../../entities/Book"
 
 export interface IUpdateBook {
-    execute(book: Partial<Book> ): Promise<Partial<Book>>
+    execute(book: Partial<IBook> ): Promise<Partial<IBook>>
 }
