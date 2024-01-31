@@ -4,13 +4,16 @@ import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
 import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
 import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
 import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
-import { IBook } from "../../src/entities/Book"
+import { Book, IBook } from "../../src/entities/Book"
 import { addBook } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { createFavorite } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
+import { FavoriteBookUseCase } from "../../src/usecases/user/FavoriteBookUseCase"
 
 describe('Testes do caso de uso do usuário', () => {
 
     let userIdToUpdate: string;
     let userIdToDelete: string;
+    let bookCreatedId: string;
 
     beforeAll(async () => {
 
@@ -33,8 +36,8 @@ describe('Testes do caso de uso do usuário', () => {
         const userToUpdete = await createUser.execute(userToBeUpdated)
         const userToDelete = await createUser.execute(userToBeDeleted)
 
-        userIdToUpdate = userToUpdete.id
-        userIdToDelete = userToDelete.id
+        userIdToUpdate = userToUpdete.props.id
+        userIdToDelete = userToDelete.props.id
 
         const bookTobeCreated: Omit<IBook, 'id'> = {
             title: "Um livro de teste 1",
@@ -46,7 +49,7 @@ describe('Testes do caso de uso do usuário', () => {
 
         const newBook1 = await addBook.execute(bookTobeCreated)
 
-
+        bookCreatedId = newBook1.props.id
 
     })
 
@@ -103,7 +106,11 @@ describe('Testes do caso de uso do usuário', () => {
 
     it('Deve favoritar um livro e retornar o livro favoritado', async () => {
 
+        const favoriteBookUseCase = new FavoriteBookUseCase(createFavorite)
 
+        const book = await favoriteBookUseCase.execute(userIdToUpdate, bookCreatedId)
+
+        expect(book).resolves.toBeInstanceOf(Book)
 
     })
 
