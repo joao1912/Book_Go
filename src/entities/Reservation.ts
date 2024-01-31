@@ -1,8 +1,15 @@
+
+
+
+
 export interface IReservation {
     id: string;
     userId: string;
     bookId: string;
     price: number;
+    startedAt? : Date
+    endsAt? : Date
+    completed? : string
 }
 
 export class Reservation {
