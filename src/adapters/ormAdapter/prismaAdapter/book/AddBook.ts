@@ -22,7 +22,8 @@ export class AddBook implements IAddBook {
                                     name: author
                                 },
                                 create: {
-                                    name: author
+                                    name: author,
+                                    description: ""
                                 }
                             }
                          }
