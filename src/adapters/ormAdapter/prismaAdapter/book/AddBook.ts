@@ -6,7 +6,7 @@ import { IAddBook } from "../../repositories/book/IAddBook";
 export class AddBook implements IAddBook {
 
    
-    async execute({title, price, genre, synopsis, author}: Omit<IBook, "id">): Promise <IBook>{
+    async execute({title, price, genre, synopsis, author}: Omit<IBook, "id">): Promise <Book>{
        
         try {
 
@@ -70,19 +70,15 @@ export class AddBook implements IAddBook {
     
                 }
             
-            let newBook = {
-                
+    
+            return new Book({
                 id: book.id, 
                 title: book.title,
                 price: book.price,
                 author: book.books_authors?.author,
                 synopsis: book.synopsis,
                 genre: book.books_tags?.tag.genre 
-            }
-            
-           
-    
-            return newBook
+            })
             
         } catch (error) {
             throw new Error("Internal server error: " + error);
