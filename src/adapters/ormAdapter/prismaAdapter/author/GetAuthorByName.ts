@@ -21,7 +21,7 @@ export class GetAuthorByName implements IGetAuthorByName {
             return new Author({
                 id: author.id,
                 name: author.name,
-                description: author.description
+                description: author.description || ''
             }) 
            
         } catch (error) {
