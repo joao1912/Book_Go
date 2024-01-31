@@ -14,22 +14,17 @@ export class AddBook implements IAddBook {
                 data: {
                     title: title,
                     price: price,
-                    synopsis: synopsis, 
-                    books_authors: {
-                        create: {
-                         author: {
-                            connectOrCreate: {
-                                where:{
-                                    name: author
-                                },
-                                create: {
-                                    name: author,
-                                  
-                                }
+                    synopsis: synopsis,
+                    author: {
+                        connectOrCreate: {
+                            where: {
+                                name: author
+                            },
+                            create: {
+                                name: author
                             }
-                         }
                         }
-                      },                    
+                    },                     
                     books_tags: {
                      create: {
                         tag: {

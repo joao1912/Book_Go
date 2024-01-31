@@ -64,6 +64,8 @@ model Book {
   books_tags Book_tag?
 
   books_authors Book_author?
+  
+  author Author []
 
 }
 
@@ -181,6 +183,8 @@ model Author {
   description String?
 
   books_authors Book_author?
+
+  book Book[]
 
   createdAt DateTime  @default(now())
 
