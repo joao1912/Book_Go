@@ -1,5 +1,5 @@
 import { IReservation } from "../../../../entities/Reservation"
 
-export interface MakeReservation {
-    execute(reservation: IReservation): Promise<IReservation>
+export interface IMakeReservation {
+    execute(reservation: Omit<IReservation, "id">): Promise<IReservation>
 }

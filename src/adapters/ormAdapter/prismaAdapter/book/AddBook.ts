@@ -9,6 +9,7 @@ export class AddBook implements IAddBook {
     async execute({title, price, genre, synopsis, author}: Omit<IBook, "id">): Promise <IBook>{
        
         try {
+
             const book = await prisma.book.create({
                 data: {
                     title: title,
@@ -23,7 +24,7 @@ export class AddBook implements IAddBook {
                                 },
                                 create: {
                                     name: author,
-                                    description: ""
+                                  
                                 }
                             }
                          }
