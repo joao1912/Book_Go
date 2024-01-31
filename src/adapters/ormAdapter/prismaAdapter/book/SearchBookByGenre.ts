@@ -1,7 +1,7 @@
 import { ISearchBookByGenre } from "../../repositories/book/ISearchBookByGenre";
 import { prisma } from "../db";
 
-export class SearchBookByTitle implements ISearchBookByGenre {
+export class SearchBookByGenre implements ISearchBookByGenre {
   async execute(genre: string) {
     try {
       const bookSearch = await prisma.book.findMany({
