@@ -36,8 +36,6 @@ describe('Testes do caso de uso do usuário', () => {
         userIdToUpdate = userToUpdete.id
         userIdToDelete = userToDelete.id
 
-      
-
     })
 
     it('deve retornar o id do usuario criado', async () => {
@@ -49,7 +47,6 @@ describe('Testes do caso de uso do usuário', () => {
             password: 'cleiton123',
                 email: 'cleiton1@gmail.com',
                 telephone: '5548978453627'
-
         }
 
         const user = await createUserUseCase.execute(userToBeCreated)
