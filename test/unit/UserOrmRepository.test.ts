@@ -4,6 +4,8 @@ import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
 import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
 import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
 import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
+import { IBook } from "../../src/entities/Book"
+import { addBook } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
 
 describe('Testes do caso de uso do usuário', () => {
 
@@ -11,8 +13,6 @@ describe('Testes do caso de uso do usuário', () => {
     let userIdToDelete: string;
 
     beforeAll(async () => {
-
-        const createUserUseCase = new CreateUserUseCase(createUser)
 
         const userToBeUpdated: Omit<IUser, 'id'> = {
             username: 'cleiton_teste1',
@@ -30,11 +30,23 @@ describe('Testes do caso de uso do usuário', () => {
             
         }
 
-        const userToUpdete = await createUserUseCase.execute(userToBeUpdated)
-        const userToDelete = await createUserUseCase.execute(userToBeDeleted)
+        const userToUpdete = await createUser.execute(userToBeUpdated)
+        const userToDelete = await createUser.execute(userToBeDeleted)
 
         userIdToUpdate = userToUpdete.id
         userIdToDelete = userToDelete.id
+
+        const bookTobeCreated: Omit<IBook, 'id'> = {
+            title: "Um livro de teste 1",
+            author: "Author de teste 1",
+            synopsis: "blablabla 1",
+            price: 12,
+            genre: "teste"
+        }
+
+        const newBook1 = await addBook.execute(bookTobeCreated)
+
+
 
     })
 
