@@ -1,11 +1,11 @@
-import { createUser, updateUser, deleteUser } from "../../src/adapters/ormAdapter/protocols"
+import { createUser, updateUser, deleteUser } from "../../src/adapters/ormAdapter/protocols/userProtocols"
 import { IUser } from "../../src/entities/User"
 import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
 import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
 import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
-import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols"
+import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
 
-describe('testes do orm prisma, user repository', () => {
+describe('Testes do caso de uso do usuário', () => {
 
     let userIdToUpdate: string;
     let userIdToDelete: string;
@@ -35,6 +35,8 @@ describe('testes do orm prisma, user repository', () => {
 
         userIdToUpdate = userToUpdete.id
         userIdToDelete = userToDelete.id
+
+      
 
     })
 
@@ -90,6 +92,12 @@ describe('testes do orm prisma, user repository', () => {
 
     })
 
+    it('Deve favoritar um livro e retornar o livro favoritado', async () => {
+
+
+
+    })
+
     afterAll(async () => {
 
         try {
@@ -99,5 +107,6 @@ describe('testes do orm prisma, user repository', () => {
         }
         
     })
+
 })
 

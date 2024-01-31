@@ -13,7 +13,7 @@ export class CreateUserUseCase {
 
         const user = await this.userService.execute(userData)
 
-    
+        return user
 
     }
 
