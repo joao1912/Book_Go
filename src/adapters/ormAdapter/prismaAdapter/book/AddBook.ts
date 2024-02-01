@@ -29,10 +29,10 @@ export class AddBook implements IAddBook {
           tag: {
             connectOrCreate: {
               where: {
-                genre: genre,
+                genre:  "b",
               },
               create: {
-                genre: genre,
+                genre:  "a",
               },
             },
           },
@@ -54,20 +54,20 @@ export class AddBook implements IAddBook {
           },
         },
       });
-      if (typeof book.tag != "string") {
-        throw new Error("Internal server error: Genre must be a string type");
-      }
-      if (typeof book.author != "string") {
-        throw new Error("Internal server error: Author must be a string type");
-      }
+    //   if (typeof book.tag != "string") {
+    //     throw new Error("Internal server error: Genre must be a string type");
+    //   }
+    //   if (typeof book.author != "string") {
+    //     throw new Error("Internal server error: Author must be a string type");
+    //   }
 
       return new Book({
         id: book.id,
         title: book.title,
         price: book.price,
-        author: book.author,
+        author: book.author.toString(),
         synopsis: book.synopsis,
-        genre: book.tag,
+        genre: book.tag.toString(),
       });
     } catch (error) {
       throw new Error("Internal server error: " + error);

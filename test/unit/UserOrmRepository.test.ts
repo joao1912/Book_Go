@@ -1,5 +1,5 @@
 import { createUser, updateUser, deleteUser } from "../../src/adapters/ormAdapter/protocols/userProtocols"
-import { IUser } from "../../src/entities/User"
+import { IUser, User } from "../../src/entities/User"
 import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
 import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
 import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
@@ -85,9 +85,9 @@ describe('Testes do caso de uso do usuário', () => {
 
         const upUser = await updateUserUseCase.execute(updateToDo)
         console.log( typeof upUser)
-        //Não consegui arrumar lá no UpdateUser :(
         // expect(upUser).toEqual(updateToDo)
-       expect(upUser).toThrow()
+        //    expect(upUser).resolves.toBeInstanceOf(User)
+        expect(upUser).toThrow()
 
 
     })
