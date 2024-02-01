@@ -6,8 +6,11 @@ import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
 import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
 import { Book, IBook } from "../../src/entities/Book"
 import { addBook } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { createFavorite } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
+import { createFavorite, deleteAllFavorites } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
 import { FavoriteBookUseCase } from "../../src/usecases/user/FavoriteBookUseCase"
+import { deleteAllAuthors } from "../../src/adapters/ormAdapter/protocols/authorProtocols"
+import { deleteAllComments } from "../../src/adapters/ormAdapter/protocols/commentProtocols"
+import { deleteAllFinances } from "../../src/adapters/ormAdapter/protocols/financeProtocols"
 
 describe('Testes do caso de uso do usuário', () => {
 
@@ -117,12 +120,17 @@ describe('Testes do caso de uso do usuário', () => {
     afterAll(async () => {
 
         try {
+
             await deleteAllUsers.execute()
+            await deleteAllAuthors.execute()
+            await deleteAllComments.execute()
+            await deleteAllFinances.execute()
+            await deleteAllFavorites.execute()
+            
         } catch (error) {
             throw new Error('Internal server error: ' + error)
         }
         
     })
-
 })
 

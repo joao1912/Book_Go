@@ -27,13 +27,14 @@ export class GetAllFinances implements IGetAllFinances {
                             title: true,
                             synopsis: true,
                             price: true,
-                            books_tags: {
+                            author: {
                                 select: {
-                                    tag: {
-                                        select: {
-                                            genre: true
-                                        }
-                                    }
+                                    name: true
+                                }
+                            },
+                            tag: {
+                                select: {
+                                    genre: true
                                 }
                             }
                         }
@@ -66,8 +67,6 @@ export class GetAllFinances implements IGetAllFinances {
 
                 }
 
-                if (typeof data.book.books_tags?.tag != "string") continue
-
                 finance.push(
                     {
                         id: data.id,
@@ -78,7 +77,8 @@ export class GetAllFinances implements IGetAllFinances {
                             title: data.book.title,
                             synopsis: data.book.synopsis,
                             price: data.book.price,
-                            genre: data.book.books_tags.tag
+                            genre: data.book.tag[0].genre,
+                            author: data.book.author[0].name
                         },
                         userId: data.fk_id_user,
     

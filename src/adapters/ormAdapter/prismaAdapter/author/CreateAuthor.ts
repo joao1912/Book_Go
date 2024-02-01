@@ -18,7 +18,7 @@ export class CreateAuthor implements ICreateAuthor {
             return new Author({
                 id: newAuthor.id,
                 name: newAuthor.name,
-                description: newAuthor.description
+                description: newAuthor.description || ''
             })
             
         } catch (error) {

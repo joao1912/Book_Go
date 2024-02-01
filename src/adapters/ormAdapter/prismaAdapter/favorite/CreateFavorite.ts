@@ -33,23 +33,23 @@ export class CreateFavorite implements ICreateFavorite {
         },
       });
 
-      if (favorited.book.author == null)
-        throw new Error("Bad Request: Author is null");
-      if (favorited.book.tag == null)
-        throw new Error("Bad Request: Genre is null");
-      if (typeof favorited.book.tag != "string") {
-        throw new Error("Internal server error: Genre must be a string type");
-      }
-      if (typeof favorited.book.author != "string") {
-        throw new Error("Internal server error: Author must be a string type");
-      }
+      // if (favorited.book.author == null)
+      //   throw new Error("Bad Request: Author is null");
+      // if (favorited.book.tag == null)
+      //   throw new Error("Bad Request: Genre is null");
+      // if (typeof favorited.book.tag != "string") {
+      //   throw new Error("Internal server error: Genre must be a string type");
+      // }
+      // if (typeof favorited.book.author != "string") {
+      //   throw new Error("Internal server error: Author must be a string type");
+      // }
 
       return new Book({
         id: favorited.book.id,
         title: favorited.book.title,
         synopsis: favorited.book.synopsis,
-        author: favorited.book.author,
-        genre: favorited.book.tag,
+        author: favorited.book.author[0].name,
+        genre: favorited.book.tag[0].genre,
         price: favorited.book.price,
       });
     } catch (error) {

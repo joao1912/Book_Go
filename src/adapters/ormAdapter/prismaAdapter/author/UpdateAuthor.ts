@@ -22,7 +22,7 @@ export class UpdateAuthor implements IUpdateAuthor {
             return new Author({
                 id: updatedAuthor.id,
                 name: updatedAuthor.name,
-                description: updatedAuthor.description
+                description: updatedAuthor.description || ''
             })
             
         } catch (error) {
