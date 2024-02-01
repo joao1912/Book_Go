@@ -69,7 +69,7 @@ describe('Testes do caso de uso do usuário', () => {
 
         const user = await createUserUseCase.execute(userToBeCreated)
 
-        expect(user).toHaveProperty('id')
+        expect(user.props.id).toHaveProperty('id')
 
     })
 
@@ -87,12 +87,10 @@ describe('Testes do caso de uso do usuário', () => {
         }
 
         const upUser = await updateUserUseCase.execute(updateToDo)
-        console.log( typeof upUser)
-        // expect(upUser).toEqual(updateToDo)
-        //    expect(upUser).resolves.toBeInstanceOf(User)
-        expect(upUser).toThrow()
 
-
+        expect(upUser).toEqual(updateToDo)
+        expect(upUser).resolves.toBeInstanceOf(User)
+        
     })
 
     it('deve deletar um usuario por id', async () => {
@@ -121,11 +119,11 @@ describe('Testes do caso de uso do usuário', () => {
 
         try {
 
-            await deleteAllUsers.execute()
-            await deleteAllAuthors.execute()
-            await deleteAllComments.execute()
-            await deleteAllFinances.execute()
-            await deleteAllFavorites.execute()
+            //await deleteAllUsers.execute()
+            //await deleteAllAuthors.execute()
+            //await deleteAllComments.execute()
+            //await deleteAllFinances.execute()
+            //await deleteAllFavorites.execute()
             
         } catch (error) {
             throw new Error('Internal server error: ' + error)
