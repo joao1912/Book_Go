@@ -1,6 +1,6 @@
 import { createAuthor } from "../../../src/adapters/ormAdapter/protocols/authorProtocols"
 import { Author } from "../../../src/entities/Author"
-import CleanDataBase from "../../util/cleanDataBase"
+import CleanDataBase from "../../util/CleanDataBase"
 
 
 describe('Testes do AuthorRepository', () => {

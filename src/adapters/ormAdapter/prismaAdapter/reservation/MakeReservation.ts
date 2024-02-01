@@ -7,7 +7,7 @@ import { IReservation } from "../../../../entities/Reservation";
 export class MakeReservation implements IMakeReservation {
 
    
-    async execute({userId, bookId, price, startedAt, endsAt, completed,}: Omit<IReservation, "id">): Promise <IReservation>{
+    async execute({userId, bookId, price, startedAt, endsAt, completed}: Omit<IReservation, "id">): Promise <IReservation>{
        
         try {
 
