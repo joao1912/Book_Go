@@ -12,7 +12,7 @@ describe('Testes do AuthorRepository', () => {
             description: 'uma descrição'
         })
 
-        expect(autor).toHaveProperty('id')
+        expect(autor.props).toHaveProperty('id')
         expect(autor).toBeInstanceOf(Author)
 
     })

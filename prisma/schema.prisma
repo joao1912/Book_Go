@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,18 +8,17 @@ datasource db {
 }
 
 model User {
-
-  id  String  @id @default(uuid())
+  id String @id @default(uuid())
 
   username String @unique
 
   password String
 
   email String @unique
-  
-  telephone String  @unique
 
-  createdAt DateTime  @default(now())
+  telephone String @unique
+
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
@@ -33,21 +31,18 @@ model User {
   finances Finance?
 
   @@map("users")
-
 }
 
-
 model Book {
-
   id String @id @default(uuid())
 
   title String
 
   price Float
 
-  synopsis String  
+  synopsis String
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
@@ -61,25 +56,21 @@ model Book {
 
   stock Stock?
 
-  books_tags Book_tag?
+  tag Tag[]
 
-  tag Tag []
+  author Author[]
 
-  books_authors Book_author?
-  
-  author Author []
-
+  @@map("books")
 }
 
 model Favorite {
-
   id String @id @default(uuid())
 
   fk_id_book String
 
-  fk_id_user String 
+  fk_id_user String
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
@@ -88,11 +79,9 @@ model Favorite {
   book Book @relation(fields: [fk_id_book], references: [id])
 
   @@map("favorites")
-
 }
 
 model Comment {
-
   id String @id @default(uuid())
 
   comment String
@@ -101,7 +90,7 @@ model Comment {
 
   fk_id_user String @unique
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
@@ -110,11 +99,9 @@ model Comment {
   book Book @relation(fields: [fk_id_book], references: [id])
 
   @@map("comments")
-
 }
 
 model Reservation {
-
   id String @id @default(uuid())
 
   price Float
@@ -123,9 +110,9 @@ model Reservation {
 
   fk_id_user String @unique
 
-  status String 
+  status String
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
@@ -134,11 +121,9 @@ model Reservation {
   book Book @relation(fields: [fk_id_book], references: [id])
 
   @@map("reservations")
-
 }
 
 model Finance {
-
   id String @id @default(uuid())
 
   payments String
@@ -149,7 +134,7 @@ model Finance {
 
   fk_id_user String @unique
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
@@ -161,89 +146,47 @@ model Finance {
 }
 
 model Stock {
-
   id String @id @default(uuid())
 
   quantity Int
 
   fk_id_book String @unique
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
   book Book @relation(fields: [fk_id_book], references: [id])
 
   @@map("stock")
-
 }
 
 model Author {
-
   id String @id @default(uuid())
 
   name String @unique
 
   description String?
 
-  books_authors Book_author?
-
   book Book[]
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
   @@map("authors")
-
 }
 
 model Tag {
-
   id String @id @default(uuid())
 
   genre String @unique
 
-  books_tags Book_tag?
+  book Book[]
 
-  book Book []
-
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 
   updateAt DateTime @updatedAt
 
   @@map("tags")
-
-}
-
-model Book_author {
-
-  fk_id_author String @unique
-
-  fk_id_book String @unique
-
-  author Author @relation(fields: [fk_id_author], references: [id])
-
-  book Book @relation(fields: [fk_id_book], references: [id])
-
-  @@id([fk_id_author, fk_id_book])
-
-  @@map("books_authors")
-
-}
-
-model Book_tag {
-
-  fk_id_tag String @unique
-
-  fk_id_book String @unique
-
-  tag Tag @relation(fields: [fk_id_tag], references: [id])
-
-  book Book @relation(fields: [fk_id_book], references: [id])
-
-  @@id([fk_id_tag, fk_id_book])
-
-  @@map("books_tags")
-
 }
