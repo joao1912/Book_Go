@@ -1,6 +1,6 @@
 import { createAuthor } from "../../../src/adapters/ormAdapter/protocols/authorProtocols"
 import { Author } from "../../../src/entities/Author"
-import CleanDataBase from "../../util/cleanDataBase"
+import CleanDataBase from "../../util/CleanDataBase"
 
 
 describe('Testes do AuthorRepository', () => {
@@ -12,7 +12,7 @@ describe('Testes do AuthorRepository', () => {
             description: 'uma descrição'
         })
 
-        expect(autor).toHaveProperty('id')
+        expect(autor.props).toHaveProperty('id')
         expect(autor).toBeInstanceOf(Author)
 
     })

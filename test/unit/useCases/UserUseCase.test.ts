@@ -8,7 +8,7 @@ import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocol
 import { createFavorite, deleteFavorite } from "../../../src/adapters/ormAdapter/protocols/favoriteProtocols"
 import { FavoriteBookUseCase } from "../../../src/usecases/user/FavoriteBookUseCase"
 import { DeleteFavoriteUseCase } from "../../../src/usecases/user/DeleteFavoriteUseCase"
-import CleanDataBase from "../../util/cleanDataBase"
+import CleanDataBase from "../../util/CleanDataBase"
 
 describe('Testes do caso de uso do usuário', () => {
 
