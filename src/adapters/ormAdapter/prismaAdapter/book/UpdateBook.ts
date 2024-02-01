@@ -51,20 +51,15 @@ export class UpdateBook implements IUpdateBook {
      
         },
       });
-      if (typeof book.tag!= "string") {
-        throw new Error("Internal server error: Genre must be a string type");
-      }
-      if (typeof book.author != "string") {
-        throw new Error("Internal server error: Author must be a string type");
-      }
+  
 
       return new Book({
         id: book.id,
         title: book.title,
-        author: book.author,
+        author: book.author[0].name,
         price: book.price,
         synopsis: book.synopsis,
-        genre: book.tag,
+        genre: book.tag[0].genre,
       });
 
       

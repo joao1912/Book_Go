@@ -123,6 +123,8 @@ model Reservation {
 
   fk_id_user String @unique
 
+  status String 
+
   createdAt DateTime  @default(now())
 
   updateAt DateTime @updatedAt

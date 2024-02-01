@@ -7,8 +7,9 @@ export class CreateFavorite implements ICreateFavorite {
     try {
       const favorited = await prisma.favorite.create({
         data: {
-          fk_id_book: bookId,
-          fk_id_user: userId,
+          
+          fk_id_book: "7a05973d-0ab9-488f-af45-8138f5b9825a",
+          fk_id_user: "b03dc8b8-5bec-4eea-8d0d-585f3db0bb61",
         },
         select: {
           book: {
@@ -53,6 +54,7 @@ export class CreateFavorite implements ICreateFavorite {
         price: favorited.book.price,
       });
     } catch (error) {
+      console.log( "Erro" + error)
       throw new Error("Internal server error" + error);
     }
   }
