@@ -63,6 +63,8 @@ model Book {
 
   books_tags Book_tag?
 
+  tag Tag []
+
   books_authors Book_author?
   
   author Author []
@@ -198,9 +200,11 @@ model Tag {
 
   id String @id @default(uuid())
 
-  genre String
+  genre String @unique
 
   books_tags Book_tag?
+
+  book Book []
 
   createdAt DateTime  @default(now())
 

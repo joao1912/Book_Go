@@ -22,20 +22,18 @@ export class UpdateStock implements IUpdateStock {
           title: true,
           synopsis: true,
           price: true,
-          books_authors: {
+          author: {
             select: {
-              author: true,
+              name: true,
             },
           },
-          books_tags: {
+  
+          tag: {
             select: {
-              tag: {
-                select: {
-                  genre: true,
-                },
-              },
+              genre: true,
             },
           },
+  
           stock: {
             select: {
               id: true,
@@ -44,10 +42,10 @@ export class UpdateStock implements IUpdateStock {
           },
         },
       });
-      if (typeof stockData.books_tags?.tag.genre != "string") {
+      if (typeof stockData.tag != "string") {
         throw new Error("Internal server error: Genre must be a string type");
       }
-      if (typeof stockData.books_authors?.author != "string") {
+      if (typeof stockData.author != "string") {
         throw new Error("Internal server error: Author must be a string type");
       }
 
@@ -66,10 +64,10 @@ export class UpdateStock implements IUpdateStock {
         book: {
           id: stockData.id,
           title: stockData.title,
-          author: stockData.books_authors?.author,
+          author: stockData.author,
           price: stockData.price,
           synopsis: stockData.synopsis,
-          genre: stockData.books_tags?.tag.genre,
+          genre: stockData.tag,
       }
     });
 

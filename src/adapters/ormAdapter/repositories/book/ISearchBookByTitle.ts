@@ -1,4 +1,4 @@
-import { IBook} from "../../../../entities/Book";
+import { Book, IBook} from "../../../../entities/Book";
 
 
 export interface ISearchBookByTitle {

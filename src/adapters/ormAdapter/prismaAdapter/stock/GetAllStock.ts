@@ -9,20 +9,18 @@ export class GetAllStock implements IGetAllStock {
         title: true,
         synopsis: true,
         price: true,
-        books_authors: {
+        author: {
           select: {
-            author: true,
+            name: true,
           },
         },
-        books_tags: {
+
+        tag: {
           select: {
-            tag: {
-              select: {
-                genre: true,
-              },
-            },
+            genre: true,
           },
         },
+
         stock: {
           select: {
             id: true,
@@ -33,8 +31,8 @@ export class GetAllStock implements IGetAllStock {
     });
     let stock = [];
     for (let bookProp of BooksStock) {
-      if (typeof bookProp.books_tags?.tag.genre != "string") continue;
-      if (typeof bookProp.books_authors?.author != "string") continue;
+      if (typeof bookProp.tag != "string") continue;
+      if (typeof bookProp.author != "string") continue;
       if (typeof bookProp.stock?.id != "string") continue;
       if (typeof bookProp.stock?.quantity != "number") continue;
 
@@ -44,10 +42,10 @@ export class GetAllStock implements IGetAllStock {
         book: {
           id: bookProp.id,
           title: bookProp.title,
-          author: bookProp.books_authors?.author,
+          author: bookProp.author,
           price: bookProp.price,
           synopsis: bookProp.synopsis,
-          genre: bookProp.books_tags?.tag.genre,
+          genre: bookProp.tag,
         },
       };
 
