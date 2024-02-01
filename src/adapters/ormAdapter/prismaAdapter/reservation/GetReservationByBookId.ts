@@ -1,7 +1,7 @@
 import { IGetReservationByBookId } from "../../repositories/reservation/IGetReservationByBookId";
 import { prisma } from "../db";
 
-export class GetReservationByUserId implements IGetReservationByBookId {
+export class GetReservationByBookId implements IGetReservationByBookId {
 
      async execute(bookId: string) {
         
