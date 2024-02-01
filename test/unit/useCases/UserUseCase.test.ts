@@ -1,17 +1,14 @@
-import { createUser, updateUser, deleteUser } from "../../src/adapters/ormAdapter/protocols/userProtocols"
-import { IUser, User } from "../../src/entities/User"
-import { CreateUserUseCase } from "../../src/usecases/user/CreateUserUseCase"
-import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
-import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
-import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
-import { Book, IBook } from "../../src/entities/Book"
-import { addBook, deleteAllBooks } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { createFavorite, deleteAllFavorites, deleteFavorite } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
-import { FavoriteBookUseCase } from "../../src/usecases/user/FavoriteBookUseCase"
-import { deleteAllAuthors } from "../../src/adapters/ormAdapter/protocols/authorProtocols"
-import { deleteAllComments } from "../../src/adapters/ormAdapter/protocols/commentProtocols"
-import { deleteAllFinances } from "../../src/adapters/ormAdapter/protocols/financeProtocols"
-import { DeleteFavoriteUseCase } from "../../src/usecases/user/DeleteFavoriteUseCase"
+import { createUser, updateUser, deleteUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols"
+import { IUser, User } from "../../../src/entities/User"
+import { CreateUserUseCase } from "../../../src/usecases/user/CreateUserUseCase"
+import { UpdateUserUseCase } from "../../../src/usecases/user/UpdateUserUseCase"
+import { DeleteUserUseCase } from "../../../src/usecases/user/DeleteUserUseCase"
+import { Book, IBook } from "../../../src/entities/Book"
+import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { createFavorite, deleteFavorite } from "../../../src/adapters/ormAdapter/protocols/favoriteProtocols"
+import { FavoriteBookUseCase } from "../../../src/usecases/user/FavoriteBookUseCase"
+import { DeleteFavoriteUseCase } from "../../../src/usecases/user/DeleteFavoriteUseCase"
+import CleanDataBase from "../../util/cleanDataBase"
 
 describe('Testes do caso de uso do usuário', () => {
 
@@ -150,18 +147,7 @@ describe('Testes do caso de uso do usuário', () => {
 
     afterAll(async () => {
 
-        try {
-
-            await deleteAllUsers.execute()
-            await deleteAllAuthors.execute()
-            await deleteAllComments.execute()
-            await deleteAllFinances.execute()
-            await deleteAllFavorites.execute()
-            await deleteAllBooks.execute()
-            
-        } catch (error) {
-            throw new Error('Internal server error: ' + error)
-        }
+        await CleanDataBase.execute()
         
     })
 })
