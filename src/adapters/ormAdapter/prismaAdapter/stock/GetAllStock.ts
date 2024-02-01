@@ -31,21 +31,20 @@ export class GetAllStock implements IGetAllStock {
     });
     let stock = [];
     for (let bookProp of BooksStock) {
-      if (typeof bookProp.tag != "string") continue;
-      if (typeof bookProp.author != "string") continue;
+
       if (typeof bookProp.stock?.id != "string") continue;
       if (typeof bookProp.stock?.quantity != "number") continue;
 
       let SingularBookStock = {
-        id: bookProp.stock?.id,
-        quantity: bookProp.stock?.quantity,
+        id: bookProp.stock.id,
+        quantity: bookProp.stock.quantity,
         book: {
           id: bookProp.id,
           title: bookProp.title,
-          author: bookProp.author,
+          author: bookProp.author[0].name,
           price: bookProp.price,
           synopsis: bookProp.synopsis,
-          genre: bookProp.tag,
+          genre: bookProp.tag[0].genre,
         },
       };
 

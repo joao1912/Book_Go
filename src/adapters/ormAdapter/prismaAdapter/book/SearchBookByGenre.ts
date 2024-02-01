@@ -31,16 +31,14 @@ export class SearchBookByGenre implements ISearchBookByGenre {
       });
       let books = [];
       for (let bookProp of bookSearch) {
-        if (typeof bookProp.tag != "string") continue;
-        if (typeof bookProp.author != "string") continue;
 
         let book = {
           id: bookProp.id,
           title: bookProp.title,
-          author: bookProp.author,
+          author: bookProp.author[0].name,
           price: bookProp.price,
           synopsis: bookProp.synopsis,
-          genre: bookProp.tag,
+          genre: bookProp.tag[0].genre,
         };
         books.push(book);
       }

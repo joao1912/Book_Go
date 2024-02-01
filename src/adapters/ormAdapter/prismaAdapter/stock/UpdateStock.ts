@@ -42,21 +42,7 @@ export class UpdateStock implements IUpdateStock {
           },
         },
       });
-      if (typeof stockData.tag != "string") {
-        throw new Error("Internal server error: Genre must be a string type");
-      }
-      if (typeof stockData.author != "string") {
-        throw new Error("Internal server error: Author must be a string type");
-      }
 
-      if (typeof stockData.stock?.id != "string"){
-        throw new Error("Internal server error: Id must be a string type");
-
-      } 
-      if (typeof stockData.stock?.quantity != "number"){
-        throw new Error("Internal server error: Quantity must be a number type");
-
-      }
 
       let stock = ({
         id: stockData.stock?.id,
@@ -64,10 +50,10 @@ export class UpdateStock implements IUpdateStock {
         book: {
           id: stockData.id,
           title: stockData.title,
-          author: stockData.author,
+          author: stockData.author[0].name,
           price: stockData.price,
           synopsis: stockData.synopsis,
-          genre: stockData.tag,
+          genre: stockData.tag[0].genre,
       }
     });
 
