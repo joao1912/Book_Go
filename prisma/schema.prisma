@@ -26,7 +26,7 @@ model User {
 
   reservations Reservation?
 
-  favorites Favorite?
+  favorites Favorite[]
 
   comments Comment?
 
@@ -51,7 +51,7 @@ model Book {
 
   updateAt DateTime @updatedAt
 
-  favorites Favorite?
+  favorites Favorite[]
 
   comments Comment?
 
@@ -75,9 +75,9 @@ model Favorite {
 
   id String @id @default(uuid())
 
-  fk_id_book String @unique
+  fk_id_book String
 
-  fk_id_user String @unique
+  fk_id_user String 
 
   createdAt DateTime  @default(now())
 

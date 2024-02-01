@@ -6,36 +6,35 @@ import { prisma } from "../db";
 export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
 
     async execute(userId: string): Promise<Book[]> {
-    
+
         try {
-            
-            const allFavorites = await prisma.favorite.findMany({
+
+            const allFavorites = await prisma.user.findMany({
                 where: {
-                    fk_id_user: userId
+                    id: userId
                 },
                 select: {
-                    book: {
+                    favorites: {
                         select: {
                             id: true,
-                            title: true,
-                            synopsis: true,
-                            price: true,
-                            books_authors: {
+                            fk_id_book: true,
+                            fk_id_user: true,
+                            book: {
                                 select: {
+                                    id: true,
+                                    title: true,
+                                    synopsis: true,
+                                    price: true,
                                     author: {
                                         select: {
-                                            name: true
-                                        }
-                                    }
-                                }
-                            },
-                            books_tags: {
-                                select: {
+                                            name: true,
+                                        },
+                                    },
                                     tag: {
                                         select: {
-                                            genre: true
-                                        }
-                                    }
+                                            genre: true,
+                                        },
+                                    },
                                 }
                             }
                         }
@@ -45,18 +44,18 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
 
             const allInstances: Book[] = []
 
-            for(let favorite of allFavorites) {
+            for (let prop of allFavorites[0].favorites) {
 
-                if (favorite.book.books_authors?.author == null) continue
-                if (favorite.book.books_tags?.tag == null) continue
+                if (prop.book.author == null) continue
+                if (prop.book.tag == null) continue
 
                 allInstances.push(new Book({
-                    id: favorite.book.id,
-                    title: favorite.book.title,
-                    synopsis: favorite.book.synopsis,
-                    author: favorite.book.books_authors.author.name,
-                    genre: favorite.book.books_tags.tag.genre,
-                    price: favorite.book.price
+                    id: prop.book.id,
+                    title: prop.book.title,
+                    synopsis: prop.book.synopsis,
+                    author: prop.book.author[0].name,
+                    genre: prop.book.tag[0].genre,
+                    price: prop.book.price
                 }))
 
             }
@@ -64,7 +63,7 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
             return allInstances
 
         } catch (error) {
-            
+
             throw new Error('Internal server error' + error)
 
         }

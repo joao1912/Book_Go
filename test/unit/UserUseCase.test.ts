@@ -5,18 +5,21 @@ import { UpdateUserUseCase } from "../../src/usecases/user/UpdateUserUseCase"
 import { DeleteUserUseCase } from "../../src/usecases/user/DeleteUserUseCase"
 import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
 import { Book, IBook } from "../../src/entities/Book"
-import { addBook } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { createFavorite, deleteAllFavorites } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
+import { addBook, deleteAllBooks } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { createFavorite, deleteAllFavorites, deleteFavorite } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
 import { FavoriteBookUseCase } from "../../src/usecases/user/FavoriteBookUseCase"
 import { deleteAllAuthors } from "../../src/adapters/ormAdapter/protocols/authorProtocols"
 import { deleteAllComments } from "../../src/adapters/ormAdapter/protocols/commentProtocols"
 import { deleteAllFinances } from "../../src/adapters/ormAdapter/protocols/financeProtocols"
+import { DeleteFavoriteUseCase } from "../../src/usecases/user/DeleteFavoriteUseCase"
 
 describe('Testes do caso de uso do usuário', () => {
 
     let userIdToUpdate: string;
     let userIdToDelete: string;
     let bookCreatedId: string;
+    let bookDeleteFavoriteId: string;
+    let favoriteIdToBeDelete: string
 
     beforeAll(async () => {
 
@@ -54,6 +57,24 @@ describe('Testes do caso de uso do usuário', () => {
 
         bookCreatedId = newBook1.props.id
 
+        const bookTobeFavorited: Omit<IBook, 'id'> = {
+            title: "Um livro de teste 2",
+            author: "Author de teste 1",
+            synopsis: "blablabla 1",
+            price: 12,
+            genre: "teste"
+        }
+
+        const newBook2 = await addBook.execute(bookTobeFavorited)
+
+        bookCreatedId = newBook1.props.id
+        bookDeleteFavoriteId = newBook2.props.id
+
+        await createFavorite.execute(userIdToUpdate, bookDeleteFavoriteId)
+        .then(result => {
+            favoriteIdToBeDelete = result.favoriteId
+        })
+
     })
 
     it('deve retornar o id do usuario criado', async () => {
@@ -69,7 +90,7 @@ describe('Testes do caso de uso do usuário', () => {
 
         const user = await createUserUseCase.execute(userToBeCreated)
 
-        expect(user.props.id).toHaveProperty('id')
+        expect(user.props).toHaveProperty('id')
 
     })
 
@@ -81,15 +102,16 @@ describe('Testes do caso de uso do usuário', () => {
         const updateToDo: Partial <IUser> = {
             id: userIdToUpdate,
             password: '123cleitinho',
-                email: 'cleitao@hotmail.com',
-                telephone: '51438888493'
+            email: 'cleitao@hotmail.com',
+            telephone: '51438888493',
+            username: 'cleiton_teste1'
             
         }
 
         const upUser = await updateUserUseCase.execute(updateToDo)
 
-        expect(upUser).toEqual(updateToDo)
-        expect(upUser).resolves.toBeInstanceOf(User)
+        expect(upUser.props).toEqual(updateToDo)
+        expect(upUser).toBeInstanceOf(User)
         
     })
 
@@ -111,7 +133,18 @@ describe('Testes do caso de uso do usuário', () => {
 
         const book = await favoriteBookUseCase.execute(userIdToUpdate, bookCreatedId)
 
-        expect(book).resolves.toBeInstanceOf(Book)
+        expect(book).toHaveProperty('favoriteId')
+        expect(book.book).toBeInstanceOf(Book)
+
+    })
+
+    it('Deve remover um livro dos favoritos', async () => {
+
+        const deleteFavoriteUseCase = new DeleteFavoriteUseCase(deleteFavorite)
+
+        const result = await deleteFavoriteUseCase.execute(favoriteIdToBeDelete)
+
+        expect(result.message).toBe('O livro foi removido dos favoritos')
 
     })
 
@@ -119,11 +152,12 @@ describe('Testes do caso de uso do usuário', () => {
 
         try {
 
-            //await deleteAllUsers.execute()
-            //await deleteAllAuthors.execute()
-            //await deleteAllComments.execute()
-            //await deleteAllFinances.execute()
-            //await deleteAllFavorites.execute()
+            await deleteAllUsers.execute()
+            await deleteAllAuthors.execute()
+            await deleteAllComments.execute()
+            await deleteAllFinances.execute()
+            await deleteAllFavorites.execute()
+            await deleteAllBooks.execute()
             
         } catch (error) {
             throw new Error('Internal server error: ' + error)

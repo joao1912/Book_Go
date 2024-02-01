@@ -1,4 +1,4 @@
-import { ICreateFavorite } from "../../adapters/ormAdapter/repositories/favorite/ICreateFavorite";
+import { ICreateFavorite, IFavoriteCreated } from "../../adapters/ormAdapter/repositories/favorite/ICreateFavorite";
 import { Book } from "../../entities/Book";
 
 
@@ -11,7 +11,7 @@ export class FavoriteBookUseCase {
 
     }
 
-    async execute(userId: string, bookId: string): Promise<Book> {
+    async execute(userId: string, bookId: string): Promise<IFavoriteCreated> {
 
         const bookFavorited = await this.createFavoriteAdapter.execute(userId, bookId)
 

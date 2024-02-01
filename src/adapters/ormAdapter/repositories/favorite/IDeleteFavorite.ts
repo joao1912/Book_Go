@@ -4,6 +4,6 @@ export interface IDeleteMessage {
 
 export interface IDeleteFavorite {
 
-    execute(userId: string, bookId: string): Promise<IDeleteMessage>
+    execute(id: string): Promise<IDeleteMessage>
 
 }

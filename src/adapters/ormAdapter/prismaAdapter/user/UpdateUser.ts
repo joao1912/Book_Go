@@ -1,10 +1,10 @@
 import { prisma } from "../db";
-import { IUser } from "../../../../entities/User";
+import { IUser, User } from "../../../../entities/User";
 import { IUpdateUser } from "../../repositories/user/IUpdateUser";
 
 export class UpdateUser implements IUpdateUser {
 
-  async execute({ id, username, password, email, telephone }: Partial<IUser>): Promise<Partial<IUser>> {
+  async execute({ id, username, password, email, telephone }: Partial<IUser>): Promise<Partial<User>> {
 
     try {
 
@@ -29,7 +29,15 @@ export class UpdateUser implements IUpdateUser {
 
       })
 
-      return user
+      return new User({
+        id: user.id,
+        email:user.email,
+        password: user.password,
+        telephone: user.telephone,
+        username: user.username
+      })
+
+      //retornar os favoritos
 
     } catch (error) {
 

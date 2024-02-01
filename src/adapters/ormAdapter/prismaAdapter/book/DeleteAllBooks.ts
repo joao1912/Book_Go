@@ -1,7 +1,7 @@
 import { IDeleteAllBooks } from "../../repositories/book/IDeleteAllBooks";
 import { prisma } from "../db";
 
-export class DeleteBook implements IDeleteAllBooks {
+export class DeleteAllBooks implements IDeleteAllBooks {
 
     async execute(): Promise<void> {
         
