@@ -1,5 +1,5 @@
-import { IReservation } from "../../../../entities/Reservation";
+import { Reservation } from "../../../../entities/Reservation";
 
 export interface IGetReservationByBookId {
-    execute(bookId: string): Promise <IReservation | IReservation[]>
+    execute(bookId: string): Promise <Reservation[] | Reservation[]>
 }

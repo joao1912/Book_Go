@@ -13,8 +13,10 @@ export class CreateFinance implements ICreateFinance {
                     payments: financeData.payment,
                     total: financeData.total,
                     fk_id_book: financeData.bookId,
-                    fk_id_user: financeData.userId
-                }
+                    fk_id_user: financeData.userId,
+                    
+                },
+               
             })
 
             return new Finance({
@@ -22,7 +24,8 @@ export class CreateFinance implements ICreateFinance {
                 bookId: newFinance.fk_id_book,
                 payment: newFinance.payments,
                 userId: newFinance.fk_id_user,
-                total: newFinance.total
+                total: newFinance.total,
+
             })
 
         } catch (error) {

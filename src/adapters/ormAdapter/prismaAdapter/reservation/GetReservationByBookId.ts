@@ -1,3 +1,4 @@
+import { Reservation } from "../../../../entities/Reservation";
 import { IGetReservationByBookId } from "../../repositories/reservation/IGetReservationByBookId";
 import { prisma } from "../db";
 
@@ -24,15 +25,17 @@ export class GetReservationByBookId implements IGetReservationByBookId {
             let dataArray = []
             for(let props of data){
   
-                let reservation = {
-                    id: props.id,
-                    bookId: props.fk_id_book,
-                    userId: props.fk_id_user,
-                    price: props.price,
-                    status: props.status,
-                    startedAt: props.createdAt
-                }
-                dataArray.push(reservation)
+                dataArray.push( new Reservation
+                   ({
+                        id: props.id,
+                        bookId: props.fk_id_book,
+                        userId: props.fk_id_user,
+                        price: props.price,
+                        status: props.status,
+                        startedAt: props.createdAt
+                    })
+                ) 
+                
             }
 
             return dataArray
