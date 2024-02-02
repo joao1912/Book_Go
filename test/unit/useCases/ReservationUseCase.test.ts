@@ -6,7 +6,6 @@ import { IBook } from "../../../src/entities/Book"
 import { IReservation, Reservation } from "../../../src/entities/Reservation"
 import { IUser } from "../../../src/entities/User"
 import { MakeReservationUseCase } from "../../../src/usecases/reservation/MakeReservationUseCase"
-import CleanDataBase from "../../util/CleanDataBase"
 
 
 
@@ -52,13 +51,6 @@ describe ("Teste de reservas", () => {
         const result = await makeReservationUseCase.execute(reserves)
 
         expect(result).toBeInstanceOf(Reservation)
-        
-    })
-
-  
-    afterAll(async () => {
-
-        await CleanDataBase.execute()
         
     })
 

@@ -6,7 +6,6 @@ import { IBook } from "../../../src/entities/Book";
 import { IReservation, Reservation } from "../../../src/entities/Reservation";
 import { IUser } from "../../../src/entities/User";
 import { GetAllReservationsUseCase } from "../../../src/usecases/reservation/GetAllReservationsUseCase";
-import CleanDataBase from "../../util/CleanDataBase";
 
 describe("Pega todas as reservas da biblioteca", () => {
   let userOneId: string;
@@ -74,9 +73,4 @@ describe("Pega todas as reservas da biblioteca", () => {
 
   })
 
-  afterAll(async () => {
-
-    await CleanDataBase.execute()
-    
-})
 });

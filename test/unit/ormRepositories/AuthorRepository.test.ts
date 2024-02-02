@@ -1,6 +1,5 @@
 import { createAuthor, deleteAuthor, getAllAuthors, getAuthorById, getAuthorByName, updateAuthor } from "../../../src/adapters/ormAdapter/protocols/authorProtocols"
 import { Author } from "../../../src/entities/Author"
-import CleanDataBase from "../../util/CleanDataBase"
 
 interface IAuthorToBeSearch {
     id?: string;
@@ -143,12 +142,6 @@ describe('Testes do AuthorRepository', () => {
                 expect(result).toBeInstanceOf(Author)
 
             })
-
-    })
-
-    afterAll(async () => {
-
-        await CleanDataBase.execute()
 
     })
 

@@ -1,7 +1,6 @@
 import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols";
 import { createComment, deleteComment, getAllComments, getCommentById, updateComment } from "../../../src/adapters/ormAdapter/protocols/commentProtocols";
 import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols";
-import CleanDataBase from "../../util/CleanDataBase"
 import { Comment } from "../../../src/entities/Comment";
 
 interface ICommentToBeSearch {
@@ -197,12 +196,6 @@ describe('Testes do CommentRepository', () => {
 
             })
 
-    })
-
-    afterAll(async () => {
-
-        await CleanDataBase.execute()
-
-    })
+    })      
 
 })
