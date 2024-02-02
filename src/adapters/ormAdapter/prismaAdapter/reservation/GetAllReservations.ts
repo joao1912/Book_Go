@@ -1,9 +1,10 @@
+import { Reservation } from "../../../../entities/Reservation";
 import { IGetAllReservation } from "../../repositories/reservation/IGetAllReservations";
 import { prisma } from "../db";
 
 export class GetAllReservations implements IGetAllReservation {
 
-     async execute() {
+     async execute(): Promise <Reservation[]> {
         
         try {
         
@@ -19,19 +20,20 @@ export class GetAllReservations implements IGetAllReservation {
             })
 
             let dataArray = []
+            
             for(let props of data){
-  
-                let reservation = {
+            
+                console.log(props.status)
+                dataArray.push( new Reservation ({
                     id: props.id,
                     bookId: props.fk_id_book,
                     userId: props.fk_id_user,
                     price: props.price,
                     status: props.status,
                     startedAt: props.createdAt
-                }
-                dataArray.push(reservation)
+                }))
             }
-
+           
             return dataArray
 
         } catch (error) {

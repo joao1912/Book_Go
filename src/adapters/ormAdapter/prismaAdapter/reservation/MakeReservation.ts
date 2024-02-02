@@ -1,13 +1,13 @@
 import { prisma } from "../db";
 import { IBook, Book } from "../../../../entities/Book";
 import { IMakeReservation } from "../../repositories/reservation/IMakeReservation";
-import { IReservation } from "../../../../entities/Reservation";
+import { IReservation, Reservation } from "../../../../entities/Reservation";
 
 
 export class MakeReservation implements IMakeReservation {
 
    
-    async execute({userId, bookId, price, startedAt, endsAt, status}: Omit<IReservation, "id">): Promise <IReservation>{
+    async execute({userId, bookId, price, startedAt, endsAt, status}: Omit<IReservation, "id">): Promise <Reservation>{
        
         try {
 
@@ -36,7 +36,7 @@ export class MakeReservation implements IMakeReservation {
             })
      
             
-            let newReservation = {
+            return new Reservation ({
                 
                 id: data.id, 
                 userId: data.fk_id_user,
@@ -45,12 +45,9 @@ export class MakeReservation implements IMakeReservation {
                 status: data.status,
                 startedAt: data.createdAt,
                 endsAt: data.createdAt,
-            }
+            })
             
-           
-    
-            return newReservation
-            
+   
         } catch (error) {
             throw new Error("Internal server error: " + error);
         }

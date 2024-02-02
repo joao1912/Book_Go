@@ -22,13 +22,13 @@ model User {
 
   updateAt DateTime @updatedAt
 
-  reservations Reservation?
+  reservations Reservation[]
 
   favorites Favorite[]
 
-  comments Comment?
+  comments Comment[]
 
-  finances Finance?
+  finances Finance[]
 
   @@map("users")
 }
@@ -48,11 +48,11 @@ model Book {
 
   favorites Favorite[]
 
-  comments Comment?
+  comments Comment[]
 
-  reservations Reservation?
+  reservations Reservation[]
 
-  finances Finance?
+  finances Finance[]
 
   stock Stock?
 
@@ -86,9 +86,9 @@ model Comment {
 
   comment String
 
-  fk_id_book String @unique
+  fk_id_book String 
 
-  fk_id_user String @unique
+  fk_id_user String 
 
   createdAt DateTime @default(now())
 
@@ -106,9 +106,9 @@ model Reservation {
 
   price Float
 
-  fk_id_book String @unique
+  fk_id_book String
 
-  fk_id_user String @unique
+  fk_id_user String 
 
   status String
 
@@ -130,9 +130,9 @@ model Finance {
 
   total Float
 
-  fk_id_book String @unique
+  fk_id_book String 
 
-  fk_id_user String @unique
+  fk_id_user String 
 
   createdAt DateTime @default(now())
 

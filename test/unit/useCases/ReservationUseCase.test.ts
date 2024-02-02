@@ -3,7 +3,7 @@ import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocol
 import { makeReservation } from "../../../src/adapters/ormAdapter/protocols/reservationProtocols"
 import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols"
 import { IBook } from "../../../src/entities/Book"
-import { IReservation } from "../../../src/entities/Reservation"
+import { IReservation, Reservation } from "../../../src/entities/Reservation"
 import { IUser } from "../../../src/entities/User"
 import { MakeReservationUseCase } from "../../../src/usecases/reservation/MakeReservationUseCase"
 import CleanDataBase from "../../util/CleanDataBase"
@@ -50,6 +50,8 @@ describe ("Teste de reservas", () => {
         const makeReservationUseCase = new MakeReservationUseCase(makeReservation)
 
         const result = await makeReservationUseCase.execute(reserves)
+
+        expect(result).toBeInstanceOf(Reservation)
         
     })
 
