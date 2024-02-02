@@ -15,7 +15,9 @@ export class GetReservationByBookId implements IGetReservationByBookId {
                     id: true,
                     fk_id_user: true,
                     fk_id_book: true,
-                    price: true
+                    price: true,
+                    status: true,
+                    createdAt: true
                 }
             })
 
@@ -26,7 +28,9 @@ export class GetReservationByBookId implements IGetReservationByBookId {
                     id: props.id,
                     bookId: props.fk_id_book,
                     userId: props.fk_id_user,
-                    price: props.price
+                    price: props.price,
+                    status: props.status,
+                    startedAt: props.createdAt
                 }
                 dataArray.push(reservation)
             }

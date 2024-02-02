@@ -17,6 +17,7 @@ export class GetReservationByUserId implements IGetReservationByUserId {
                     fk_id_book: true,
                     price: true,
                     createdAt: true,
+                    status: true
 
                 }
             })
@@ -29,6 +30,7 @@ export class GetReservationByUserId implements IGetReservationByUserId {
                     bookId: props.fk_id_book,
                     userId: props.fk_id_user,
                     price: props.price,
+                    status: props.status,
                     startedAt: props.createdAt,
                     endsAt: props.createdAt //mudar
                 }

@@ -42,7 +42,9 @@ describe ("Teste de reservas", () => {
         const reserves: Omit <IReservation, "id"> = {
             userId: userIdToReserve,
             bookId: bookIdToReserve,
-            price: 20
+            price: 20,
+            status: "Transcorrendo",
+            
         }
 
         const makeReservationUseCase = new MakeReservationUseCase(makeReservation)

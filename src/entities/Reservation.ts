@@ -7,9 +7,9 @@ export interface IReservation {
     userId: string;
     bookId: string;
     price: number;
+    status : string
     startedAt? : Date
     endsAt? : Date
-    completed? : string
 }
 
 export class Reservation {
