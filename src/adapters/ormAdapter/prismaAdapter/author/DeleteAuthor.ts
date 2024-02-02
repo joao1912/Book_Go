@@ -8,7 +8,11 @@ export class DeleteAuthor implements IDeleteAuthor {
         
         try {
 
-            await prisma.author.deleteMany()
+            await prisma.author.delete({
+                where: {
+                    id: id
+                }
+            })
 
             return {
                 message: 'Author deletado com sucesso!'

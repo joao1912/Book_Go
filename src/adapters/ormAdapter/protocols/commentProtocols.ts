@@ -6,7 +6,7 @@ import { GetCommentById } from "../prismaAdapter/comment/GetCommentById";
 import { UpdateComment } from "../prismaAdapter/comment/UpdateComment";
 
 
-export const createFinance = new CreateComment()
+export const createComment = new CreateComment()
 
 export const deleteAllComments = new DeleteAllComments()
 
