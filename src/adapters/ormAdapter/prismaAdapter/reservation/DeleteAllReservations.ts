@@ -2,17 +2,13 @@ import { prisma } from "../db";
 
 import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservation/IDeleteReservation";
 
-export class DeleteReservation implements IDeleteReservation {
+export class DeleteAllReservations implements IDeleteReservation {
 
     async execute(reservationId: string): Promise<IDeleteMessage> {
        
         try {
             
-            await prisma.reservation.delete({
-                where: {
-                    id: reservationId
-                }
-            })
+            await prisma.reservation.deleteMany()
 
             const message: IDeleteMessage =  {
                 message: 'Reservada deletada com sucesso!'

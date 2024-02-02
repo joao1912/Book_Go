@@ -23,7 +23,7 @@ export class GetAllReservations implements IGetAllReservation {
             
             for(let props of data){
             
-                console.log(props.status)
+        
                 dataArray.push( new Reservation ({
                     id: props.id,
                     bookId: props.fk_id_book,

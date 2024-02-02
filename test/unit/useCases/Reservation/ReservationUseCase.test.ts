@@ -55,11 +55,6 @@ describe ("Teste de reservas", () => {
         
     })
 
-  
-    afterAll(async () => {
 
-        await CleanDataBase.execute()
-        
-    })
 
 })

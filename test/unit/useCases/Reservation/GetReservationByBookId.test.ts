@@ -1,8 +1,8 @@
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols";
-import { makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
+import { getReservationByBookId, makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
 import { IBook } from "../../../../src/entities/Book";
-import { IReservation } from "../../../../src/entities/Reservation";
+import { IReservation, Reservation } from "../../../../src/entities/Reservation";
 import { IUser, User } from "../../../../src/entities/User"
 
 
@@ -43,6 +43,13 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
         await makeReservation.execute(reserve);
     })
 
-    it("Pesquisando reserva por book id")
+    it("Pesquisando reserva por book id", async () => {
+        
+        const getReservationByBookIdUseCase = new GetReservationByBookIdUseCase(getReservationByBookId)
+
+        const result = await getReservationByBookIdUseCase.execute(bookId)
+
+        expect(result).toBeInstanceOf(Reservation)
+    })
 
 })
