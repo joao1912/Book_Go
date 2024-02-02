@@ -1,7 +1,6 @@
 import { IGetAllReservation } from "../../adapters/ormAdapter/repositories/reservation/IGetAllReservations"
-import { IReservation } from "../../entities/Reservation"
 
-export class GetAllReservationsUseCase{
+export class GetAllReservationsUseCase {
 
     protected reservationService: IGetAllReservation
     constructor(ormAdapter: IGetAllReservation){
@@ -12,6 +11,5 @@ export class GetAllReservationsUseCase{
         let result = await this.reservationService.execute()
         return result
     }
-
 
 }

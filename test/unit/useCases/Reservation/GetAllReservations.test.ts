@@ -64,14 +64,13 @@ describe("Pega todas as reservas da biblioteca", () => {
 
   });
 
-  let ormAdapterInstance: IGetAllReservation 
   it("deve retornar todas as reservas criadas", async()=> {
 
-    const getAllReservationsUseCase = new GetAllReservationsUseCase(ormAdapterInstance)
+    const getAllReservationsUseCase = new GetAllReservationsUseCase(getAllReservations)
 
-    const result = await getAllReservations.execute()
+    const result = await getAllReservationsUseCase.execute()
 
-    expect(result[0].props).toBeInstanceOf(Reservation)
+    expect(result[0]).toBeInstanceOf(Reservation)
 
   })
 
