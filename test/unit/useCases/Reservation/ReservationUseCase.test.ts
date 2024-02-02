@@ -1,12 +1,12 @@
-import { MakeReservation } from "../../../src/adapters/ormAdapter/prismaAdapter/reservation/MakeReservation"
-import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { makeReservation } from "../../../src/adapters/ormAdapter/protocols/reservationProtocols"
-import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols"
-import { IBook } from "../../../src/entities/Book"
-import { IReservation, Reservation } from "../../../src/entities/Reservation"
-import { IUser } from "../../../src/entities/User"
-import { MakeReservationUseCase } from "../../../src/usecases/reservation/MakeReservationUseCase"
-import CleanDataBase from "../../util/CleanDataBase"
+import { MakeReservation } from "../../../../src/adapters/ormAdapter/prismaAdapter/reservation/MakeReservation"
+import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols"
+import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
+import { IBook } from "../../../../src/entities/Book"
+import { IReservation, Reservation } from "../../../../src/entities/Reservation"
+import { IUser } from "../../../../src/entities/User"
+import { MakeReservationUseCase } from "../../../../src/usecases/reservation/MakeReservationUseCase"
+import CleanDataBase from "../../../util/CleanDataBase"
 
 
 

@@ -1,12 +1,12 @@
-import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols";
-import { getAllReservations, makeReservation } from "../../../src/adapters/ormAdapter/protocols/reservationProtocols";
-import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols";
-import { IGetAllReservation } from "../../../src/adapters/ormAdapter/repositories/reservation/IGetAllReservations";
-import { IBook } from "../../../src/entities/Book";
-import { IReservation, Reservation } from "../../../src/entities/Reservation";
-import { IUser } from "../../../src/entities/User";
-import { GetAllReservationsUseCase } from "../../../src/usecases/reservation/GetAllReservationsUseCase";
-import CleanDataBase from "../../util/CleanDataBase";
+import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols";
+import { getAllReservations, makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
+import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols";
+import { IGetAllReservation } from "../../../../src/adapters/ormAdapter/repositories/reservation/IGetAllReservations";
+import { IBook } from "../../../../src/entities/Book";
+import { IReservation, Reservation } from "../../../../src/entities/Reservation";
+import { IUser } from "../../../../src/entities/User";
+import { GetAllReservationsUseCase } from "../../../../src/usecases/reservation/GetAllReservationsUseCase";
+import CleanDataBase from "../../../util/CleanDataBase";
 
 describe("Pega todas as reservas da biblioteca", () => {
   let userOneId: string;
