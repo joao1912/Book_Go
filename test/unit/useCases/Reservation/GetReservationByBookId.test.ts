@@ -1,6 +1,8 @@
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols";
+import { makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
 import { IBook } from "../../../../src/entities/Book";
+import { IReservation } from "../../../../src/entities/Reservation";
 import { IUser, User } from "../../../../src/entities/User"
 
 
@@ -30,6 +32,17 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
 
         userOneId = newUser.props.id
         bookId = newBook.props.id
+
+        const reserve: Omit <IReservation, "id"> = {
+            userId: userOneId,
+            bookId: bookId,
+            price: 23,
+            status: "Transcorrendo"
+        }
+
+        await makeReservation.execute(reserve);
     })
+
+    it("Pesquisando reserva por book id")
 
 })
