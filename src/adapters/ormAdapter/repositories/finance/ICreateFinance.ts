@@ -8,8 +8,20 @@ export enum typeOfPayment {
     Pix = "Pix"
 }
 
+export interface IRegister {
+    id?: string;
+    author: string;
+    email: string;
+    telephone: string;
+    payment: string;
+    total: number;
+    title: string;
+}
+
 export interface ICreateFinance {
 
     execute(financeData: Omit<IFinance, 'id'>): Promise<Finance>
+
+    insertIntoRegister(data: IRegister): Promise<void>
 
 }

@@ -19,9 +19,9 @@ interface ICommentToBeUpdate {
 
 interface IUserToCommentTest { 
     id?: string;
-    username: 'um nome';
-    email: 'teste@gmail.com';
-    telephone: '55000000000';
+    username: 'um nome2';
+    email: 'teste@gmail.com2';
+    telephone: '550000000002';
     password: 'senha_segura';
 }
 
@@ -50,9 +50,9 @@ describe('Testes do CommentRepository', () => {
         // Criar um usuário para os testes
 
         const user: IUserToCommentTest = { 
-            username: 'um nome', 
-            email: 'teste@gmail.com', 
-            telephone: '55000000000', 
+            username: 'um nome2', 
+            email: 'teste@gmail.com2', 
+            telephone: '550000000002', 
             password: 'senha_segura' 
         }
 
