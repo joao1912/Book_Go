@@ -4,5 +4,5 @@ export interface IDeleteMessage {
 }
 
 export interface IDeleteReservation {
-    execute(userId: string, bookId:string): Promise<IDeleteMessage>
+    execute(reservationId: string): Promise<IDeleteMessage>
 }
