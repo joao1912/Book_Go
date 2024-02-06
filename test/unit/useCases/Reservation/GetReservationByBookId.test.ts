@@ -24,9 +24,9 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
     };
 
     const bookOne: Omit<IBook, "id"> = {
-      title: "Book One",
+      title: "Book To Search Book Reserves",
       synopsis: "This is book one",
-      price: 22,
+      price: 33,
       author: "Gem",
       genre: "Fantasia",
     };
@@ -40,7 +40,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
     const reserve: Omit<IReservation, "id"> = {
       userId: userOneId,
       bookId: bookId,
-      price: 23,
+      price: 33,
       status: "Transcorrendo",
     };
 

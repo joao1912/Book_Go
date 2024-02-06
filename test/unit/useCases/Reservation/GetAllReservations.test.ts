@@ -34,7 +34,7 @@ describe("Pega todas as reservas da biblioteca", () => {
     userTwoId = userTwoData.props.id;
 
     const newBook: Omit<IBook, "id"> = {
-      title: "The Best One",
+      title: "Book to Search All Reserves",
       synopsis: "Once upon a time",
       price: 1,
       genre: "Biografy",
@@ -69,7 +69,10 @@ describe("Pega todas as reservas da biblioteca", () => {
 
     const result = await getAllReservationsUseCase.execute()
 
-    expect(result[0]).toBeInstanceOf(Reservation)
+    for (let prop of result){
+
+      expect(prop).toBeInstanceOf(Reservation)
+  }
 
   })
 

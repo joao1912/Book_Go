@@ -12,7 +12,7 @@ export class Stock {
 
 
  constructor(props: IStock){
-   const {id,  quantity, book} = props
+   const {id, quantity, book} = props
    
    this.props = props
  

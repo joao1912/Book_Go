@@ -2,7 +2,7 @@ import { IUpdateStock } from "../../adapters/ormAdapter/repositories/stock/IUpda
 import { IStock } from "../../entities/Stock"
 
 
-export class Updatestock {
+export class UpdateStockUseCase {
 
     protected stockService: IUpdateStock
     constructor(ormAdapter: IUpdateStock) {

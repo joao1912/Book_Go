@@ -25,7 +25,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
     };
 
     const bookOne: Omit<IBook, "id"> = {
-      title: "Book Three",
+      title: "Book To Delete Reserve",
       synopsis: "This is book three",
       price: 22,
       author: "Gem",
@@ -50,9 +50,9 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
   });
 
   it("Pesquisando reserva por book id", async () => {
-    const getReservationByBookIdUseCase = new DeleteReservationUseCase(deleteReservation);
+    const deleteBookUseCase = new DeleteReservationUseCase(deleteReservation);
 
-    const result = await getReservationByBookIdUseCase.execute(reservationId);
+    const result = await deleteBookUseCase.execute(reservationId);
 
     //Usar arraycontaining
     expect(result.message).toBe('Reservada deletada com sucesso!')

@@ -36,6 +36,11 @@ export class AddBook implements IAddBook {
               },
             },
           },
+          stock: {
+            create: {
+              quantity: 1
+            }
+          }
         },
         select: {
           id: true,

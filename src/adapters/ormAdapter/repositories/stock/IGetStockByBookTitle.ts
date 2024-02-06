@@ -1,7 +1,7 @@
-import { IStock } from "../../../../entities/Stock";
+import { Stock } from "../../../../entities/Stock";
 
 
 export interface IGetStockByBookTitle {
-    execute(book: string): Promise< IStock | IStock[]>
+    execute(book: string): Promise< Stock[]>
 
 }

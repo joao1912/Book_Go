@@ -34,7 +34,7 @@ model Book {
   favorites    Favorite[]
   finances     Finance[]
   reservations Reservation[]
-  stock        Stock?
+  stock        Stock[]
   author       Author[]      @relation("AuthorToBook")
   tag          Tag[]         @relation("BookToTag")
 
@@ -112,7 +112,7 @@ model Stock {
   fk_id_book String   @unique
   createdAt  DateTime @default(now())
   updateAt   DateTime @updatedAt
-  book       Book     @relation(fields: [fk_id_book], references: [id])
+  book       Book     @relation(fields: [fk_id_book], references: [id], onDelete: Cascade)
 
   @@map("stock")
 }

@@ -1,55 +1,46 @@
+import { Stock } from "../../../../entities/Stock";
 import { IGetStockByBookTitle } from "../../repositories/stock/IGetStockByBookTitle";
 import { prisma } from "../db";
 
 export class GetStockByBookTitle implements IGetStockByBookTitle{
   async execute (title:string) {
-    const BooksStock = await prisma.book.findMany({
-        where: { title: title },
+    const BooksStock = await prisma.stock.findMany({
+        where: { 
+          book: {
+            
+            title: title 
+          }
+        },
         select: {
           id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          author: {
-            select: {
-              name: true,
-            },
+          quantity: true,
+          book: {
+            include: {
+              author: true,
+              tag: true
+            }
+          }
           },
-  
-          tag: {
-            select: {
-              genre: true,
-            },
-          },
-  
-          stock: {
-            select: {
-              id: true,
-              quantity: true,
-            },
-          },
-        },
       });
       let stock = [];
       for (let bookProp of BooksStock) {
-
-        if (typeof bookProp.stock?.id != "string") continue;
-        if (typeof bookProp.stock?.quantity != "number") continue;
   
-        let SingularBookStock = {
-          id: bookProp.stock.id,
-          quantity: bookProp.stock.quantity,
+       
+  
+        stock.push (new Stock ({
+          id: bookProp.id,
+          quantity: bookProp.quantity,
           book: {
             id: bookProp.id,
-            title: bookProp.title,
-            author: bookProp.author[0].name,
-            price: bookProp.price,
-            synopsis: bookProp.synopsis,
-            genre: bookProp.tag[0].genre,
+            title: bookProp.book.title,
+            author: bookProp.book.author[0].name,
+            price: bookProp.book.price,
+            synopsis: bookProp.book.synopsis,
+            genre: bookProp.book.tag[0].genre,
           },
-        };
+        }));
   
-        stock.push(SingularBookStock);
+   
       }
   
       return stock;

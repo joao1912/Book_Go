@@ -2,7 +2,7 @@ import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reserva
 import { IReservation } from "../../entities/Reservation"
 
 
-export class MakeReservationUseCase{
+export class MakeReservationUseCase {
 
     protected reservationService: IMakeReservation
     constructor(ormAdapter: IMakeReservation){

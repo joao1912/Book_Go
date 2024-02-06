@@ -24,9 +24,9 @@ describe("Criando dados necessários para pegar a reserva de um usuário por id"
     };
 
     const bookOne: Omit<IBook, "id"> = {
-      title: "Book Reserved",
+      title: "Book To Search User Reserve",
       synopsis: "This is book one of a kind",
-      price: 22,
+      price: 33,
       author: "Grip",
       genre: "Fantasia",
     };

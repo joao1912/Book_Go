@@ -1,63 +1,46 @@
 import { prisma } from "../db";
 import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
-import { IStock } from "../../../../entities/Stock";
+import { IStock, Stock } from "../../../../entities/Stock";
 
 export class UpdateStock implements IUpdateStock {
-  async execute({id, quantity, book  }: Partial<IStock>): Promise<Partial<IStock>> {
+  async execute({id, quantity}: Partial<IStock>): Promise <Stock> {
     try {
-      const stockData = await prisma.book.update({
-        where: {
-          id: book?.id,
-        },
-
+      const stockData = await prisma.stock.update({
+       
         data: {
-          stock: {
-            update: {
-              quantity: quantity 
-            }
-          },
+          quantity: quantity || undefined},           
+        where: {
+          fk_id_book: id,
         },
+        
         select: {
           id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          author: {
-            select: {
-              name: true,
-            },
-          },
-  
-          tag: {
-            select: {
-              genre: true,
-            },
-          },
-  
-          stock: {
-            select: {
-              id: true,
-              quantity: true,
-            },
-          },
-        },
+          quantity: true,
+          book: {
+            include: {
+              author: true,
+              tag: true
+            }
+          }
+          }
+        
       });
 
 
-      let stock = ({
-        id: stockData.stock?.id,
-        quantity: stockData.stock?.quantity,
+      return new Stock ({
+        id: stockData.id,
+        quantity: stockData.quantity,
         book: {
           id: stockData.id,
-          title: stockData.title,
-          author: stockData.author[0].name,
-          price: stockData.price,
-          synopsis: stockData.synopsis,
-          genre: stockData.tag[0].genre,
+          title: stockData.book.title,
+          author: stockData.book.author[0].name,
+          price: stockData.book.price,
+          synopsis: stockData.book.synopsis,
+          genre: stockData.book.tag[0].genre,
       }
     });
 
-    return stock
+
 
     } catch (error) {
       throw new Error("Something happened: " + error);
