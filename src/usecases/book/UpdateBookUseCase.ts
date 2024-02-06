@@ -2,7 +2,7 @@ import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdate
 import { IBook } from "../../entities/Book"
 
 
-export class UpdateBook {
+export class UpdateBookUseCase {
 
     protected bookService: IUpdateBook
     constructor(ormAdapter: IUpdateBook) {

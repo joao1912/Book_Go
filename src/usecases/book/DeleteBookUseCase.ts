@@ -1,7 +1,7 @@
 import { IDeleteBook } from "../../adapters/ormAdapter/repositories/book/IDeleteBook";
 
 
-export class DeleteUserUseCase {
+export class DeleteBookUseCase {
 
     protected bookService: IDeleteBook
 

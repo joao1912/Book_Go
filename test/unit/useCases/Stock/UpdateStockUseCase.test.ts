@@ -44,7 +44,7 @@ describe("Test update stock ", ()=>{
     const result = await updateStockUseCase.execute(updateQuantity)
 
 
-      expect(result).toBeInstanceOf(Stock)
+      expect(result.props).toBeInstanceOf(Stock)
   
 
 

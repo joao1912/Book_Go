@@ -24,7 +24,7 @@ export class UpdateBook implements IUpdateBook {
           tag: {
             update: {
               where: { 
-                genre: undefined
+                genre: "Biography"
               },
               data: {
                 genre: genre

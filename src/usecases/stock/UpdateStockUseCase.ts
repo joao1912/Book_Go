@@ -11,7 +11,7 @@ export class UpdateStockUseCase {
 
     async execute(stockData: Partial<IStock>) {
 
-        const stock = await this.stockService.execute(stockData)
+       return await this.stockService.execute(stockData)
 
     
 

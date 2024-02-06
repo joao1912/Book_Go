@@ -2,7 +2,7 @@ import { IAddBook } from "../../adapters/ormAdapter/repositories/book/IAddBook"
 import { IBook } from "../../entities/Book"
 
 
-export class AddBook {
+export class AddBookUseCase {
 
     protected bookService: IAddBook
     constructor(ormAdapter: IAddBook) {
@@ -11,7 +11,7 @@ export class AddBook {
 
     async execute(bookData: Omit<IBook, "id">) {
 
-        const book = await this.bookService.execute(bookData)
+        return await this.bookService.execute(bookData)
 
     
 

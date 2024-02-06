@@ -37,7 +37,7 @@ describe("Pega todas as reservas da biblioteca", () => {
       title: "Book to Search All Reserves",
       synopsis: "Once upon a time",
       price: 1,
-      genre: "Biografy",
+      genre: "Biography",
       author: "Wilson",
     };
 
