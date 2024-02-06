@@ -1,5 +1,5 @@
 import { IFinance, Finance } from "../../../../entities/Finance";
-import { ICreateFinance, IRegister } from "../../repositories/finance/ICreateFinance";
+import { ICreateFinance, IRegister, typeOfPayment } from "../../repositories/finance/ICreateFinance";
 import { prisma } from "../db";
 
 export class CreateFinance implements ICreateFinance {
@@ -17,6 +17,32 @@ export class CreateFinance implements ICreateFinance {
                 total: total,
             }
         })
+
+    }
+
+    private toEnumPayment(type: string): typeOfPayment {
+
+        let typePayment: typeOfPayment
+
+        switch(type) {
+
+            case "Ticket":
+                typePayment = typeOfPayment.Ticket
+                break
+            case "Credit card":
+                typePayment = typeOfPayment.CreditCard
+                break
+            case "Debit card":
+                typePayment = typeOfPayment.DebitCard
+                break
+            case "Pix":
+                typePayment = typeOfPayment.Pix
+                break
+            default:
+                throw new Error('Internal server error: Type of Payment is undefined')
+        }
+
+        return typePayment
 
     }
 
@@ -64,7 +90,7 @@ export class CreateFinance implements ICreateFinance {
             return new Finance({
                 id: newFinance.id,
                 bookId: newFinance.fk_id_book,
-                payment: newFinance.payments,
+                payment: this.toEnumPayment(newFinance.payments),
                 userId: newFinance.fk_id_user,
                 total: newFinance.total,
             })
