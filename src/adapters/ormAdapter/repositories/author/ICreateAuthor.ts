@@ -1,8 +1,8 @@
-import { Author, IAuthor } from "../../../../entities/Author";
+import { Author } from "../../../../entities/Author";
 
 
 export interface ICreateAuthor {
 
-    execute(authorData: Omit<IAuthor, 'id'>): Promise<Author>
+    execute(authorData: Omit<Author, 'id'>): Promise<Author>
 
 }

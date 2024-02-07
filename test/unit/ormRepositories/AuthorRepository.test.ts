@@ -15,20 +15,24 @@ interface IAuthorToBeUpdate {
 
 describe('Testes do AuthorRepository', () => {
     
-    let idAuthorToBeDelete: string;
-    let idAuthorToBeSearch: string;
-    let idAuthorToBeUpdate: string;
+    let idAuthorToBeDelete: string | undefined;
+    let idAuthorToBeSearch: string | undefined;
+    let idAuthorToBeUpdate: string | undefined;
 
     beforeAll(async () => {
 
         // Criar um autor para deletar
 
-        await createAuthor.execute({
+        const author1 = new Author({
             name: 'nome_teste1',
             description: 'uma descrição'
         })
+
+        await createAuthor.execute(author1)
             .then(result => {
+  
                 idAuthorToBeDelete = result.props.id
+                
             })
 
 
@@ -39,7 +43,9 @@ describe('Testes do AuthorRepository', () => {
             description: 'uma descrição'
         }
 
-        await createAuthor.execute(authorToBeSearch)
+        const author2 = new Author(authorToBeSearch)
+
+        await createAuthor.execute(author2)
             .then(result => {
                 idAuthorToBeSearch = result.props.id
             })
@@ -51,7 +57,9 @@ describe('Testes do AuthorRepository', () => {
             description: 'uma descrição'
         }
 
-        await createAuthor.execute(authorToBeUpdate)
+        const author3 = new Author(authorToBeUpdate)
+
+        await createAuthor.execute(author3)
             .then(result => {
                 idAuthorToBeUpdate = result.props.id
             })
@@ -59,11 +67,13 @@ describe('Testes do AuthorRepository', () => {
     })
 
     it('Deve criar um autor', async () => {
-       
-        const autor = await createAuthor.execute({
+
+        const authorInstanceToBeCreate = new Author({
             name: 'nome_teste2',
             description: 'uma descrição'
         })
+       
+        const autor = await createAuthor.execute(authorInstanceToBeCreate)
 
         expect(autor.props).toHaveProperty('id')
         expect(autor).toBeInstanceOf(Author)
@@ -71,6 +81,8 @@ describe('Testes do AuthorRepository', () => {
     })
 
     it('Deve deletar um autor', async () => {
+
+        if (idAuthorToBeDelete == undefined) throw new Error('idAuthorToBeDelete can not be undefined')
         
         await deleteAuthor.execute(idAuthorToBeDelete)
         .then(result => {
@@ -92,6 +104,8 @@ describe('Testes do AuthorRepository', () => {
     })
 
     it('Deve buscar um autor por id', async () => {
+
+        if (idAuthorToBeSearch == undefined) throw new Error('idAuthorToBeSearch can not be undefined')
 
         await getAuthorById.execute(idAuthorToBeSearch)
             .then(result => {
@@ -135,7 +149,9 @@ describe('Testes do AuthorRepository', () => {
             description: 'uma descrição'
         }
 
-        await updateAuthor.execute(updatedValues)
+        const authorInstanceToBeUpdated = new Author(updatedValues)
+
+        await updateAuthor.execute(authorInstanceToBeUpdated)
             .then((result: Author) => {
 
                 expect(result.props).toEqual(updatedValues)

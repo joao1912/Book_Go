@@ -1,8 +1,8 @@
-import { Author, IAuthor } from "../../../../entities/Author";
+import { Author } from "../../../../entities/Author";
 
 
 export interface IUpdateAuthor {
 
-    execute(authorToBeUpdated: Partial<IAuthor>): Promise<Author>
+    execute(authorToBeUpdated: Partial<Author>): Promise<Author>
 
 }

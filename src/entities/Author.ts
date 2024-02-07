@@ -1,5 +1,5 @@
 export interface IAuthor {
-    id: string;
+    id?: string;
     name: string;
     description: string;
 }
@@ -14,6 +14,10 @@ export class Author {
 
         this.props = props
       
+    }
+
+    set id(id: string) {
+        this.id = id
     }
    
     get Author(){

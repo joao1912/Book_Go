@@ -5,17 +5,19 @@ import { prisma } from "../db";
 
 export class UpdateAuthor implements IUpdateAuthor {
 
-    async execute({id, description, name}: Partial<IAuthor>): Promise<Author> {
-        
+    async execute({props}: Partial<Author>): Promise<Author> {
+
         try {
+
+            console.log(props?.id)
 
             const updatedAuthor = await prisma.author.update({
                 where: {
-                    id: id
+                    id: props?.id
                 },
                 data: {
-                    name: name || undefined,
-                    description: description || undefined
+                    name: props?.name || undefined,
+                    description: props?.description || undefined
                 }
             })
 

@@ -4,8 +4,10 @@ import { prisma } from "../db";
 
 export class CreateAuthor implements ICreateAuthor {
 
-    async execute({description, name}: Omit<IAuthor, "id">): Promise<Author> {
-        
+    async execute({props}: Omit<Author, "id">): Promise<Author> {
+
+        const {description, name} = props;
+
         try {
 
             const newAuthor = await prisma.author.create({
