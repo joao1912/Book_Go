@@ -23,10 +23,9 @@ export class UpdateBook implements IUpdateBook {
           synopsis: synopsis || undefined,
           price: price || undefined,
           tag: {
-
             connectOrCreate: {
               where: {
-                genre: genre || undefined
+                genre: genre
               },
               create: {
                 genre: genre 
@@ -52,6 +51,21 @@ export class UpdateBook implements IUpdateBook {
               }, 
         },
       });
+
+      const tagDisconnect = await prisma.tag.update({
+        where: {
+          genre: "Biography"
+        },
+        data: {
+          book: {
+           disconnect: {
+            id: id
+          }
+          }
+          }
+        
+
+      })
 
       
   
