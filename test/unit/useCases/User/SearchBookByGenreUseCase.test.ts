@@ -1,8 +1,8 @@
-import { addBook, deleteBook, searchBookByGenre } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { Book, IBook } from "../../../src/entities/Book"
-import { AddBookUseCase } from "../../../src/usecases/book/AddBookUseCase"
-import { DeleteBookUseCase } from "../../../src/usecases/book/DeleteBookUseCase"
-import { SearchBookByGenreUseCase } from "../../../src/usecases/book/SearchBookByGenreUseCase"
+import { addBook, deleteBook, searchBookByGenre } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { Book, IBook } from "../../../../src/entities/Book"
+import { AddBookUseCase } from "../../../../src/usecases/book/AddBookUseCase"
+import { DeleteBookUseCase } from "../../../../src/usecases/book/DeleteBookUseCase"
+import { SearchBookByGenreUseCase } from "../../../../src/usecases/book/SearchBookByGenreUseCase"
 
 
 describe("Procurar um livros por genero", ()=>{

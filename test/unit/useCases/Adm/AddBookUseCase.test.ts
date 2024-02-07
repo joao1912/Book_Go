@@ -1,6 +1,6 @@
-import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { Book, IBook } from "../../../src/entities/Book"
-import { AddBookUseCase } from "../../../src/usecases/book/AddBookUseCase"
+import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { Book, IBook } from "../../../../src/entities/Book"
+import { AddBookUseCase } from "../../../../src/usecases/book/AddBookUseCase"
 
 
 describe("Adicionar um livro", ()=>{

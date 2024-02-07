@@ -1,7 +1,7 @@
-import { addBook, deleteBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { Book, IBook } from "../../../src/entities/Book"
-import { AddBookUseCase } from "../../../src/usecases/book/AddBookUseCase"
-import { DeleteBookUseCase } from "../../../src/usecases/book/DeleteBookUseCase"
+import { addBook, deleteBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { Book, IBook } from "../../../../src/entities/Book"
+import { AddBookUseCase } from "../../../../src/usecases/book/AddBookUseCase"
+import { DeleteBookUseCase } from "../../../../src/usecases/book/DeleteBookUseCase"
 
 
 describe("Deletar um livro", ()=>{

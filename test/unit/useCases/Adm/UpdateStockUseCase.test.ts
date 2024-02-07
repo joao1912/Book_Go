@@ -2,7 +2,7 @@
 import { GetStockByBookTitle } from "../../../../src/adapters/ormAdapter/prismaAdapter/stock/GetStockByBookTitle"
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { getStockByBookTitle, updateStock } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
-import { IBook } from "../../../../src/entities/Book"
+import { Book, IBook } from "../../../../src/entities/Book"
 import { IStock, Stock } from "../../../../src/entities/Stock"
 import { GetAllStockUseCase } from "../../../../src/usecases/stock/GetAllStockUseCase"
 import { GetStockByBookTitleUseCase } from "../../../../src/usecases/stock/GetStockByBookTitleUseCase"
@@ -44,7 +44,7 @@ describe("Test update stock ", ()=>{
     const result = await updateStockUseCase.execute(updateQuantity)
 
 
-      expect(result.props).toBeInstanceOf(Stock)
+      expect(result.props.book).toBeInstanceOf(Book)
   
 
 

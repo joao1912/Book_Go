@@ -1,4 +1,4 @@
-import { prisma } from "../db";
+import { prisma, PrismaError } from "../db";
 import { Book, IBook } from "../../../../entities/Book";
 import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 
@@ -10,8 +10,9 @@ export class UpdateBook implements IUpdateBook {
     price,
     genre,
     author,
-  }: Partial<IBook>): Promise<Book> {
+  }: IBook): Promise<Book> {
     try {
+     
       const book = await prisma.book.update({
         where: {
           id: id,
@@ -20,14 +21,16 @@ export class UpdateBook implements IUpdateBook {
         data: {
           title: title || undefined,
           synopsis: synopsis || undefined,
-          price: price || undefined,  
+          price: price || undefined,
           tag: {
-            update: {
-              where: { 
-                genre: "Biography"
+
+            connectOrCreate: {
+              where: {
+                genre: genre || undefined
               },
-              data: {
-                genre: genre
+              create: {
+                genre: genre 
+
               }
             }
           }
@@ -46,11 +49,11 @@ export class UpdateBook implements IUpdateBook {
                 select: {
                   genre: true,
                 },
-              },
-       
-     
+              }, 
         },
       });
+
+      
   
 
       return new Book({
@@ -64,7 +67,10 @@ export class UpdateBook implements IUpdateBook {
 
       
     } catch (error) {
-      throw new Error("Something happened: " + error);
+      if(error instanceof PrismaError){
+        console.log("Prisma errinho", error.code)
+      }
+      throw new Error("Something else happened: " + error);
     }
   }
 }

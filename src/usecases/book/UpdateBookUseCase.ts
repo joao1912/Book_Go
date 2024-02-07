@@ -11,7 +11,7 @@ export class UpdateBookUseCase {
 
     async execute(bookData: Partial<IBook>) {
 
-        const book = await this.bookService.execute(bookData)
+        return await this.bookService.execute(bookData)
 
     
 
