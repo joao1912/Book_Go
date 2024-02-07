@@ -83,51 +83,69 @@ describe('Testes do CommentRepository', () => {
 
         // Criar um comentário para deletar
 
-        await createComment.execute({
+        const commentInstanceToBeDelete = new Comment({
             comment: 'Um comentário',
             bookId: bookId,
             userId: userId
         })
+
+        await createComment.execute(commentInstanceToBeDelete)
             .then(result => {
-                idCommentToBeDelete = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    idCommentToBeDelete = id
+                }
             })
 
 
         // Criar comentário para buscas e update
 
-        const commentToBeSearch: ICommentToBeSearch = {
+        const commentToBeSearch = new Comment({
             comment: "Um comentário para busca",
             bookId: bookId,
             userId: userId
-        }
+        })
 
         await createComment.execute(commentToBeSearch)
             .then(result => {
-                idCommentToBeSearch = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    idCommentToBeSearch = id
+                }
             })
 
         // Criar comentário para buscas e update
 
-        const commentToBeUpdate: ICommentToBeUpdate = {
+        const dataToBeUpdate: ICommentToBeUpdate = {
             comment: "Um comentário para atualizar",
             bookId: bookId,
             userId: userId
         }
 
+        const commentToBeUpdate = new Comment(dataToBeUpdate)
+
         await createComment.execute(commentToBeUpdate)
             .then(result => {
-                idCommentToBeUpdate = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    idCommentToBeUpdate = id
+                }
             })
 
     })
 
     it('Deve criar um comentário', async () => {
-       
-        await createComment.execute({
+
+        const commentInstanceToBeCreate = new Comment({
             comment: 'Um comentário criado em testes!',
             bookId: bookId,
             userId: userId
         })
+       
+        await createComment.execute(commentInstanceToBeCreate)
             .then(result => {
 
                 expect(result).toBeInstanceOf(Comment)
@@ -188,14 +206,15 @@ describe('Testes do CommentRepository', () => {
             userId: userId
         }
 
-        await updateComment.execute(updatedValues)
+        const commentInstanceToBeUpdated = new Comment(updatedValues)
+
+        await updateComment.execute(commentInstanceToBeUpdated)
             .then(result => {
 
                 expect(result).toBeInstanceOf(Comment)
                 expect(result.props).toEqual(updatedValues)
 
             })
-
     })      
 
 })

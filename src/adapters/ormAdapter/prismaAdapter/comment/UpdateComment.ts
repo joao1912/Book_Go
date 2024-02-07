@@ -4,17 +4,17 @@ import { IUpdateComment } from "../../repositories/comment/IUpdateComment";
 
 export class UpdateComment implements IUpdateComment {
 
-    async execute(commentUpdated: Partial<IComment>): Promise<Partial<Comment>> {
+    async execute({props}: Partial<Comment>): Promise<Partial<Comment>> {
 
         try {
 
             const comment = await prisma.comment.update({
                 where: {
-                    id: commentUpdated.id
+                    id: props?.id
                 },
 
                 data: {
-                    comment: commentUpdated.comment || undefined
+                    comment: props?.comment || undefined
                 }
 
             })

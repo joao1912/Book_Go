@@ -5,7 +5,9 @@ import { prisma } from "../db";
 
 export class CreateComment implements ICreateComment {
 
-    async execute({comment, bookId, userId}: Omit<IComment, "id">): Promise<Comment> {
+    async execute({props}: Omit<Comment, "id">): Promise<Comment> {
+
+        const {comment, bookId, userId} = props
         
         try {
             
