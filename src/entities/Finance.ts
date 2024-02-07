@@ -1,7 +1,7 @@
 import { typeOfPayment } from "../adapters/ormAdapter/repositories/finance/ICreateFinance";
 
 export interface IFinance {
-    id: string;
+    id?: string;
     payment: typeOfPayment;
     bookId: string;
     userId: string;

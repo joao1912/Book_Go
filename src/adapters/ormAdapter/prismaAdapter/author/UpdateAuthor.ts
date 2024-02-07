@@ -9,8 +9,6 @@ export class UpdateAuthor implements IUpdateAuthor {
 
         try {
 
-            console.log(props?.id)
-
             const updatedAuthor = await prisma.author.update({
                 where: {
                     id: props?.id

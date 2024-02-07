@@ -46,16 +46,18 @@ export class CreateFinance implements ICreateFinance {
 
     }
 
-    async execute(financeData: Omit<IFinance, "id">): Promise<Finance> {
+    async execute({props}: Omit<Finance, "id">): Promise<Finance> {
+
+        const {payment, total, bookId, userId} = props;
 
         try {
 
             const newFinance = await prisma.finance.create({
                 data: {
-                    payments: financeData.payment,
-                    total: financeData.total,
-                    fk_id_book: financeData.bookId,
-                    fk_id_user: financeData.userId,
+                    payments: payment,
+                    total: total,
+                    fk_id_book: bookId,
+                    fk_id_user: userId,
 
                 },
                 include: {

@@ -32,17 +32,17 @@ export class UpdateFinance implements IUpdateFinance {
 
     }
 
-    async execute({payment, id, total}: Partial<IFinance>): Promise<Partial<Finance>> {
+    async execute({props}: Partial<Finance>): Promise<Partial<Finance>> {
         
         try {
 
             const updatedFinance = await prisma.finance.update({
                 where: {
-                    id: id
+                    id: props?.id
                 },
                 data: {
-                    payments: payment || undefined,
-                    total: total || undefined
+                    payments: props?.payment || undefined,
+                    total: props?.total || undefined
                 }
             })
 

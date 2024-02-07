@@ -66,43 +66,68 @@ describe('Testes do FinanceRepository', () => {
 
         // Criar um finance para o delete
 
-        await createFinance.execute({
+        const financeInstance = new Finance({
             payment: typeOfPayment.Pix,
             bookId: bookId,
             userId: userId,
             total: 15
-        })
+        }) 
+
+        await createFinance.execute(financeInstance)
             .then(result => {
 
-                idFinanceToBeDelete = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+
+                    idFinanceToBeDelete = id
+
+                }
+
 
             })
 
         // Criar um finance para os testes de busca
 
-        await createFinance.execute({
+        const financeInstanceToBeSearch = new Finance({
             payment: typeOfPayment.Pix,
             bookId: bookId,
             userId: userId,
             total: 15
         })
+
+        await createFinance.execute(financeInstanceToBeSearch)
             .then(result => {
 
-                idFinanceToBeSearch = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+
+                    idFinanceToBeSearch = id
+
+                }
 
             })
 
         // Criar um finance para o update
 
-        await createFinance.execute({
+        const financeInstanceToBeUpdate = new Finance({
             payment: typeOfPayment.Pix,
             bookId: bookId,
             userId: userId,
             total: 18
         })
+
+        await createFinance.execute(financeInstanceToBeUpdate)
             .then(result => {
 
-                idFinanceToBeUpdated = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+
+                    idFinanceToBeUpdated = id
+
+                }
 
             })
 
@@ -112,12 +137,14 @@ describe('Testes do FinanceRepository', () => {
 
     it('Deve criar um dado no finance', async () => {
 
-        await createFinance.execute({
+        const financeInstaceToBeCreated = new Finance({
             payment: typeOfPayment.Pix,
             bookId: bookId,
             userId: userId,
             total: 15
         })
+
+        await createFinance.execute(financeInstaceToBeCreated)
             .then(result => {
 
                 expect(result).toBeInstanceOf(Finance)
@@ -177,7 +204,15 @@ describe('Testes do FinanceRepository', () => {
             total: 10
         }
 
-        await updateFinance.execute(newDataFinance)
+        const financeInstaceToBeUpdate = new Finance({
+            id: idFinanceToBeUpdated,
+            payment: typeOfPayment.Pix,
+            total: 10,
+            bookId: bookId,
+            userId: userId
+        })
+
+        await updateFinance.execute(financeInstaceToBeUpdate)
             .then(result => {
 
                 expect(result).toBeInstanceOf(Finance)
