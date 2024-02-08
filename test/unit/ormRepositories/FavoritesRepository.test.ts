@@ -117,8 +117,7 @@ describe('Testes do FavoriteRepository', () => {
 
                 expect(result.message).toBe('O livro foi removido dos favoritos')
 
-            })
-
+            })   
     })
 
     it('Deve buscar todos os favorites', async () => {
