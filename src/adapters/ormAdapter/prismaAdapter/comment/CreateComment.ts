@@ -10,7 +10,6 @@ export class CreateComment implements ICreateComment {
         const {comment, bookId, userId} = props
         
         try {
-            
         
             const commentData = await prisma.comment.create({
                 data: {
