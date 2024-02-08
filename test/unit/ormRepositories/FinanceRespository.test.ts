@@ -2,7 +2,9 @@ import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocol
 import { createFinance, deleteFinance, getAllFinances, getFinanceById, updateFinance } from "../../../src/adapters/ormAdapter/protocols/financeProtocols"
 import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols";
 import { typeOfPayment } from "../../../src/adapters/ormAdapter/repositories/finance/ICreateFinance";
+import { Book } from "../../../src/entities/Book";
 import { Finance, IFinance } from "../../../src/entities/Finance";
+import { User } from "../../../src/entities/User";
 
 interface IUserToFinanceTest {
     id?: string;
@@ -40,10 +42,16 @@ describe('Testes do FinanceRepository', () => {
             password: 'senha_segura'
         }
 
-        await createUser.execute(user)
+        const userInstance = new User(user)
+
+        await createUser.execute(userInstance)
             .then(result => {
 
-                userId = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    userId = id
+                }
 
             })
 
@@ -57,10 +65,16 @@ describe('Testes do FinanceRepository', () => {
             genre: "teste"
         }
 
-        await addBook.execute(book)
+        const bookInstance = new Book(book)
+
+        await addBook.execute(bookInstance)
             .then(result => {
 
-                bookId = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    bookId = id
+                }
 
             })
 
@@ -71,7 +85,7 @@ describe('Testes do FinanceRepository', () => {
             bookId: bookId,
             userId: userId,
             total: 15
-        }) 
+        })
 
         await createFinance.execute(financeInstance)
             .then(result => {
@@ -161,7 +175,7 @@ describe('Testes do FinanceRepository', () => {
 
                 expect(result.message).toBe('Deletado com sucesso!')
                 expect(result).not.toBeInstanceOf(Finance)
-                
+
             })
 
     })
