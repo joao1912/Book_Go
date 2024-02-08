@@ -3,14 +3,9 @@ import { Book, IBook } from "../../../../entities/Book";
 import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 
 export class UpdateBook implements IUpdateBook {
-  async execute({
-    id,
-    title,
-    synopsis,
-    price,
-    genre,
-    author,
-  }: IBook): Promise<Book> {
+  async execute({ props }: Book): Promise<Book> {
+
+    const {id, title, synopsis, price, genre, author} = props
     try {
      
       const book = await prisma.book.update({

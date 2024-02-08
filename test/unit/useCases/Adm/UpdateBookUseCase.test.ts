@@ -8,18 +8,18 @@ describe("Adicionar um livro", ()=>{
    
     beforeAll(async () => {
         
-        const addingBook: Omit<IBook, "id"> ={
+        const addingBook = new Book ({
             title: "New book to edit",
             synopsis: "This is book is going to edited",
             price: 20,
             author: "Jupiter",
             genre: "Biography"
-        }
+        })
         
        
 
         const newBook = await addBook.execute(addingBook)
-        bookUpdateId = newBook.props.id
+        if(newBook.props.id){bookUpdateId = newBook.props.id}
 
     })
 

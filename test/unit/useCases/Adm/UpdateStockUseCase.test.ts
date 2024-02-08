@@ -15,24 +15,24 @@ describe("Test update stock ", ()=>{
     let bookStockUpdate: string
     let bookStockUpdateQuantity: number
     beforeAll(async ()=>{
-        const stockBookTitle: Omit <IBook, "id"> = {
+        const stockBookTitle = new Book ({
             title: "Book Stock Update",
             synopsis: "This book is going to be reserved",
             price: 29,
             genre: "Business",
             author: "John Bus"
-        }
+        })
        
 
 
         const bookOnStock1 = await addBook.execute(stockBookTitle)
-        bookStockUpdate = bookOnStock1.props.id
+        if(bookOnStock1.props.id){bookStockUpdate = bookOnStock1.props.id}
         bookStockUpdateQuantity = 5
         
     })
 
     it("Updating testing", async()=>{
-        const updateQuantity: Partial<IStock> ={
+        const updateQuantity: Partial<Stock> ={
             id: bookStockUpdate,
             quantity: bookStockUpdateQuantity
         }

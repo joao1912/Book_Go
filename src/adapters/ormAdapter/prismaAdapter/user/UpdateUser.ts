@@ -4,8 +4,9 @@ import { IUpdateUser } from "../../repositories/user/IUpdateUser";
 
 export class UpdateUser implements IUpdateUser {
 
-  async execute({ id, username, password, email, telephone }: Partial<IUser>): Promise<Partial<User>> {
+  async execute({props}: User): Promise<Partial<User>> {
 
+    const {id, username, password, email, telephone } = props
     try {
 
       const user = await prisma.user.update({

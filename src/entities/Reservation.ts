@@ -3,7 +3,7 @@
 
 
 export interface IReservation {
-    id: string;
+    id?: string;
     userId: string;
     bookId: string;
     price: number;

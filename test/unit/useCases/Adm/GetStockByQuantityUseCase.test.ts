@@ -2,7 +2,7 @@
 import { GetStockByBookTitle } from "../../../../src/adapters/ormAdapter/prismaAdapter/stock/GetStockByBookTitle"
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { getStockByBookTitle, getStockByQuantity } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
-import { IBook } from "../../../../src/entities/Book"
+import { Book, IBook } from "../../../../src/entities/Book"
 import { Stock } from "../../../../src/entities/Stock"
 import { GetAllStockUseCase } from "../../../../src/usecases/stock/GetAllStockUseCase"
 import { GetStockByBookTitleUseCase } from "../../../../src/usecases/stock/GetStockByBookTitleUseCase"
@@ -14,13 +14,13 @@ describe("Test stock by book title", ()=>{
 
     let bookQuantity: number
     beforeAll(async ()=>{
-        const stockBookQuantity: Omit <IBook, "id"> = {
+        const stockBookQuantity = new Book({
             title: "Book Stock Titlee",
             synopsis: "This book is going to be reserved",
             price: 29,
             genre: "Business",
             author: "John Bus"
-        }
+        })
        
 
         

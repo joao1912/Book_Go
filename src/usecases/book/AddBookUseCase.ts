@@ -1,5 +1,5 @@
 import { IAddBook } from "../../adapters/ormAdapter/repositories/book/IAddBook"
-import { IBook } from "../../entities/Book"
+import { Book, IBook } from "../../entities/Book"
 
 
 export class AddBookUseCase {
@@ -9,7 +9,7 @@ export class AddBookUseCase {
         this.bookService = ormAdapter
     }
 
-    async execute(bookData: Omit<IBook, "id">) {
+    async execute(bookData: Omit<Book, "id">) {
 
         return await this.bookService.execute(bookData)
 

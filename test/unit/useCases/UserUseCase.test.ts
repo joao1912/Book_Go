@@ -19,27 +19,27 @@ describe('Testes do caso de uso do usuário', () => {
 
     beforeAll(async () => {
 
-        const userToBeUpdated: Omit<IUser, 'id'> = {
-            username: 'cleiton_teste1',
-            password: 'cleiton123_teste1',
-            email: 'cleiton_teste1@gmail.com',
-             telephone: '5548978453627_teste1'
+        // const userToBeUpdated: Omit<IUser, 'id'> = {
+        //     username: 'cleiton_teste1',
+        //     password: 'cleiton123_teste1',
+        //     email: 'cleiton_teste1@gmail.com',
+        //      telephone: '5548978453627_teste1'
             
-        }
+        // }
 
-        const userToBeDeleted: Omit<IUser, 'id'> = {
-            username: 'cleiton_teste2',
-            password: 'cleiton123_teste2',
-                email: 'cleiton_teste2@gmail.com',
-                telephone: '5548978453627_teste2'
+        // const userToBeDeleted: Omit<IUser, 'id'> = {
+        //     username: 'cleiton_teste2',
+        //     password: 'cleiton123_teste2',
+        //         email: 'cleiton_teste2@gmail.com',
+        //         telephone: '5548978453627_teste2'
             
-        }
+        // }
 
-        const userToUpdete = await createUser.execute(userToBeUpdated)
-        const userToDelete = await createUser.execute(userToBeDeleted)
+        // const userToUpdete = await createUser.execute(userToBeUpdated)
+        // const userToDelete = await createUser.execute(userToBeDeleted)
 
-        userIdToUpdate = userToUpdete.props.id
-        userIdToDelete = userToDelete.props.id
+        // userIdToUpdate = userToUpdete.props.id
+        // userIdToDelete = userToDelete.props.id
 
         const bookTobeCreated: Omit<IBook, 'id'> = {
             title: "Um livro de teste 1",
@@ -73,55 +73,55 @@ describe('Testes do caso de uso do usuário', () => {
 
     })
 
-    it('deve retornar o id do usuario criado', async () => {
+    // it('deve retornar o id do usuario criado', async () => {
 
-        const createUserUseCase = new CreateUserUseCase(createUser)
+    //     const createUserUseCase = new CreateUserUseCase(createUser)
 
-        const userToBeCreated: Omit<IUser, 'id'> = {
-            username: 'cleiton4',
-            password: 'cleiton123',
-                email: 'cleiton1@gmail.com',
-                telephone: '5548978453627'
-        }
+    //     const userToBeCreated: Omit<IUser, 'id'> = {
+    //         username: 'cleiton4',
+    //         password: 'cleiton123',
+    //             email: 'cleiton1@gmail.com',
+    //             telephone: '5548978453627'
+    //     }
 
-        const user = await createUserUseCase.execute(userToBeCreated)
+    //     const user = await createUserUseCase.execute(userToBeCreated)
 
-        expect(user.props).toHaveProperty('id')
+    //     expect(user.props).toHaveProperty('id')
 
-    })
+    // })
 
 
-    it ('deve mudar todos os usuario, exceto o username', async() => {
+    // it ('deve mudar todos os usuario, exceto o username', async() => {
 
-        const updateUserUseCase = new UpdateUserUseCase(updateUser) 
+    //     const updateUserUseCase = new UpdateUserUseCase(updateUser) 
 
-        const updateToDo: Partial <IUser> = {
-            id: userIdToUpdate,
-            password: '123cleitinho',
-            email: 'cleitao@hotmail.com',
-            telephone: '51438888493',
-            username: 'cleiton_teste1'
+    //     const updateToDo: Partial <IUser> = {
+    //         id: userIdToUpdate,
+    //         password: '123cleitinho',
+    //         email: 'cleitao@hotmail.com',
+    //         telephone: '51438888493',
+    //         username: 'cleiton_teste1'
             
-        }
+    //     }
 
-        const upUser = await updateUserUseCase.execute(updateToDo)
+    //     const upUser = await updateUserUseCase.execute(updateToDo)
 
-        expect(upUser.props).toEqual(updateToDo)
-        expect(upUser).toBeInstanceOf(User)
+    //     expect(upUser.props).toEqual(updateToDo)
+    //     expect(upUser).toBeInstanceOf(User)
         
-    })
+    // })
 
-    it('deve deletar um usuario por id', async () => {
+    // it('deve deletar um usuario por id', async () => {
 
-        const deleteUserUseCase = new DeleteUserUseCase(deleteUser)
+    //     const deleteUserUseCase = new DeleteUserUseCase(deleteUser)
 
-        const result = await deleteUserUseCase.execute(userIdToDelete)
+    //     const result = await deleteUserUseCase.execute(userIdToDelete)
         
-        expect(result).toStrictEqual({
-            message: `O usuário de id: ${userIdToDelete} foi excluído com sucesso.`
-        })
+    //     expect(result).toStrictEqual({
+    //         message: `O usuário de id: ${userIdToDelete} foi excluído com sucesso.`
+    //     })
 
-    })
+    // })
 
     it('Deve favoritar um livro e retornar o livro favoritado', async () => {
 

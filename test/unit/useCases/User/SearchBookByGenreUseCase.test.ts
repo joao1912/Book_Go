@@ -11,20 +11,20 @@ describe("Procurar um livros por genero", ()=>{
     
     beforeAll(async ()=>{
         
-        const BookGenreOne: Omit<IBook, "id"> ={
+        const BookGenreOne = new Book({
             title: "Search a genre",
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
             genre: "Biography"
-        }
-        const BookGenreTwo: Omit<IBook, "id"> ={
+        })
+        const BookGenreTwo = new Book({
             title: "Search a genre two",
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
             genre: "Biography"
-        }
+        })
 
         const bookDataOne = await addBook.execute(BookGenreOne)
         const bookDataTwo = await addBook.execute(BookGenreTwo)

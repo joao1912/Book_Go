@@ -3,7 +3,9 @@ import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
 import { IStock, Stock } from "../../../../entities/Stock";
 
 export class UpdateStock implements IUpdateStock {
-  async execute({id, quantity}: Partial<IStock>): Promise <Stock> {
+  async execute({props}: Stock): Promise <Stock> {
+   
+    const {id, quantity} = props
     try {
       const stockData = await prisma.stock.update({
        

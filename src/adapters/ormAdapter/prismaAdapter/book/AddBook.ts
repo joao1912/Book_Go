@@ -2,14 +2,17 @@ import { prisma } from "../db";
 import { IBook, Book } from "../../../../entities/Book";
 import { IAddBook } from "../../repositories/book/IAddBook";
 
+
 export class AddBook implements IAddBook {
   async execute({
-    title,
-    price,
-    genre,
-    synopsis,
-    author,
-  }: Omit<IBook, "id">): Promise<Book> {
+   props
+  }: Omit<Book, "id">): Promise<Book> {
+
+    const { title,
+      price,
+      genre,
+      synopsis,
+      author} = props
     try {
       const book = await prisma.book.create({
         data: {

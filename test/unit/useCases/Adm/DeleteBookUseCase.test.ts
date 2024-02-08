@@ -10,17 +10,21 @@ describe("Deletar um livro", ()=>{
     
     beforeAll(async ()=>{
         
-        const BookToDelete: Omit<IBook, "id"> ={
+        const BookToDelete= new Book ({
             title: "New book to add",
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
             genre: "Biography"
-        }
+        })
 
         const bookData = await addBook.execute(BookToDelete)
-        BookToDeleteId = bookData.props.id
-        BookToDeleteTitle = bookData.props.title
+        if(bookData.props.id){
+            BookToDeleteId = bookData.props.id
+        }
+        if(BookToDeleteTitle){
+            BookToDeleteTitle = bookData.props.title
+        }
 
     })
 

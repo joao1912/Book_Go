@@ -12,13 +12,13 @@ describe("Procurar  livros por titulo", ()=>{
     
     beforeAll(async ()=>{
         
-        const BookGenreOne: Omit<IBook, "id"> ={
+        const BookGenreOne = new Book({
             title: "Search a title",
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
             genre: "Biography"
-        }
+        })
 
 
         const bookDataOne = await addBook.execute(BookGenreOne)

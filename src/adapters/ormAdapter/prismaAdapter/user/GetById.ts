@@ -1,12 +1,13 @@
 import { prisma } from "../db";
 import { IGetById } from "../../repositories/user/IGetById";
+import { User } from "../../../../entities/User";
 
 export class GetById implements IGetById {
     
     async execute(id:string) {
 
         try {
-          const users = await prisma.user.findUnique({
+          const user = await prisma.user.findFirstOrThrow({
             where: {id: id},
             select: {
                 id: true,
@@ -18,7 +19,14 @@ export class GetById implements IGetById {
             }
         })
 
-        return users
+        return new User ({
+            id: user.id,
+            username: user.username,
+            password: user.password,
+            email: user.email,
+            telephone: user.telephone,
+        
+          })
 
         } catch (error) {
           throw new Error('Internal server error: ' + error)

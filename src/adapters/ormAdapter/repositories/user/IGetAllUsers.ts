@@ -1,5 +1,5 @@
-import { IUser } from "../../../../entities/User"
+import { User } from "../../../../entities/User"
 
 export interface IGetAllUsers {
-    execute(): Promise<IUser[]>
+    execute(): Promise<User[]>
 }

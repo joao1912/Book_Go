@@ -7,13 +7,14 @@ describe("Adicionar um livro", ()=>{
 
     it("Criar um livro",async () => {
         
-        const addingBook: Omit<IBook, "id"> ={
+        const addingBook = new Book({
             title: "New book to add",
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
             genre: "Biography"
-        }
+        })
+       
         
         const addBookUseCase = new AddBookUseCase(addBook)
 

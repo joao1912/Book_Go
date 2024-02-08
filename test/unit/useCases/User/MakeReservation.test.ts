@@ -2,9 +2,9 @@ import { MakeReservation } from "../../../../src/adapters/ormAdapter/prismaAdapt
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols"
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
-import { IBook } from "../../../../src/entities/Book"
+import { Book, IBook } from "../../../../src/entities/Book"
 import { IReservation, Reservation } from "../../../../src/entities/Reservation"
-import { IUser } from "../../../../src/entities/User"
+import { IUser, User } from "../../../../src/entities/User"
 import { MakeReservationUseCase } from "../../../../src/usecases/reservation/MakeReservationUseCase"
 import CleanDataBase from "../../../util/CleanDataBase"
 
@@ -16,36 +16,36 @@ describe ("Teste de reservas", () => {
 
     beforeAll(async() =>{
         
-        const newUser: Omit <IUser, "id"> ={
+        const newUser = new User({
             username: "GiReserves",
             password: "123",
             email:"gi@reserves",
             telephone: "48999909092"
-        }
+        })
 
-        const newBook: Omit <IBook, "id"> = {
+        const newBook = new Book({
             title: "Book Reserved",
             synopsis: "This book is going to be reserved",
             price: 999,
             genre: "Business",
             author: "John Bus"
-        }
+        })
         const userToReserve = await createUser.execute(newUser)
         const bookToReserve = await addBook.execute(newBook)
 
-        userIdToReserve = userToReserve.props.id
-        bookIdToReserve = bookToReserve.props.id
+        if(userToReserve.props.id){userIdToReserve = userToReserve.props.id}
+        if(bookToReserve.props.id){bookIdToReserve = bookToReserve.props.id}
 
     })
 
     it("Fazer uma reserva", async() => {
-        const reserves: Omit <IReservation, "id"> = {
+        const reserves = new Reservation({
             userId: userIdToReserve,
             bookId: bookIdToReserve,
             price: 20,
             status: "Transcorrendo",
             
-        }
+        })
 
         const makeReservationUseCase = new MakeReservationUseCase(makeReservation)
 

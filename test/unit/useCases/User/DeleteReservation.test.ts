@@ -4,7 +4,7 @@ import {
   makeReservation,
 } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols";
-import { IBook } from "../../../../src/entities/Book";
+import { Book, IBook } from "../../../../src/entities/Book";
 import {
   IReservation,
   Reservation,
@@ -17,36 +17,36 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
   let bookId: string;
   let reservationId: string
   beforeAll(async () => {
-    const userOne: Omit<IUser, "id"> = {
+    const userOne = new User ({
       username: "Zoo",
       password: "4308",
       email: "zoo@gmail.com",
       telephone: "3322229450",
-    };
+    });
 
-    const bookOne: Omit<IBook, "id"> = {
+    const bookOne= new Book ({
       title: "Book To Delete Reserve",
       synopsis: "This is book three",
       price: 22,
       author: "Gem",
       genre: "Fantasia",
-    };
+    });
 
     const newUser = await createUser.execute(userOne);
     const newBook = await addBook.execute(bookOne);
 
-    userOneId = newUser.props.id;
-    bookId = newBook.props.id;
+    if(newUser.props.id){userOneId = newUser.props.id};
+   if(newBook.props.id) {bookId = newBook.props.id}
 
-    const reserve: Omit<IReservation, "id"> = {
+    const reserve = new Reservation({
       userId: userOneId,
       bookId: bookId,
       price: 23,
       status: "Transcorrendo",
-    };
+    });
 
     const reserveData = await makeReservation.execute(reserve);
-    reservationId = reserveData.props.id
+    if(reserveData.props.id){reservationId = reserveData.props.id}
   });
 
   it("Pesquisando reserva por book id", async () => {

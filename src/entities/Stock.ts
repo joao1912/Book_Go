@@ -1,14 +1,15 @@
 import { IBook } from "./Book";
 
 export interface IStock {
-    id: string;
+    id?: string;
     quantity: number;
     book: IBook
 }
 
 
 export class Stock {
- readonly props: IStock;
+ 
+    public readonly props: IStock;
 
 
  constructor(props: IStock){
