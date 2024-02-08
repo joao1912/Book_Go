@@ -33,8 +33,11 @@ describe("Test update stock ", ()=>{
 
     it("Updating testing", async()=>{
         const updateQuantity: Partial<Stock> ={
-            id: bookStockUpdate,
-            quantity: bookStockUpdateQuantity
+           
+                id: bookStockUpdate ,
+                quantity: bookStockUpdateQuantity
+            
+            
         }
 
     const updateStockUseCase = new UpdateStockUseCase(updateStock)
