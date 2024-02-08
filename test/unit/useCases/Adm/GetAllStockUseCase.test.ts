@@ -34,7 +34,7 @@ describe("Test search all books on stock", ()=>{
 
     it("Verificando stocks", async()=>{
 
-        const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
+    const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
     const result = await getAllStockUseCase.execute()
 

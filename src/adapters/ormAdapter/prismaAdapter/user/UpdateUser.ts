@@ -4,9 +4,9 @@ import { IUpdateUser } from "../../repositories/user/IUpdateUser";
 
 export class UpdateUser implements IUpdateUser {
 
-  async execute({props}: User): Promise<Partial<User>> {
+  async execute({ props }: User): Promise<Partial<User>> {
 
-    const {id, username, password, email, telephone } = props
+    const { id, username, password, email, telephone } = props
     try {
 
       const user = await prisma.user.update({
@@ -27,12 +27,11 @@ export class UpdateUser implements IUpdateUser {
           email: true,
           telephone: true
         }
-
       })
 
       return new User({
         id: user.id,
-        email:user.email,
+        email: user.email,
         password: user.password,
         telephone: user.telephone,
         username: user.username
@@ -43,7 +42,7 @@ export class UpdateUser implements IUpdateUser {
     } catch (error) {
 
       throw new Error("Something happened: " + error)
-      
+
     }
 
     // return users

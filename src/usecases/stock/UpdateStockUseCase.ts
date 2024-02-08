@@ -1,5 +1,5 @@
 import { IUpdateStock } from "../../adapters/ormAdapter/repositories/stock/IUpdateStock"
-import { Stock } from "../../entities/Stock"
+import { IStock, Stock } from "../../entities/Stock"
 
 
 export class UpdateStockUseCase {
@@ -9,9 +9,10 @@ export class UpdateStockUseCase {
         this.stockService = ormAdapter
     }
 
-    async execute(stockData: Partial<Stock>) {
+    async execute(stockData: IStock) {
 
-       return await this.stockService.execute(stockData)
+    const stockInstance = new Stock(stockData)
+       return await this.stockService.execute(stockInstance)
 
     
 

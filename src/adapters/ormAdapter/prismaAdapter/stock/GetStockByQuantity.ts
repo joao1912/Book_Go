@@ -4,9 +4,10 @@ import { prisma } from "../db";
 
 export class GetStockByQuantity implements IGetStockByQuantity {
   async execute(quantity: number) {
+    
     const BooksStock = await prisma.stock.findMany({
       where: {
-          quantity: quantity,     
+        quantity: quantity,
       },
       select: {
         id: true,
@@ -17,13 +18,12 @@ export class GetStockByQuantity implements IGetStockByQuantity {
             tag: true
           }
         }
-        }
+      }
     });
     let stock = [];
     for (let bookProp of BooksStock) {
 
-
-      stock.push (new Stock ({
+      stock.push(new Stock({
         id: bookProp.id,
         quantity: bookProp.quantity,
         book: {
@@ -36,7 +36,7 @@ export class GetStockByQuantity implements IGetStockByQuantity {
         },
       }));
 
- 
+
     }
 
     return stock;

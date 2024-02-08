@@ -6,10 +6,10 @@ import { IReservation, Reservation } from "../../../../entities/Reservation";
 
 export class MakeReservation implements IMakeReservation {
 
+    async execute({ props }: Reservation): Promise<Reservation> {
 
-    async execute({props}: Omit<Reservation, "id">): Promise <Reservation>{
-       
-        const {userId, bookId, price, startedAt, endsAt, status} = props
+        const { userId, bookId, price, startedAt, endsAt, status } = props
+
         try {
 
             const data = await prisma.reservation.create({
@@ -18,28 +18,22 @@ export class MakeReservation implements IMakeReservation {
                     fk_id_user: userId,
                     price: price,
                     status: status
-                    
-    
-                  },
-                  select: {
+
+
+                },
+                select: {
                     id: true,
                     fk_id_book: true,
                     fk_id_user: true,
                     price: true,
                     status: true,
                     createdAt: true,
-                  
-                      }
-                    
-                
-                 
-                    
+                }
             })
-     
-            
-            return new Reservation ({
-                
-                id: data.id, 
+
+            return new Reservation({
+
+                id: data.id,
                 userId: data.fk_id_user,
                 bookId: data.fk_id_book,
                 price: data.price,
@@ -47,12 +41,12 @@ export class MakeReservation implements IMakeReservation {
                 startedAt: data.createdAt,
                 endsAt: data.createdAt,
             })
-            
-   
+
+
         } catch (error) {
             throw new Error("Internal server error: " + error);
         }
-    
+
 
     }
 }

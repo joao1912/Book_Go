@@ -5,6 +5,7 @@ import { UpdateBookUseCase } from "../../../../src/usecases/book/UpdateBookUseCa
 
 describe("Adicionar um livro", ()=>{
     let bookUpdateId: string
+    let bookData: IBook
    
     beforeAll(async () => {
         
@@ -21,18 +22,26 @@ describe("Adicionar um livro", ()=>{
         const newBook = await addBook.execute(addingBook)
         if(newBook.props.id){bookUpdateId = newBook.props.id}
 
+        bookData = {
+        id: newBook.props.id,
+        title: newBook.props.title,
+        price: newBook.props.price,
+        author: newBook.props.author,
+        synopsis: newBook.props.synopsis,
+        genre: newBook.props.genre
+    }
+
     })
 
     it("Deve editar um livro", async()=>{
-        const bookEdit: Partial<Book> = {
-            props:{
+        const bookEdit: IBook = {
                 id: bookUpdateId,
                 price: 10,
                 genre: "Test Edit",
-                author: "",
-                synopsis: "",
-                title: ""
-            }
+                author: bookData.author,
+                synopsis: bookData.synopsis,
+                title: bookData.title
+            
         }
 
         const updateBookUseCase = new UpdateBookUseCase(updateBook)

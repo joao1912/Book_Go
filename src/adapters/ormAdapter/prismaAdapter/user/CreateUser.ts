@@ -5,7 +5,7 @@ import { ICreateUser } from "../../repositories/user/ICreateUser";
 export class CreateUser implements ICreateUser {
 
 
-  async execute({props}: Omit<User, "id">): Promise<User> {
+  async execute({ props }: Omit<User, "id">): Promise<User> {
 
     const { username, email, telephone, password } = props
 
@@ -25,10 +25,6 @@ export class CreateUser implements ICreateUser {
         telephone: true,
 
       }
-
-
-
-
     })
 
     return new User({
@@ -39,6 +35,6 @@ export class CreateUser implements ICreateUser {
       username: user.username,
       favoritesBooks: []
     })
-    
+
   }
 }

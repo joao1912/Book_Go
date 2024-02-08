@@ -1,5 +1,5 @@
 import { IUpdateUser } from "../../adapters/ormAdapter/repositories/user/IUpdateUser"
-import { User } from "../../entities/User"
+import { IUser, User } from "../../entities/User"
 
 export class UpdateUserUseCase {
 
@@ -8,9 +8,11 @@ export class UpdateUserUseCase {
         this.userService = ormAdapter
     }
 
-    async execute(userData: Partial<User>) {
+    async execute(userData: IUser) {
         try {
-            return await this.userService.execute(userData)
+            const userInstance = new User(userData)
+
+            return await this.userService.execute(userInstance)
         } catch (error) {
             throw new Error("Internal server error: " + error)
         }

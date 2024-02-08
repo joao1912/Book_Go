@@ -4,7 +4,7 @@ import { prisma } from "../db";
 export class DeleteUser implements IDeleteUser {
 
     async execute(id: string): Promise<IDeleteMessage> {
-        
+
         try {
             await prisma.user.delete({
                 where: {

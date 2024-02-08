@@ -4,50 +4,58 @@ import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProto
 import { getStockByBookTitle, updateStock } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
 import { Book, IBook } from "../../../../src/entities/Book"
 import { IStock, Stock } from "../../../../src/entities/Stock"
-import { GetAllStockUseCase } from "../../../../src/usecases/stock/GetAllStockUseCase"
-import { GetStockByBookTitleUseCase } from "../../../../src/usecases/stock/GetStockByBookTitleUseCase"
 import { UpdateStockUseCase } from "../../../../src/usecases/stock/UpdateStockUseCase"
 
 
 
-describe("Test update stock ", ()=>{
+describe("Test update stock ", () => {
 
     let bookStockUpdate: string
     let bookStockUpdateQuantity: number
-    let oi: IBook
+    let bookType: IBook
 
-    beforeAll(async ()=>{
-        const stockBookTitle = new Book ({
+    beforeAll(async () => {
+        const stockBookTitle = new Book({
             title: "Book Stock Update",
             synopsis: "This book is going to be reserved",
             price: 29,
             genre: "Business",
             author: "John Bus"
         })
-       
-        const bookOnStock1 = await addBook.execute(stockBookTitle)
-        if(bookOnStock1.props.id){bookStockUpdate = bookOnStock1.props.id}
-        bookStockUpdateQuantity = 5
-        
-    })
 
-    it("Updating testing", async()=>{
-        const updateQuantity: Partial<Stock> = {
-           props: {
-               id: bookStockUpdate ,
-               quantity: bookStockUpdateQuantity,
-                book: oi
-           }
-        
+        const bookData = await addBook.execute(stockBookTitle)
+        if (bookData.props.id) { bookStockUpdate = bookData.props.id }
+        bookStockUpdateQuantity = 5
+
+        bookType = {
+            id: bookData.props.id,
+            title: bookData.props.title,
+            price: bookData.props.price,
+            author: bookData.props.author,
+            synopsis: bookData.props.synopsis,
+            genre: bookData.props.genre
         }
 
-    const updateStockUseCase = new UpdateStockUseCase(updateStock)
+    })
 
-    const result = await updateStockUseCase.execute(updateQuantity)
+    it("Updating testing", async () => {
+        const updateQuantity: IStock = {
+
+            id: bookStockUpdate,
+            quantity: bookStockUpdateQuantity,
+            book: bookType
 
 
-      //expect(result).toBeInstanceOf(Book)
-      // ta dando pau aqui
+        }
+
+        const updateStockUseCase = new UpdateStockUseCase(updateStock)
+
+        const result = await updateStockUseCase.execute(updateQuantity)
+
+
+        expect(result).toBeInstanceOf(Stock)
+        // expect(result.props.book).toEqual(bookType)
+        // ta dando pau aqui
 
 
 

@@ -9,9 +9,11 @@ export class UpdateBookUseCase {
         this.bookService = ormAdapter
     }
 
-    async execute(bookData: Partial<Book>) {
+    async execute(bookData: IBook) {
+        
+        const bookInstance = new Book(bookData)
 
-        return await this.bookService.execute(bookData)
+        return await this.bookService.execute(bookInstance)
 
     
 

@@ -1,5 +1,5 @@
 import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reservation/IMakeReservation"
-import { Reservation } from "../../entities/Reservation"
+import { IReservation, Reservation } from "../../entities/Reservation"
 
 
 export class MakeReservationUseCase {
@@ -10,8 +10,9 @@ export class MakeReservationUseCase {
 
     }
 
-    async execute (reservationData: Omit<Reservation, "id">){
-        return await this.reservationService.execute(reservationData)
+    async execute (reservationData: IReservation){
+        const reservationInstance = new Reservation(reservationData)
+        return await this.reservationService.execute(reservationInstance)
     }
 
 } 

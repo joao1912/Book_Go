@@ -4,15 +4,10 @@ import { IAddBook } from "../../repositories/book/IAddBook";
 
 
 export class AddBook implements IAddBook {
-  async execute({
-   props
-  }: Omit<Book, "id">): Promise<Book> {
+  async execute({ props }: Book): Promise<Book> {
 
-    const { title,
-      price,
-      genre,
-      synopsis,
-      author} = props
+    const { title, price, genre, synopsis, author } = props
+   
     try {
       const book = await prisma.book.create({
         data: {
@@ -32,10 +27,10 @@ export class AddBook implements IAddBook {
           tag: {
             connectOrCreate: {
               where: {
-                genre:  genre,
+                genre: genre,
               },
               create: {
-                genre:  genre,
+                genre: genre,
               },
             },
           },
@@ -72,7 +67,7 @@ export class AddBook implements IAddBook {
         synopsis: book.synopsis,
         genre: book.tag[0].genre,
       });
-      
+
     } catch (error) {
       throw new Error("Internal server error: " + error);
     }

@@ -39,13 +39,13 @@ describe ("Teste de reservas", () => {
     })
 
     it("Fazer uma reserva", async() => {
-        const reserves = new Reservation({
+        const reserves: IReservation = {
             userId: userIdToReserve,
             bookId: bookIdToReserve,
             price: 20,
             status: "Transcorrendo",
             
-        })
+        }
 
         const makeReservationUseCase = new MakeReservationUseCase(makeReservation)
 

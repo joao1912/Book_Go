@@ -3,18 +3,20 @@ import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
 import { IStock, Stock } from "../../../../entities/Stock";
 
 export class UpdateStock implements IUpdateStock {
-  async execute({props}: Stock): Promise <Stock> {
-   
-    const {id, quantity} = props
+  async execute({ props }: Stock): Promise<Stock> {
+
+    const { id, quantity } = props
+
     try {
       const stockData = await prisma.stock.update({
-       
+
         data: {
-          quantity: quantity || undefined},           
+          quantity: quantity || undefined
+        },
         where: {
           fk_id_book: id,
         },
-        
+
         select: {
           id: true,
           quantity: true,
@@ -24,12 +26,10 @@ export class UpdateStock implements IUpdateStock {
               tag: true
             }
           }
-          }
-        
+        }
       });
 
-
-      return new Stock ({
+      return new Stock({
         id: stockData.id,
         quantity: stockData.quantity,
         book: {
@@ -39,10 +39,8 @@ export class UpdateStock implements IUpdateStock {
           price: stockData.book.price,
           synopsis: stockData.book.synopsis,
           genre: stockData.book.tag[0].genre,
-      }
-    });
-
-
+        }
+      });
 
     } catch (error) {
       throw new Error("Something happened: " + error);
