@@ -38,8 +38,7 @@ describe("Test update stock ", ()=>{
                quantity: bookStockUpdateQuantity,
                 book: oi
            }
-            
-            
+        
         }
 
     const updateStockUseCase = new UpdateStockUseCase(updateStock)

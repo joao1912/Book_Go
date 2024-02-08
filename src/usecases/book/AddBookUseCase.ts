@@ -9,9 +9,11 @@ export class AddBookUseCase {
         this.bookService = ormAdapter
     }
 
-    async execute(bookData: Omit<Book, "id">) {
+    async execute(bookData: IBook) {
 
-        return await this.bookService.execute(bookData)
+        const bookInstance = new Book(bookData)
+
+        return await this.bookService.execute(bookInstance)
 
     
 
