@@ -1,6 +1,8 @@
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols";
 import { createFavorite, deleteFavorite } from "../../../../src/adapters/ormAdapter/protocols/favoriteProtocols";
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols";
+import { Book } from "../../../../src/entities/Book";
+import { User } from "../../../../src/entities/User";
 import { DeleteFavoriteByIdUseCase } from "../../../../src/usecases/user/DeleteFavoriteByIdUseCase";
 
 
@@ -21,22 +23,32 @@ describe('Teste do DeleteFavoiteByIdUseCase', () => {
             telephone: "3322229450",
         };
 
-        await createUser.execute(user)
+        const userInstance = new User(user)
+
+        await createUser.execute(userInstance)
             .then(result => {
 
-                userId = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    userId = id
+                }
 
             })
 
         // Criar um livro
 
-        await addBook.execute({
+        const book = {
             author: 'cleitin da massa',
             genre: 'massa',
             price: 40,
             synopsis: 'efmaiefmuenmf',
             title: 'A massa lendária'
-        })
+        }
+
+        const bookInstance = new Book(book)
+
+        await addBook.execute(bookInstance)
             .then(result => {
 
                 const id = result.props.id
@@ -72,5 +84,5 @@ describe('Teste do DeleteFavoiteByIdUseCase', () => {
 
             })
     })
-    
+
 })

@@ -2,6 +2,7 @@ import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocol
 import { createFavorite, deleteFavorite, getAllFavoritesByUserId } from "../../../src/adapters/ormAdapter/protocols/favoriteProtocols";
 import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols";
 import { Book } from "../../../src/entities/Book";
+import { User } from "../../../src/entities/User";
 
 interface IFavoriteToBeSearch {
     id?: string;
@@ -44,10 +45,18 @@ describe('Testes do FavoriteRepository', () => {
             password: 'senha_segura'
         }
 
-        await createUser.execute(user)
+
+
+        const userInstance = new User(user)
+
+        await createUser.execute(userInstance)
             .then(result => {
 
-                userId = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    userId = id
+                }
 
             })
 
@@ -69,17 +78,29 @@ describe('Testes do FavoriteRepository', () => {
             genre: "teste2"
         }
 
-        await addBook.execute(book1)
+        const bookInstance1 = new Book(book1)
+
+        await addBook.execute(bookInstance1)
             .then(result => {
 
-                bookId1 = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    bookId1 = id
+                }
 
             })
 
-        await addBook.execute(book2)
+        const bookInstance2 = new Book(book2)
+
+        await addBook.execute(bookInstance2)
             .then(result => {
 
-                bookId2 = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                    bookId2 = id
+                }
 
             })
 
@@ -117,7 +138,7 @@ describe('Testes do FavoriteRepository', () => {
 
                 expect(result.message).toBe('O livro foi removido dos favoritos')
 
-            })   
+            })
     })
 
     it('Deve buscar todos os favorites', async () => {

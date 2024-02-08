@@ -1,7 +1,9 @@
 import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols";
 import { createComment, deleteComment, getAllComments, getCommentById, updateComment } from "../../../src/adapters/ormAdapter/protocols/commentProtocols";
 import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols";
+import { Book } from "../../../src/entities/Book";
 import { Comment } from "../../../src/entities/Comment";
+import { User } from "../../../src/entities/User";
 
 interface ICommentToBeSearch {
     id?: string;
@@ -56,11 +58,17 @@ describe('Testes do CommentRepository', () => {
             password: 'senha_segura' 
         }
 
-        await createUser.execute(user)
+        const userInstance = new User(user)
+
+        await createUser.execute(userInstance)
             .then(result => {
 
-                userId = result.props.id
+                const id = result.props.id
 
+                if (id != undefined) {
+                   userId = id
+                }
+                
             })
 
         // Crir um livro para os testes
@@ -73,10 +81,16 @@ describe('Testes do CommentRepository', () => {
             genre: "teste"
         }
 
-        await addBook.execute(book)
+        const bookInstance = new Book(book)
+
+        await addBook.execute(bookInstance)
             .then(result => {
 
-                bookId = result.props.id
+                const id = result.props.id
+
+                if (id != undefined) {
+                   bookId = id
+                }
 
             })
 
