@@ -1,5 +1,5 @@
 import { addBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols";
-import { createComment, deleteComment, getAllComments, getCommentById, updateComment } from "../../../src/adapters/ormAdapter/protocols/commentProtocols";
+import { createComment, deleteComment, getAllComments, getAllCommentsByUserId, getCommentById, updateComment } from "../../../src/adapters/ormAdapter/protocols/commentProtocols";
 import { createUser } from "../../../src/adapters/ormAdapter/protocols/userProtocols";
 import { Book } from "../../../src/entities/Book";
 import { Comment } from "../../../src/entities/Comment";
@@ -190,6 +190,18 @@ describe('Testes do CommentRepository', () => {
                 expect(result[0]).toBeInstanceOf(Comment)
 
             })
+
+    })
+
+    it('Deve buscar todos os comentários de um usuário', async () => {
+
+        await getAllCommentsByUserId.execute(userId)
+        .then(result => {
+
+            expect(result.length).toBeGreaterThan(0)
+            expect(result[0]).toBeInstanceOf(Comment)
+
+        })
 
     })
 
