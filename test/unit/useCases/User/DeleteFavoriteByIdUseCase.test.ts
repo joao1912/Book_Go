@@ -19,7 +19,7 @@ describe('Teste do DeleteFavoiteByIdUseCase', () => {
         const user = {
             username: "Zoo",
             password: "4308",
-            email: "zoo@gmail.com",
+            email: "aleatorio@gmail.com",
             telephone: "3322229450",
         };
 

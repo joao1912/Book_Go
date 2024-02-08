@@ -22,7 +22,7 @@ describe("Deletar um livro", ()=>{
         if(bookData.props.id){
             BookToDeleteId = bookData.props.id
         }
-        if(BookToDeleteTitle){
+        if(bookData.props.title){
             BookToDeleteTitle = bookData.props.title
         }
 

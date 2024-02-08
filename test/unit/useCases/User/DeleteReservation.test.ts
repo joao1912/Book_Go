@@ -17,11 +17,12 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
   let bookId: string;
   let reservationId: string
   beforeAll(async () => {
+   
     const userOne = new User ({
-      username: "Zoo",
+      username: "Zookkaa",
       password: "4308",
       email: "zoo@gmail.com",
-      telephone: "3322229450",
+      telephone: "4033002039045",
     });
 
     const bookOne= new Book ({

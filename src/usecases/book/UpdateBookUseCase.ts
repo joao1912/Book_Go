@@ -1,5 +1,5 @@
 import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdateBook"
-import { IBook } from "../../entities/Book"
+import { Book, IBook } from "../../entities/Book"
 
 
 export class UpdateBookUseCase {
@@ -9,7 +9,7 @@ export class UpdateBookUseCase {
         this.bookService = ormAdapter
     }
 
-    async execute(bookData: Partial<IBook>) {
+    async execute(bookData: Partial<Book>) {
 
         return await this.bookService.execute(bookData)
 

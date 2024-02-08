@@ -24,10 +24,15 @@ describe("Adicionar um livro", ()=>{
     })
 
     it("Deve editar um livro", async()=>{
-        const bookEdit: Partial<IBook> = {
-            id: bookUpdateId,
-            price: 10,
-            genre: "Test Edit"
+        const bookEdit: Partial<Book> = {
+            props:{
+                id: bookUpdateId,
+                price: 10,
+                genre: "Test Edit",
+                author: "",
+                synopsis: "",
+                title: ""
+            }
         }
 
         const updateBookUseCase = new UpdateBookUseCase(updateBook)

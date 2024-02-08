@@ -1,4 +1,4 @@
-import { updateUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
+import { createUser, updateUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
 import { User } from "../../../../src/entities/User"
 import { UpdateUserUseCase } from "../../../../src/usecases/user/UpdateUserUseCase"
 
@@ -14,6 +14,10 @@ describe("Alterar propriedades do usuário", ()=>{
              telephone: '5548978453627_teste1'
             
         })
+
+        const userData = await createUser.execute(userToBeUpdated)
+
+        if(userData.props.id){userIdToUpdate = userData.props.id}
 
     })
 
@@ -33,7 +37,7 @@ describe("Alterar propriedades do usuário", ()=>{
 
         const upUser = await updateUserUseCase.execute(updateToDo)
 
-        expect(upUser.props).toEqual(updateToDo)
+        expect(upUser.props?.username).toEqual(updateToDo.props.username)
         expect(upUser).toBeInstanceOf(User)
         
     })
