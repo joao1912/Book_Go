@@ -14,6 +14,8 @@ describe("Test update stock ", ()=>{
 
     let bookStockUpdate: string
     let bookStockUpdateQuantity: number
+    let oi: IBook
+
     beforeAll(async ()=>{
         const stockBookTitle = new Book ({
             title: "Book Stock Update",
@@ -23,8 +25,6 @@ describe("Test update stock ", ()=>{
             author: "John Bus"
         })
        
-
-
         const bookOnStock1 = await addBook.execute(stockBookTitle)
         if(bookOnStock1.props.id){bookStockUpdate = bookOnStock1.props.id}
         bookStockUpdateQuantity = 5
@@ -32,10 +32,12 @@ describe("Test update stock ", ()=>{
     })
 
     it("Updating testing", async()=>{
-        const updateQuantity: Partial<Stock> ={
-           
-                id: bookStockUpdate ,
-                quantity: bookStockUpdateQuantity
+        const updateQuantity: Partial<Stock> = {
+           props: {
+               id: bookStockUpdate ,
+               quantity: bookStockUpdateQuantity,
+                book: oi
+           }
             
             
         }
