@@ -1,2 +1,2 @@
 # book
-Site para uma biblioteca.
+Uma API para uma biblioteca fisíca.
