@@ -41,7 +41,6 @@ describe("Test update stock ", () => {
     it("Updating testing", async () => {
         const updateQuantity: IStock = {
 
-            id: bookStockUpdate,
             quantity: bookStockUpdateQuantity,
             book: bookType
 

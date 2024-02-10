@@ -1,23 +1,6 @@
 import { addBook, deleteBook, searchBookByGenre, searchBookByTitle, updateBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { Book } from "../../../src/entities/Book"
+import { Book, IBook } from "../../../src/entities/Book"
 
-interface IBookToBeSearch {
-    id?: string;
-    title: string;
-    author: string 
-    synopsis: string;
-    price: number
-    genre: string;
-}
-
-interface IBookToBeUpdate {
-    id?: string;
-    title: string;
-    author: string 
-    synopsis: string;
-    price: number
-    genre: string;
-}
 
 describe('Testes do BookRepository', () => {
     
@@ -51,7 +34,7 @@ describe('Testes do BookRepository', () => {
 
         // Criar livro para buscas e update
 
-        const BookToBeSearch: IBookToBeSearch = {
+        const BookToBeSearch: IBook = {
             title: "ORM Book to search",
             synopsis: "This is a test to search a book just with orm",
             price: 1,
@@ -69,7 +52,7 @@ describe('Testes do BookRepository', () => {
 
         // Criar livro para update
 
-        const BookToBeUpdate: IBookToBeUpdate = {
+        const BookToBeUpdate: IBook = {
             title: "ORM Book to update",
             synopsis: "This is a test to update a book just with orm",
             price: 1,
@@ -133,7 +116,7 @@ describe('Testes do BookRepository', () => {
         await searchBookByGenre.execute(bookGenre)
             .then(result => {
 
-                const equalValue: IBookToBeSearch = {
+                const equalValue: IBook = {
                     title: "ORM Book to search",
                     synopsis: "This is a test to search a book just with orm",
                     price: 1,
@@ -157,7 +140,7 @@ describe('Testes do BookRepository', () => {
         await searchBookByTitle.execute(bookTitle)
             .then(result => {
 
-                const equalValue: IBookToBeSearch = {
+                const equalValue: IBook = {
                     
                     title: bookTitle,
                     synopsis: "This is a test to search a book just with orm",

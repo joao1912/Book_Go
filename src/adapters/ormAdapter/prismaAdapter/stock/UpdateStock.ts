@@ -14,7 +14,7 @@ export class UpdateStock implements IUpdateStock {
           quantity: quantity || undefined
         },
         where: {
-          fk_id_book: id,
+          fk_id_book: book.id,
         },
 
         select: {

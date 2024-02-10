@@ -7,12 +7,13 @@ import { IStock, Stock } from "../../../src/entities/Stock"
 
 describe('Testes do StockRepository', () => {
 
-    
+
     let stockSearchByTitle: string
     let bookId1: string
     let bookId2: string
     let stockSearchByQuantity: number
-    let bookType: IBook
+    let IBookType: IBook
+    let IBookTypeSearch: IBook
 
 
     beforeAll(async () => {
@@ -26,7 +27,6 @@ describe('Testes do StockRepository', () => {
             genre: "Test ORM",
             author: "Wilson",
         })
-        bookType = book1
         const bookInstance1 = new Book(book1)
 
         await addBook.execute(bookInstance1)
@@ -34,6 +34,16 @@ describe('Testes do StockRepository', () => {
 
                 if (result.props.title) (stockSearchByTitle = result.props.title)
                 if (result.props.id) (bookId1 = result.props.id)
+            
+           
+                IBookType = {
+                    id: result.props.id,
+                    title: result.props.title,
+                    price: result.props.price,
+                    author: result.props.author,
+                    synopsis: result.props.synopsis,
+                    genre: result.props.genre
+                }
 
             })
 
@@ -52,20 +62,28 @@ describe('Testes do StockRepository', () => {
 
         await addBook.execute(bookInstance2)
             .then(result => {
-
                 if (result.props.id) (bookId2 = result.props.id)
+
+                IBookTypeSearch = {
+                    id: result.props.id,
+                    title: result.props.title,
+                    price: result.props.price,
+                    author: result.props.author,
+                    synopsis: result.props.synopsis,
+                    genre: result.props.genre
+                }
+
             })
 
-            // Atualizando estoque
-            const updateQuantityBefore = new Stock ({
+        // Atualizando estoque
+        const updateQuantityBefore = new Stock({
 
-                id: bookId2,
-                quantity: 20,
-                book: book2
-            })
+            quantity: 20,
+            book: IBookTypeSearch
+        })
 
-        
-        await updateStock.execute(updateQuantityBefore).then(result =>{
+
+        await updateStock.execute(updateQuantityBefore).then(result => {
 
             stockSearchByQuantity = result.props.quantity
         })
@@ -77,32 +95,31 @@ describe('Testes do StockRepository', () => {
 
         const result = await getStockByQuantity.execute(stockSearchByQuantity)
 
-        for(let stock of result){
-        
+        for (let stock of result) {
+
             expect(stock).toBeInstanceOf(Stock)
         }
 
     })
 
-    
-    it('Deve buscar um stock por quantidade', async () => {
+
+    it('Deve buscar um stock pelo titulo do livro', async () => {
 
         const result = await getStockByBookTitle.execute(stockSearchByTitle)
 
-        for(let stock of result){
+        for (let stock of result) {
             expect(stock.props.book.title).toEqual("ORM Stock to search")
             expect(stock).toBeInstanceOf(Stock)
         }
 
     })
 
-    
-    it("Updating testing", async () => {
+
+    it("Atualizar a quantidade do livro", async () => {
         const updateQuantity: IStock = {
 
-            id: bookId1,
             quantity: 50,
-            book: bookType
+            book: IBookType
 
 
         }
@@ -112,7 +129,7 @@ describe('Testes do StockRepository', () => {
 
 
         expect(result).toBeInstanceOf(Stock)
- 
+
 
 
 
