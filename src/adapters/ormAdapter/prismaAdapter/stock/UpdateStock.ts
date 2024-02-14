@@ -38,6 +38,8 @@ export class UpdateStock implements IUpdateStock {
           author: stockData.book.author[0].name,
           price: stockData.book.price,
           synopsis: stockData.book.synopsis,
+          publishedDate: stockData.book.publishedDate,
+          pageCount: stockData.book.pageCount,
           genre: stockData.book.tag[0].genre,
         }
       });

@@ -53,6 +53,8 @@ export class GetAllFinances implements IGetAllFinances {
                             title: true,
                             synopsis: true,
                             price: true,
+                            publishedDate: true,
+                            pageCount: true,
                             author: {
                                 select: {
                                     name: true
@@ -82,6 +84,8 @@ export class GetAllFinances implements IGetAllFinances {
                             title: data.book.title,
                             synopsis: data.book.synopsis,
                             price: data.book.price,
+                            pageCount: data.book.pageCount,
+                            publishedDate: data.book.publishedDate,
                             genre: data.book.tag[0].genre,
                             author: data.book.author[0].name
                         },

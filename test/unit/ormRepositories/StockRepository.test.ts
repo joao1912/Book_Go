@@ -26,6 +26,8 @@ describe('Testes do StockRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 20,
+            publishedDate: '2023-10-10'
         })
         const bookInstance1 = new Book(book1)
 
@@ -42,6 +44,8 @@ describe('Testes do StockRepository', () => {
                     price: result.props.price,
                     author: result.props.author,
                     synopsis: result.props.synopsis,
+                    publishedDate: result.props.publishedDate,
+                    pageCount: result.props.pageCount,
                     genre: result.props.genre
                 }
 
@@ -56,6 +60,8 @@ describe('Testes do StockRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 30,
+            publishedDate: '2016-12-10'
         })
 
         const bookInstance2 = new Book(book2)
@@ -70,7 +76,10 @@ describe('Testes do StockRepository', () => {
                     price: result.props.price,
                     author: result.props.author,
                     synopsis: result.props.synopsis,
+                    publishedDate: result.props.publishedDate,
+                    pageCount: result.props.pageCount,
                     genre: result.props.genre
+
                 }
 
             })

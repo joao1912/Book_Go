@@ -29,6 +29,8 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
       price: 33,
       author: "Gem",
       genre: "Fantasia",
+      pageCount: 3,
+      publishedDate: '2015-04-09',
     });
 
     const newUser = await createUser.execute(userOne);

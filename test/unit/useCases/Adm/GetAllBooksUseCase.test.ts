@@ -12,6 +12,8 @@ describe("Test search all books", ()=>{
             synopsis: "HUM...",
             price: 999,
             genre: "News",
+            pageCount: 23,
+            publishedDate: '1999-10-09',
             author: "Diego"
         })
        

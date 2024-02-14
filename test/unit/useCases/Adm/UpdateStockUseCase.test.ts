@@ -20,6 +20,8 @@ describe("Test update stock ", () => {
             synopsis: "This book is going to be reserved",
             price: 29,
             genre: "Business",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
             author: "John Bus"
         })
 
@@ -33,6 +35,8 @@ describe("Test update stock ", () => {
             price: bookData.props.price,
             author: bookData.props.author,
             synopsis: bookData.props.synopsis,
+            pageCount: bookData.props.pageCount,
+            publishedDate: bookData.props.publishedDate,
             genre: bookData.props.genre
         }
 

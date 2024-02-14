@@ -18,6 +18,8 @@ describe("Test stock by book title", ()=>{
             synopsis: "This book is going to be reserved",
             price: 29,
             genre: "Business",
+            pageCount: 273,
+            publishedDate: '2003-04-09',
             author: "John Bus"
         })
        

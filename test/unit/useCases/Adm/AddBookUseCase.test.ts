@@ -12,6 +12,8 @@ describe("Adicionar um livro", ()=>{
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
+            pageCount: 23,
+            publishedDate: '1999-10-09',
             genre: "Biography"
         }
        

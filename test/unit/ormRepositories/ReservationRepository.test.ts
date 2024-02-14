@@ -29,6 +29,8 @@ describe('Testes do ReservantionRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 123,
+            publishedDate: '2003-10-09'
         })
         
         const bookInstance1 = new Book(book1)
@@ -45,6 +47,8 @@ describe('Testes do ReservantionRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 123,
+            publishedDate: '2003-10-09'
         })
         
         const bookInstance2 = new Book(book2)

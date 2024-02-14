@@ -13,6 +13,9 @@ export class SearchBookByTitle implements ISearchBookByTitle {
           title: true,
           synopsis: true,
           price: true,
+          publishedDate: true,
+          pageCount: true,
+          image:true,
           author: {
             select: {
               name: true
@@ -36,6 +39,8 @@ export class SearchBookByTitle implements ISearchBookByTitle {
           author: bookProp.author[0].name,
           price: bookProp.price,
           synopsis: bookProp.synopsis,
+          publishedDate: bookProp.publishedDate,
+          pageCount: bookProp.pageCount,
           genre: bookProp.tag[0].genre,
         })
         );

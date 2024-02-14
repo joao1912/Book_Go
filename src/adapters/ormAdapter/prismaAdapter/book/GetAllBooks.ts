@@ -11,6 +11,8 @@ export class GetAllBooks implements IGetAllBooks {
           title: true,
           synopsis: true,
           price: true,
+          publishedDate: true,
+          pageCount: true,
           author: {
             select: {
               name: true
@@ -34,6 +36,8 @@ export class GetAllBooks implements IGetAllBooks {
           author: bookProp.author[0].name,
           price: bookProp.price,
           synopsis: bookProp.synopsis,
+          publishedDate: bookProp.publishedDate,
+          pageCount: bookProp.pageCount,
           genre: bookProp.tag[0].genre,
         }));
       ;

@@ -1,10 +1,13 @@
 export interface IBook {
-    id?: string
+    id?: string;
     title: string;
-    author: string 
+    author: string ;
     synopsis: string;
-    price: number
+    price: number;
     genre: string;
+    publishedDate: string;
+    pageCount: number; 
+    image?: any
 
 }
 
@@ -16,7 +19,7 @@ export class Book {
 
  constructor(props: IBook){
    
-    const {id, title, synopsis, genre, price, author} = props
+    const {id, title, synopsis, genre, price, author, publishedDate,pageCount, image} = props
    this.props = props
 
 
@@ -29,6 +32,8 @@ export class Book {
             title: this.props.title,
             synopsis: this.props.synopsis,
             price: this.props.price,
+            publishedDate: this.props.publishedDate,
+            pageCount: this.props.pageCount,
             genre: this.props.genre,
     
         }

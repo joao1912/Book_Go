@@ -29,6 +29,8 @@ describe("Criando dados necessários para pegar a reserva de um usuário por id"
       price: 33,
       author: "Grip",
       genre: "Fantasia",
+      pageCount: 73,
+      publishedDate: '2001-04-09',
     });
 
     const newUser = await createUser.execute(userOne);
