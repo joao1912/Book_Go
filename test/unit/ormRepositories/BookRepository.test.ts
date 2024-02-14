@@ -1,4 +1,4 @@
-import { addBook, deleteBook, searchBookByGenre, searchBookByTitle, updateBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { addBook, deleteBook, getAllBooks, searchBookByGenre, searchBookByTitle, updateBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { Book, IBook } from "../../../src/entities/Book"
 
 
@@ -176,6 +176,15 @@ describe('Testes do BookRepository', () => {
 
             })
 
+    })
+
+    it('Deve buscar todos os stocks', async () => {
+
+        const allBooks = await getAllBooks.execute()
+
+        expect(allBooks.length).toBeGreaterThan(0)
+
+        for (let books of allBooks) expect(books).toBeInstanceOf(Book)
     })
 
 })

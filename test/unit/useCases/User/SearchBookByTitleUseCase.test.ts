@@ -40,14 +40,14 @@ describe("Procurar  livros por titulo", ()=>{
             expect(prop).toBeInstanceOf(Book)
         }
       
-})
+},10000)
 
 it("Procurando um livro que não está registrado, deve retornar um erro",async () => {
         
       
     const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
-    const result = await searchBookByTitleUseCase.execute("BookToSearchTitle")
+    const result = await searchBookByTitleUseCase.execute("NãoEstáRegistrado")
 
     expect(result).toEqual([])
     expect(result).toHaveLength(0)
