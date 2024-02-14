@@ -22,7 +22,7 @@ export class expressAdapter implements HTTPAdapterRepository {
 
     setRoutes(): void {
 
-        this.app.use('/users', userRouter)
+        this.app.use('/v1/users', userRouter)
         
     }
 

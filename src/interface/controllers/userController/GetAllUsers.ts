@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
 import { GetAllUsersUseCase } from "../../../usecases/user/GetAllUsersUseCase";
 import { getAllUsers } from "../../../adapters/ormAdapter/protocols/userProtocols";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 
 class GetAllUsers {
 
-    async handle(req: Request, res: Response) {
+    async handle(req: HttpRequest, res: HttpResponse) {
 
         try {
             
