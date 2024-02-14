@@ -4,7 +4,7 @@ import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userPr
 import { Book } from "../../../../src/entities/Book"
 import { Comment } from "../../../../src/entities/Comment";
 import { User } from "../../../../src/entities/User";
-import { SearchAllCommentsUseCase } from "../../../../src/usecases/user/SearchAllCommentsUseCase";
+import { SearchAllCommentsUseCase } from "../../../../src/usecases/comment/SearchAllCommentsUseCase";
 
 
 describe('Testes do SearchAllCommentsUseCase', () => {

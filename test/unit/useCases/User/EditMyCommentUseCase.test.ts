@@ -4,7 +4,7 @@ import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userPr
 import { Book } from "../../../../src/entities/Book"
 import { User } from "../../../../src/entities/User"
 import { Comment } from "../../../../src/entities/Comment"
-import { EditMyCommentUseCase } from "../../../../src/usecases/user/EditMyCommentUseCase"
+import { EditMyCommentUseCase } from "../../../../src/usecases/comment/EditMyCommentUseCase"
 
 
 describe('Teste do EditMyCommentUseCase', () => {
