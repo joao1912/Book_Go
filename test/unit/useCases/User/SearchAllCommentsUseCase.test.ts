@@ -23,7 +23,9 @@ describe('Testes do SearchAllCommentsUseCase', () => {
             author: 'O autor estranho',
             genre: 'estranho',
             price: 50,
-            synopsis: 'estranhamente caro'
+            synopsis: 'estranhamente caro',
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
 
         await addBook.execute(bookData)

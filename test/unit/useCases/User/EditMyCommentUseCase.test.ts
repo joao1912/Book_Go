@@ -22,7 +22,9 @@ describe('Teste do EditMyCommentUseCase', () => {
             author: 'O autor muito bom',
             genre: 'incrivel',
             price: 10,
-            synopsis: 'estranhamente barato'
+            synopsis: 'estranhamente barato',
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
 
         await addBook.execute(bookData)

@@ -22,7 +22,9 @@ describe('Teste do DeleteMyCommentUseCase', () => {
             author: 'O autor muito diferente',
             genre: 'diferente',
             price: 30,
-            synopsis: 'estranhamente diferente'
+            synopsis: 'estranhamente diferente',
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
 
         await addBook.execute(bookData)
