@@ -2,7 +2,7 @@ import { HTTPAdapterRepository } from "./repository/HTTPAdapterRepository";
 import express, { Application } from "express";
 import cors from "cors"
 
-import userRoutes from "../../interface/routes/user/userRoutes";
+import userRouter from "../../interface/routes/express/userRoutes";
 
 export class expressAdapter implements HTTPAdapterRepository {
 
@@ -22,7 +22,7 @@ export class expressAdapter implements HTTPAdapterRepository {
 
     setRoutes(): void {
 
-        this.app.use('/users', userRoutes)
+        this.app.use('/users', userRouter)
         
     }
 
