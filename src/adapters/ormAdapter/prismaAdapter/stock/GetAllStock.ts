@@ -30,6 +30,8 @@ export class GetAllStock implements IGetAllStock {
           author: bookProp.book.author[0].name,
           price: bookProp.book.price,
           synopsis: bookProp.book.synopsis,
+          publishedDate: bookProp.book.publishedDate,
+          pageCount: bookProp.book.pageCount,
           genre: bookProp.book.tag[0].genre,
         },
       }));

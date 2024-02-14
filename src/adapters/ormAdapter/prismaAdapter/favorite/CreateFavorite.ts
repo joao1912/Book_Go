@@ -18,6 +18,8 @@ export class CreateFavorite implements ICreateFavorite {
               id: true,
               title: true,
               synopsis: true,
+              publishedDate: true,
+              pageCount: true,
               price: true,
               author: {
                 select: {
@@ -42,6 +44,8 @@ export class CreateFavorite implements ICreateFavorite {
           title: favorited.book.title,
           synopsis: favorited.book.synopsis,
           author: favorited.book.author[0].name,
+          publishedDate: favorited.book.publishedDate,
+          pageCount: favorited.book.pageCount,
           genre: favorited.book.tag[0].genre,
           price: favorited.book.price,
         })

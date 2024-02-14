@@ -40,7 +40,9 @@ describe('Teste do caso de uso de buscar todos os favoritos de um usuários', ()
             genre: 'massa1',
             price: 40,
             synopsis: 'efmaiefmuenmf1',
-            title: 'A massa lendária1'
+            title: 'A massa lendária1',
+            pageCount: 83,
+            publishedDate: '2021-04-09',
         }
 
         const book2 = {
@@ -48,7 +50,9 @@ describe('Teste do caso de uso de buscar todos os favoritos de um usuários', ()
             genre: 'massa2',
             price: 40,
             synopsis: 'efmaiefmuenmf2',
-            title: 'A massa lendária2'
+            title: 'A massa lendária2',
+            pageCount: 63,
+            publishedDate: '2007-04-09',
         }
 
         const bookInstance1 = new Book(book1)

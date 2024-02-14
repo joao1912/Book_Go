@@ -43,7 +43,9 @@ describe('Teste do DeleteFavoiteByIdUseCase', () => {
             genre: 'massa',
             price: 40,
             synopsis: 'efmaiefmuenmf',
-            title: 'A massa lendária'
+            title: 'A massa lendária',
+            pageCount: 273,
+            publishedDate: '2001-04-09',
         }
 
         const bookInstance = new Book(book)

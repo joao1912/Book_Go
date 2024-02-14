@@ -5,9 +5,9 @@ import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 export class UpdateBook implements IUpdateBook {
   async execute({ props }: Book): Promise<Book> {
 
-    const {id, title, synopsis, price, genre, author} = props
+    const { id, title, synopsis, price, genre, author, publishedDate, pageCount, image } = props
     try {
-     
+
       const book = await prisma.book.update({
         where: {
           id: id,
@@ -17,13 +17,16 @@ export class UpdateBook implements IUpdateBook {
           title: title || undefined,
           synopsis: synopsis || undefined,
           price: price || undefined,
+          publishedDate: publishedDate || undefined,
+          pageCount: pageCount || undefined,
+          image: image || undefined,
           tag: {
             connectOrCreate: {
               where: {
                 genre: genre
               },
               create: {
-                genre: genre 
+                genre: genre
 
               }
             }
@@ -34,16 +37,19 @@ export class UpdateBook implements IUpdateBook {
           title: true,
           synopsis: true,
           price: true,
+          publishedDate: true,
+          pageCount: true,
+          image: true,
           author: {
             select: {
               name: true,
             },
           },
-              tag: {
-                select: {
-                  genre: true,
-                },
-              }, 
+          tag: {
+            select: {
+              genre: true,
+            },
+          },
         },
       });
 
@@ -53,17 +59,17 @@ export class UpdateBook implements IUpdateBook {
         },
         data: {
           book: {
-           disconnect: {
-            id: id
+            disconnect: {
+              id: id
+            }
           }
-          }
-          }
-        
+        }
+
 
       })
 
-      
-  
+
+
 
       return new Book({
         id: book.id,
@@ -71,12 +77,14 @@ export class UpdateBook implements IUpdateBook {
         author: book.author[0].name,
         price: book.price,
         synopsis: book.synopsis,
+        publishedDate: book.publishedDate,
+        pageCount: book.pageCount,
         genre: book.tag[0].genre,
       });
 
-      
+
     } catch (error) {
-      if(error instanceof PrismaError){
+      if (error instanceof PrismaError) {
         console.log("Prisma errinho", error.code)
       }
       throw new Error("Something else happened: " + error);

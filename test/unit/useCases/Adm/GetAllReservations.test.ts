@@ -44,6 +44,8 @@ describe("Pega todas as reservas da biblioteca", () => {
       price: 1,
       genre: "Biography",
       author: "Wilson",
+      pageCount: 73,
+      publishedDate: '2001-04-09',
     });
 
     const newBookData = await addBook.execute(newBook)

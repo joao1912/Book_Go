@@ -17,6 +17,8 @@ export class SearchBookByGenre implements ISearchBookByGenre {
           title: true,
           synopsis: true,
           price: true,
+          publishedDate: true,
+          pageCount: true,
           author: {
             select: {
               name: true
@@ -39,6 +41,8 @@ export class SearchBookByGenre implements ISearchBookByGenre {
           author: bookProp.author[0].name,
           price: bookProp.price,
           synopsis: bookProp.synopsis,
+          publishedDate: bookProp.publishedDate,
+          pageCount: bookProp.pageCount,
           genre: bookProp.tag[0].genre,
         }));
       ;

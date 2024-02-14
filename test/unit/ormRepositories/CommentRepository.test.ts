@@ -32,7 +32,9 @@ interface IBookToCommentTest {
     title: 'Um livro de testes';
     author: 'Um author' 
     synopsis: 'bla bla bla';
-    price: 15
+    price: 15,
+    pageCount: 123,
+    publishedDate: '2003-10-09',
     genre: 'teste'; 
 }
 
@@ -78,6 +80,8 @@ describe('Testes do CommentRepository', () => {
             author: "Um author",
             synopsis: "bla bla bla",
             price: 15,
+            pageCount: 123,
+            publishedDate: '2003-10-09',
             genre: "teste"
         }
 

@@ -42,7 +42,9 @@ describe('Teste de caso de uso do GetMyComments', () => {
             author: "teste",
             synopsis: "blaha",
             price: 0,
-            genre: "teste"
+            genre: "teste",
+            pageCount: 26,
+            publishedDate: '2011-04-09',
         }
 
         const book2: IBook = {
@@ -50,7 +52,9 @@ describe('Teste de caso de uso do GetMyComments', () => {
             author: "teste",
             synopsis: "blaha",
             price: 0,
-            genre: "teste"
+            genre: "teste",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         }
 
         const bookInstace1 = await addBook.execute(new Book(book1))

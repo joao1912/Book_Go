@@ -16,14 +16,18 @@ describe("Procurar um livros por genero", ()=>{
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
-            genre: "Biography"
+            genre: "Biography",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
         const BookGenreTwo = new Book({
             title: "Search a genre two",
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
-            genre: "Biography"
+            genre: "Biography",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
 
         const bookDataOne = await addBook.execute(BookGenreOne)

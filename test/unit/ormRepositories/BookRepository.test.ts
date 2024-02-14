@@ -21,6 +21,8 @@ describe('Testes do BookRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 360,
+            publishedDate: '2013-10-10'
         })
 
         await addBook.execute(Book1)
@@ -40,6 +42,8 @@ describe('Testes do BookRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 360,
+            publishedDate: '2013-10-10'
         }
 
         const Book2 = new Book(BookToBeSearch)
@@ -58,6 +62,8 @@ describe('Testes do BookRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 360,
+            publishedDate: '2013-10-10'
         }
 
         const Book3 = new Book(BookToBeUpdate)
@@ -77,6 +83,8 @@ describe('Testes do BookRepository', () => {
             price: 1,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 360,
+            publishedDate: '2013-10-10'
         })
        
         const result = await addBook.execute(BookInstanceToBeAdd)
@@ -122,6 +130,8 @@ describe('Testes do BookRepository', () => {
                     price: 1,
                     genre: bookGenre,
                     author: "Wilson",
+                    pageCount: 360,
+                    publishedDate: '2013-10-10'
                 }
                 for (let books of result ){
 
@@ -147,6 +157,8 @@ describe('Testes do BookRepository', () => {
                     price: 1,
                     genre: "Test ORM",
                     author: "Wilson",
+                    pageCount: 360,
+                    publishedDate: '2013-10-10'
                 }
                 // expect(result[0].props).toEqual(equalValue)
                 for(let book of result) {expect(book).toBeInstanceOf(Book)}
@@ -164,6 +176,8 @@ describe('Testes do BookRepository', () => {
             price: 140,
             genre: "Test ORM",
             author: "Wilson",
+            pageCount: 360,
+            publishedDate: '2013-10-10'
         }
 
         const BookInstanceToBeUpdated = new Book(updatedValues)
@@ -178,7 +192,7 @@ describe('Testes do BookRepository', () => {
 
     })
 
-    it('Deve buscar todos os stocks', async () => {
+    it('Deve buscar todos os livros', async () => {
 
         const allBooks = await getAllBooks.execute()
 

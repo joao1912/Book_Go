@@ -28,7 +28,9 @@ describe ("Teste de reservas", () => {
             synopsis: "This book is going to be reserved",
             price: 999,
             genre: "Business",
-            author: "John Bus"
+            author: "John Bus",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
         const userToReserve = await createUser.execute(newUser)
         const bookToReserve = await addBook.execute(newBook)

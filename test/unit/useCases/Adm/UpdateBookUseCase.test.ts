@@ -14,7 +14,9 @@ describe("Adicionar um livro", ()=>{
             synopsis: "This is book is going to edited",
             price: 20,
             author: "Jupiter",
-            genre: "Biography"
+            genre: "Biography",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
         
        
@@ -28,8 +30,11 @@ describe("Adicionar um livro", ()=>{
         price: newBook.props.price,
         author: newBook.props.author,
         synopsis: newBook.props.synopsis,
+        pageCount: newBook.props.pageCount,
+        publishedDate: newBook.props.publishedDate,
         genre: newBook.props.genre
-    }
+        }
+    
 
     })
 
@@ -40,7 +45,9 @@ describe("Adicionar um livro", ()=>{
                 genre: "Test Edit",
                 author: bookData.author,
                 synopsis: bookData.synopsis,
-                title: bookData.title
+                title: bookData.title,
+                pageCount: bookData.pageCount,
+                publishedDate: bookData.publishedDate
             
         }
 

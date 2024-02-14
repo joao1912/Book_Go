@@ -17,7 +17,9 @@ describe("Procurar  livros por titulo", ()=>{
             synopsis: "This is a new book",
             price: 20,
             author: "Jupiter",
-            genre: "Biography"
+            genre: "Biography",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
         })
 
 

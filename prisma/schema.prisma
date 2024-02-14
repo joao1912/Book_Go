@@ -28,6 +28,9 @@ model Book {
   title        String
   price        Float
   synopsis     String
+  publishedDate String  
+  pageCount    Int
+  image        String?
   createdAt    DateTime      @default(now())
   updateAt     DateTime      @updatedAt
   comments     Comment[]

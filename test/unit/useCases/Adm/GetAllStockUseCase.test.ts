@@ -15,6 +15,8 @@ describe("Test search all books on stock", ()=>{
             synopsis: "This book is going to be reserved",
             price: 999,
             genre: "Business",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
             author: "John Bus"
         })
        
@@ -24,6 +26,8 @@ describe("Test search all books on stock", ()=>{
             synopsis: "This book is going to be reserved",
             price: 999,
             genre: "Business",
+            pageCount: 73,
+            publishedDate: '2001-04-09',
             author: "John Bus"
         })
         

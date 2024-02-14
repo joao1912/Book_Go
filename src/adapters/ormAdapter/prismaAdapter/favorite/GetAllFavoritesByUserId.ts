@@ -25,6 +25,8 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
                                     title: true,
                                     synopsis: true,
                                     price: true,
+                                    publishedDate: true,
+                                    pageCount: true,
                                     author: {
                                         select: {
                                             name: true,
@@ -55,7 +57,9 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
                     synopsis: prop.book.synopsis,
                     author: prop.book.author[0].name,
                     genre: prop.book.tag[0].genre,
-                    price: prop.book.price
+                    price: prop.book.price,
+                    pageCount: prop.book.pageCount,
+                    publishedDate: prop.book.publishedDate
                 }))
 
             }

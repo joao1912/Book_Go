@@ -43,7 +43,9 @@ describe('Teste do CreateCommentUseCase', () => {
             author: "Um author",
             synopsis: "bla bla bla",
             price: 15,
-            genre: "teste"
+            genre: "teste",
+            pageCount: 703,
+            publishedDate: '2009-04-09',
         }
 
         const bookInstance = new Book(book)
