@@ -3,7 +3,7 @@ import { IGetAllComments } from "../../adapters/ormAdapter/repositories/comment/
 
 export class SearchAllCommentsUseCase {
 
-    getAllCommentsAdapter: IGetAllComments;
+    protected getAllCommentsAdapter: IGetAllComments;
 
     constructor(ormAdapter: IGetAllComments) {
 
