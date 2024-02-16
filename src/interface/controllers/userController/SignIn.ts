@@ -1,4 +1,4 @@
-import { HashPassword } from "../../../../test/util/HashPassword";
+import { HashPassword } from "../../../adapters/encryptorAdapter/HashPassword";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
