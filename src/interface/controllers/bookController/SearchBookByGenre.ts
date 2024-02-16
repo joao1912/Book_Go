@@ -3,16 +3,13 @@ import { searchBookByGenre } from "../../../adapters/ormAdapter/protocols/bookPr
 import { SearchBookByGenreUseCase } from "../../../usecases/book/SearchBookByGenreUseCase";
 
 
-interface genre {
-    genre: string
-}
-interface IBody extends genre { }
+
 
 class SearchBookByGenre {
 
-    async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
+    async handle(req: HttpRequest, res: HttpResponse) {
         try {
-            const genre = req.body
+            const genre = req.body.genre
 
             const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 
