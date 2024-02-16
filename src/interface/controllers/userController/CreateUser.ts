@@ -6,7 +6,7 @@ import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase";
 
 interface IBody extends IUser {}
 
-export class SignIn {
+export class CreateUser {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
 
@@ -46,6 +46,6 @@ export class SignIn {
 
 }
 
-const signIn = new SignIn()
+const createUserController = new CreateUser()
 
-export default signIn
+export default createUserController
