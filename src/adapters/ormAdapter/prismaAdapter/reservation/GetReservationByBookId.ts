@@ -22,6 +22,11 @@ export class GetReservationByBookId implements IGetReservationByBookId {
                 }
             })
 
+            if(data.length == 0){
+                const message = "Este livro não possui nenhuma reserva."
+                 return message
+             }
+
             let dataArray = []
             for(let props of data){
   

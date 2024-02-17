@@ -23,6 +23,11 @@ export class GetReservationByUserId implements IGetReservationByUserId {
                 }
             })
 
+            if(data.length == 0){
+               const message = "Usuário não possui reservas"
+                return message
+            }
+
             
             let dataArray = []
             for(let props of data){

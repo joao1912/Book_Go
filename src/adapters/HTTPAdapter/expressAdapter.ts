@@ -4,6 +4,8 @@ import cors from "cors"
 
 import userRouter from "../../interface/routes/express/userRoutes";
 import bookRouter from "../../interface/routes/express/bookRoutes";
+import reservationRouter from "../../interface/routes/express/reservationRoutes";
+import stockRouter from "../../interface/routes/express/stockRoutes";
 
 export class expressAdapter implements HTTPAdapterRepository {
 
@@ -23,8 +25,10 @@ export class expressAdapter implements HTTPAdapterRepository {
 
     setRoutes(): void {
 
-        this.app.use('/v1/book', bookRouter)
         this.app.use('/v1/users', userRouter)
+        this.app.use('/v1/book', bookRouter)
+        this.app.use('/v1/reservation', reservationRouter)
+        this.app.use('/v1/stock', stockRouter)
         
     }
 

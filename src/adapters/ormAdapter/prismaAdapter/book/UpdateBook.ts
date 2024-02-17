@@ -28,6 +28,7 @@ export class UpdateBook implements IUpdateBook {
           pageCount: pageCount || undefined,
           image: image || undefined,
           tag: {
+            set:[],
             connectOrCreate: {
               where: {
                 genre: genre
