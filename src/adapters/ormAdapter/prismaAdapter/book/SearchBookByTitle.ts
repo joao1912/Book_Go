@@ -8,26 +8,10 @@ export class SearchBookByTitle implements ISearchBookByTitle {
       const bookSearch = await prisma.book.findMany({
         where: { title: title },
 
-        select: {
-          id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          publishedDate: true,
-          pageCount: true,
-          image:true,
-          author: {
-            select: {
-              name: true
-            }
-          },
-          tag: {
-            select: {
-              genre: true
-            }
-          }
-
-        },
+        include: {
+          author: true,
+          tag: true
+        }
       });
       let books = [];
       for (let bookProp of bookSearch) {

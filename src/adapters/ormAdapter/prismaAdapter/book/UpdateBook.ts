@@ -1,19 +1,26 @@
-import { prisma, PrismaError } from "../db";
-import { Book, IBook } from "../../../../entities/Book";
+import { prisma, PrismaError,  BookUpdateInput } from "../db";
+import { Book } from "../../../../entities/Book";
 import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 
 export class UpdateBook implements IUpdateBook {
   async execute({ props }: Book): Promise<Book> {
 
     const { id, title, synopsis, price, genre, author, publishedDate, pageCount, image } = props
+
     try {
+      
+      let newData: BookUpdateInput = {
+        title: title || undefined,
+        synopsis: synopsis || undefined,
+        price: price || undefined,
+        publishedDate: publishedDate || undefined,
+        pageCount: pageCount || undefined,
+        image: image || undefined,
+      }
 
-      const book = await prisma.book.update({
-        where: {
-          id: id,
-        },
+      if (genre) {
 
-        data: {
+        newData = {
           title: title || undefined,
           synopsis: synopsis || undefined,
           price: price || undefined,
@@ -27,49 +34,22 @@ export class UpdateBook implements IUpdateBook {
               },
               create: {
                 genre: genre
-
               }
             }
           }
-        },
-        select: {
-          id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          publishedDate: true,
-          pageCount: true,
-          image: true,
-          author: {
-            select: {
-              name: true,
-            },
-          },
-          tag: {
-            select: {
-              genre: true,
-            },
-          },
-        },
-      });
-
-      const tagDisconnect = await prisma.tag.update({
-        where: {
-          genre: "Biography"
-        },
-        data: {
-          book: {
-            disconnect: {
-              id: id
-            }
-          }
         }
+      }
 
-
-      })
-
-
-
+      const book = await prisma.book.update({
+        where: {
+          id: id,
+        },
+        data: newData,
+        include: {
+          author: true,
+          tag: true
+        }
+      });
 
       return new Book({
         id: book.id,

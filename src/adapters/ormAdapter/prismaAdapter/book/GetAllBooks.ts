@@ -6,25 +6,10 @@ export class GetAllBooks implements IGetAllBooks {
   async execute() {
     try {
       const bookSearch = await prisma.book.findMany({
-        select: {
-          id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          publishedDate: true,
-          pageCount: true,
-          author: {
-            select: {
-              name: true
-            }
-          },
-          tag: {
-            select: {
-              genre: true
-            }
-          }
-         
-        },
+        include: {
+          author: true,
+          tag: true
+        }
       });
 
       let books = [];

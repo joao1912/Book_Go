@@ -43,25 +43,10 @@ export class AddBook implements IAddBook {
             }
           }
         },
-        select: {
-          id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          publishedDate: true,
-          pageCount: true,
-          image: true,
-          author: {
-            select: {
-              name: true,
-            },
-          },
-          tag: {
-            select: {
-              genre: true,
-            },
-          },
-        },
+        include: {
+          author: true,
+          tag: true
+        }
       });
 
 

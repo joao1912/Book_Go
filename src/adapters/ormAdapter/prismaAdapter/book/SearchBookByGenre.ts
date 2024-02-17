@@ -12,25 +12,10 @@ export class SearchBookByGenre implements ISearchBookByGenre {
             }
           
         },
-        select: {
-          id: true,
-          title: true,
-          synopsis: true,
-          price: true,
-          publishedDate: true,
-          pageCount: true,
-          author: {
-            select: {
-              name: true
-            }
-          },
-          tag: {
-            select: {
-              genre: true
-            }
-          }
-         
-        },
+        include: {
+          author: true,
+          tag: true
+        }
       });
       let books = [];
       for (let bookProp of bookSearch) {
