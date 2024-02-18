@@ -7,7 +7,10 @@ export class GetStockByQuantity implements IGetStockByQuantity {
     
     const BooksStock = await prisma.stock.findMany({
       where: {
-        quantity: quantity,
+        
+        quantity: {
+          lte: quantity
+        },
       },
       select: {
         id: true,

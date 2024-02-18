@@ -1,4 +1,4 @@
-import { addBook, deleteBook, getAllBooks, searchBookByGenre, searchBookByTitle, updateBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { addBook, deleteBook, getAllBooks, searchBookByGenre, searchBookById, searchBookByTitle, updateBook } from "../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { Book, IBook } from "../../../src/entities/Book"
 
 
@@ -8,6 +8,7 @@ describe('Testes do BookRepository', () => {
     let idBookToBeDeleteTitle: string 
     let bookGenre: string 
     let bookTitle: string 
+    let bookId: string 
     let idBookToBeUpdate: string ;
     
 
@@ -52,6 +53,7 @@ describe('Testes do BookRepository', () => {
             .then(result => {
                 bookGenre = result.props.genre
                 bookTitle = result.props.title
+               if(result.props.id){ bookId = result.props.id}
             })
 
         // Criar livro para update
@@ -121,7 +123,7 @@ describe('Testes do BookRepository', () => {
 
         if (bookGenre == undefined) throw new Error('bookGenre can not be undefined')
 
-        await searchBookByGenre.execute(bookGenre)
+        await searchBookByGenre.execute(bookId)
             .then(result => {
 
                 const equalValue: IBook = {
@@ -162,6 +164,28 @@ describe('Testes do BookRepository', () => {
                 }
                 // expect(result[0].props).toEqual(equalValue)
                 for(let book of result) {expect(book).toBeInstanceOf(Book)}
+
+            })
+        
+    })
+    it('Deve buscar um livro por id', async () => {
+      
+
+        await searchBookById.execute(bookId)
+            .then(result => {
+
+                const equalValue: IBook = {
+                    
+                    title: bookTitle,
+                    synopsis: "This is a test to search a book just with orm",
+                    price: 1,
+                    genre: "Test ORM",
+                    author: "Wilson",
+                    pageCount: 360,
+                    publishedDate: '2013-10-10'
+                }
+                // expect(result[0].props).toEqual(equalValue)
+               expect(result).toBeInstanceOf(Book)
 
             })
         
