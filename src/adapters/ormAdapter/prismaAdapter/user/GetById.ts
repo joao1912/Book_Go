@@ -1,14 +1,16 @@
 import { prisma } from "../db";
-import { IGetById } from "../../repositories/user/IGetById";
+import { IGetUser } from "../../repositories/user/IGetUser";
 import { User } from "../../../../entities/User";
 
-export class GetById implements IGetById {
+export class GetUser implements IGetUser {
 
-  async execute(id: string) {
+  async execute(input: string) {
 
     try {
-      const user = await prisma.user.findFirstOrThrow({
-        where: { id: id },
+      const user = await prisma.user.findUnique({
+        where: {   
+             email: input  
+        },
         select: {
           id: true,
           username: true,
@@ -18,6 +20,7 @@ export class GetById implements IGetById {
         }
       })
 
+      if(user != null){ 
       return new User({
         id: user.id,
         username: user.username,
@@ -25,6 +28,10 @@ export class GetById implements IGetById {
         email: user.email,
         telephone: user.telephone,
       })
+    }
+
+      let message = "Invalid input "
+      return message
 
     } catch (error) {
       throw new Error('Internal server error: ' + error)
