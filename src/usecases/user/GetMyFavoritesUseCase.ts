@@ -1,7 +1,7 @@
 import { GetAllFavoritesByUserId } from "../../adapters/ormAdapter/prismaAdapter/favorite/GetAllFavoritesByUserId";
 
 
-export class GetMyFavorites {
+export class GetMyFavoritesUseCase {
 
     protected getFavoritesAdapter: GetAllFavoritesByUserId;
 
