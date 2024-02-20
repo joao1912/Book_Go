@@ -9,11 +9,11 @@ import createFavoriteController from "../../controllers/userController/CreateFav
 import getMyFavoritesController from "../../controllers/userController/GetMyFavorites";
 import getUserController from "../../controllers/userController/GetUser";
 
-
+import Auth from "../../middlewares/Auth";
 
 const userRouter = Router()
 
-userRouter.get('/', getAllUsersController.handle)
+userRouter.get('/', Auth.execute, getAllUsersController.handle)
 
 userRouter.get('/myFavorites', getMyFavoritesController.handle)
 

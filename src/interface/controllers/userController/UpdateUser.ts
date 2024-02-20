@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { authJwt } from "../../../adapters/authAdapter/jwtAdapter";
+import AuthJwt from "../../../adapters/authAdapter/jwtAdapter";
 import { updateUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
 import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase";
@@ -20,10 +20,10 @@ class UpdateUser {
         const updateUserUseCase = new UpdateUserUseCase(updateUser)
 
 
-        const authorization = authJwt.checkToken(req.headers["authorization"])
-        if (!authorization) {
-            return res.status(403).json({ message: "Acess denied" })
-        }
+        //const authorization = AuthJwt.checkToken(req.headers["authorization"])
+        //if (!authorization) {
+        //    return res.status(403).json({ message: "Acess denied" })
+        //}
 
         try {
 
