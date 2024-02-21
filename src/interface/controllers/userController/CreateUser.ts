@@ -3,10 +3,11 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
 import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase";
+import { IController } from "../IController";
 
 interface IBody extends IUser {}
 
-export class CreateUser {
+export class CreateUser implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
 

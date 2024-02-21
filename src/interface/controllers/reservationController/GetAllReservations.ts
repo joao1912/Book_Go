@@ -1,8 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllReservations } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
 import { GetAllReservationsUseCase } from "../../../usecases/reservation/GetAllReservationsUseCase";
+import { IController } from "../IController";
 
-class GetAllReservations {
+class GetAllReservations implements IController {
+
     async handle(req: HttpRequest, res: HttpResponse){
 
         try {

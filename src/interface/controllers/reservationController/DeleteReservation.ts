@@ -1,9 +1,11 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { deleteReservation } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
 import { DeleteReservationUseCase } from "../../../usecases/reservation/DeleteReservationUseCase";
+import { IController } from "../IController";
 
 
-class DeleteReservation{
+class DeleteReservation implements IController {
+
     async handle(req: HttpRequest<{id:string}>, res: HttpResponse){
 
         try {

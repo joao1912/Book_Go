@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { searchBookByTitle } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { SearchBookByTitleUseCase } from "../../../usecases/book/SearchBookByTitleUseCase";
+import { IController } from "../IController";
 
 
-class SearchBookByTitle {
+class SearchBookByTitle implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
 

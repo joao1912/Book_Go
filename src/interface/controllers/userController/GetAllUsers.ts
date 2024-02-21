@@ -1,8 +1,9 @@
 import { GetAllUsersUseCase } from "../../../usecases/user/GetAllUsersUseCase";
 import { getAllUsers } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { IController } from "../IController";
 
-class GetAllUsers {
+class GetAllUsers implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 

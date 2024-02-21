@@ -2,9 +2,11 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { updateBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { IBook } from "../../../entities/Book";
 import { UpdateBookUseCase } from "../../../usecases/book/UpdateBookUseCase";
+import { IController } from "../IController";
 
 interface IBody extends IBook{}
-class UpdateBook {
+
+class UpdateBook implements IController {
 
     async handle (req: HttpRequest<{id: any},{}, IBody>, res: HttpResponse){
 

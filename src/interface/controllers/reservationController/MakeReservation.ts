@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { makeReservation } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
 import { MakeReservationUseCase } from "../../../usecases/reservation/MakeReservationUseCase";
+import { IController } from "../IController";
 
 
-class MakeReservation {
+class MakeReservation implements IController {
 
     async handle(req: HttpRequest<{book_id:string, user_id: string}>,res: HttpResponse){
     

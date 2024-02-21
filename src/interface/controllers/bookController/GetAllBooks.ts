@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllBooks } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { GetAllBooksUseCase } from "../../../usecases/book/GetAllBooksUseCase";
+import { IController } from "../IController";
 
 
-class GetAllBooks {
+class GetAllBooks implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
 

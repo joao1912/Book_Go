@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { deleteFavorite } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
 import { DeleteFavoriteByIdUseCase } from "../../../usecases/user/DeleteFavoriteByIdUseCase";
+import { IController } from "../IController";
 
 
-class DeleteFavorite {
+class DeleteFavorite implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 

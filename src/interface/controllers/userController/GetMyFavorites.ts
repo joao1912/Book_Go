@@ -1,8 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllFavoritesByUserId } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
 import { GetMyFavoritesUseCase } from "../../../usecases/user/GetMyFavoritesUseCase";
+import { IController } from "../IController";
 
-class GetMyFavorites {
+class GetMyFavorites implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 
@@ -12,7 +13,9 @@ class GetMyFavorites {
 
         const getMyFavoritesUseCase = new GetMyFavoritesUseCase(getAllFavoritesByUserId)
 
-        return await getMyFavoritesUseCase.execute(userId)
+        const favorites = await getMyFavoritesUseCase.execute(userId)
+
+        res.status(200).json(favorites)
 
     }
 

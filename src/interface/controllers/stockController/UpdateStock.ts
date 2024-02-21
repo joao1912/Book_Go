@@ -5,10 +5,12 @@ import { IBook } from "../../../entities/Book";
 import { IStock } from "../../../entities/Stock";
 import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseCase";
 import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase";
+import { IController } from "../IController";
 
 
-class UpdateStock {
-    async handle(req: HttpRequest<{ book_Id: string }, {}, { quantity: number }>, res: HttpResponse, next: HttpNext) {
+class UpdateStock implements IController {
+    
+    async handle(req: HttpRequest<{ book_Id: string }, {}, { quantity: number }>, res: HttpResponse) {
 
         let IBookType: IBook
         const searchBookByIdUseCase = new SearchBookByIdUseCase(searchBookById)

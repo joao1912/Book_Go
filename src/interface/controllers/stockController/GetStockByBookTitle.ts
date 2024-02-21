@@ -1,9 +1,11 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getStockByBookTitle } from "../../../adapters/ormAdapter/protocols/stockProtocols";
 import { GetStockByBookTitleUseCase } from "../../../usecases/stock/GetStockByBookTitleUseCase";
+import { IController } from "../IController";
 
 
-class GetStockByBookTitle {
+class GetStockByBookTitle implements IController {
+    
     async handle(req: HttpRequest<{title:string}>, res: HttpResponse){
         try {
             let titleText = req.params.title

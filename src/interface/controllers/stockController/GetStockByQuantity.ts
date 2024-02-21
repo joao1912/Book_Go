@@ -1,9 +1,11 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getStockByQuantity } from "../../../adapters/ormAdapter/protocols/stockProtocols";
 import { GetStockByQuantityUseCase } from "../../../usecases/stock/GetStockByQuantityUseCase";
+import { IController } from "../IController";
 
 
-class GetStockByQuantity {
+class GetStockByQuantity implements IController {
+    
     async handle(req: HttpRequest<{quantity:number}>, res: HttpResponse){
         try {
             const quantity = Number(req.params.quantity)

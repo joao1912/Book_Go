@@ -3,10 +3,11 @@ import AuthJwt from "../../../adapters/authAdapter/jwtAdapter";
 import { updateUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
 import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase";
+import { IController } from "../IController";
 
 interface IBody extends IUser { }
 
-class UpdateUser {
+class UpdateUser implements IController {
     async handle(req: HttpRequest<{ id: string }, {}, IBody>, res: HttpResponse) {
         const id = req.params.id
         

@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { deleteUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { DeleteUserUseCase } from "../../../usecases/user/DeleteUserUseCase";
+import { IController } from "../IController";
 
 
-class DeleteUser {
+class DeleteUser implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 

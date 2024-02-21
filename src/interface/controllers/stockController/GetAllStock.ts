@@ -1,10 +1,11 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllStock } from "../../../adapters/ormAdapter/protocols/stockProtocols";
 import { GetAllStockUseCase } from "../../../usecases/stock/GetAllStockUseCase";
+import { IController } from "../IController";
 
 
 
-class GetAllStock {
+class GetAllStock implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
         try {

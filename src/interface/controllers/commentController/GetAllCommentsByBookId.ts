@@ -3,9 +3,13 @@ import { getAllComments } from "../../../adapters/ormAdapter/protocols/commentPr
 import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase";
 import { IController } from "../IController";
 
+interface IParams {
+    bookId: string;
+}
+
 class GetAllCommentsByBookId implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse) {
+    async handle(req: HttpRequest<IParams>, res: HttpResponse) {
 
         const bookId = req.params.bookId;
 

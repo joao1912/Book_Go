@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol"
 import { getReservationByBookId } from "../../../adapters/ormAdapter/protocols/reservationProtocols"
 import { GetReservationByBookIdUseCase } from "../../../usecases/reservation/GetReservationByBookIdUseCase"
+import { IController } from "../IController"
 
 
-class GetReservationByBookId {
+class GetReservationByBookId implements IController {
 
     async handle(req: HttpRequest<{book_id: string}>, res: HttpResponse){
 

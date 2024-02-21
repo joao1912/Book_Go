@@ -1,6 +1,7 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createFavorite } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
 import { FavoriteBookUseCase } from "../../../usecases/user/FavoriteBookUseCase";
+import { IController } from "../IController";
 
 interface IBody {
 
@@ -9,7 +10,7 @@ interface IBody {
 
 }
 
-export class CreateFavorite {
+export class CreateFavorite implements IController {
 
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
@@ -21,7 +22,9 @@ export class CreateFavorite {
 
         const createFavoriteUseCase = new FavoriteBookUseCase(createFavorite)
 
-        return await createFavoriteUseCase.execute(userId, bookId)
+        const favorite = await createFavoriteUseCase.execute(userId, bookId)
+
+        res.status(200).json(favorite)
 
     }
 

@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { deleteBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { DeleteBookUseCase } from "../../../usecases/book/DeleteBookUseCase";
+import { IController } from "../IController";
 
 
-class DeleteBook {
+class DeleteBook implements IController {
 
     async handle(req: HttpRequest<{id:any}>, res: HttpResponse){
 
