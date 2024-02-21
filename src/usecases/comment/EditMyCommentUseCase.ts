@@ -1,5 +1,5 @@
 import { IUpdateComment } from "../../adapters/ormAdapter/repositories/comment/IUpdateComment";
-import { Comment } from "../../entities/Comment";
+import { Comment, IComment } from "../../entities/Comment";
 
 
 export class EditMyCommentUseCase {
@@ -12,7 +12,9 @@ export class EditMyCommentUseCase {
 
     }
 
-    async execute(commentData: Comment) {
+    async execute(commentData: Partial<Comment>) {
+
+        //tem que arrumar
 
         return await this.updateComment.execute(commentData)
 
