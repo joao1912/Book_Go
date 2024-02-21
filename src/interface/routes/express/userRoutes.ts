@@ -15,18 +15,18 @@ const userRouter = Router()
 
 userRouter.get('/', Auth.execute, getAllUsersController.handle)
 
-userRouter.get('/myFavorites', getMyFavoritesController.handle)
+userRouter.get('/myFavorites', Auth.execute, getMyFavoritesController.handle)
 
 userRouter.post('/signIn', createUserController.handle)
 
 userRouter.post('/login', getUserController.handle)
 
-userRouter.post('/update/:id', updateUserController.handle)
+userRouter.post('/update/:id', Auth.execute, updateUserController.handle)
 
-userRouter.post('/addFavorite', createFavoriteController.handle)
+userRouter.post('/addFavorite', Auth.execute, createFavoriteController.handle)
 
-userRouter.delete('/removeFavorite/:favoriteId', deleteFavoriteController.handle)
+userRouter.delete('/removeFavorite/:favoriteId', Auth.execute, deleteFavoriteController.handle)
 
-userRouter.delete('/deleteUser/', deleteUserController.handle)
+userRouter.delete('/deleteUser/', Auth.execute, deleteUserController.handle)
 
 export default userRouter
