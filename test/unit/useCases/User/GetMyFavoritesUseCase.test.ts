@@ -1,7 +1,7 @@
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
 import { createFavorite, getAllFavoritesByUserId } from "../../../../src/adapters/ormAdapter/protocols/favoriteProtocols"
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols";
-import { GetMyFavorites } from "../../../../src/usecases/user/GetMyFavoritesUseCase";
+import { GetMyFavoritesUseCase } from "../../../../src/usecases/user/GetMyFavoritesUseCase";
 import { Book } from "../../../../src/entities/Book";
 import { User } from "../../../../src/entities/User";
 
@@ -91,9 +91,9 @@ describe('Teste do caso de uso de buscar todos os favoritos de um usuários', ()
 
     it('deve buscar todos os favoritos do usuário por id', async () => {
 
-        const getMyFavorites = new GetMyFavorites(getAllFavoritesByUserId)
+        const getMyFavoritesUseCase = new GetMyFavoritesUseCase(getAllFavoritesByUserId)
 
-        await getMyFavorites.execute(userId)
+        await getMyFavoritesUseCase.execute(userId)
             .then(result => {
 
                 expect(result.length).toBeGreaterThan(0)

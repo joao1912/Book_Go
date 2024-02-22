@@ -1,8 +1,9 @@
 import { hashSync, genSaltSync, compare } from "bcrypt";
+import { IEncryptorAdapterRepository } from "./repository/IEncryptorAdapterRepository";
 
-export class HashPassword {
+export class HashPassword implements IEncryptorAdapterRepository {
 
-    public static hash(password: string): string {
+    public hash(password: string): string {
 
         const saltRounds = Number(process.env.SALT_HASH)
         const salt = genSaltSync(saltRounds)
@@ -13,7 +14,7 @@ export class HashPassword {
 
     }
 
-    public static async validadePassword(password: string, hash: string): Promise<boolean> {
+    public async validadePassword(password: string, hash: string): Promise<boolean> {
 
         return await compare(password, hash)
 

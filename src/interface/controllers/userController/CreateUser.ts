@@ -1,4 +1,4 @@
-import { HashPassword } from "../../../adapters/encryptorAdapter/HashPassword";
+import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
@@ -24,7 +24,7 @@ export class CreateUser implements IController {
             
             const createUserUseCase = new CreateUserUseCase(createUser)
 
-            const passwordHash = HashPassword.hash(password)
+            const passwordHash = encryptorAdapter.hash(password)
 
             const userInstance = await createUserUseCase.execute({
                 email,

@@ -1,6 +1,6 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import authJwt from "../../../adapters/authAdapter/jwtAdapter";
-import { HashPassword } from "../../../adapters/encryptorAdapter/HashPassword";
+import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
 import { getUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { GetUserUseCase } from "../../../usecases/user/GetUserUseCase";
 import { IController } from "../IController";
@@ -31,7 +31,7 @@ class GetUser implements IController {
 
                 const dbHashPassword = userInstance.props.password
 
-                const checkPassword = await HashPassword.validadePassword(password, dbHashPassword)
+                const checkPassword = await encryptorAdapter.validadePassword(password, dbHashPassword)
                 
                 if (!checkPassword) {
 

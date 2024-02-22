@@ -6,4 +6,6 @@ const financeRouter = Router()
 
 financeRouter.get('/', getAllFinanceController.handle)
 
+export default financeRouter
+
 //tem que ter o id do adm
