@@ -14,12 +14,12 @@ class GetUser implements IController {
         let userId: string
         console.log("header", req.headers["authorization"])
 
-        if (!email) {
-            res.status(422).json({ message: "Enter your email" })
+        if (!email || !password) {
+            let missingParam = (!email)? `Enter your email` : ''
+            missingParam = missingParam + (!password)? `Enter you password`: ''
+            res.status(422).json({ message: missingParam })
         }
-        if (!password) {
-            res.status(422).json({ message: "Enter your password" })
-        }
+      
 
         try {
 
