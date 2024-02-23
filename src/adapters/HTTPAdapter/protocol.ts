@@ -9,4 +9,5 @@ export interface HttpRequest<T1 = any, T2 = any, ReqBody = any> extends Request<
 export interface HttpResponse extends Response {}
 
 export interface HttpNext extends NextFunction {}
+
 export default HTTPAdapter
