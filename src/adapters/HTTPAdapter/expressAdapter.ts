@@ -43,5 +43,11 @@ export class expressAdapter implements HTTPAdapterRepository {
         this.app.use(cors())
         this.setRoutes()
     }
-    
+
+    getApp(): Application {
+
+        return this.app
+
+    }    
+
 }

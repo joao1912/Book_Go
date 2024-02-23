@@ -7,7 +7,8 @@
     "start": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "test:unit": "jest --testPathPattern=test",
     "test:unit:orm": "jest ./test/unit/ormRepositories",
-    "test:unit:usecases": "jest --testPathPattern=./test/unit/useCases"
+    "test:unit:usecases": "jest --testPathPattern=./test/unit/useCases",
+    "test:int": "jest ./test/integration/user --runInBand --detectOpenHandles"
   },
   "author": "",
   "license": "MIT",

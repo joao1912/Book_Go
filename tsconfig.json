@@ -32,6 +32,7 @@
     "paths": {
       "@entities/*": ["src/entities/*"],
       "@usecases/*": ["src/usecases/*"],
+      "@adapters/*": ["src/adapters/*"],
       "@prismaAdapter/*": ["src/adapters/ormAdapter/prismaAdapter/*"],
       "@routes/*": ["src/interface/routes/*"],
       "@controllers/*": ["src/interface/controllers/*"],
