@@ -12,8 +12,8 @@ import getUserController from "../../controllers/userController/GetUser";
 import Auth from "../../middlewares/Auth";
 
 const userRouter = Router()
-//Auth.execute,
-userRouter.get('/', getAllUsersController.handle)
+
+userRouter.get('/', Auth.execute, getAllUsersController.handle)
 
 userRouter.get('/myFavorites', Auth.execute, getMyFavoritesController.handle)
 

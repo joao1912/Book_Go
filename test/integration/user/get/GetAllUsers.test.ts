@@ -1,11 +1,11 @@
 import request from "supertest"
-import HTTPAdapter from "@adapters/HTTPAdapter/protocol"
-import { Application } from "express"
+import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import { IUser } from "@entities/User"
+import { authAdapter } from "../../../../src/adapters/authAdapter/protocol"
 
 describe('## GET ##' ,() => {
 
-    let app: Application
+    let app: any
 
     beforeAll(() => {
 
@@ -14,7 +14,7 @@ describe('## GET ##' ,() => {
 
     })
 
-    it('Deve criar e buscar um usuário', async () => {
+    it('Deve criar e buscar os usuários cadastrados', async () => {
 
         const user: IUser = {
             username: "a gi",
@@ -22,6 +22,8 @@ describe('## GET ##' ,() => {
             email: "giDasSenhaLouca@gmail.com",
             telephone: "48998003827"
         }
+
+        const token = authAdapter.sign('id_teste', 180000)
 
         await request(app)
             .post('/v1/users/signIn')
@@ -35,6 +37,7 @@ describe('## GET ##' ,() => {
 
         await request(app)
             .get('/v1/users/')
+            .auth(token, {type : "bearer"})
             .expect(200)
             .then(response => {
 

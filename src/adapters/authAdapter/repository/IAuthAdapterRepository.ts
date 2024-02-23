@@ -5,4 +5,6 @@ export interface IAuthAdapterRepository {
 
     checkToken(token: string): string | null
 
+    getAuth(): any
+
 }

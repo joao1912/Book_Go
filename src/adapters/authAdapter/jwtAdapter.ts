@@ -9,20 +9,30 @@ interface TokenPayload extends JwtPayload {
 
 class AuthJwt implements IAuthAdapterRepository {
 
-    public sign(id: string) {
+    public sign(id: string, expiration?: number) {
 
         let secretKey = process.env.MY_SECRET
 
 
         if (secretKey != undefined) {
 
-            const jwtToken = jwt.sign(
+            try {
+                const jwtToken = jwt.sign(
 
-                { id: id },
-                secretKey,
+                    { id: id },
+                    secretKey,
+                    {expiresIn: expiration ? expiration : 1209600000}
+    
+                )
+                return jwtToken
+            } catch (error) {
+                throw new Error('Internal server error: ' + error)
+            }
+            
+        } else {
 
-            )
-            return jwtToken
+            throw new Error('Internal server error: failed to attempt to find secret_key')
+
         }
     }
 
@@ -40,6 +50,10 @@ class AuthJwt implements IAuthAdapterRepository {
             console.error(error);
             return null;
         }
+    }
+
+    public getAuth() {
+        return jwt
     }
 }
 
