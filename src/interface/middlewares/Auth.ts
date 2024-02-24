@@ -4,10 +4,11 @@ import { authAdapter } from "../../adapters/authAdapter/protocol";
 export default class Auth {
 
     public static async execute(req: HttpRequest, res: HttpResponse, next: HttpNext) {
-
-        const token = req.headers['Authorization']
+        console.log(req.headers.authorization)
+        const token = req.headers.authorization
 
         if (typeof token != 'string') {
+            console.log("TO", token)
             throw new Error('Invalid token')
         }
 
@@ -18,7 +19,7 @@ export default class Auth {
             if (typeof id != 'string') throw new Error('id can not be type string')
             
             req.userId = id
-
+          
             next()
 
         } catch (error) {

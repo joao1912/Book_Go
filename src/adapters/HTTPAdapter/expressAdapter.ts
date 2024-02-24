@@ -1,6 +1,7 @@
 import { HTTPAdapterRepository } from "./repository/HTTPAdapterRepository";
 import express, { Application } from "express";
 import cors from "cors"
+import {createHttpTerminator} from 'http-terminator'
 
 import userRouter from "../../interface/routes/express/userRoutes";
 import bookRouter from "../../interface/routes/express/bookRoutes";
@@ -18,7 +19,7 @@ export class expressAdapter implements HTTPAdapterRepository {
     }
 
     listen(): void {
-        
+  
         this.app.listen(process.env.PORT, () => {
             console.log(`server is running in port ${process.env.PORT}`)
         })
@@ -33,13 +34,13 @@ export class expressAdapter implements HTTPAdapterRepository {
         this.app.use('/v1/stock', stockRouter)
         this.app.use('/v1/comment', commentRouter)
         this.app.use('/v1/finance', financeRouter)
-        
+
     }
 
     config(): void {
-        
+
         this.app.use(express.json())
-        this.app.use(express.urlencoded({extended: true}))
+        this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cors())
         this.setRoutes()
     }
@@ -48,6 +49,17 @@ export class expressAdapter implements HTTPAdapterRepository {
 
         return this.app
 
-    }    
+    }
+    close(): void {
+        // const { createHttpTerminator } = require('http-terminator')
+       
+        const server =  this.app.listen(process.env.PORT)
+        const httpTerminator = createHttpTerminator({ server })
+
+
+        setTimeout(() => {
+            httpTerminator.terminate()
+        }, 1000)
+    }
 
 }
