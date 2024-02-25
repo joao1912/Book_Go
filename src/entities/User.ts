@@ -17,6 +17,8 @@ export class User {
      
       const  {id, username,  password, email, telephone, favoritesBooks = []} = props
         this.props = props
+
+       
     }
 
    

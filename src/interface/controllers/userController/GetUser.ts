@@ -1,3 +1,4 @@
+import ServerResponse from "@controllers/ServerResponse";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import authJwt from "../../../adapters/authAdapter/jwtAdapter";
 import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
@@ -9,19 +10,18 @@ import { IController } from "../IController";
 class GetUser implements IController {
 
     async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<any> {
-
         const { email, password } = req.body
         let userId: string
-        // console.log("header", req.headers["authorization"])
+        const serverReponse = new ServerResponse(res)
 
         if (!email || !password) {
             let missingParam: string
-            missingParam = (!email)? "Enter your email " : ''
-            missingParam = missingParam + ((!password)? "Enter you password": '')
-            // console.log("asdadsa", missingParam)
-            return res.status(422).json({ message: missingParam })
+            missingParam = (!email) ? "Enter your email " : ''
+            missingParam = missingParam + ((!password) ? ("\n" + "Enter you password") : '')
+           
+            return serverReponse.badRequest({ message: missingParam })
         }
-      
+
 
         try {
 
@@ -34,29 +34,26 @@ class GetUser implements IController {
                 const dbHashPassword = userInstance.props.password
 
                 const checkPassword = await encryptorAdapter.validadePassword(password, dbHashPassword)
-                
+
                 if (!checkPassword) {
-                return res.status(403).json("Invalid password")
+                    return serverReponse.invalidPassword("Invalid password")
                 }
 
                 if (userInstance.props.id) {
-                   
+
                     const userToken = authJwt.sign(userInstance.props.id)
 
-                    res.status(200).json({token: userToken})
+                    return serverReponse.ok({ token: userToken })
                 }
-
-
             }
 
 
         } catch (error) {
 
-            console.log(error)
+            console.log("aaaaa", error)
 
-            return res.status(500).json({ message: "Internal server error. Cannot login right now." })
+            return serverReponse.serverError({ message: "Internal server error. Cannot login right now." })
         }
-
     }
 }
 

@@ -64,7 +64,7 @@ describe('## GET ##' ,() => {
             email: "testelogin@gmail.com",
           
         })
-            .expect(422)
+            .expect(400)
             .then(response => {
 
                 expect(response.text).toContain("Enter you password")
@@ -80,7 +80,7 @@ describe('## GET ##' ,() => {
         .send({
             password: "123"
         })
-            .expect(422)
+            .expect(400)
             .then(response => {
 
                 expect(response.text).toBeTruthy
@@ -98,7 +98,7 @@ describe('## GET ##' ,() => {
             password: "abc"
           
         })
-            .expect(403)
+            .expect(401)
             .then(response => {
 
                 expect(response.text).toContain("Invalid password")
@@ -113,7 +113,7 @@ describe('## GET ##' ,() => {
         // .send({
           
         // })
-            .expect(422)
+            .expect(400)
             .then(response => {
 
                 expect(response.text).toBeTruthy
