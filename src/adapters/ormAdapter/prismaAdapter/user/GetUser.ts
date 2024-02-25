@@ -34,7 +34,7 @@ export class GetUser implements IGetUser {
       })
     }
 
-      let message = "Invalid input "
+      let message = `${input} not found in db`
       return message
 
     } catch (error) {

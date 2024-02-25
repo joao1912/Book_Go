@@ -8,16 +8,18 @@ import { IController } from "../IController";
 
 class GetUser implements IController {
 
-    async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<void> {
+    async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<any> {
 
         const { email, password } = req.body
         let userId: string
-        console.log("header", req.headers["authorization"])
+        // console.log("header", req.headers["authorization"])
 
         if (!email || !password) {
-            let missingParam = (!email)? `Enter your email` : ''
-            missingParam = missingParam + (!password)? `Enter you password`: ''
-            res.status(422).json({ message: missingParam })
+            let missingParam: string
+            missingParam = (!email)? "Enter your email " : ''
+            missingParam = missingParam + ((!password)? "Enter you password": '')
+            // console.log("asdadsa", missingParam)
+            return res.status(422).json({ message: missingParam })
         }
       
 
@@ -34,15 +36,14 @@ class GetUser implements IController {
                 const checkPassword = await encryptorAdapter.validadePassword(password, dbHashPassword)
                 
                 if (!checkPassword) {
-
-                    res.status(403).json("Invalid password")
+                return res.status(403).json("Invalid password")
                 }
 
                 if (userInstance.props.id) {
                    
                     const userToken = authJwt.sign(userInstance.props.id)
 
-                    res.status(200).json({TOKENZAO: userToken})
+                    res.status(200).json({token: userToken})
                 }
 
 
@@ -53,7 +54,7 @@ class GetUser implements IController {
 
             console.log(error)
 
-            res.status(500).json({ message: "Servidor error" })
+            return res.status(500).json({ message: "Internal server error. Cannot login right now." })
         }
 
     }

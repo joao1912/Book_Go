@@ -2,14 +2,14 @@ import { prisma } from "../db";
 import { IGetUser } from "../../repositories/user/IGetUser";
 import { User } from "../../../../entities/User";
 
-export class GetUser implements IGetUser {
+export class GetById implements IGetUser {
 
   async execute(input: string) {
 
     try {
       const user = await prisma.user.findUnique({
         where: {   
-             email: input  
+             id: input  
         },
         select: {
           id: true,

@@ -4,7 +4,7 @@ import { authAdapter } from "../../adapters/authAdapter/protocol";
 export default class Auth {
 
     public static async execute(req: HttpRequest, res: HttpResponse, next: HttpNext) {
-        console.log(req.headers.authorization)
+        // console.log(req.headers.authorization)
         const token = req.headers.authorization
 
         if (typeof token != 'string') {

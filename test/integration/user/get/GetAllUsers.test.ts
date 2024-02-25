@@ -31,7 +31,6 @@ describe('## GET ##' ,() => {
             .send(user)
             .expect(200)
             .then(response => {
-
                 console.log(response.body)
 
             })
