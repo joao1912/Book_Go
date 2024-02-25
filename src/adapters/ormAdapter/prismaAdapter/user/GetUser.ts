@@ -34,7 +34,7 @@ export class GetUser implements IGetUser {
       })
     }
 
-      let message = `${input} not found in db`
+      let message = `Email not registered`
       return message
 
     } catch (error) {

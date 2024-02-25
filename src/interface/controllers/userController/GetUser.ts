@@ -29,6 +29,8 @@ class GetUser implements IController {
 
             const userInstance = await getUserUseCase.execute(email)
 
+           
+
             if (typeof userInstance !== "string") {
 
                 const dbHashPassword = userInstance.props.password
@@ -46,6 +48,9 @@ class GetUser implements IController {
                     return serverReponse.ok({ token: userToken })
                 }
             }
+            
+            console.log("console", userInstance)
+            return serverReponse.notFound(userInstance)
 
 
         } catch (error) {

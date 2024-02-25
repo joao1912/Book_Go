@@ -1,13 +1,12 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import { IUser } from "@entities/User"
-import { authAdapter } from "../../../../src/adapters/authAdapter/protocol"
 
-describe('## GET ##' ,() => {
-    
+describe('## GET ##', () => {
+
     let app: any
-    beforeAll(async()=>{
-        
+    beforeAll(async () => {
+
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
@@ -23,47 +22,47 @@ describe('## GET ##' ,() => {
             .post('/v1/users/signIn')
             .send(userToLogin)
             .expect(200)
-            // .then(response => {
+        // .then(response => {
 
-            //     console.log(response.body)
+        //     console.log(response.body)
 
-            // })
+        // })
     })
-  
-    afterAll(async()=>{
+
+    afterAll(async () => {
         HTTPAdapter.close()
 
     })
 
 
 
-   
 
-    it("Deve fazer login e receber um token", async()=>{
-        
-    
+
+    it("Deve fazer login e receber um token", async () => {
+
+
         await request.agent(app)
-        .post("/v1/users/login")
-        .send({
-            email: "testelogin@gmail.com",
-            password: "123"
-        })
+            .post("/v1/users/login")
+            .send({
+                email: "testelogin@gmail.com",
+                password: "123"
+            })
             .expect(200)
             .then(response => {
                 expect(response.text).toContain("token")
                 // console.log(response.text)
 
             })
-     
+
     })
-    it("Tentativa fazer login sem senha deve receber uma mensagem", async()=>{
-        
+    it("Tentativa fazer login sem senha deve receber uma mensagem", async () => {
+
         await request.agent(app)
-        .post("/v1/users/login")
-        .send({
-            email: "testelogin@gmail.com",
-          
-        })
+            .post("/v1/users/login")
+            .send({
+                email: "testelogin@gmail.com",
+
+            })
             .expect(400)
             .then(response => {
 
@@ -71,15 +70,15 @@ describe('## GET ##' ,() => {
                 // HTTPAdapter.close()
 
             })
-     
+
     })
-    it("Tentativa de fazer login sem email deve receber uma mensagem", async()=>{
-        
+    it("Tentativa de fazer login sem email deve receber uma mensagem", async () => {
+
         await request.agent(app)
-        .post("/v1/users/login")
-        .send({
-            password: "123"
-        })
+            .post("/v1/users/login")
+            .send({
+                password: "123"
+            })
             .expect(400)
             .then(response => {
 
@@ -87,41 +86,54 @@ describe('## GET ##' ,() => {
                 // HTTPAdapter.close()
 
             })
-     
+
     })
-    it("Tentativa de fazer login com senha incorreta deve receber uma mensagem", async()=>{
-        
+    it("Tentativa de fazer login com senha incorreta deve receber uma mensagem", async () => {
+
         await request.agent(app)
-        .post("/v1/users/login")
-        .send({
-            email: "testelogin@gmail.com",
-            password: "abc"
-          
-        })
+            .post("/v1/users/login")
+            .send({
+                email: "testelogin@gmail.com",
+                password: "abc"
+
+            })
             .expect(401)
             .then(response => {
 
                 expect(response.text).toContain("Invalid password")
 
             })
-     
+
     })
-    it("Tentativa de fazer login sem email e senha: deve receber uma mensagem", async()=>{
-        
+    it("Tentativa de fazer login sem email e senha: deve receber uma mensagem", async () => {
+
         await request.agent(app)
-        .post("/v1/users/login")
-        // .send({
-          
-        // })
+            .post("/v1/users/login")
             .expect(400)
             .then(response => {
 
                 expect(response.text).toBeTruthy
-              
-            })
-     
-    })
 
-    // FAZER TENTATIVA COM EMAIL INCORRETO
+            })
+
+    })
+    it("Tentativa de fazer login com email incorreto: deve receber uma mensagem", async () => {
+
+        await request.agent(app)
+            .post("/v1/users/login")
+            .send({
+                email: "testelog@gmail.com",
+                password: "123"
+            })
+            .expect(404)
+            .then(response => {
+                expect(response.text).toContain("Email not registered")
+            //     expect(response.text).toBe("Email not registered")
+
+            })
+
+    },10000)
+
+
 
 }) 
