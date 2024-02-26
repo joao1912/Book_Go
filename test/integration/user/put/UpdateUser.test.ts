@@ -1,6 +1,8 @@
 import HTTPAdapter from "@adapters/HTTPAdapter/protocol"
 import { IUser } from "@entities/User"
+import { response } from "express"
 import request from "supertest"
+
 
 
 describe('## PUT ##', () => {
@@ -8,6 +10,8 @@ describe('## PUT ##', () => {
     let app: any
     let token: string
     let id: string
+
+ 
     beforeAll(async () => {
 
         HTTPAdapter.config()
@@ -21,28 +25,26 @@ describe('## PUT ##', () => {
         }
 
 
-        await request(app)
+      const result =  await request(app)
             .post('/v1/users/signIn')
             .send(userToLogin)
             .expect(200)
-            .then(response => {
-                console.log(response.text)
-            })
+            const user = result.body;
+            expect(user).toHaveProperty('id');
+            id = user.id;
+
     
-        const result = await request.agent(app)
+       const resultLogin = await request.agent(app)
             .post("/v1/users/login")
             .send({
                 email: "updateuser@gmail.com",
                 password: "123",
             })
             .expect(200)
-            .then(response => {
-              
-                token = response.text
-                // console.log(response.text)
-
-            })
-    })
+            const tokenOBJ = resultLogin.body;
+            expect(tokenOBJ).toHaveProperty('token');
+            token = tokenOBJ.token;
+        })     
 
     afterAll(async () => {
         HTTPAdapter.close()
@@ -52,10 +54,13 @@ describe('## PUT ##', () => {
 // Falta o Id, 
     it("Deve mudar a senha", async()=>{
         await request.agent(app)
-        .put(`v1/users/update/${id}`)
+        .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
         .send({
-            password: "123"
+            password: "YEAH"
+        })
+        .then(response => {
+            console.log(response.text)
         })
     })
 
