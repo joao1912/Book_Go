@@ -2,7 +2,7 @@ import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import { IUser } from "@entities/User"
 
-describe('## GET ##', () => {
+describe('## POST ##', () => {
 
     let app: any
     beforeAll(async () => {

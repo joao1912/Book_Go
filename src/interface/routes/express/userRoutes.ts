@@ -21,7 +21,7 @@ userRouter.post('/signIn', createUserController.handle)
 
 userRouter.post('/login', getUserController.handle)
 
-userRouter.post('/update/:id', Auth.execute, updateUserController.handle)
+userRouter.put('/update/:id', Auth.execute, updateUserController.handle)
 
 userRouter.post('/addFavorite', Auth.execute, createFavoriteController.handle)
 
