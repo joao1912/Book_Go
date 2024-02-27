@@ -5,21 +5,22 @@ import searchBookByGenreController from "../../controllers/bookController/Search
 import searchBookByTitleController from "../../controllers/bookController/SearchBookByTitle";
 import updateBookController from "../../controllers/bookController/UpdateBook";
 import deleteBookController from "../../controllers/bookController/DeleteBook";
+import Auth from "@middlewares/Auth";
 
 
 const bookRouter = Router()
 
 bookRouter.get('/', getAllBooksController.handle)
 
-bookRouter.post('/add', addBookController.handle)
+bookRouter.post('/add', Auth.execute, addBookController.handle)
 
 bookRouter.post('/searchbygenre', searchBookByGenreController.handle)
 
 bookRouter.post('/searchbytitle', searchBookByTitleController.handle)
 
-bookRouter.put('/update/:id', updateBookController.handle)
+bookRouter.put('/update/:id', Auth.execute, updateBookController.handle)
 
-bookRouter.delete('/delete/:id', deleteBookController.handle)
+bookRouter.delete('/delete/:id', Auth.execute, deleteBookController.handle)
 
 
 

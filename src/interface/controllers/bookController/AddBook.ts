@@ -1,3 +1,4 @@
+import ServerResponse from "@controllers/ServerResponse";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { addBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { IBook } from "../../../entities/Book";
@@ -9,6 +10,7 @@ interface IBody extends IBook {}
 class AddBook implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse){
+        const serverResponse = new ServerResponse(res)
 
         try {
             const {
@@ -34,9 +36,10 @@ class AddBook implements IController {
                 
             })
 
-            res.status(200).json(bookInstance)
+            return serverResponse.ok(bookInstance)
         } catch (error) {
-            throw new Error ("Bad request: " + error)
+            console.log("Erro ao criar livro" + error)
+            return serverResponse.badRequest("Internal server error. Look for superadmin haha")
         }
 
     }

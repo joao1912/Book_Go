@@ -51,13 +51,46 @@ describe('## PUT ##', () => {
 
     })
 
-// Falta o Id, 
+
     it("Deve mudar a senha", async()=>{
         await request.agent(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
         .send({
             password: "YEAH"
+        })
+        .then(response => {
+            console.log(response.text)
+        })
+    })
+    it("Deve mudar o email", async()=>{
+        await request.agent(app)
+        .put(`/v1/users/update/${id}`)
+        .set('Authorization', `${token}`)
+        .send({
+            email: "newupdateuser@gmail.com"
+        })
+        .then(response => {
+            console.log(response.text)
+        })
+    })
+    it("Deve mudar o telefone", async()=>{
+        await request.agent(app)
+        .put(`/v1/users/update/${id}`)
+        .set('Authorization', `${token}`)
+        .send({
+            telefone: "50-000443320"
+        })
+        .then(response => {
+            console.log(response.text)
+        })
+    })
+    it("Deve mudar o username", async()=>{
+        await request.agent(app)
+        .put(`/v1/users/update/${id}`)
+        .set('Authorization', `${token}`)
+        .send({
+            username: "new-update-user@gmail.com"
         })
         .then(response => {
             console.log(response.text)
