@@ -38,7 +38,7 @@ describe('## GET ##' ,() => {
 
     })
 
-    it("Buscar todos os usuarios", async()=>{
+    it("Buscar todos os usuarios", async() => {
         
         await request.agent(app)
         .get("/v1/users/")
@@ -49,6 +49,7 @@ describe('## GET ##' ,() => {
             .then(response => {
 
                 console.log(response.body)
+
 
             })
      

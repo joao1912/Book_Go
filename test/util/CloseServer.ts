@@ -1,11 +1,17 @@
 import HTTPAdapter from "../../src/adapters/HTTPAdapter/protocol";
 
-export default class CloseServer {
+class CloseServer {
 
     static async execute() {
 
         HTTPAdapter.close()
 
     }
+
+}
+
+export default async () => {
+
+    await CloseServer.execute()
 
 }

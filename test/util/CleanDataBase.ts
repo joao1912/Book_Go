@@ -5,7 +5,7 @@ import { deleteAllFavorites } from "../../src/adapters/ormAdapter/protocols/favo
 import { deleteAllFinances } from "../../src/adapters/ormAdapter/protocols/financeProtocols"
 import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
 
-export default class CleanDataBase {
+class CleanDataBase {
 
     public static async execute() {
 
@@ -23,5 +23,12 @@ export default class CleanDataBase {
         }
 
     }
+
+}
+
+
+export default async () => {
+
+    await CleanDataBase.execute()
 
 }
