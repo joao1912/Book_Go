@@ -63,7 +63,7 @@ const config: Config = {
   // forceCoverageMatch: [],
 
   // A path to a module which exports an async function that is triggered once before all test suites
-  globalSetup: "./test/util/CleanDataBase.ts",
+  globalSetup: "./test/util/toTest/config.ts",
 
   // A path to a module which exports an async function that is triggered once after all test suites
   // globalTeardown: undefined,
