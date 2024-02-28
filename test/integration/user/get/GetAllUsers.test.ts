@@ -7,6 +7,7 @@ describe('## GET ##' ,() => {
     
     let app: any
     let token: string
+
     beforeAll(() => {
 
         token =  authAdapter.sign('id_teste1', 18000)
@@ -16,7 +17,6 @@ describe('## GET ##' ,() => {
 
     })
 
-
     it('Deve criar e buscar os usuários cadastrados', async () => {
 
         const user: IUser = {
@@ -25,7 +25,6 @@ describe('## GET ##' ,() => {
             email: "giDasSenhaLouca@gmail.com",
             telephone: "48998003827"
         }
-
 
         await request(app)
             .post('/v1/users/signIn')
@@ -40,19 +39,17 @@ describe('## GET ##' ,() => {
 
     it("Buscar todos os usuarios", async() => {
         
-        await request.agent(app)
+        await request(app)
         .get("/v1/users/")
-        // .set('Accept', 'application/json')
-        // .auth(token, {type: "bearer"})
-            .set('Authorization', `${token}`)
-            .expect(200)
-            .then(response => {
+        .set('Authorization', `${token}`)
+        .expect(200)
+        .then(response => {
 
-                console.log(response.body)
+            console.log(response.body)
 
 
-            })
+        })
      
     })
 
-}) 
+})

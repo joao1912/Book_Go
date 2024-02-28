@@ -1,13 +1,19 @@
 import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
-import { IUser } from "../../../entities/User";
+import { IUser, User } from "../../../entities/User";
 import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase";
 import { IController } from "../IController";
 
 interface IBody extends IUser {}
 
 export class CreateUser implements IController {
+
+    formatter(data: User): any {
+
+        return data.User
+        
+    }
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
 
@@ -33,9 +39,9 @@ export class CreateUser implements IController {
                 username,
             })
 
-            const newUser = userInstance.User
-
-            res.status(200).json(newUser)
+            res.status(200).json(
+                this.formatter(userInstance)
+            )
 
         } catch (error) {
 

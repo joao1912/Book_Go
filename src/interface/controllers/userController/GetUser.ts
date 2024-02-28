@@ -38,7 +38,7 @@ class GetUser implements IController {
                 const checkPassword = await encryptorAdapter.validadePassword(password, dbHashPassword)
 
                 if (!checkPassword) {
-                    return serverReponse.invalidPassword("Invalid password")
+                    return serverReponse.notAuthorized("Invalid password")
                 }
 
                 if (userInstance.props.id) {

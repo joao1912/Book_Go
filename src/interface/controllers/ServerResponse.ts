@@ -17,15 +17,18 @@ class ServerResponse {
         this.response.status(400).json(message);
     }
 
-    invalidPassword(message: any): void {
+    notAuthorized(message: any): void {
         this.response.status(401).json(message);
     }
+
     notFound(message: any): void {
         this.response.status(404).json(message);
     }
+
     missingParameters(message: any): void {
         this.response.status(422).json(message);
     }
+
     serverError(message: any): void {
         this.response.status(500).json(message);
     }
