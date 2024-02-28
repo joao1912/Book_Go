@@ -2,10 +2,9 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
-import type {Config} from 'jest';
-
+import type { Config } from 'jest';
 
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
@@ -27,7 +26,7 @@ const config: Config = {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -35,7 +34,7 @@ const config: Config = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -63,10 +62,10 @@ const config: Config = {
   // forceCoverageMatch: [],
 
   // A path to a module which exports an async function that is triggered once before all test suites
-  globalSetup: "./test/util/CleanDataBase.ts",
+  globalSetup: './test/util/CleanDataBase.ts',
 
   // A path to a module which exports an async function that is triggered once after all test suites
-  globalTeardown: "./test/util/CloseServer.ts",
+  globalTeardown: './test/util/CloseServer.ts',
 
   // A set of global variables that need to be available in all test environments
   // globals: {},
@@ -93,15 +92,8 @@ const config: Config = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>[/src/$1]',
-    "^@entities/(.*)$": ["<rootDir>/src/entities/$1"],
-      "^@usecases/(.*)$": ["<rootDir>/src/usecases/$1"],
-      "^@adapters/(.*)$": ["<rootDir>/src/adapters/$1"],
-      "^@prismaAdapter/(.*)$": ["<rootDir>/src/adapters/ormAdapter/prismaAdapter/$1"],
-      "^@routes/(.*)$": ["<rootDir>/src/interface/routes/$1"],
-      // "^@controllers/(.*)$": ["<rootDir>/src/interface/controllers/$1"],
-      "^@middleware/(.*)$": ["<rootDir>/src/interface/middlewares/$1"],
-    
+    '@src/(.*)': '<rootDir>/src/$1',
+    '@test/(.*)': '<rootDir>/test/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -167,10 +159,7 @@ const config: Config = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: [
-    "**/__tests__/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[tj]s?(x)"
-  ],
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
