@@ -35,7 +35,7 @@
       "@adapters/*": ["src/adapters/*"],
       "@prismaAdapter/*": ["src/adapters/ormAdapter/prismaAdapter/*"],
       "@routes/*": ["src/interface/routes/*"],
-      "@controllers/*": ["src/interface/controllers/*"],
+      // "@controllers/*": ["src/interface/controllers/*"],
       "@middlewares/*": ["src/interface/middlewares/*"],
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */

@@ -93,13 +93,15 @@ const config: Config = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>[/src/$1]',
     "^@entities/(.*)$": ["<rootDir>/src/entities/$1"],
       "^@usecases/(.*)$": ["<rootDir>/src/usecases/$1"],
       "^@adapters/(.*)$": ["<rootDir>/src/adapters/$1"],
       "^@prismaAdapter/(.*)$": ["<rootDir>/src/adapters/ormAdapter/prismaAdapter/$1"],
       "^@routes/(.*)$": ["<rootDir>/src/interface/routes/$1"],
-      "^@controllers/(.*)$": ["<rootDir>/src/interface/controllers/$1"],
-      "^@middlewares/(.*)$": ["<rootDir>/src/interface/middlewares/$1"],
+      // "^@controllers/(.*)$": ["<rootDir>/src/interface/controllers/$1"],
+      "^@middleware/(.*)$": ["<rootDir>/src/interface/middlewares/$1"],
+    
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

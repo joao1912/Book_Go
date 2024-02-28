@@ -1,4 +1,4 @@
-import ServerResponse from "@controllers/ServerResponse";
+import ServerResponse from "src/interface/controllers/ServerResponse";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { addBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { IBook } from "../../../entities/Book";
