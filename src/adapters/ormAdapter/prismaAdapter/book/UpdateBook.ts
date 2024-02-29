@@ -66,7 +66,7 @@ export class UpdateBook implements IUpdateBook {
 
     } catch (error) {
       if (error instanceof PrismaErrorClient) {
-        const message = "Invalid input type"
+        const message =`Invalid input type` 
         
         return message 
       }

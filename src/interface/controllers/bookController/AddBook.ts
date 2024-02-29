@@ -38,7 +38,7 @@ class AddBook implements IController {
             })
 
             return serverResponse.ok(
-                Formatter.handle<Book>(bookInstance)
+                Formatter.handle<Book>(response)
             )
             
         } catch (error) {
