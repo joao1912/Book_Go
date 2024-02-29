@@ -2,6 +2,7 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { getAllBooks } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { GetAllBooksUseCase } from "../../../usecases/book/GetAllBooksUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class GetAllBooks implements IController {
@@ -10,14 +11,18 @@ class GetAllBooks implements IController {
 
         try {
 
+            const serverResponse = new ServerResponse(res)
             const getAllBooksUseCase = new GetAllBooksUseCase(getAllBooks)
 
             const allBooks = await getAllBooksUseCase.execute()
 
-            res.status(200).json(allBooks)
+           return serverResponse.ok(allBooks)
             
         } catch (error) {
-            throw new Error ("Bad request: " + error)
+            console.log("Erroou" + error)
+            
+            throw new Error("Internal server error")
+          
         }
     }
 }

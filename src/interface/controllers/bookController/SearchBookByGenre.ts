@@ -3,6 +3,7 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { searchBookByGenre } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { SearchBookByGenreUseCase } from "../../../usecases/book/SearchBookByGenreUseCase";
 import { IController } from "../IController";
+import { Book } from "../../../entities/Book";
 
 
 
@@ -17,9 +18,14 @@ class SearchBookByGenre implements IController {
 
             const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 
-            const bookInstance = await searchBookByGenreUseCase.execute(genre)
+            const response = await searchBookByGenreUseCase.execute(genre)
             
-            return serverResponse.ok(bookInstance)
+            if(typeof response == "string"){
+                return serverResponse.notFound(response)
+            }
+            
+            return serverResponse.ok(response)
+
         } catch (error) {
             throw new Error("Bad Request: " + error)
 

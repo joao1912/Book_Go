@@ -25,7 +25,7 @@ class AddBook implements IController {
 
             const addBookUseCase = new AddBookUseCase(addBook)
 
-            const bookInstance = await addBookUseCase.execute({
+            const response = await addBookUseCase.execute({
                 title,
                 synopsis,
                 author,
@@ -36,7 +36,11 @@ class AddBook implements IController {
                 
             })
 
-            return serverResponse.ok(bookInstance)
+            
+            return serverResponse.ok(response)
+
+
+            // return serverResponse.notFound(bookInstance)
         } catch (error) {
             console.log("Erro ao criar livro" + error)
             return serverResponse.badRequest("Internal server error. Look for superadmin haha")

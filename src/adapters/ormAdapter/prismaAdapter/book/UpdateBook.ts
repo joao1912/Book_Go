@@ -1,9 +1,9 @@
-import { prisma, PrismaError,  BookUpdateInput } from "../db";
+import { prisma,  BookUpdateInput, PrismaErrorClient } from "../db";
 import { Book } from "../../../../entities/Book";
 import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 
 export class UpdateBook implements IUpdateBook {
-  async execute({ props }: Book): Promise<Book> {
+  async execute({ props }: Book){
 
     const { id, title, synopsis, price, genre, author, publishedDate, pageCount, image } = props
 
@@ -65,10 +65,16 @@ export class UpdateBook implements IUpdateBook {
 
 
     } catch (error) {
-      if (error instanceof PrismaError) {
-        console.log("Prisma errinho", error.code)
+      if (error instanceof PrismaErrorClient) {
+        const message = "Invalid input type"
+        
+        return message 
       }
-      throw new Error("Something else happened: " + error);
+       else {
+        console.log( "Erro no update book" + error)
+       
+        return ("Internal server error");
+       }
     }
   }
 }

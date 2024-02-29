@@ -6,7 +6,7 @@ export class DeleteBook implements IDeleteBook {
     async execute(id: string): Promise<IDeleteMessageBook> {
         
         try {
-         const bookDeleted =   await prisma.book.delete({
+         const bookDeleted = await prisma.book.delete({
                 where: {
                     id: id
                 },

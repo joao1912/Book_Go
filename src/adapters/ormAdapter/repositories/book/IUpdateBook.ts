@@ -1,5 +1,5 @@
 import {Book, IBook } from "../../../../entities/Book"
 
 export interface IUpdateBook {
-    execute(book: Book ): Promise<Book>
+    execute(book: Book ): Promise<Book | string>
 }

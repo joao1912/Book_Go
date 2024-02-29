@@ -3,6 +3,7 @@ import { updateBook } from "../../../adapters/ormAdapter/protocols/bookProtocols
 import { IBook } from "../../../entities/Book";
 import { UpdateBookUseCase } from "../../../usecases/book/UpdateBookUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IBook{}
 
@@ -11,6 +12,7 @@ class UpdateBook implements IController {
     async handle (req: HttpRequest<{id: any},{}, IBody>, res: HttpResponse){
 
         try {
+            const serverResponse = new ServerResponse(res)
             const bookId = req.params.id
             const {
                 title,
@@ -24,7 +26,7 @@ class UpdateBook implements IController {
 
             const updateBookUseCase = new UpdateBookUseCase(updateBook)
 
-            const bookInstance = await updateBookUseCase.execute({
+            const response = await updateBookUseCase.execute({
                 id: bookId,
                 title,
                 synopsis,
@@ -35,10 +37,24 @@ class UpdateBook implements IController {
                 pageCount
             })
 
-            res.status(200).json(bookInstance)
+            switch (true){
+                case (typeof response !== "string" ):
+                return serverResponse.ok(response)
+                break;
+
+                case (response == "Invalid input type"):
+                return serverResponse.badRequest(response)
+                break;
+
+                case (response == "Internal server error"):
+                return serverResponse.serverError(response)
+                break;
+            }
+
     
         } catch(error){
-            throw new Error ("Bad request: " + error)
+            console.log(error)
+            throw new Error ("Something happened please try again later")
         }
     }
 

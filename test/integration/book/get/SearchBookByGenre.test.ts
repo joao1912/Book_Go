@@ -83,4 +83,14 @@ describe('## GET BOOK GENRE ##', () => {
             expect(book).toHaveProperty("props.id")
         }
     })
+    it("Deve tentar buscar um genero que não existe", async()=>{
+       const result = await request.agent(app)
+        .post(`/v1/book/genre`)
+        .send({
+            genre: "blablabla"
+        })
+        .expect(404)
+        expect(result.body).toEqual(`Genre not found.`)
+
+    })
 })

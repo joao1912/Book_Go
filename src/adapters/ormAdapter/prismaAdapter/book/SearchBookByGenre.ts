@@ -17,6 +17,7 @@ export class SearchBookByGenre implements ISearchBookByGenre {
           tag: true
         }
       });
+      if(bookSearch.length !== 0){
       let books = [];
       for (let bookProp of bookSearch) {
 
@@ -30,10 +31,14 @@ export class SearchBookByGenre implements ISearchBookByGenre {
           pageCount: bookProp.pageCount,
           genre: bookProp.tag[0].genre,
         }));
-      ;
+  
       }
 
-      return books;
+      return books
+    }
+
+      const message = `Genre not found.`
+      return message
     } catch (error) {
       
        throw new Error("Internal server error: " + error);
