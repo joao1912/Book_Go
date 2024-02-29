@@ -50,13 +50,12 @@ export class expressAdapter implements HTTPAdapterRepository {
         return this.app
 
     }
-    close(): void {
-        // const { createHttpTerminator } = require('http-terminator')
+    async close(): Promise<void> {
        
         const server =  this.app.listen(process.env.PORT)
         const httpTerminator = createHttpTerminator({ server })
     
-            httpTerminator.terminate()
+            await httpTerminator.terminate()
 
     }
 

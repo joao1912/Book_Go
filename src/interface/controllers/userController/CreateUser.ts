@@ -4,12 +4,11 @@ import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols
 import { IUser, User } from "../../../entities/User";
 import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 interface IBody extends IUser {}
 
 export class CreateUser implements IController {
-
-   
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
 
@@ -35,7 +34,11 @@ export class CreateUser implements IController {
                 username,
             })
 
-            res.status(200).json(userInstance)
+           
+
+            res.status(200).json(
+                Formatter.handle<User>(userInstance)
+            )
 
         } catch (error) {
 

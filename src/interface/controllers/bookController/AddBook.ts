@@ -3,7 +3,7 @@ import { addBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { IBook } from "../../../entities/Book";
 import { AddBookUseCase } from "../../../usecases/book/AddBookUseCase";
 import { IController } from "../IController";
-import ServerResponse from "../ServerResponse";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IBook {}
 

@@ -12,6 +12,10 @@ class CloseServer {
 
 export default async () => {
 
-    await CloseServer.execute()
+    try {
+        await CloseServer.execute()
+    } catch (error) {
+        console.log(error)
+    }
 
 }

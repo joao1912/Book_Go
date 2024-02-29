@@ -1,4 +1,4 @@
-import ServerResponse from "../ServerResponse";
+import ServerResponse from "../utils/ServerResponse";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { searchBookByGenre } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { SearchBookByGenreUseCase } from "../../../usecases/book/SearchBookByGenreUseCase";
