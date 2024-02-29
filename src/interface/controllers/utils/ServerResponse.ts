@@ -1,4 +1,4 @@
-import { HttpResponse } from "../../adapters/HTTPAdapter/protocol";
+import { HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 
 class ServerResponse {
     public response: HttpResponse;

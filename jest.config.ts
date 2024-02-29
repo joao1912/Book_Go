@@ -65,7 +65,7 @@ const config: Config = {
   globalSetup: './test/util/CleanDataBase.ts',
 
   // A path to a module which exports an async function that is triggered once after all test suites
-  // globalTeardown: './test/util/CloseServer.ts',
+  globalTeardown: './test/util/CloseServer.ts',
 
   // A set of global variables that need to be available in all test environments
   // globals: {},
