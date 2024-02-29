@@ -3,7 +3,8 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { searchBookByGenre } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { SearchBookByGenreUseCase } from "../../../usecases/book/SearchBookByGenreUseCase";
 import { IController } from "../IController";
-import { Book } from "../../../entities/Book";
+import { Book, IBook } from "../../../entities/Book";
+import Formatter from "../utils/Formatter";
 
 
 
@@ -23,9 +24,19 @@ class SearchBookByGenre implements IController {
             if(typeof response == "string"){
                 return serverResponse.notFound(response)
             }
-            
-            return serverResponse.ok(response)
 
+            let bookList: Array<IBook> = []
+
+            for (let book of response) {
+
+                bookList.push(
+                    Formatter.handle<Book>(book)
+                )
+
+            }
+            
+            return serverResponse.ok(bookList)
+            
         } catch (error) {
             throw new Error("Bad Request: " + error)
 

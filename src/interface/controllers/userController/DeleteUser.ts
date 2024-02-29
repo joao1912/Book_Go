@@ -2,15 +2,20 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { deleteUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { DeleteUserUseCase } from "../../../usecases/user/DeleteUserUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteUser implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 
+        const serverResponse = new ServerResponse(res)
+
         const userId = req.userId;
 
-        if (!userId) throw new Error('BadRequest: userId can not be undefined.')
+        if (!userId) {
+            return serverResponse.badRequest('BadRequest: userId can not be undefined.')
+        }
 
         try {
             
@@ -19,7 +24,7 @@ class DeleteUser implements IController {
             await deleteUserUseCase.execute(userId)
                 .then(result => {
 
-                    res.status(200).json(result)
+                    return serverResponse.ok(result)
 
                 })
 

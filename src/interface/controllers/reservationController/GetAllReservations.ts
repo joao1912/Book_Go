@@ -1,11 +1,16 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllReservations } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
+import { IReservation, Reservation } from "../../../entities/Reservation";
 import { GetAllReservationsUseCase } from "../../../usecases/reservation/GetAllReservationsUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetAllReservations implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             
@@ -13,7 +18,17 @@ class GetAllReservations implements IController {
 
             const reservationInstance = await getAllReservationsUseCase.execute()
 
-            res.status(200).json(reservationInstance)
+            let reservationList: Array<IReservation> = []
+
+            for (let reservation of reservationInstance) {
+
+                reservationList.push(
+                    Formatter.handle<Reservation>(reservation)
+                )
+
+            }
+
+            return serverResponse.ok(reservationList)
 
         } catch (error) {
             throw new Error ("Bad request: "+ error)

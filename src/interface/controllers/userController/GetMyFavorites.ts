@@ -1,21 +1,38 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllFavoritesByUserId } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
+import { Book, IBook } from "../../../entities/Book";
 import { GetMyFavoritesUseCase } from "../../../usecases/user/GetMyFavoritesUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetMyFavorites implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 
+        const serverResponse = new ServerResponse(res)
+
         const userId = req.userId
 
-        if (!userId) throw new Error('Bad request: userId can not be undefined')
+        if (!userId) {
+            return serverResponse.badRequest('Bad request: userId can not be undefined')
+        }
 
         const getMyFavoritesUseCase = new GetMyFavoritesUseCase(getAllFavoritesByUserId)
 
-        const favorites = await getMyFavoritesUseCase.execute(userId)
+        const favoritesInstances = await getMyFavoritesUseCase.execute(userId)
 
-        res.status(200).json(favorites)
+        let favoriteList: Array<IBook> = []
+
+        for (let book of favoritesInstances) {
+            
+            favoriteList.push(
+                Formatter.handle<Book>(book)
+            )
+
+        }
+
+        return serverResponse.ok(favoriteList)
 
     }
 

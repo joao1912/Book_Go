@@ -2,15 +2,19 @@ import { HttpNext, HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapt
 import { searchBookById } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { updateStock } from "../../../adapters/ormAdapter/protocols/stockProtocols";
 import { IBook } from "../../../entities/Book";
-import { IStock } from "../../../entities/Stock";
+import { IStock, Stock } from "../../../entities/Stock";
 import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseCase";
 import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class UpdateStock implements IController {
     
     async handle(req: HttpRequest<{ book_Id: string }, {}, { quantity: number }>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
 
         let IBookType: IBook
         const searchBookByIdUseCase = new SearchBookByIdUseCase(searchBookById)
@@ -31,9 +35,13 @@ class UpdateStock implements IController {
                     quantity: quantity,
                     book: IBookType
                 })
-                res.status(200).json(stockInstance)
+
+                return serverResponse.ok(
+                    Formatter.handle<Stock>(stockInstance)
+                )
+
             } else {
-                res.status(404).json(bookInstance)
+                return serverResponse.notFound(bookInstance)
             }
 
         } catch (error) {

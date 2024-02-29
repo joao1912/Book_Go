@@ -35,7 +35,7 @@ export class Book {
             publishedDate: this.props.publishedDate,
             pageCount: this.props.pageCount,
             genre: this.props.genre,
-    
+            author: this.props.author
         }
     }
   

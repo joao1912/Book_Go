@@ -1,15 +1,18 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { updateBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
-import { IBook } from "../../../entities/Book";
+import { Book, IBook } from "../../../entities/Book";
 import { UpdateBookUseCase } from "../../../usecases/book/UpdateBookUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
-interface IBody extends IBook{}
+interface IBody extends IBook { }
 
 class UpdateBook implements IController {
 
-    async handle (req: HttpRequest<{id: any},{}, IBody>, res: HttpResponse){
+    async handle(req: HttpRequest<{ id: any }, {}, IBody>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             const serverResponse = new ServerResponse(res)
@@ -22,7 +25,7 @@ class UpdateBook implements IController {
                 publishedDate,
                 genre,
                 pageCount
-             } = req.body
+            } = req.body
 
             const updateBookUseCase = new UpdateBookUseCase(updateBook)
 
@@ -36,25 +39,25 @@ class UpdateBook implements IController {
                 genre,
                 pageCount
             })
-
-            switch (true){
-                case (typeof response !== "string" ):
-                return serverResponse.ok(response)
-                break;
+            switch (true) {
+                case (typeof response !== "string"):
+                    Formatter.handle<Book>(response)
+                    return serverResponse.ok(response)
+                    break;
 
                 case (response == "Invalid input type"):
-                return serverResponse.badRequest(response)
-                break;
+                    return serverResponse.badRequest(response)
+                    break;
 
                 case (response == "Internal server error"):
-                return serverResponse.serverError(response)
-                break;
+                    return serverResponse.serverError(response)
+                    break;
             }
 
-    
-        } catch(error){
+
+        } catch (error) {
             console.log(error)
-            throw new Error ("Something happened please try again later")
+            throw new Error("Something happened please try again later")
         }
     }
 

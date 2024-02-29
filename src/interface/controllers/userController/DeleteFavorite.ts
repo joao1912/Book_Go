@@ -2,11 +2,14 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { deleteFavorite } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
 import { DeleteFavoriteByIdUseCase } from "../../../usecases/user/DeleteFavoriteByIdUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteFavorite implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
 
         const deleteFavoriteByIdUseCase = new DeleteFavoriteByIdUseCase(deleteFavorite)
 
@@ -17,7 +20,7 @@ class DeleteFavorite implements IController {
             await deleteFavoriteByIdUseCase.execute(favoriteId)
                 .then(result => {
 
-                    res.status(200).json(result)
+                    return serverResponse.ok(result)
 
                 })
 

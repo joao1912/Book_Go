@@ -9,17 +9,18 @@ class DeleteBook implements IController {
 
     async handle(req: HttpRequest<{id:any}>, res: HttpResponse){
 
+        const serverResponse = new ServerResponse(res)
+
         try {
 
             const serverResponse = new ServerResponse(res)
 
             const bookId = req.params.id
             const deleteBookUseCase = new DeleteBookUseCase(deleteBook)
-
+            
             const message  = await deleteBookUseCase.execute(bookId)
 
             return serverResponse.ok(message)
-            //Adicionar para id não encontrado
 
         } catch (error) {
             throw new Error ("Bad request: " + error)

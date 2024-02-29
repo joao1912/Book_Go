@@ -1,14 +1,21 @@
+import { User } from "../../../entities/User";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import AuthJwt from "../../../adapters/authAdapter/jwtAdapter";
 import { updateUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
 import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IUser { }
 
 class UpdateUser implements IController {
+    
     async handle(req: HttpRequest<{ id: string }, {}, IBody>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
+
         const id = req.params.id
         
         const {
@@ -20,12 +27,6 @@ class UpdateUser implements IController {
 
         const updateUserUseCase = new UpdateUserUseCase(updateUser)
 
-
-        //const authorization = AuthJwt.checkToken(req.headers["authorization"])
-        //if (!authorization) {
-        //    return res.status(403).json({ message: "Acess denied" })
-        //}
-
         try {
 
             const userInstance = await updateUserUseCase.execute({
@@ -36,8 +37,9 @@ class UpdateUser implements IController {
                 username,
             })
 
-            res.status(200).json(userInstance)
-
+            return serverResponse.ok(
+                Formatter.handle<User>(userInstance)
+            )
 
         } catch (error) {
             throw new Error("Bad request: " + error)
