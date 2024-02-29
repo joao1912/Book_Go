@@ -1,8 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createComment } from "../../../adapters/ormAdapter/protocols/commentProtocols";
-import { IComment } from "../../../entities/Comment";
+import { Comment, IComment } from "../../../entities/Comment";
 import { CreateCommentUseCase } from "../../../usecases/comment/CreateCommentUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 interface IBody extends IComment {}
 
@@ -22,7 +23,9 @@ class CreateComment implements IController {
 
             const newComment = await createCommentUseCase.execute({...commentData, userId})
 
-            res.status(200).json(newComment)
+            res.status(200).json(
+                Formatter.handle<Comment>(newComment)
+            )
 
         } catch (error) {
 

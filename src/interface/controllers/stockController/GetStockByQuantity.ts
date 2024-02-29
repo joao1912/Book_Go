@@ -1,7 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getStockByQuantity } from "../../../adapters/ormAdapter/protocols/stockProtocols";
+import { IStock, Stock } from "../../../entities/Stock";
 import { GetStockByQuantityUseCase } from "../../../usecases/stock/GetStockByQuantityUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 
 class GetStockByQuantity implements IController {
@@ -12,9 +14,19 @@ class GetStockByQuantity implements IController {
 
             const getStockByQuantityUseCase = new GetStockByQuantityUseCase(getStockByQuantity)
 
-            const stockInstance = await getStockByQuantityUseCase.execute(quantity)
+            const stockInstances = await getStockByQuantityUseCase.execute(quantity)
 
-            res.status(200).json(stockInstance)
+            let stockList: Array<IStock> = []
+
+            for (let item of stockInstances) {
+
+                stockList.push(
+                    Formatter.handle<Stock>(item)
+                )
+
+            }
+
+            res.status(200).json(stockList)
 
         } catch (error) {
             throw new Error ("Bad request " + error)

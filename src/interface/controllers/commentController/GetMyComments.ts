@@ -1,7 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllCommentsByUserId } from "../../../adapters/ormAdapter/protocols/commentProtocols";
+import { Comment, IComment } from "../../../entities/Comment";
 import { GetMyCommentsUseCase } from "../../../usecases/comment/GetMyCommentsUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 
 class GetMyComments implements IController {
@@ -18,7 +20,17 @@ class GetMyComments implements IController {
             
             const comments = await getMycommentsUseCase.execute(userId)
 
-            res.status(200).json(comments)
+            let commentList: Array<IComment> = []
+
+            for (let comment of comments) {
+                
+                commentList.push(
+                    Formatter.handle<Comment>(comment)
+                )
+
+            }
+
+            res.status(200).json(commentList)
 
         } catch (error) {
 

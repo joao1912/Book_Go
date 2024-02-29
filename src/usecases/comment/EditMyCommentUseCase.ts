@@ -12,11 +12,11 @@ export class EditMyCommentUseCase {
 
     }
 
-    async execute(commentData: Partial<Comment>) {
+    async execute(commentData: IComment) {
 
-        //tem que arrumar
+        const commentInstance = new Comment(commentData)
 
-        return await this.updateComment.execute(commentData)
+        return await this.updateComment.execute(commentInstance)
 
     }
 

@@ -4,7 +4,7 @@ import { IUpdateComment } from "../../repositories/comment/IUpdateComment";
 
 export class UpdateComment implements IUpdateComment {
 
-    async execute({props}: Partial<Comment>): Promise<Partial<Comment>> {
+    async execute({props}: Comment): Promise<Comment> {
 
         try {
 

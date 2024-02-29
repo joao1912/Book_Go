@@ -1,8 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { updateBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
-import { IBook } from "../../../entities/Book";
+import { Book, IBook } from "../../../entities/Book";
 import { UpdateBookUseCase } from "../../../usecases/book/UpdateBookUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 interface IBody extends IBook{}
 
@@ -35,7 +36,9 @@ class UpdateBook implements IController {
                 pageCount
             })
 
-            res.status(200).json(bookInstance)
+            res.status(200).json(
+                Formatter.handle<Book>(bookInstance)
+            )
     
         } catch(error){
             throw new Error ("Bad request: " + error)

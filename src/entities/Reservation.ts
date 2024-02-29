@@ -20,21 +20,5 @@ export class Reservation {
 
         this.props = props
     }
-
-    get ReservationId() {
-        return this.props.id
-    }
-
-    get UserId() {
-        return this.props.userId
-    }
-
-    get BookId() {
-        return this.props.bookId
-    }
-
-    get Price() {
-        return this.props.price
-    }
      
 }

@@ -11,7 +11,7 @@ class DeleteBook implements IController {
         try {
             const bookId = req.params.id
             const deleteBookUseCase = new DeleteBookUseCase(deleteBook)
-
+            
             const message  = await deleteBookUseCase.execute(bookId)
 
             res.status(200).json(message)

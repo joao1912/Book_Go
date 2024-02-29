@@ -1,8 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { addBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
-import { IBook } from "../../../entities/Book";
+import { Book, IBook } from "../../../entities/Book";
 import { AddBookUseCase } from "../../../usecases/book/AddBookUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IBook {}
@@ -36,7 +37,10 @@ class AddBook implements IController {
                 
             })
 
-            return serverResponse.ok(bookInstance)
+            return serverResponse.ok(
+                Formatter.handle<Book>(bookInstance)
+            )
+            
         } catch (error) {
             console.log("Erro ao criar livro" + error)
             return serverResponse.badRequest("Internal server error. Look for superadmin haha")

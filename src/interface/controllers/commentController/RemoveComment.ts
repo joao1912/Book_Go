@@ -26,7 +26,7 @@ class RemoveComment implements IController {
             const comment = await getOneCommentUseCase.execute(commentId)
             
             //validação do comment
-            if (comment.getUserId() !== userId) {
+            if (comment.props.userId !== userId) {
 
                 throw new Error('Bad Request: you dont have access to delete this comment.')
 

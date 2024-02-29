@@ -49,13 +49,9 @@ class GetUser implements IController {
                 }
             }
             
-            console.log("console", userInstance)
             return serverReponse.notFound(userInstance)
 
-
         } catch (error) {
-
-            console.log("aaaaa", error)
 
             return serverReponse.serverError({ message: "Internal server error. Cannot login right now." })
         }

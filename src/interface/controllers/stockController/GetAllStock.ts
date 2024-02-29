@@ -1,8 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllStock } from "../../../adapters/ormAdapter/protocols/stockProtocols";
+import { IStock, Stock } from "../../../entities/Stock";
 import { GetAllStockUseCase } from "../../../usecases/stock/GetAllStockUseCase";
 import { IController } from "../IController";
-
+import Formatter from "../utils/Formatter";
 
 
 class GetAllStock implements IController {
@@ -11,9 +12,19 @@ class GetAllStock implements IController {
         try {
             const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
-            const stockInstance = await getAllStockUseCase.execute()
+            const stockInstances = await getAllStockUseCase.execute()
 
-            res.status(200).json(stockInstance)
+            let stockList: Array<IStock> = []
+
+            for (let item of stockInstances) {
+
+                stockList.push(
+                    Formatter.handle<Stock>(item)
+                )
+
+            }
+
+            res.status(200).json(stockList)
 
             
         } catch (error) {

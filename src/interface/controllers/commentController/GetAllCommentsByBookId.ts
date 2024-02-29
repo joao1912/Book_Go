@@ -1,7 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { getAllComments } from "../../../adapters/ormAdapter/protocols/commentProtocols";
+import { Comment, IComment } from "../../../entities/Comment";
 import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 interface IParams {
     bookId: string;
@@ -21,7 +23,17 @@ class GetAllCommentsByBookId implements IController {
 
             const comments = await searchAllCommentsUseCase.execute(bookId)
 
-            res.status(200).json(comments)
+            let commentList: Array<IComment> = []
+
+            for (let comment of comments) {
+                
+                commentList.push(
+                    Formatter.handle<Comment>(comment)
+                )
+
+            }
+
+            res.status(200).json(commentList)
 
         } catch (error) {
 

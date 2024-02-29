@@ -34,9 +34,7 @@ export class CreateUser implements IController {
                 username,
             })
 
-           
-
-            res.status(200).json(
+            res.status(200).json( 
                 Formatter.handle<User>(userInstance)
             )
 

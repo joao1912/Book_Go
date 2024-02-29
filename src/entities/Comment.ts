@@ -16,20 +16,4 @@ export class Comment {
         this.props = props
     }
 
-    getId() {
-        return this.props.id
-    }
-
-    getBookId() {
-        return this.props.bookId
-    }
-
-    getUserId() {
-        return this.props.userId
-    }
-
-    getComment() {
-        return this.props.comment
-    }
-
 }

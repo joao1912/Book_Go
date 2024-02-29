@@ -1,7 +1,9 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { searchBookByTitle } from "../../../adapters/ormAdapter/protocols/bookProtocols";
+import { Book, IBook } from "../../../entities/Book";
 import { SearchBookByTitleUseCase } from "../../../usecases/book/SearchBookByTitleUseCase";
 import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
 
 
 class SearchBookByTitle implements IController {
@@ -14,9 +16,19 @@ class SearchBookByTitle implements IController {
 
             const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
-            const bookInstance = await searchBookByTitleUseCase.execute(title)
+            const bookInstances = await searchBookByTitleUseCase.execute(title)
 
-            res.status(200).json(bookInstance)
+            let bookList: Array<IBook> = []
+
+            for (let book of bookInstances) {
+
+                bookList.push(
+                    Formatter.handle<Book>(book)
+                )
+
+            }
+
+            res.status(200).json(bookList)
             
         } catch (error) {
             throw new Error ("Bad request: " + error)
