@@ -53,8 +53,8 @@ class GetUser implements IController {
 
         } catch (error) {
 
-            throw new Error("Bad request: " + error)
-
+            return serverReponse.serverError({ message: "Internal server error. Cannot login right now." })
+            
         }
     }
 }
