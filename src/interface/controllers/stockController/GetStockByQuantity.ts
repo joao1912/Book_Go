@@ -4,11 +4,15 @@ import { IStock, Stock } from "../../../entities/Stock";
 import { GetStockByQuantityUseCase } from "../../../usecases/stock/GetStockByQuantityUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class GetStockByQuantity implements IController {
     
     async handle(req: HttpRequest<{quantity:number}>, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
+
         try {
             const quantity = Number(req.params.quantity)
 
@@ -26,7 +30,7 @@ class GetStockByQuantity implements IController {
 
             }
 
-            res.status(200).json(stockList)
+            return serverResponse.ok(stockList)
 
         } catch (error) {
             throw new Error ("Bad request " + error)

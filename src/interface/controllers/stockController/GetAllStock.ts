@@ -4,12 +4,17 @@ import { IStock, Stock } from "../../../entities/Stock";
 import { GetAllStockUseCase } from "../../../usecases/stock/GetAllStockUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class GetAllStock implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
+
         try {
+
             const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
             const stockInstances = await getAllStockUseCase.execute()
@@ -24,7 +29,7 @@ class GetAllStock implements IController {
 
             }
 
-            res.status(200).json(stockList)
+            return serverResponse.ok(stockList)
 
             
         } catch (error) {

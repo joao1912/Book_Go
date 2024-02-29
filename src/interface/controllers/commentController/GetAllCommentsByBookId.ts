@@ -4,6 +4,7 @@ import { Comment, IComment } from "../../../entities/Comment";
 import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IParams {
     bookId: string;
@@ -13,9 +14,13 @@ class GetAllCommentsByBookId implements IController {
 
     async handle(req: HttpRequest<IParams>, res: HttpResponse) {
 
+        const serverResponse = new ServerResponse(res)
+
         const bookId = req.params.bookId;
 
-        if (typeof bookId != 'string') throw new Error('Bad Request: bookId can not be other type besides string')
+        if (typeof bookId != 'string') {
+            return serverResponse.badRequest('Bad Request: bookId can not be other type besides string')
+        }
 
         try {
             
@@ -33,7 +38,7 @@ class GetAllCommentsByBookId implements IController {
 
             }
 
-            res.status(200).json(commentList)
+            return serverResponse.ok(commentList)
 
         } catch (error) {
 

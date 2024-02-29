@@ -2,10 +2,13 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { getAllFinances } from "../../../adapters/ormAdapter/protocols/financeProtocols";
 import { GetAllFinanceUseCase } from "../../../usecases/finance/GetAllFinanceUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetAllFinance implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
         
         try {
             
@@ -13,7 +16,7 @@ class GetAllFinance implements IController {
 
             const finance = await getAllFinanceUseCase.execute()
 
-            res.status(200).json(finance)
+            return serverResponse.ok(finance)
 
         } catch (error) {
             

@@ -3,6 +3,7 @@ import { deleteComment, getCommentById } from "../../../adapters/ormAdapter/prot
 import { DeleteMyCommentUseCase } from "../../../usecases/comment/DeleteMyCommentUseCase";
 import { GetOneCommentUseCase } from "../../../usecases/comment/GetOneCommentUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IParams {
     commentId: string;
@@ -11,11 +12,15 @@ interface IParams {
 class RemoveComment implements IController {
 
     async handle(req: HttpRequest<IParams>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
       
         const commentId = req.params.commentId;
         const userId = req.userId
 
-        if (!userId) throw new Error('Bad Request: userId can not be undefined.')
+        if (!userId) {
+            return serverResponse.badRequest('Bad Request: userId can not be undefined.')
+        }
 
         try {
 
@@ -25,16 +30,15 @@ class RemoveComment implements IController {
 
             const comment = await getOneCommentUseCase.execute(commentId)
             
-            //validação do comment
             if (comment.props.userId !== userId) {
 
-                throw new Error('Bad Request: you dont have access to delete this comment.')
+                return serverResponse.notAuthorized('Bad Request: you dont have access to delete this comment.')
 
             }
 
             const message = await deleteMyCommentUseCase.execute(commentId)
 
-            res.status(200).json(message)
+            return serverResponse.ok(message)
             
         } catch (error) {
 

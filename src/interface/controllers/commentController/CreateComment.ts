@@ -4,6 +4,7 @@ import { Comment, IComment } from "../../../entities/Comment";
 import { CreateCommentUseCase } from "../../../usecases/comment/CreateCommentUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IComment {}
 
@@ -11,11 +12,15 @@ class CreateComment implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
 
+        const serverResponse = new ServerResponse(res)
+
         const commentData = req.body;
 
         const userId = req.userId;
 
-        if (typeof userId != 'string') throw new Error('Bad Request: userId can not be other type besides string')
+        if (typeof userId != 'string') {
+            return serverResponse.badRequest('Bad Request: userId can not be other type besides string')
+        }
 
         try {
             
@@ -23,7 +28,7 @@ class CreateComment implements IController {
 
             const newComment = await createCommentUseCase.execute({...commentData, userId})
 
-            res.status(200).json(
+            return serverResponse.ok(
                 Formatter.handle<Comment>(newComment)
             )
 

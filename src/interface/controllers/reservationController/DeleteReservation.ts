@@ -2,11 +2,14 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { deleteReservation } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
 import { DeleteReservationUseCase } from "../../../usecases/reservation/DeleteReservationUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteReservation implements IController {
 
     async handle(req: HttpRequest<{id:string}>, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             const reservationId = req.params.id
@@ -15,7 +18,7 @@ class DeleteReservation implements IController {
 
             const message = await deleteReservationUseCase.execute(reservationId)
 
-            res.status(200).json(message)
+            return serverResponse.ok(message)
 
 
 

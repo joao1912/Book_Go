@@ -4,14 +4,19 @@ import { Book, IBook } from "../../../entities/Book";
 import { GetMyFavoritesUseCase } from "../../../usecases/user/GetMyFavoritesUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetMyFavorites implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 
+        const serverResponse = new ServerResponse(res)
+
         const userId = req.userId
 
-        if (!userId) throw new Error('Bad request: userId can not be undefined')
+        if (!userId) {
+            return serverResponse.badRequest('Bad request: userId can not be undefined')
+        }
 
         const getMyFavoritesUseCase = new GetMyFavoritesUseCase(getAllFavoritesByUserId)
 
@@ -27,7 +32,7 @@ class GetMyFavorites implements IController {
 
         }
 
-        res.status(200).json(favoriteList)
+        return serverResponse.ok(favoriteList)
 
     }
 

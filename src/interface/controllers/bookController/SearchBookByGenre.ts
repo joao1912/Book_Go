@@ -31,7 +31,7 @@ class SearchBookByGenre implements IController {
 
             }
 
-            res.status(200).json(bookList)
+            return serverResponse.ok(bookList)
             
         } catch (error) {
             throw new Error("Bad Request: " + error)

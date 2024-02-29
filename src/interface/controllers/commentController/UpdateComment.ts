@@ -4,18 +4,23 @@ import { Comment, IComment } from "../../../entities/Comment";
 import { EditMyCommentUseCase } from "../../../usecases/comment/EditMyCommentUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IComment {}
 
 class UpdateComment implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
         
         const commentData = req.body;
 
         const userId = req.userId;
 
-        if (!userId) throw new Error('Bad Request: userId can not be undefined')
+        if (!userId) {
+            return serverResponse.badRequest('Bad Request: userId can not be undefined')
+        }
 
         try {
             
@@ -23,7 +28,7 @@ class UpdateComment implements IController {
 
             const commentUpdated = await editMyCommentUseCase.execute(commentData)
 
-            res.status(200).json(
+            return serverResponse.ok(
                 Formatter.handle<Comment>(commentUpdated)
             )
 

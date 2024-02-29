@@ -4,11 +4,15 @@ import { IStock, Stock } from "../../../entities/Stock";
 import { GetStockByBookTitleUseCase } from "../../../usecases/stock/GetStockByBookTitleUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class GetStockByBookTitle implements IController {
     
     async handle(req: HttpRequest<{title:string}>, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
+
         try {
             let titleText = req.params.title
             
@@ -28,7 +32,7 @@ class GetStockByBookTitle implements IController {
 
             }
 
-            res.status(200).json(stockList)
+            return serverResponse.ok(stockList)
 
         } catch (error) {
             throw new Error ("Bad request: "+ error)

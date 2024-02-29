@@ -4,11 +4,14 @@ import { Reservation } from "../../../entities/Reservation";
 import { MakeReservationUseCase } from "../../../usecases/reservation/MakeReservationUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class MakeReservation implements IController {
 
     async handle(req: HttpRequest<{book_id:string, user_id: string}>,res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
     
         try {
             const { book_id, user_id } = req.params;
@@ -25,7 +28,7 @@ class MakeReservation implements IController {
 
             const reservationInstance = await makeReservationUseCase.execute(reserve)
 
-            res.status(200).json(
+            return serverResponse.ok(
                 Formatter.handle<Reservation>(reservationInstance)
             )
             

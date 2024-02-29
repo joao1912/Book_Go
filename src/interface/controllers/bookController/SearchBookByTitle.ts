@@ -4,11 +4,14 @@ import { Book, IBook } from "../../../entities/Book";
 import { SearchBookByTitleUseCase } from "../../../usecases/book/SearchBookByTitleUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class SearchBookByTitle implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
 
         try {
 
@@ -28,7 +31,7 @@ class SearchBookByTitle implements IController {
 
             }
 
-            res.status(200).json(bookList)
+            return serverResponse.ok(bookList)
             
         } catch (error) {
             throw new Error ("Bad request: " + error)

@@ -5,10 +5,13 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import { User } from "../../../entities/User";
 import { IUser } from "../../../entities/User";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetAllUsers implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             
@@ -26,7 +29,7 @@ class GetAllUsers implements IController {
 
             }
 
-            res.status(200).json(usersList)
+            return serverResponse.ok(usersList)
 
         } catch (error) {
 

@@ -7,11 +7,14 @@ import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseC
 import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class UpdateStock implements IController {
     
     async handle(req: HttpRequest<{ book_Id: string }, {}, { quantity: number }>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
 
         let IBookType: IBook
         const searchBookByIdUseCase = new SearchBookByIdUseCase(searchBookById)
@@ -33,12 +36,12 @@ class UpdateStock implements IController {
                     book: IBookType
                 })
 
-                res.status(200).json(
+                return serverResponse.ok(
                     Formatter.handle<Stock>(stockInstance)
                 )
 
             } else {
-                res.status(404).json(bookInstance)
+                return serverResponse.notFound(bookInstance)
             }
 
         } catch (error) {

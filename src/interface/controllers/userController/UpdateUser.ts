@@ -6,11 +6,16 @@ import { IUser } from "../../../entities/User";
 import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IUser { }
 
 class UpdateUser implements IController {
+    
     async handle(req: HttpRequest<{ id: string }, {}, IBody>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
+
         const id = req.params.id
         
         const {
@@ -32,7 +37,7 @@ class UpdateUser implements IController {
                 username,
             })
 
-            res.status(200).json(
+            return serverResponse.ok(
                 Formatter.handle<User>(userInstance)
             )
 

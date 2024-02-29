@@ -4,10 +4,13 @@ import { IReservation, Reservation } from "../../../entities/Reservation";
 import { GetAllReservationsUseCase } from "../../../usecases/reservation/GetAllReservationsUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetAllReservations implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             
@@ -25,7 +28,7 @@ class GetAllReservations implements IController {
 
             }
 
-            res.status(200).json(reservationList)
+            return serverResponse.ok(reservationList)
 
         } catch (error) {
             throw new Error ("Bad request: "+ error)

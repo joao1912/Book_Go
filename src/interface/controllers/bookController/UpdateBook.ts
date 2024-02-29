@@ -4,12 +4,15 @@ import { Book, IBook } from "../../../entities/Book";
 import { UpdateBookUseCase } from "../../../usecases/book/UpdateBookUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IBook{}
 
 class UpdateBook implements IController {
 
     async handle (req: HttpRequest<{id: any},{}, IBody>, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             const bookId = req.params.id
@@ -36,7 +39,7 @@ class UpdateBook implements IController {
                 pageCount
             })
 
-            res.status(200).json(
+            serverResponse.ok(
                 Formatter.handle<Book>(bookInstance)
             )
     

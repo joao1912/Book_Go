@@ -5,12 +5,15 @@ import { IUser, User } from "../../../entities/User";
 import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase";
 import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IUser {}
 
 export class CreateUser implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
+
+        const serverResponse = new ServerResponse(res)
 
         try {
 
@@ -34,7 +37,7 @@ export class CreateUser implements IController {
                 username,
             })
 
-            res.status(200).json( 
+            return serverResponse.ok( 
                 Formatter.handle<User>(userInstance)
             )
 

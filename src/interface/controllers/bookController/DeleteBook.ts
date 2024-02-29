@@ -2,11 +2,14 @@ import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protoco
 import { deleteBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { DeleteBookUseCase } from "../../../usecases/book/DeleteBookUseCase";
 import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteBook implements IController {
 
     async handle(req: HttpRequest<{id:any}>, res: HttpResponse){
+
+        const serverResponse = new ServerResponse(res)
 
         try {
             const bookId = req.params.id
@@ -14,7 +17,7 @@ class DeleteBook implements IController {
             
             const message  = await deleteBookUseCase.execute(bookId)
 
-            res.status(200).json(message)
+            return serverResponse.ok(message)
 
         } catch (error) {
             throw new Error ("Bad request: " + error)
