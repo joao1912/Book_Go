@@ -35,7 +35,7 @@ describe("Deletar um livro", ()=>{
 
 
         expect(result).toStrictEqual({
-            message: `O livro de id: ${BookToDeleteId} e ${BookToDeleteTitle} foi excluído com sucesso.`
+            message: `The book with ID ${BookToDeleteId} and title "${BookToDeleteTitle}" has been successfully deleted.`
     })
 })
 

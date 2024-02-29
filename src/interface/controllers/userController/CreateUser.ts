@@ -9,11 +9,7 @@ interface IBody extends IUser {}
 
 export class CreateUser implements IController {
 
-    formatter(data: User): any {
-
-        return data.User
-        
-    }
+   
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
 
@@ -39,9 +35,7 @@ export class CreateUser implements IController {
                 username,
             })
 
-            res.status(200).json(
-                this.formatter(userInstance)
-            )
+            res.status(200).json(userInstance)
 
         } catch (error) {
 

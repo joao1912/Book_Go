@@ -17,7 +17,7 @@ export class DeleteBook implements IDeleteBook {
             })
 
             return {
-                message: `O livro de id: ${bookDeleted.id} e ${bookDeleted.title} foi excluído com sucesso.`
+                message: `The book with ID ${bookDeleted.id} and title "${bookDeleted.title}" has been successfully deleted.`
             }
 
         } catch (error) {
