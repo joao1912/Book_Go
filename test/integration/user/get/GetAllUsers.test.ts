@@ -1,7 +1,7 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { IUser } from "@src/entities/User"
 import { authAdapter } from "../../../../src/adapters/authAdapter/protocol"
+import { IUser } from "../../../../src/entities/User"
 
 describe('## GET ##' ,() => {
     

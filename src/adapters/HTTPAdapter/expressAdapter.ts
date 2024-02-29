@@ -55,11 +55,9 @@ export class expressAdapter implements HTTPAdapterRepository {
        
         const server =  this.app.listen(process.env.PORT)
         const httpTerminator = createHttpTerminator({ server })
-
-
-        setTimeout(() => {
+    
             httpTerminator.terminate()
-        }, 1000)
+
     }
 
 }

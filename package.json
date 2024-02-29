@@ -4,7 +4,7 @@
   "description": "Site para uma biblioteca.",
   "main": "src/intex.ts",
   "scripts": {
-    "start": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "start": "ts-node-dev src/index.ts",
     "test:unit": "jest --testPathPattern=test",
     "test:unit:orm": "jest ./test/unit/ormRepositories",
     "test:unit:usecases": "jest --testPathPattern=./test/unit/useCases",

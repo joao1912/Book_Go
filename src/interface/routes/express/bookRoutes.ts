@@ -5,7 +5,7 @@ import searchBookByGenreController from "../../controllers/bookController/Search
 import searchBookByTitleController from "../../controllers/bookController/SearchBookByTitle";
 import updateBookController from "../../controllers/bookController/UpdateBook";
 import deleteBookController from "../../controllers/bookController/DeleteBook";
-import Auth from "@middlewares/Auth";
+import Auth from "../../middlewares/Auth";
 
 
 const bookRouter = Router()

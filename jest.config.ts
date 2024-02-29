@@ -65,7 +65,7 @@ const config: Config = {
   globalSetup: './test/util/CleanDataBase.ts',
 
   // A path to a module which exports an async function that is triggered once after all test suites
-  globalTeardown: './test/util/CloseServer.ts',
+  // globalTeardown: './test/util/CloseServer.ts',
 
   // A set of global variables that need to be available in all test environments
   // globals: {},
@@ -91,10 +91,10 @@ const config: Config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    '@src/(.*)': '<rootDir>/src/$1',
-    '@test/(.*)': '<rootDir>/test/$1',
-  },
+  // moduleNameMapper: {
+  //   '@src/(.*)': '<rootDir>/src/$1',
+  //   '@test/(.*)': '<rootDir>/test/$1',
+  // },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

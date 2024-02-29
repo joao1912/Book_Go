@@ -24,22 +24,22 @@ model User {
 }
 
 model Book {
-  id           String        @id @default(uuid())
-  title        String
-  price        Float
-  synopsis     String
-  publishedDate String  
-  pageCount    Int
-  image        String?
-  createdAt    DateTime      @default(now())
-  updateAt     DateTime      @updatedAt
-  comments     Comment[]
-  favorites    Favorite[]
-  finances     Finance[]
-  reservations Reservation[]
-  stock        Stock[]
-  author       Author[]      @relation("AuthorToBook")
-  tag          Tag[]         @relation("BookToTag")
+  id            String        @id @default(uuid())
+  title         String
+  price         Float
+  synopsis      String
+  publishedDate String
+  pageCount     Int
+  image         String?
+  createdAt     DateTime      @default(now())
+  updateAt      DateTime      @updatedAt
+  comments      Comment[]
+  favorites     Favorite[]
+  finances      Finance[]
+  reservations  Reservation[]
+  stock         Stock[]
+  author        Author[]      @relation("AuthorToBook")
+  tag           Tag[]         @relation("BookToTag")
 
   @@map("books")
 }

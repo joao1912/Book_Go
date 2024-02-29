@@ -1,7 +1,8 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { IUser } from "@entities/User"
-import { Book, IBook } from "@entities/Book";
+import { IBook } from "../../../../src/entities/Book";
+import { IUser } from "../../../../src/entities/User";
+
 
 describe('## POST BOOK ##', () => {
 

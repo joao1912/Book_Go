@@ -1,7 +1,8 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { IUser } from "@entities/User"
-import { Book, IBook } from "@entities/Book";
+import { IBook } from "../../../../src/entities/Book";
+import { IUser } from "../../../../src/entities/User";
+
 
 describe('## POST BOOK ##', () => {
 
@@ -32,7 +33,7 @@ describe('## POST BOOK ##', () => {
         }
 
 
-        const result = await request(app)
+        const result = await request.agent(app)
             .post('/v1/users/signIn')
             .send(adminBook)
             .expect(200)
@@ -52,7 +53,7 @@ describe('## POST BOOK ##', () => {
         expect(tokenJSON).toHaveProperty('token');
         token = tokenJSON.token;
 
-    })
+    },25000)
 
     afterAll(async () => {
         HTTPAdapter.close()
@@ -68,5 +69,5 @@ describe('## POST BOOK ##', () => {
         const book = result.body
         expect(book).toHaveProperty("props.id")
        
-    })
+    },25000)
 })

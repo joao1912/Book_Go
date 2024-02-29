@@ -1,6 +1,6 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { IUser } from "@entities/User"
+import { IUser } from "../../../../src/entities/User"
 
 describe('## POST ##', () => {
 

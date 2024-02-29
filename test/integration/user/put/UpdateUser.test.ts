@@ -1,7 +1,8 @@
-import HTTPAdapter from "@adapters/HTTPAdapter/protocol"
-import { IUser } from "@entities/User"
+
 import { response } from "express"
 import request from "supertest"
+import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
+import { IUser } from "../../../../src/entities/User"
 
 
 

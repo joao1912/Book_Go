@@ -1,4 +1,4 @@
-import ServerResponse from "../../controllers/ServerResponse";
+import ServerResponse from "../ServerResponse";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import authJwt from "../../../adapters/authAdapter/jwtAdapter";
 import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
