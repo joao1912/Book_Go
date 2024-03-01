@@ -7,7 +7,7 @@ import deleteUserController from '../../controllers/userController/DeleteUser';
 import updateUserController from '../../controllers/userController/UpdateUser';
 import createFavoriteController from '../../controllers/userController/CreateFavorite';
 import getMyFavoritesController from '../../controllers/userController/GetMyFavorites';
-import getUserController from '../../controllers/userController/GetUser';
+import loginController from '../../controllers/userController/Login';
 
 import Auth from '../../middlewares/Auth';
 
@@ -19,7 +19,7 @@ userRouter.get('/myFavorites', Auth.execute, getMyFavoritesController.handle);
 
 userRouter.post('/signIn', createUserController.handle);
 
-userRouter.post('/login', getUserController.handle);
+userRouter.post('/login', loginController.handle);
 
 userRouter.put('/update/:id', Auth.execute, updateUserController.handle);
 

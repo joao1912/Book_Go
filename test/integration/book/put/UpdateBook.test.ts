@@ -58,43 +58,43 @@ describe('## GET BOOK TITLE ##', () => {
 
     })
     
-    // it("Deve mudar o titulo do livro", async()=>{
-    //    const result = await request.agent(app)
-    //     .put(`/v1/book/update/${bookId}`)
-    //     .set('Authorization', `${token}`)
-    //     .send({
-    //         title: "1..2..3"
-    //     })
-    //     .expect(200)
-    //     const bookEdited = result.body
-    //     expect(bookEdited).toHaveProperty("props.id")
+    it("Deve mudar o titulo do livro", async()=>{
+       const result = await request.agent(app)
+        .put(`/v1/book/update/${bookId}`)
+        .set('Authorization', `${token}`)
+        .send({
+            title: "1..2..3"
+        })
+        .expect(200)
+        const bookEdited = result.body
+        expect(bookEdited).toHaveProperty("id")
         
-    // })
-    // it("Deve mudar a sinopse do livro", async()=>{
-    //     const result = await request.agent(app)
-    //     .put(`/v1/book/update/${bookId}`)
-    //     .set('Authorization', `${token}`)
-    //     .send({
-    //         synopis: "Hello Stranger"
-    //     })
-    //     .expect(200)
-    //     const bookEdited = result.body
-    //     expect(bookEdited.props).toHaveProperty("id")
+    })
+    it("Deve mudar a sinopse do livro", async()=>{
+        const result = await request.agent(app)
+        .put(`/v1/book/update/${bookId}`)
+        .set('Authorization', `${token}`)
+        .send({
+            synopsis: "Hello Stranger"
+        })
+        .expect(200)
+        const bookEdited = result.body
+        expect(bookEdited).toHaveProperty("id")
         
-    // })
+    })
     
-    // it("Deve mudar o genero do livro", async()=>{
-    //    const result = await request.agent(app)
-    //     .put(`/v1/book/update/${bookId}`)
-    //     .set('Authorization', `${token}`)
-    //     .send({
-    //         genre: "Try"
-    //     })
-    //     .expect(200)
-    //     const bookEdited = result.body
-    //     expect(bookEdited).toHaveProperty("props.id")
+    it("Deve mudar o genero do livro", async()=>{
+       const result = await request.agent(app)
+        .put(`/v1/book/update/${bookId}`)
+        .set('Authorization', `${token}`)
+        .send({
+            genre: "Try"
+        })
+        .expect(200)
+        const bookEdited = result.body
+        expect(bookEdited).toHaveProperty("id")
         
-    // })
+    })
 
 
     it("Deve mudar titulo com int, deve receber mensagem", async()=>{

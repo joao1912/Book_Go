@@ -7,7 +7,7 @@ import { GetUserUseCase } from "../../../usecases/user/GetUserUseCase";
 import { IController } from "../IController";
 
 
-class GetUser implements IController {
+class Login implements IController {
 
     async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<any> {
         const { email, password } = req.body
@@ -59,6 +59,6 @@ class GetUser implements IController {
     }
 }
 
-const getUserController = new GetUser()
+const loginController = new Login()
 
-export default getUserController
+export default loginController

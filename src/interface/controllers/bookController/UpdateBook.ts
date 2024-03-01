@@ -41,8 +41,7 @@ class UpdateBook implements IController {
             })
             switch (true) {
                 case (typeof response !== "string"):
-                    Formatter.handle<Book>(response)
-                    return serverResponse.ok(response)
+                    return serverResponse.ok(Formatter.handle<Book>(response))
                     break;
 
                 case (response == "Invalid input type"):

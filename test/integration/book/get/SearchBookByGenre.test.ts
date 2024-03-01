@@ -80,7 +80,7 @@ describe('## GET BOOK GENRE ##', () => {
         .expect(200)
         const books = result.body
         for(let book of books) {
-            expect(book).toHaveProperty("props.id")
+            expect(book).toHaveProperty("id")
         }
     })
     it("Deve tentar buscar um genero que não existe", async()=>{
