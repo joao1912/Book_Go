@@ -38,8 +38,8 @@ class SearchBookByGenre implements IController {
             return serverResponse.ok(bookList)
             
         } catch (error) {
-            throw new Error("Bad Request: " + error)
-
+            console.log(error)
+            throw new Error("Something happened. Please try again later")  
         }
     }
 }

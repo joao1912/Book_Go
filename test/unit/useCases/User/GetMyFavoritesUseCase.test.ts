@@ -60,26 +60,30 @@ describe('Teste do caso de uso de buscar todos os favoritos de um usuários', ()
 
         await addBook.execute(bookInstance1)
             .then(result => {
+                if(result instanceof Book){
 
-                const id = result.props.id
-
-                if (id != undefined) {
-
-                    bookId1 = id
-
+                    const id = result.props.id
+    
+                    if (id != undefined) {
+    
+                        bookId1 = id
+    
+                    }
                 }
 
             })
 
         await addBook.execute(bookInstance2)
             .then(result => {
+                if(result instanceof Book){
 
-                const id = result.props.id
-
-                if (id != undefined) {
-
-                    bookId2 = id
-
+                    const id = result.props.id
+    
+                    if (id != undefined) {
+    
+                        bookId2 = id
+    
+                    }
                 }
 
             })

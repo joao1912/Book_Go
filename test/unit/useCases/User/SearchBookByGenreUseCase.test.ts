@@ -32,7 +32,8 @@ describe("Procurar um livros por genero", ()=>{
 
         const bookDataOne = await addBook.execute(BookGenreOne)
         const bookDataTwo = await addBook.execute(BookGenreTwo)
-
+        
+        if(bookDataOne instanceof Book)
         BookToSearchGenre = bookDataOne.props.genre
 
     })

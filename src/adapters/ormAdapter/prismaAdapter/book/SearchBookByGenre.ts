@@ -1,6 +1,7 @@
 import { Book } from "../../../../entities/Book";
 import { ISearchBookByGenre } from "../../repositories/book/ISearchBookByGenre";
 import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookByGenre implements ISearchBookByGenre {
   async execute(genre: string) {
@@ -40,8 +41,8 @@ export class SearchBookByGenre implements ISearchBookByGenre {
       const message = `Genre not found.`
       return message
     } catch (error) {
-      
-       throw new Error("Internal server error: " + error);
+      return handlePrismaError(error)
+     
     }
   }
 }

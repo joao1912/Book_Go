@@ -1,6 +1,7 @@
 import { prisma } from "../db";
 import { ISearchBookByTitle } from "../../repositories/book/ISearchBookByTitle";
 import { Book } from "../../../../entities/Book";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookByTitle implements ISearchBookByTitle {
   async execute(title: string) {
@@ -16,7 +17,7 @@ export class SearchBookByTitle implements ISearchBookByTitle {
       if (bookSearch.length !== 0) {
 
         let books = [];
-        
+
         for (let bookProp of bookSearch) {
           books.push(new Book({
             id: bookProp.id,
@@ -40,7 +41,7 @@ export class SearchBookByTitle implements ISearchBookByTitle {
 
 
     } catch (error) {
-      throw new Error(`Internal server error:` + error);
+      return handlePrismaError(error)
     }
   }
 }

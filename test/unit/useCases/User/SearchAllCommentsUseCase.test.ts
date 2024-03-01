@@ -30,12 +30,15 @@ describe('Testes do SearchAllCommentsUseCase', () => {
 
         await addBook.execute(bookData)
             .then(result => {
+                if (result instanceof Book){
+                    const id = result.props.id
+                 
+                    if (id != undefined) {
 
-                const id = result.props.id
+                        bookId = id
+                }
 
-                if (id != undefined) {
 
-                    bookId = id
 
                 }
 

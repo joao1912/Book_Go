@@ -22,7 +22,8 @@ describe("Adicionar um livro", ()=>{
        
 
         const newBook = await addBook.execute(addingBook)
-        if(newBook.props.id){bookUpdateId = newBook.props.id}
+        if(newBook instanceof Book &&newBook.props.id){
+            bookUpdateId = newBook.props.id
 
         bookData = {
         id: newBook.props.id,
@@ -34,7 +35,7 @@ describe("Adicionar um livro", ()=>{
         publishedDate: newBook.props.publishedDate,
         genre: newBook.props.genre
         }
-    
+    }    
 
     })
 

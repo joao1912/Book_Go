@@ -39,12 +39,13 @@ class UpdateBook implements IController {
                 genre,
                 pageCount
             })
+            
             switch (true) {
                 case (typeof response !== "string"):
                     return serverResponse.ok(Formatter.handle<Book>(response))
                     break;
 
-                case (response == "Invalid input type"):
+                case (response == "Invalid input type."):
                     return serverResponse.badRequest(response)
                     break;
 
@@ -56,7 +57,7 @@ class UpdateBook implements IController {
 
         } catch (error) {
             console.log(error)
-            throw new Error("Something happened please try again later")
+            throw new Error("Something happened. Please try again later")
         }
     }
 

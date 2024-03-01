@@ -106,7 +106,7 @@ describe('## GET BOOK TITLE ##', () => {
         })
         .expect(400)
         const bookEdited = result.body
-        expect(bookEdited).toEqual(`Invalid input type`)
+        expect(bookEdited).toEqual(`Invalid input type.`)
         
     })
     

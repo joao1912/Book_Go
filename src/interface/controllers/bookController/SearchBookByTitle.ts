@@ -21,6 +21,7 @@ class SearchBookByTitle implements IController {
             const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
             const response = await searchBookByTitleUseCase.execute(title)
+         
             if(typeof response == "string"){
                 return serverResponse.notFound(response)
             }
@@ -39,8 +40,8 @@ class SearchBookByTitle implements IController {
             return serverResponse.ok(bookList)
             
         } catch (error) {
-            throw new Error ("Bad request: " + error)
-        }
+            console.log(error)
+            throw new Error("Something happened. Please try again later")        }
     }
 }
 

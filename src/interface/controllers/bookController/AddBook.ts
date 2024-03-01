@@ -36,14 +36,17 @@ class AddBook implements IController {
                 pageCount
                 
             })
+            if(typeof response == "string"){
+                return serverResponse.badRequest(response)
+            }
 
             return serverResponse.ok(
                 Formatter.handle<Book>(response)
             )
             
         } catch (error) {
-            console.log("Erro ao criar livro" + error)
-            return serverResponse.badRequest("Internal server error. Look for superadmin haha")
+            console.log(error)
+            throw new Error("Something happened. Please try again later")  
         }
 
     }

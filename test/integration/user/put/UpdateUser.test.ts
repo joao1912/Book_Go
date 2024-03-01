@@ -60,9 +60,11 @@ describe('## PUT ##', () => {
         .send({
             password: "YEAH"
         })
-        .then(response => {
-            console.log(response.text)
-        })
+        .expect(200)
+
+        // .then(response => {
+        //     console.log(response.text)
+        // })
     })
     it("Deve mudar o email", async()=>{
         await request.agent(app)
@@ -71,9 +73,11 @@ describe('## PUT ##', () => {
         .send({
             email: "newupdateuser@gmail.com"
         })
-        .then(response => {
-            console.log(response.text)
-        })
+        .expect(200)
+
+        // .then(response => {
+        //     console.log(response.text)
+        // })
     })
     it("Deve mudar o telefone", async()=>{
         await request.agent(app)
@@ -82,9 +86,11 @@ describe('## PUT ##', () => {
         .send({
             telefone: "50-000443320"
         })
-        .then(response => {
-            console.log(response.text)
-        })
+        .expect(200)
+
+        // .then(response => {
+        //     console.log(response.text)
+        // })
     })
     it("Deve mudar o username", async()=>{
         await request.agent(app)
@@ -93,9 +99,10 @@ describe('## PUT ##', () => {
         .send({
             username: "new-update-user@gmail.com"
         })
-        .then(response => {
-            console.log(response.text)
-        })
+        .expect(200)
+        // .then(response => {
+        //     console.log(response.text)
+        // })
     })
 
 })

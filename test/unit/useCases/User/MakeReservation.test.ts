@@ -36,7 +36,7 @@ describe ("Teste de reservas", () => {
         const bookToReserve = await addBook.execute(newBook)
 
         if(userToReserve.props.id){userIdToReserve = userToReserve.props.id}
-        if(bookToReserve.props.id){bookIdToReserve = bookToReserve.props.id}
+        if(bookToReserve instanceof Book && bookToReserve.props.id){bookIdToReserve = bookToReserve.props.id}
 
     })
 

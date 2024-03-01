@@ -53,13 +53,14 @@ describe('Teste do DeleteFavoiteByIdUseCase', () => {
         await addBook.execute(bookInstance)
             .then(result => {
 
-                const id = result.props.id
+                if(result instanceof Book){
+                    const id = result.props.id
 
                 if (id != undefined) {
 
                     bookId = id
 
-                }
+                }}
 
             })
 

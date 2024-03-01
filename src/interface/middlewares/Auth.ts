@@ -8,8 +8,8 @@ export default class Auth {
         const token = req.headers.authorization
 
         if (typeof token != 'string') {
-            console.log("TO", token)
-            throw new Error('Invalid token')
+         
+            throw new Error('Must have an authorization token')
         }
 
         try {

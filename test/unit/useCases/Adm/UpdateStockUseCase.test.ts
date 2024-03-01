@@ -26,8 +26,11 @@ describe("Test update stock ", () => {
         })
 
         const bookData = await addBook.execute(stockBookTitle)
+        if(bookData instanceof Book){
         if (bookData.props.id) { bookStockUpdate = bookData.props.id }
+        
         bookStockUpdateQuantity = 5
+
 
         bookType = {
             id: bookData.props.id,
@@ -39,6 +42,7 @@ describe("Test update stock ", () => {
             publishedDate: bookData.props.publishedDate,
             genre: bookData.props.genre
         }
+    }
 
     })
 
