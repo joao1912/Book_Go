@@ -29,14 +29,15 @@ describe('Teste do EditMyCommentUseCase', () => {
 
         await addBook.execute(bookData)
             .then(result => {
-
-                const id = result.props.id
-
-                if (id != undefined) {
-
-                    bookId = id
-
+                if(result instanceof Book){
+                    const id = result.props.id
+                    if (id != undefined) {
+    
+                        bookId = id
+    
+                    }
                 }
+
 
             })
 

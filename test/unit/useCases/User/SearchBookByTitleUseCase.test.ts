@@ -25,6 +25,7 @@ describe("Procurar  livros por titulo", ()=>{
 
         const bookDataOne = await addBook.execute(BookGenreOne)
 
+        if(bookDataOne instanceof Book)
         BookToSearchTitle = bookDataOne.props.title
 
     })
@@ -51,8 +52,7 @@ it("Procurando um livro que não está registrado, deve retornar um erro",async 
 
     const result = await searchBookByTitleUseCase.execute("NãoEstáRegistrado")
 
-    expect(result).toEqual([])
-    expect(result).toHaveLength(0)
+    expect(result).toEqual("Book not found.")
 //     
 
 

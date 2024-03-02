@@ -1,14 +1,15 @@
-import { prisma, PrismaError,  BookUpdateInput } from "../db";
+import { prisma, BookUpdateInput} from "../db";
 import { Book } from "../../../../entities/Book";
 import { IUpdateBook } from "../../repositories/book/IUpdateBook";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateBook implements IUpdateBook {
-  async execute({ props }: Book): Promise<Book> {
+  async execute({ props }: Book) {
 
     const { id, title, synopsis, price, genre, author, publishedDate, pageCount, image } = props
 
     try {
-      
+
       let newData: BookUpdateInput = {
         title: title || undefined,
         synopsis: synopsis || undefined,
@@ -28,7 +29,7 @@ export class UpdateBook implements IUpdateBook {
           pageCount: pageCount || undefined,
           image: image || undefined,
           tag: {
-            set:[],
+            set: [],
             connectOrCreate: {
               where: {
                 genre: genre
@@ -65,10 +66,8 @@ export class UpdateBook implements IUpdateBook {
 
 
     } catch (error) {
-      if (error instanceof PrismaError) {
-        console.log("Prisma errinho", error.code)
-      }
-      throw new Error("Something else happened: " + error);
+      return handlePrismaError(error)
+    
     }
   }
 }

@@ -1,6 +1,7 @@
 import { prisma } from "../db";
 import { ISearchBookByTitle } from "../../repositories/book/ISearchBookByTitle";
 import { Book } from "../../../../entities/Book";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookByTitle implements ISearchBookByTitle {
   async execute(title: string) {
@@ -13,28 +14,34 @@ export class SearchBookByTitle implements ISearchBookByTitle {
           tag: true
         }
       });
-      let books = [];
-      for (let bookProp of bookSearch) {
+      if (bookSearch.length !== 0) {
 
+        let books = [];
 
-        books.push(new Book({
-          id: bookProp.id,
-          title: bookProp.title,
-          author: bookProp.author[0].name,
-          price: bookProp.price,
-          synopsis: bookProp.synopsis,
-          publishedDate: bookProp.publishedDate,
-          pageCount: bookProp.pageCount,
-          genre: bookProp.tag[0].genre,
-        })
-        );
-
+        for (let bookProp of bookSearch) {
+          books.push(new Book({
+            id: bookProp.id,
+            title: bookProp.title,
+            author: bookProp.author[0].name,
+            price: bookProp.price,
+            synopsis: bookProp.synopsis,
+            publishedDate: bookProp.publishedDate,
+            pageCount: bookProp.pageCount,
+            genre: bookProp.tag[0].genre,
+          })
+          );
+        }
+        return books
       }
-      return books
+
+      const message = `Book not found.`
+
+      return message
+
 
 
     } catch (error) {
-      throw new Error(`Internal server error: There is no book with the title "${title}" ` + error);
+      return handlePrismaError(error)
     }
   }
 }

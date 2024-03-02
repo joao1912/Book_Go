@@ -37,7 +37,7 @@ describe("Criando dados necessários para pegar a reserva de um usuário por id"
     const newBook = await addBook.execute(bookOne);
 
     if(newUser.props.id){userOneId = newUser.props.id}
-    if (newBook.props.id){bookId = newBook.props.id}
+    if (newBook instanceof Book && newBook.props.id){bookId = newBook.props.id}
 
     const reserve = new Reservation({
       userId: userOneId,

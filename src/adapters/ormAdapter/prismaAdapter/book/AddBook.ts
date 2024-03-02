@@ -1,10 +1,11 @@
 import { prisma } from "../db";
-import { IBook, Book } from "../../../../entities/Book";
+import { Book } from "../../../../entities/Book";
 import { IAddBook } from "../../repositories/book/IAddBook";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class AddBook implements IAddBook {
-  async execute({ props }: Book): Promise<Book> {
+  async execute({ props }: Book) {
 
     const { title, price, genre, synopsis, author, publishedDate, pageCount, image } = props
    
@@ -62,7 +63,8 @@ export class AddBook implements IAddBook {
       });
 
     } catch (error) {
-      throw new Error("Internal server error: " + error);
+      return handlePrismaError(error)
+      
     }
   }
 }

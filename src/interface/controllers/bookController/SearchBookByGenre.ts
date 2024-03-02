@@ -19,23 +19,27 @@ class SearchBookByGenre implements IController {
 
             const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 
-            const bookInstances = await searchBookByGenreUseCase.execute(genre)
+            const response = await searchBookByGenreUseCase.execute(genre)
             
+            if(typeof response == "string"){
+                return serverResponse.notFound(response)
+            }
+
             let bookList: Array<IBook> = []
 
-            for (let book of bookInstances) {
+            for (let book of response) {
 
                 bookList.push(
                     Formatter.handle<Book>(book)
                 )
 
             }
-
+            
             return serverResponse.ok(bookList)
             
         } catch (error) {
-            throw new Error("Bad Request: " + error)
-
+            console.log(error)
+            throw new Error("Something happened. Please try again later")  
         }
     }
 }

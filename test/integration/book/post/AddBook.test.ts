@@ -67,7 +67,7 @@ describe('## POST BOOK ##', () => {
             .send(addingBook)
             .expect(200)
         const book = result.body
-        expect(book).toHaveProperty("props.id")
+        expect(book).toHaveProperty("id")
        
     },25000)
 })

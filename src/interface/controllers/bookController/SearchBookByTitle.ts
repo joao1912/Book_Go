@@ -14,16 +14,22 @@ class SearchBookByTitle implements IController {
         const serverResponse = new ServerResponse(res)
 
         try {
+            const serverResponse = new ServerResponse(res)
 
             const title = req.body.title
 
             const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
-            const bookInstances = await searchBookByTitleUseCase.execute(title)
+            const response = await searchBookByTitleUseCase.execute(title)
+         
+            if(typeof response == "string"){
+                return serverResponse.notFound(response)
+            }
+            
 
             let bookList: Array<IBook> = []
 
-            for (let book of bookInstances) {
+            for (let book of response) {
 
                 bookList.push(
                     Formatter.handle<Book>(book)
@@ -34,8 +40,8 @@ class SearchBookByTitle implements IController {
             return serverResponse.ok(bookList)
             
         } catch (error) {
-            throw new Error ("Bad request: " + error)
-        }
+            console.log(error)
+            throw new Error("Something happened. Please try again later")        }
     }
 }
 

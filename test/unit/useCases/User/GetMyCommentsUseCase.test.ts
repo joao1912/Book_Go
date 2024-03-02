@@ -60,8 +60,12 @@ describe('Teste de caso de uso do GetMyComments', () => {
         const bookInstace1 = await addBook.execute(new Book(book1))
         const bookInstace2 = await addBook.execute(new Book(book2))
 
-        const idBook1 = bookInstace1.props.id
-        const idBook2 = bookInstace2.props.id
+        if(bookInstace1 instanceof Book && bookInstace2 instanceof Book){
+            const idBook1 = bookInstace1.props.id
+            const idBook2 = bookInstace2.props.id
+       
+       
+
 
         if (idBook1 != undefined && idBook2 != undefined) {
 
@@ -103,6 +107,7 @@ describe('Teste de caso de uso do GetMyComments', () => {
 
                 })
         }
+    }
     })
 
     it('Deve buscar todos os comentários de um usuário', async () => {

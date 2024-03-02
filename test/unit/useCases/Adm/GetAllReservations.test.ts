@@ -50,7 +50,7 @@ describe("Pega todas as reservas da biblioteca", () => {
 
     const newBookData = await addBook.execute(newBook)
    
-   if(newBookData.props.id != undefined){
+   if(newBookData instanceof Book && newBookData.props.id != undefined){
      newBookId = newBookData.props.id
 
    }

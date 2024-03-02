@@ -26,7 +26,8 @@ describe("Test stock by book title", ()=>{
 
         
         const bookOnStock1 = await addBook.execute(stockBookTitle)
-        bookTitle = bookOnStock1.props.title
+        if(bookOnStock1 instanceof Book){
+        bookTitle = bookOnStock1.props.title}
 
     })
 

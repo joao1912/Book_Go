@@ -15,6 +15,7 @@ class GetAllBooks implements IController {
 
         try {
 
+            const serverResponse = new ServerResponse(res)
             const getAllBooksUseCase = new GetAllBooksUseCase(getAllBooks)
 
             const allBooks = await getAllBooksUseCase.execute()
@@ -32,7 +33,10 @@ class GetAllBooks implements IController {
             return serverResponse.ok(bookList)
             
         } catch (error) {
-            throw new Error ("Bad request: " + error)
+            console.log("Erroou" + error)
+            
+            throw new Error("Internal server error")
+          
         }
     }
 }

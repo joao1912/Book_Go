@@ -1,6 +1,7 @@
 import { prisma } from "../db";
 import { Book } from "../../../../entities/Book";
 import { ISearchBookById } from "../../repositories/book/ISearchBookById";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookById implements ISearchBookById {
   async execute(id: string) {
@@ -14,9 +15,9 @@ export class SearchBookById implements ISearchBookById {
           tag: true
         }
       });
-     
-   if(bookProp != null){   
-       return new Book({
+
+      if (bookProp != null) {
+        return new Book({
           id: bookProp.id,
           title: bookProp.title,
           author: bookProp.author[0].name,
@@ -28,11 +29,11 @@ export class SearchBookById implements ISearchBookById {
         })
       }
 
-     let message = "There is no book with the id provided "
+      let message = "There is no book with the id provided "
       return message
 
     } catch (error) {
-      throw new Error(`Internal server error: There is no book with the id provided ` + error);
+      return handlePrismaError(error)
     }
   }
 }

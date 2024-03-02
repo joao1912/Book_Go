@@ -45,7 +45,7 @@ describe('## GET BOOK TITLE ##', () => {
         // id = admin.id;
 
 
-   const resultLogin = await request.agent(app)
+   const resultLogin = await request(app)
         .post("/v1/users/login")
         .send({
             email: "admin_teste@gmail.com",
@@ -80,8 +80,17 @@ describe('## GET BOOK TITLE ##', () => {
         .expect(200)
         const books = result.body
         for(let book of books) {
-            expect(book).toHaveProperty("props.id")
-            expect(book.props.title).toEqual(Book1.title)
+            expect(book).toHaveProperty("id")
+            expect(book.title).toEqual(Book1.title)
         }
+    })
+    it("Deve tentar buscar um livro  que não existe", async()=>{
+       const result = await request.agent(app)
+        .post(`/v1/book/title`)
+        .send({
+            title: "dauishaiuhdsaiu"
+        })
+        .expect(404)
+        expect(result.body).toEqual(`Book not found.`)
     })
 })

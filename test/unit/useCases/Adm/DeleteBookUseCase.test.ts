@@ -21,8 +21,11 @@ describe("Deletar um livro", ()=>{
         })
 
         const bookData = await addBook.execute(BookToDelete)
-        if(bookData.props.id){BookToDeleteId = bookData.props.id }
-        if(bookData.props.title){BookToDeleteTitle = bookData.props.title }
+        if(bookData instanceof Book){
+            if(bookData.props.id){BookToDeleteId = bookData.props.id }
+            if(bookData.props.title){BookToDeleteTitle = bookData.props.title }
+
+        }
 
     })
 

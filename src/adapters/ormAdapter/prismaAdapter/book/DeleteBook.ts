@@ -1,12 +1,13 @@
 import { IDeleteBook, IDeleteMessageBook } from "../../repositories/book/IDeleteBook";
 import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteBook implements IDeleteBook {
 
     async execute(id: string): Promise<IDeleteMessageBook> {
-        
+
         try {
-         const bookDeleted =   await prisma.book.delete({
+            const bookDeleted = await prisma.book.delete({
                 where: {
                     id: id
                 },
@@ -21,8 +22,9 @@ export class DeleteBook implements IDeleteBook {
             }
 
         } catch (error) {
-            throw new Error('Internal server error: ' + error)
-        }
-
+            const message = handlePrismaError(error)
+            return {message: message}      
+                
+            }
     }
 }

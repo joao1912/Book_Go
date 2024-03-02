@@ -6,15 +6,16 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
-interface IBody extends IBook{}
+interface IBody extends IBook { }
 
 class UpdateBook implements IController {
 
-    async handle (req: HttpRequest<{id: any},{}, IBody>, res: HttpResponse){
+    async handle(req: HttpRequest<{ id: any }, {}, IBody>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
         try {
+            const serverResponse = new ServerResponse(res)
             const bookId = req.params.id
             const {
                 title,
@@ -24,11 +25,11 @@ class UpdateBook implements IController {
                 publishedDate,
                 genre,
                 pageCount
-             } = req.body
+            } = req.body
 
             const updateBookUseCase = new UpdateBookUseCase(updateBook)
 
-            const bookInstance = await updateBookUseCase.execute({
+            const response = await updateBookUseCase.execute({
                 id: bookId,
                 title,
                 synopsis,
@@ -38,13 +39,25 @@ class UpdateBook implements IController {
                 genre,
                 pageCount
             })
+            
+            switch (true) {
+                case (typeof response !== "string"):
+                    return serverResponse.ok(Formatter.handle<Book>(response))
+                    break;
 
-            serverResponse.ok(
-                Formatter.handle<Book>(bookInstance)
-            )
-    
-        } catch(error){
-            throw new Error ("Bad request: " + error)
+                case (response == "Invalid input type."):
+                    return serverResponse.badRequest(response)
+                    break;
+
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
+            }
+
+
+        } catch (error) {
+            console.log(error)
+            throw new Error("Something happened. Please try again later")
         }
     }
 

@@ -52,11 +52,13 @@ describe('Teste do CreateCommentUseCase', () => {
 
         await addBook.execute(bookInstance)
             .then(result => {
+                if(result instanceof Book){
 
-                const id = result.props.id
-
-                if (id != undefined) {
-                    bookId = id
+                    const id = result.props.id
+    
+                    if (id != undefined) {
+                        bookId = id
+                    }
                 }
 
             })
