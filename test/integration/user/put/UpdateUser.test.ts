@@ -61,7 +61,7 @@ describe('## PUT ##', () => {
             password: "YEAH"
         })
         .then(response => {
-            console.log(response.text)
+            //console.log(response.text)
         })
     })
     it("Deve mudar o email", async()=>{
@@ -72,7 +72,7 @@ describe('## PUT ##', () => {
             email: "newupdateuser@gmail.com"
         })
         .then(response => {
-            console.log(response.text)
+            //console.log(response.text)
         })
     })
     it("Deve mudar o telefone", async()=>{
@@ -83,7 +83,7 @@ describe('## PUT ##', () => {
             telefone: "50-000443320"
         })
         .then(response => {
-            console.log(response.text)
+            //console.log(response.text)
         })
     })
     it("Deve mudar o username", async()=>{
@@ -94,7 +94,7 @@ describe('## PUT ##', () => {
             username: "new-update-user@gmail.com"
         })
         .then(response => {
-            console.log(response.text)
+            //console.log(response.text)
         })
     })
 

@@ -8,32 +8,23 @@ describe('## GET ##' ,() => {
     let app: any
     let token: string
 
-    beforeAll(() => {
+    beforeAll(async () => {
 
         token =  authAdapter.sign('id_teste1', 18000)
 
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-    })
-
-    it('Deve criar e buscar os usuários cadastrados', async () => {
-
         const user: IUser = {
-            username: "a gis",
-            password: "umaSenhaLoucaDeVerdade",
-            email: "giDasSenhaLouca@gmail.com",
-            telephone: "48998003827"
+            username: "Um User",
+            password: "umaSenhaLoucaDeVerdade123",
+            email: "giDasSenhaLouca123@gmail.com",
+            telephone: "48996003856"
         }
 
         await request(app)
             .post('/v1/users/signIn')
             .send(user)
-            .expect(200)
-            .then(response => {
-                console.log(response.body)
-
-            })
 
     })
 
@@ -45,8 +36,9 @@ describe('## GET ##' ,() => {
         .expect(200)
         .then(response => {
 
-            console.log(response.body)
-
+            const data: IUser[] = response.body
+                
+            expect(data.length).toBeGreaterThanOrEqual(1)
 
         })
      

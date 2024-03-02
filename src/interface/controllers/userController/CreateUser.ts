@@ -37,8 +37,11 @@ export class CreateUser implements IController {
                 username,
             })
 
+            const userData: any = Formatter.handle<User>(userInstance)
+            delete userData.password
+
             return serverResponse.ok( 
-                Formatter.handle<User>(userInstance)
+                userData
             )
 
         } catch (error) {
