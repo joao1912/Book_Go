@@ -2,11 +2,12 @@ import { prisma } from "../db";
 import { IBook, Book } from "../../../../entities/Book";
 import { IMakeReservation } from "../../repositories/reservation/IMakeReservation";
 import { IReservation, Reservation } from "../../../../entities/Reservation";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class MakeReservation implements IMakeReservation {
 
-    async execute({ props }: Reservation): Promise<Reservation> {
+    async execute({ props }: Reservation) {
 
         const { userId, bookId, price, startedAt, endsAt, status } = props
 
@@ -44,7 +45,7 @@ export class MakeReservation implements IMakeReservation {
 
 
         } catch (error) {
-            throw new Error("Internal server error: " + error);
+           return handlePrismaError(error)
         }
 
 

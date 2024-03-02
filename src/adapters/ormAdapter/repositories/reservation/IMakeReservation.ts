@@ -1,5 +1,5 @@
 import { IReservation, Reservation } from "../../../../entities/Reservation"
 
 export interface IMakeReservation {
-    execute(reservation: Reservation): Promise<Reservation>
+    execute(reservation: Reservation): Promise<Reservation | string>
 }

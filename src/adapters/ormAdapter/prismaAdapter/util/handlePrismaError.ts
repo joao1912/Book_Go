@@ -1,15 +1,16 @@
 import { Prisma } from "@prisma/client";
 
 export const handlePrismaError = (error: any): string => {
-    switch(true) {
+    switch (true) {
         case error instanceof Prisma.PrismaClientValidationError:
-            return "Invalid input type."
+            return "Invalid input type provided."
 
         case error instanceof Prisma.PrismaClientKnownRequestError:
-            return "Id does not exist."
+            return "Id provided does not exist."
 
         default:
-           return "Internal server error. Try again later."
+            console.log(error)
+            return "Internal server error. Try again later."
     }
 };
 

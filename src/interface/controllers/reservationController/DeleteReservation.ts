@@ -7,23 +7,35 @@ import ServerResponse from "../utils/ServerResponse";
 
 class DeleteReservation implements IController {
 
-    async handle(req: HttpRequest<{id:string}>, res: HttpResponse){
+    async handle(req: HttpRequest<{}, {}, {reservationId:string}>, res: HttpResponse){
 
         const serverResponse = new ServerResponse(res)
 
         try {
-            const reservationId = req.params.id
+            const reservationId = req.body.reservationId
 
             const deleteReservationUseCase = new DeleteReservationUseCase(deleteReservation)
 
-            const message = await deleteReservationUseCase.execute(reservationId)
+            const response = await deleteReservationUseCase.execute(reservationId)
 
-            return serverResponse.ok(message)
+            switch (true) {
+
+                case (response.message == "Id provided does not exist."):
+                    return serverResponse.notFound(response)
+                    break;
+
+                case (response.message == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
+            }
+
+            return serverResponse.ok(response)
 
 
 
         } catch (error) {
-            throw new Error("Bad request: "+ error)
+            console.log(error)
+            throw new Error("Something happened. Please try again later")  
         }
     }
 }

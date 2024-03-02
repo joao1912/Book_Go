@@ -31,8 +31,8 @@ class GetAllReservations implements IController {
             return serverResponse.ok(reservationList)
 
         } catch (error) {
-            throw new Error ("Bad request: "+ error)
-        }
+            console.log(error)
+            throw new Error("Something happened. Please try again later")          }
     }
 }
 

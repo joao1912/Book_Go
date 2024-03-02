@@ -49,7 +49,7 @@ describe('## DELETE BOOK  ##', () => {
         const book = resultBook.body
         expect(book).toHaveProperty("id")
         id = book.id
-        
+
 
 
 
@@ -79,12 +79,12 @@ describe('## DELETE BOOK  ##', () => {
             .set('Authorization', `${token}`)
             .expect(200)
 
-            expect(result.body).toEqual(`Id does not exist.`)
+        expect(result.body).toEqual(`Id provided does not exist. exist.`)
         // expect(result.body).toEqual({
-        //     message: `Id does not exist.`
+        //     message: `Id provided does not exist. exist.`
         // })
     })
-    
+
     it("Deve tentar deletar livro sem token deve receber mensagem", async () => {
         const result = await request.agent(app)
             .delete(`/v1/book/delete/${id}`)

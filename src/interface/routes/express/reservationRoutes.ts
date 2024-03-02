@@ -4,19 +4,20 @@ import getReservationByUserIdController from "../../controllers/reservationContr
 import getReservationByBookIdController from "../../controllers/reservationController/GetReservationByBookId";
 import deleteReservationController from "../../controllers/reservationController/DeleteReservation";
 import getAllReservationsController from "../../controllers/reservationController/GetAllReservations";
+import Auth from "../../middlewares/Auth";
 
 
 const reservationRouter = Router()
 
-reservationRouter.get('/', getAllReservationsController.handle)
+reservationRouter.get('/all', Auth.execute, getAllReservationsController.handle)
 
-reservationRouter.get('/user/:user_id/book/:book_id', makeReservationController.handle)
+reservationRouter.get('/book/:book_id', Auth.execute, getReservationByBookIdController.handle)
 
-reservationRouter.get('/user/:user_id', getReservationByUserIdController.handle)
+reservationRouter.get('/user/:user_id', Auth.execute, getReservationByUserIdController.handle)
 
-reservationRouter.get('/book/:book_id', getReservationByBookIdController.handle)
+reservationRouter.post('/user/:user_id', Auth.execute, makeReservationController.handle)
 
-reservationRouter.delete('/:id', deleteReservationController.handle)
+reservationRouter.delete('/delete', Auth.execute, deleteReservationController.handle)
 
 
 export default reservationRouter

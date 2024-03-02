@@ -37,6 +37,7 @@ class SearchBookByGenre implements IController {
             
             return serverResponse.ok(bookList)
             
+            
         } catch (error) {
             console.log(error)
             throw new Error("Something happened. Please try again later")  

@@ -1,6 +1,7 @@
 import { prisma } from "../db";
 
 import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservation/IDeleteReservation";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteReservation implements IDeleteReservation {
 
@@ -21,8 +22,8 @@ export class DeleteReservation implements IDeleteReservation {
             return message
 
         } catch (error) {
-            
-            throw new Error('internal server error' + error)
+            const message = handlePrismaError(error)
+            return {message: message}    
 
         }
     }

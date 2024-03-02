@@ -39,13 +39,13 @@ class UpdateBook implements IController {
                 genre,
                 pageCount
             })
-            
+
             switch (true) {
-                case (typeof response !== "string"):
+                case (response instanceof Book):
                     return serverResponse.ok(Formatter.handle<Book>(response))
                     break;
 
-                case (response == "Invalid input type."):
+                case (response == "Invalid input type provided."):
                     return serverResponse.badRequest(response)
                     break;
 

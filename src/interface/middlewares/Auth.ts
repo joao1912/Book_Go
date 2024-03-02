@@ -9,14 +9,14 @@ export default class Auth {
 
         if (typeof token != 'string') {
          
-            throw new Error('Must have an authorization token')
+            return res.status(401).json({message: 'Must have an authorization token'})
         }
 
         try {
             
             const id = authAdapter.checkToken(token)
 
-            if (typeof id != 'string') throw new Error('id can not be type string')
+            if (typeof id != 'string') throw new Error('id must be a string')
             
             req.userId = id
           

@@ -7,7 +7,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 class DeleteBook implements IController {
 
-    async handle(req: HttpRequest<{id:any}>, res: HttpResponse){
+    async handle(req: HttpRequest<{ id: any }>, res: HttpResponse) {
 
 
         try {
@@ -15,12 +15,12 @@ class DeleteBook implements IController {
             const serverResponse = new ServerResponse(res)
             const bookId = req.params.id
             const deleteBookUseCase = new DeleteBookUseCase(deleteBook)
-            
-            const response  = await deleteBookUseCase.execute(bookId)
-           
+
+            const response = await deleteBookUseCase.execute(bookId)
+
             switch (true) {
-              
-                case (response.message == "Id does not exist."):
+
+                case (response.message == "Id provided does not exist."):
                     return serverResponse.notFound(response)
                     break;
 

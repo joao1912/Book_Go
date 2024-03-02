@@ -6,22 +6,22 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
-interface IBody extends IBook {}
+interface IBody extends IBook { }
 
 class AddBook implements IController {
 
-    async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse){
+    async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
         const serverResponse = new ServerResponse(res)
 
         try {
             const {
-               title,
-               synopsis,
-               author,
-               price,
-               publishedDate,
-               genre,
-               pageCount
+                title,
+                synopsis,
+                author,
+                price,
+                publishedDate,
+                genre,
+                pageCount
             } = req.body
 
             const addBookUseCase = new AddBookUseCase(addBook)
@@ -34,19 +34,25 @@ class AddBook implements IController {
                 publishedDate,
                 genre,
                 pageCount
-                
+
             })
-            if(typeof response == "string"){
-                return serverResponse.badRequest(response)
+            switch (true) {
+                case (response instanceof Book):
+                    return serverResponse.ok(Formatter.handle<Book>(response))
+                    break;
+
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
+                    break;
+
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
             }
 
-            return serverResponse.ok(
-                Formatter.handle<Book>(response)
-            )
-            
         } catch (error) {
             console.log(error)
-            throw new Error("Something happened. Please try again later")  
+            throw new Error("Something happened. Please try again later")
         }
 
     }
