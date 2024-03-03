@@ -30,12 +30,12 @@ describe('## PUT ##', () => {
             .post('/v1/users/signIn')
             .send(userToLogin)
             .expect(200)
-            const user = result.body;
+            const user = result.body.user;
             expect(user).toHaveProperty('id');
             id = user.id;
 
     
-       const resultLogin = await request.agent(app)
+       const resultLogin = await request(app)
             .post("/v1/users/login")
             .send({
                 email: "updateuser@gmail.com",
@@ -54,7 +54,7 @@ describe('## PUT ##', () => {
 
 
     it("Deve mudar a senha", async()=>{
-        await request.agent(app)
+        await request(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
         .send({
@@ -67,7 +67,7 @@ describe('## PUT ##', () => {
         // })
     })
     it("Deve mudar o email", async()=>{
-        await request.agent(app)
+        await request(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
         .send({
@@ -80,7 +80,7 @@ describe('## PUT ##', () => {
         // })
     })
     it("Deve mudar o telefone", async()=>{
-        await request.agent(app)
+        await request(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
         .send({
@@ -93,7 +93,7 @@ describe('## PUT ##', () => {
         // })
     })
     it("Deve mudar o username", async()=>{
-        await request.agent(app)
+        await request(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
         .send({

@@ -8,7 +8,7 @@
     "test:unit": "jest --testPathPattern=test",
     "test:unit:orm": "jest ./test/unit/ormRepositories",
     "test:unit:usecases": "jest --testPathPattern=./test/unit/useCases",
-    "test:int": "jest ./test/integration/user --runInBand --detectOpenHandles"
+    "test:int": "jest ./test/integration/user --runInBand"
   },
   "author": "",
   "license": "MIT",
