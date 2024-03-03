@@ -6,7 +6,12 @@ export const handlePrismaError = (error: any): string => {
             return "Invalid input type provided."
 
         case error instanceof Prisma.PrismaClientKnownRequestError:
+     
+                // console.log(error.meta)
+
             return "Id provided does not exist."
+            //unique constraint P2002
+
 
         default:
             console.log(error)

@@ -3,11 +3,11 @@ import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol";
 import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
-describe('## DELETE RESERVATION ##', () => {
+describe('## GET ALL RESERVATION ##', () => {
 
     let app: any;
     let userId: string;
-    let book_Id: string;
+    let bookId: string;
     let reservationId: string;
     let tokenUser: string;
     let tokenAdmin: string;
@@ -18,19 +18,19 @@ describe('## DELETE RESERVATION ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
         const book: IBook = {
-            title: "Route delete a reserve",
+            title: "Route get all reserve",
             synopsis: "Um copo meio cheio",
             price: 80,
-            author: "Route Delete",
+            author: "Route Get",
             pageCount: 23,
             publishedDate: '2024-10-09',
             genre: "Route"
         }
         const user: IUser = {
-            username: "deletereserve",
-            email: "deletereserve@gmail.com",
+            username: "getabookreserve",
+            email: "getbookreserve@gmail.com",
             password: "123",
-            telephone: "46642658800"
+            telephone: "435062658800"
         }
 
         const loginAdmin = await request.agent(app)
@@ -52,7 +52,7 @@ describe('## DELETE RESERVATION ##', () => {
             .expect(200)
             const bookProps = resultBook.body;
             expect(bookProps).toHaveProperty('id');
-            book_Id = bookProps.id;
+            bookId = bookProps.id;
     
 
         const result = await request(app)
@@ -68,7 +68,7 @@ describe('## DELETE RESERVATION ##', () => {
         const loginUser = await request.agent(app)
             .post("/v1/users/login")
             .send({
-                email: "deletereserve@gmail.com",
+                email: "getbookreserve@gmail.com",
                 password: "123",
             })
             .expect(200)
@@ -77,7 +77,7 @@ describe('## DELETE RESERVATION ##', () => {
         tokenUser = tokenJSONUser.token;
 
         const resultReserve = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
+        .post(`/v1/reservation/user/${userId}/book/${bookId}`)
         .set('Authorization', `${tokenUser}`)
         .expect(200)
         expect(resultReserve.body).toHaveProperty('id');
@@ -91,28 +91,16 @@ describe('## DELETE RESERVATION ##', () => {
     })
 
     
-    it("Deve deletar a reserva", async ()=>{
+    it("Deve listar todas as reservas de um livro", async ()=>{
         const result = await request.agent(app)
-        .delete(`/v1/reservation/delete/${reservationId}`)
-        .set('Authorization', `${tokenUser}`)
+        .get(`/v1/reservation/book/${bookId}`)
+        .set('Authorization', `${tokenAdmin}`)
         .expect(200)
-        expect(result.body.message).toEqual("Reservada deletada com sucesso!");
+        expect(result.body[0]).toHaveProperty("id");
     })
 
-    it("Deve tentar deletar reserva com id inexistente", async ()=>{
-        const result = await request.agent(app)
-        .delete(`/v1/reservation/delete/${reservationId}`)
-        .set('Authorization', `${tokenUser}`)
-        .expect(404)
-        expect(result.body.message).toEqual('Id provided does not exist.');
-    })
 
-    it("Deve tentar deletar reserva sem token", async ()=>{
-        const result = await request.agent(app)
-        .delete(`/v1/reservation/delete/${reservationId}`)
-        .expect(401)
-        expect(result.body.message).toEqual('Must have an authorization token' );
-    })
+  
 
   
 

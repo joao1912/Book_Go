@@ -11,13 +11,13 @@ const reservationRouter = Router()
 
 reservationRouter.get('/all', Auth.execute, getAllReservationsController.handle)
 
-reservationRouter.get('/book/:book_id', Auth.execute, getReservationByBookIdController.handle)
+reservationRouter.get('/book/:bookId', Auth.execute, getReservationByBookIdController.handle)
 
-reservationRouter.get('/user/:user_id', Auth.execute, getReservationByUserIdController.handle)
+reservationRouter.get('/user/:userId', Auth.execute, getReservationByUserIdController.handle)
 
-reservationRouter.post('/user/:user_id', Auth.execute, makeReservationController.handle)
+reservationRouter.post('/user/:userId/book/:bookId', Auth.execute, makeReservationController.handle)
 
-reservationRouter.delete('/delete', Auth.execute, deleteReservationController.handle)
+reservationRouter.delete('/delete/:reservationId', Auth.execute, deleteReservationController.handle)
 
 
 export default reservationRouter

@@ -9,16 +9,16 @@ import ServerResponse from "../utils/ServerResponse";
 
 class MakeReservation implements IController {
 
-    async handle(req: HttpRequest<{ user_id: string }, { bookId: string }>, res: HttpResponse) {
+    async handle(req: HttpRequest<{ userId: string, bookId: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
         try {
-            const user_id = req.params.user_id
-            const book_id = req.body.bookId
+            const {userId, bookId} = req.params
+     
 
             let reserve = {
-                userId: user_id,
-                bookId: book_id,
+                userId: userId,
+                bookId: bookId,
                 price: 20,
                 status: "string"
 

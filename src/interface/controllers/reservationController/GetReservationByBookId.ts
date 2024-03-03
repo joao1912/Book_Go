@@ -9,34 +9,49 @@ import ServerResponse from "../utils/ServerResponse"
 
 class GetReservationByBookId implements IController {
 
-    async handle(req: HttpRequest<{book_id: string}>, res: HttpResponse){
+    async handle(req: HttpRequest<{bookId: string}>, res: HttpResponse){
 
         const serverResponse = new ServerResponse(res)
 
         try {
-            const bookId = req.params.book_id
+            const bookId = req.params.bookId
 
             const getReservationByUserIdUseCase = new GetReservationByBookIdUseCase(getReservationByBookId)
 
-            const reservationInstance = await getReservationByUserIdUseCase.execute(bookId)
+            const response = await getReservationByUserIdUseCase.execute(bookId)
 
-            if (typeof reservationInstance === 'string') {
+         
+            if (typeof response !== 'string') {
+                let reservationList: Array<IReservation> = []
 
-                return serverResponse.notAuthorized(reservationInstance)
+                for (let reservation of response) {
+    
+                    reservationList.push(
+                        Formatter.handle<Reservation>(reservation)
+                    )
+    
+                }
+    
+                return serverResponse.ok(reservationList)    
+            }
+            switch (true) {
 
+                case (response == "This book has no reservations."):
+                    return serverResponse.badRequest(response)
+                    break;
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
+                    break;
+
+                case (response == "Id provided does not exist."):
+                    return serverResponse.notFound(response)
+                    break;
+
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
             }
 
-            let reservationList: Array<IReservation> = []
-
-            for (let reservation of reservationInstance) {
-
-                reservationList.push(
-                    Formatter.handle<Reservation>(reservation)
-                )
-
-            }
-
-            return serverResponse.ok(reservationList)
 
         } catch (error) {
             console.log(error)

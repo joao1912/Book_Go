@@ -84,34 +84,25 @@ describe('## POST RESERVATION ##', () => {
 
     it("Deve fazer uma reserva", async ()=>{
         const result = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}`)
+        .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
         .set('Authorization', `${tokenUser}`)
-        .send({
-            bookId: book_Id
-        })
         .expect(200)
         expect(result.body).toHaveProperty('id');
     })
 
     it("Deve fazer uma reserva com id inexistente", async ()=>{
         const result = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}`)
+        .post(`/v1/reservation/user/${userId}/book/${"esselivronãoexiste"}`)
         .set('Authorization', `${tokenUser}`)
-        .send({
-            bookId: "esseidnãoexiste"
-        })
+        
         .expect(404)
         expect(result.body).toEqual('Id provided does not exist.');
     })
 
     it("Deve tentar fazer uma reserva sem token", async ()=>{
         const result = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}`)
-        .send({
-            bookId: book_Id
-        })
+        .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
         .expect(401)
-        console.log(result.body)
         expect(result.body.message).toEqual('Must have an authorization token' );
     })
 

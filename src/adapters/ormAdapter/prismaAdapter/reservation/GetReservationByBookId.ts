@@ -1,13 +1,14 @@
 import { Reservation } from "../../../../entities/Reservation";
 import { IGetReservationByBookId } from "../../repositories/reservation/IGetReservationByBookId";
 import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetReservationByBookId implements IGetReservationByBookId {
 
-     async execute(bookId: string) {
-        
+    async execute(bookId: string) {
+
         try {
-        
+
             const data = await prisma.reservation.findMany({
                 where: {
                     fk_id_book: bookId
@@ -22,16 +23,16 @@ export class GetReservationByBookId implements IGetReservationByBookId {
                 }
             })
 
-            if(data.length == 0){
-                const message = "Este livro não possui nenhuma reserva."
-                 return message
-             }
+            if (data.length == 0) {
+                const message = "This book has no reservations."
+                return message
+            }
 
             let dataArray = []
-            for(let props of data){
-  
-                dataArray.push( new Reservation
-                   ({
+            for (let props of data) {
+
+                dataArray.push(new Reservation
+                    ({
                         id: props.id,
                         bookId: props.fk_id_book,
                         userId: props.fk_id_user,
@@ -39,16 +40,18 @@ export class GetReservationByBookId implements IGetReservationByBookId {
                         status: props.status,
                         startedAt: props.createdAt
                     })
-                ) 
-                
+                )
+
             }
 
             return dataArray
 
+
+
         } catch (error) {
-            throw new Error ("Internal error server" + error)
+            return handlePrismaError(error)
         }
-        
+
     }
-   
+
 }
