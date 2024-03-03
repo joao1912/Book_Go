@@ -45,8 +45,8 @@ export class CreateUser implements IController {
             )
 
         } catch (error) {
-
-            throw new Error('Bad Request: ' + error)
+            console.log(error)
+            throw new Error("Something happened. Please try again later")
             
         }
 

@@ -1,10 +1,11 @@
 import { Reservation } from "../../../../entities/Reservation";
 import { IGetAllReservation } from "../../repositories/reservation/IGetAllReservations";
 import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllReservations implements IGetAllReservation {
 
-     async execute(): Promise <Reservation[]> {
+     async execute(){
         
         try {
         
@@ -19,6 +20,10 @@ export class GetAllReservations implements IGetAllReservation {
                 }
             })
 
+        if(data.length == 0){
+                const message = `No reserves found.`
+                return message
+            }
             let dataArray = []
             
             for(let props of data){
@@ -35,9 +40,12 @@ export class GetAllReservations implements IGetAllReservation {
             }
            
             return dataArray
+        
+
+         
 
         } catch (error) {
-            throw new Error ("Internal error server" + error)
+            return handlePrismaError(error)
         }
         
     }

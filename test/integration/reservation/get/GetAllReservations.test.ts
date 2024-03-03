@@ -3,7 +3,7 @@ import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol";
 import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
-describe('## DELETE RESERVATION ##', () => {
+describe('## GET ALL RESERVATION ##', () => {
 
     let app: any;
     let userId: string;
@@ -30,7 +30,7 @@ describe('## DELETE RESERVATION ##', () => {
             username: "getallreserve",
             email: "getallreserve@gmail.com",
             password: "123",
-            telephone: "46642658800"
+            telephone: "99642658800"
         }
 
         const loginAdmin = await request.agent(app)
@@ -77,11 +77,8 @@ describe('## DELETE RESERVATION ##', () => {
         tokenUser = tokenJSONUser.token;
 
         const resultReserve = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}`)
+        .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
         .set('Authorization', `${tokenUser}`)
-        .send({
-            bookId: book_Id
-        })
         .expect(200)
         expect(resultReserve.body).toHaveProperty('id');
         reservationId = resultReserve.body.id
@@ -97,10 +94,15 @@ describe('## DELETE RESERVATION ##', () => {
     it("Deve listar todas as reservas", async ()=>{
         const result = await request.agent(app)
         .get(`/v1/reservation/all`)
-        .set('Authorization', `${tokenUser}`)
+        .set('Authorization', `${tokenAdmin}`)
         .expect(200)
-        console.log(result.body)
-        // expect(result.body.message).toEqual("Reservada deletada com sucesso!");
+        expect(result.body[0]).toHaveProperty("id");
+    })
+
+    it("Deve tentar ver todas as reservas sem token", async ()=>{
+        const result = await request.agent(app)
+        .get(`/v1/reservation/all`)
+        .expect(401)
     })
 
 

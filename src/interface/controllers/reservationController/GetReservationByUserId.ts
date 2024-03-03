@@ -18,26 +18,40 @@ class GetReservationByUserId implements IController {
             const userId = req.params.user_id
             const getReservationByUserIdUseCase = new GetReservationByUserIdUseCase(getReservationByUserId)
 
-            const reservationInstance = await getReservationByUserIdUseCase.execute(userId)
+            const response= await getReservationByUserIdUseCase.execute(userId)
 
-            if (typeof reservationInstance === 'string') {
+            if (typeof response !== 'string') {
+                let reservationList: Array<IReservation> = []
 
-                return serverResponse.notAuthorized(reservationInstance)
-
+                for (let reservation of response) {
+    
+                    reservationList.push(
+                        Formatter.handle<Reservation>(reservation)
+                    )
+    
+                }
+    
+                return serverResponse.ok(reservationList)    
             }
+            
+            switch (true) {
 
-            let reservationList: Array<IReservation> = []
+                case (response == "You have no reserves."):
+                    return serverResponse.badRequest(response)
+                    break;
 
-            for (let reservation of reservationInstance) {
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
+                    break;
 
-                reservationList.push(
-                    Formatter.handle<Reservation>(reservation)
-                )
+                case (response == "Id provided does not exist."):
+                    return serverResponse.notFound(response)
+                    break;
 
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
             }
-
-            return serverResponse.ok(reservationList)
-
 
         } catch (error) {
             console.log(error)
