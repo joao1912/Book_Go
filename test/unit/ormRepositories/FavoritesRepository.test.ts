@@ -88,11 +88,15 @@ describe('Testes do FavoriteRepository', () => {
         await addBook.execute(bookInstance1)
             .then(result => {
 
-                const id = result.props.id
+                if (typeof result != 'string') {
+                    const id = result.props.id
 
-                if (id != undefined) {
-                    bookId1 = id
+                    if (id != undefined) {
+                        bookId1 = id
+                    }
                 }
+
+                
 
             })
 
@@ -101,12 +105,15 @@ describe('Testes do FavoriteRepository', () => {
         await addBook.execute(bookInstance2)
             .then(result => {
 
-                const id = result.props.id
+                if (typeof result != 'string') {
 
-                if (id != undefined) {
-                    bookId2 = id
+                    const id = result.props.id
+
+                    if (id != undefined) {
+                        bookId2 = id
+                    }
+                    
                 }
-
             })
 
         await createFavorite.execute(userId, bookId2)

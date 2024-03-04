@@ -74,11 +74,17 @@ describe('Testes do FinanceRepository', () => {
         await addBook.execute(bookInstance)
             .then(result => {
 
-                const id = result.props.id
+                if (typeof result != 'string') {
 
-                if (id != undefined) {
-                    bookId = id
+                    const id = result.props.id
+
+                    if (id != undefined) {
+                        bookId = id
+                    }
+                    
                 }
+
+                
 
             })
 
