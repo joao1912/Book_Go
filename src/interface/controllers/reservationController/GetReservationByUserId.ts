@@ -37,7 +37,7 @@ class GetReservationByUserId implements IController {
             switch (true) {
 
                 case (response == "You have no reserves."):
-                    return serverResponse.badRequest(response)
+                    return serverResponse.ok(response)
                     break;
 
                 case (response == "Invalid input type provided."):

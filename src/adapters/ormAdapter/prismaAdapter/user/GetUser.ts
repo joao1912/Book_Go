@@ -1,6 +1,7 @@
 import { prisma } from "../db";
 import { IGetUser } from "../../repositories/user/IGetUser";
 import { User } from "../../../../entities/User";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetUser implements IGetUser {
 
@@ -38,7 +39,8 @@ export class GetUser implements IGetUser {
       return message
 
     } catch (error) {
-      throw new Error('Internal server error: ' + error)
+      return handlePrismaError(error)
+        
     }
 
 

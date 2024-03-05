@@ -14,7 +14,7 @@ export class HashPassword implements IEncryptorAdapterRepository {
 
     }
 
-    public async validadePassword(password: string, hash: string): Promise<boolean> {
+    public async validatePassword(password: string, hash: string): Promise<boolean> {
 
         return await compare(password, hash)
 

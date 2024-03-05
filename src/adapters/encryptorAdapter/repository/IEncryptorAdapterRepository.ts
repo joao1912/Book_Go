@@ -3,6 +3,6 @@ export interface IEncryptorAdapterRepository {
 
     hash(password: string): string
 
-    validadePassword(password: string, hash: string): Promise<boolean>
+    validatePassword(password: string, hash: string): Promise<boolean>
 
 }

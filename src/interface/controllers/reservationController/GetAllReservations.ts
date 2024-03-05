@@ -33,11 +33,9 @@ class GetAllReservations implements IController {
                 return serverResponse.ok(reservationList)    
             }
             switch (true) {
-
-         
                 
                 case (response == "No reserves found."):
-                    return serverResponse.notFound(response)
+                    return serverResponse.ok(response)
                     break;
                 case (response == "Internal server error"):
                     return serverResponse.serverError(response)

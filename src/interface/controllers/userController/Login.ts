@@ -11,7 +11,6 @@ class Login implements IController {
 
     async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<any> {
         const { email, password } = req.body
-        let userId: string
         const serverReponse = new ServerResponse(res)
 
         if (!email || !password) {
@@ -35,7 +34,7 @@ class Login implements IController {
 
                 const dbHashPassword = userInstance.props.password
 
-                const checkPassword = await encryptorAdapter.validadePassword(password, dbHashPassword)
+                const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
 
                 if (!checkPassword) {
                     return serverReponse.notAuthorized("Invalid password")
@@ -53,8 +52,8 @@ class Login implements IController {
 
         } catch (error) {
 
-            return serverReponse.serverError({ message: "Internal server error. Cannot login right now." })
-            
+            console.log(error)
+            throw new Error("Something happened. Please try again later")            
         }
     }
 }

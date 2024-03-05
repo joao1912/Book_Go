@@ -10,10 +10,10 @@ import ServerResponse from "../utils/ServerResponse";
 class GetAllStock implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
-
-        const serverResponse = new ServerResponse(res)
-
+        console.log("oiii", req)
+        
         try {
+            const serverResponse = new ServerResponse(res)
 
             const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
@@ -33,7 +33,8 @@ class GetAllStock implements IController {
 
             
         } catch (error) {
-            throw new Error ("Bad request " + error)
+            console.log(error)
+            throw new Error("Something happened. Please try again later")
         }
 
 

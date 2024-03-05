@@ -12,7 +12,7 @@ describe('## GET ALL RESERVATION ##', () => {
     let tokenUser: string;
     let tokenAdmin: string;
 
-   
+
     beforeAll(async () => {
 
         HTTPAdapter.config()
@@ -44,16 +44,15 @@ describe('## GET ALL RESERVATION ##', () => {
         expect(tokenJSONAdmin).toHaveProperty('token');
         tokenAdmin = tokenJSONAdmin.token;
 
-
-       const resultBook = await request.agent(app)
+        const resultBook = await request.agent(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${tokenAdmin}`)
             .send(book)
             .expect(200)
-            const bookProps = resultBook.body;
-            expect(bookProps).toHaveProperty('id');
-            book_Id = bookProps.id;
-    
+        const bookProps = resultBook.body;
+        expect(bookProps).toHaveProperty('id');
+        book_Id = bookProps.id;
+
 
         const result = await request(app)
             .post('/v1/users/signIn')
@@ -77,9 +76,9 @@ describe('## GET ALL RESERVATION ##', () => {
         tokenUser = tokenJSONUser.token;
 
         const resultReserve = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
-        .set('Authorization', `${tokenUser}`)
-        .expect(200)
+            .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(200)
         expect(resultReserve.body).toHaveProperty('id');
         reservationId = resultReserve.body.id
 
@@ -90,24 +89,24 @@ describe('## GET ALL RESERVATION ##', () => {
 
     })
 
-    
-    it("Deve listar todas as reservas", async ()=>{
+
+    it("Deve listar todas as reservas", async () => {
         const result = await request.agent(app)
-        .get(`/v1/reservation/all`)
-        .set('Authorization', `${tokenAdmin}`)
-        .expect(200)
+            .get(`/v1/reservation/all`)
+            .set('Authorization', `${tokenAdmin}`)
+            .expect(200)
         expect(result.body[0]).toHaveProperty("id");
     })
 
-    it("Deve tentar ver todas as reservas sem token", async ()=>{
+    it("Deve tentar ver todas as reservas sem token", async () => {
         const result = await request.agent(app)
-        .get(`/v1/reservation/all`)
-        .expect(401)
+            .get(`/v1/reservation/all`)
+            .expect(401)
     })
 
 
-  
 
-  
+
+
 
 })

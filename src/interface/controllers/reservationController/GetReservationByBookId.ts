@@ -37,7 +37,7 @@ class GetReservationByBookId implements IController {
             switch (true) {
 
                 case (response == "This book has no reservations."):
-                    return serverResponse.badRequest(response)
+                    return serverResponse.ok(response)
                     break;
                 case (response == "Invalid input type provided."):
                     return serverResponse.badRequest(response)

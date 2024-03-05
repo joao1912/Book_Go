@@ -8,8 +8,8 @@ import ServerResponse from "../utils/ServerResponse";
 
 
 class GetStockByQuantity implements IController {
-    
-    async handle(req: HttpRequest<{quantity:number}>, res: HttpResponse){
+
+    async handle(req: HttpRequest<{ quantity: number }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
@@ -18,22 +18,40 @@ class GetStockByQuantity implements IController {
 
             const getStockByQuantityUseCase = new GetStockByQuantityUseCase(getStockByQuantity)
 
-            const stockInstances = await getStockByQuantityUseCase.execute(quantity)
+            const response = await getStockByQuantityUseCase.execute(quantity)
 
             let stockList: Array<IStock> = []
+           
+            if (typeof response !== 'string') {
+                for (let item of response) {
 
-            for (let item of stockInstances) {
+                    stockList.push(
+                        Formatter.handle<Stock>(item)
+                    )
 
-                stockList.push(
-                    Formatter.handle<Stock>(item)
-                )
+                }
 
+                return serverResponse.ok(stockList)
             }
 
-            return serverResponse.ok(stockList)
+            switch (true) {
+
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
+                    break;
+
+                case (response == ""):
+                    return serverResponse.notFound(response)
+                    break;
+
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
+            }
 
         } catch (error) {
-            throw new Error ("Bad request " + error)
+            console.log(error)
+            throw new Error("Something happened. Please try again later")
         }
 
     }

@@ -8,34 +8,52 @@ import ServerResponse from "../utils/ServerResponse";
 
 
 class GetStockByBookTitle implements IController {
-    
-    async handle(req: HttpRequest<{title:string}>, res: HttpResponse){
+
+    async handle(req: HttpRequest<{ title: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
         try {
             let titleText = req.params.title
-            
-            const title = titleText.replaceAll("_"," ")
+
+            const title = titleText.replaceAll("_", " ")
 
             const getStockByBookTitleUseCase = new GetStockByBookTitleUseCase(getStockByBookTitle)
 
-            const stockInstances = await getStockByBookTitleUseCase.execute(title)
+            const response = await getStockByBookTitleUseCase.execute(title)
 
             let stockList: Array<IStock> = []
+           
+            if (typeof response !== 'string') {
+                for (let item of response) {
 
-            for (let item of stockInstances) {
+                    stockList.push(
+                        Formatter.handle<Stock>(item)
+                    )
 
-                stockList.push(
-                    Formatter.handle<Stock>(item)
-                )
+                }
 
+                return serverResponse.ok(stockList)
+            }
+            
+            switch (true) {
+
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
+                    break;
+
+                case (response == "Id provided does not exist."):
+                    return serverResponse.notFound(response)
+                    break;
+
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
             }
 
-            return serverResponse.ok(stockList)
-
         } catch (error) {
-            throw new Error ("Bad request: "+ error)
+            console.log(error)
+            throw new Error("Something happened. Please try again later")
         }
     }
 

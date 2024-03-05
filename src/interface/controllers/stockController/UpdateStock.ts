@@ -11,7 +11,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 
 class UpdateStock implements IController {
-    
+
     async handle(req: HttpRequest<{ book_Id: string }, {}, { quantity: number }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
@@ -21,13 +21,14 @@ class UpdateStock implements IController {
 
         try {
             const bookId = req.params.book_Id
-           
+
+            const quantity = req.body.quantity
+
             const bookInstance = await searchBookByIdUseCase.execute(bookId)
 
             if (typeof bookInstance !== "string") {
                 IBookType = bookInstance.props
-            
-                const quantity = req.body.quantity
+
 
                 const updateStockUseCase = new UpdateStockUseCase(updateStock)
 
@@ -40,9 +41,28 @@ class UpdateStock implements IController {
                     Formatter.handle<Stock>(stockInstance)
                 )
 
-            } else {
-                return serverResponse.notFound(bookInstance)
             }
+            switch (true) {
+
+                case (bookInstance == "Invalid input type provided."):
+                    return serverResponse.badRequest(bookInstance)
+                    break;
+
+                // case (response == ""):
+                //     return serverResponse.notFound(response)
+                //     break;
+
+                case (bookInstance == "Id provided does not exist."):
+                    return serverResponse.notFound(bookInstance)
+                    break;
+
+                case (bookInstance == "Internal server error"):
+                    return serverResponse.serverError(bookInstance)
+                    break;
+            }
+
+         
+
 
         } catch (error) {
             throw new Error("Bad request: " + error)
