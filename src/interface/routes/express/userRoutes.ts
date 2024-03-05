@@ -21,9 +21,9 @@ userRouter.post('/signIn', createUserController.handle);
 
 userRouter.post('/login', loginController.handle);
 
-userRouter.put('/update/:id', Auth.execute, updateUserController.handle);
+userRouter.post('/addFavorite/:bookId', Auth.execute, createFavoriteController.handle);
 
-userRouter.post('/addFavorite', Auth.execute, createFavoriteController.handle);
+userRouter.put('/update/:id', Auth.execute, updateUserController.handle);
 
 userRouter.delete(
   '/removeFavorite/:favoriteId',

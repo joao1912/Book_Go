@@ -1,3 +1,4 @@
+import { authAdapter } from "../../../adapters/authAdapter/protocol";
 import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
@@ -40,8 +41,17 @@ export class CreateUser implements IController {
             const userData: any = Formatter.handle<User>(userInstance)
             delete userData.password
 
+            const token = authAdapter.sign(userData.id)
+
+            const response = {
+                user: {
+                    ...userData
+                },
+                token: token
+            }
+
             return serverResponse.ok( 
-                userData
+                response
             )
 
         } catch (error) {

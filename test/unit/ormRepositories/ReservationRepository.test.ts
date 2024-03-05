@@ -36,9 +36,11 @@ describe('Testes do ReservantionRepository', () => {
         const bookInstance1 = new Book(book1)
 
         await addBook.execute(bookInstance1)
-            .then(result => {
+            .then((result) => {
 
-                if (result.props.id) (bookId1 = result.props.id)
+                if (typeof result != 'string') {
+                    bookId1 = result.props.id!
+                }
 
             })
         const book2: IBook = ({
@@ -56,7 +58,9 @@ describe('Testes do ReservantionRepository', () => {
         await addBook.execute(bookInstance2)
             .then(result => {
 
-                if (result.props.id) (bookId2 = result.props.id)
+                if (typeof result != 'string') {
+                    bookId2 = result.props.id!
+                }
 
             })
 
@@ -115,7 +119,11 @@ describe('Testes do ReservantionRepository', () => {
 
         await makeReservation.execute(reservationInstance2)
         .then(result =>{
-            if(result.props.id){reservationId = result.props.id}
+
+            if (typeof result != 'string') {
+                reservationId = result.props.id!
+            }
+
         })
 
 
