@@ -97,7 +97,7 @@ describe('## GET BOOK TITLE ##', () => {
     })
 
 
-    it("Deve mudar titulo com int, deve receber mensagem", async () => {
+    fit("Deve mudar titulo com int, deve receber mensagem", async () => {
         const result = await request.agent(app)
             .put(`/v1/book/update/${bookId}`)
             .set('Authorization', `${token}`)

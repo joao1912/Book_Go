@@ -1,9 +1,10 @@
 import { prisma } from "../db";
 import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
 import { IStock, Stock } from "../../../../entities/Stock";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateStock implements IUpdateStock {
-  async execute({ props }: Stock): Promise<Stock> {
+  async execute({ props }: Stock){
 
     const { id, quantity, book } = props
 
@@ -45,7 +46,7 @@ export class UpdateStock implements IUpdateStock {
       });
 
     } catch (error) {
-      throw new Error("Something happened: " + error);
+      return handlePrismaError(error)
     }
   }
 }

@@ -40,7 +40,7 @@ class GetStockByQuantity implements IController {
                     return serverResponse.badRequest(response)
                     break;
 
-                case (response == ""):
+                case (response == "No books found with this quantity."):
                     return serverResponse.notFound(response)
                     break;
 

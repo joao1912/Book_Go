@@ -14,6 +14,7 @@ class GetStockByBookTitle implements IController {
         const serverResponse = new ServerResponse(res)
 
         try {
+          
             let titleText = req.params.title
 
             const title = titleText.replaceAll("_", " ")
@@ -38,12 +39,12 @@ class GetStockByBookTitle implements IController {
             
             switch (true) {
 
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
+                case (response == "Book not found."):
+                    return serverResponse.notFound(response)
                     break;
 
-                case (response == "Id provided does not exist."):
-                    return serverResponse.notFound(response)
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
                     break;
 
                 case (response == "Internal server error"):

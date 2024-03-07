@@ -15,6 +15,6 @@ stockRouter.get('/book/:title', Auth.execute, getStockByBookTitleController.hand
 
 stockRouter.get('/book/quantity/:quantity',Auth.execute, getStockByQuantityController.handle)
 
-stockRouter.put('/update/book/:book_Id/', Auth.execute, updateStockController.handle)
+stockRouter.put('/update/book/:bookId/', Auth.execute, updateStockController.handle)
 
 export default stockRouter

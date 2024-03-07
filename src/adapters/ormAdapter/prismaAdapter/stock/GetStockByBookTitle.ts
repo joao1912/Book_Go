@@ -1,14 +1,16 @@
 import { Stock } from "../../../../entities/Stock";
 import { IGetStockByBookTitle } from "../../repositories/stock/IGetStockByBookTitle";
 import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
-export class GetStockByBookTitle implements IGetStockByBookTitle{
-  async execute (title:string) {
-    const BooksStock = await prisma.stock.findMany({
-        where: { 
+export class GetStockByBookTitle implements IGetStockByBookTitle {
+  async execute(title: string) {
+    try {
+      const BooksStock = await prisma.stock.findMany({
+        where: {
           book: {
-            
-            title: title 
+
+            title: title
           }
         },
         select: {
@@ -20,14 +22,18 @@ export class GetStockByBookTitle implements IGetStockByBookTitle{
               tag: true
             }
           }
-          },
+        },
       });
+
+      if(BooksStock.length == 0){
+        return "Book not found."
+      }
+
+
       let stock = [];
       for (let bookProp of BooksStock) {
-  
-       
-  
-        stock.push (new Stock ({
+
+        stock.push(new Stock({
           id: bookProp.id,
           quantity: bookProp.quantity,
           book: {
@@ -41,10 +47,13 @@ export class GetStockByBookTitle implements IGetStockByBookTitle{
             genre: bookProp.book.tag[0].genre,
           },
         }));
-  
-   
       }
-  
+
       return stock;
+
+    } catch (error) {
+      return handlePrismaError(error)
     }
-  }     
+
+  }
+}     

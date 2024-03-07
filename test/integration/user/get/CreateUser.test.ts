@@ -29,4 +29,23 @@ describe('## GET ##' ,() => {
 
     })
 
+    // it('Deve tentar criar usuário com email já cadastrado', async () => {
+
+    //     const user: IUser = {
+    //         username: "a gis",
+    //         password: "umaSenhaLoucaDeVerdade",
+    //         email: "admin_teste@gmail.com",
+    //         telephone: "48998003827"
+    //     }
+
+    //     await request(app)
+    //         .post('/v1/users/signIn')
+    //         .send(user)
+    //         // .expect(400)
+    //         .then(response =>{
+    //             console.log(response.body)
+    //         })
+
+    // })
+
 })

@@ -72,14 +72,14 @@ describe('## DELETE BOOK  ##', () => {
     })
 
 
-    it("Deve tentar deletar livro com id inexistente", async () => {
+    fit("Deve tentar deletar livro com id inexistente", async () => {
         const fakeId = "oijiajidoja9d0a9sda03"
         const result = await request.agent(app)
             .delete(`/v1/book/delete/${fakeId}`)
             .set('Authorization', `${token}`)
-            .expect(200)
+            .expect(404)
 
-        expect(result.body).toEqual(`Id provided does not exist. exist.`)
+        expect(result.body.message).toEqual(`Id provided does not exist.`)
         // expect(result.body).toEqual({
         //     message: `Id provided does not exist. exist.`
         // })

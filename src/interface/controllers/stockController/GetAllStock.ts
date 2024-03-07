@@ -10,7 +10,6 @@ import ServerResponse from "../utils/ServerResponse";
 class GetAllStock implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse){
-        console.log("oiii", req)
         
         try {
             const serverResponse = new ServerResponse(res)

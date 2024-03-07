@@ -12,7 +12,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 class UpdateStock implements IController {
 
-    async handle(req: HttpRequest<{ book_Id: string }, {}, { quantity: number }>, res: HttpResponse) {
+    async handle(req: HttpRequest<{ bookId: string }, {}, { quantity: number }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
@@ -20,7 +20,7 @@ class UpdateStock implements IController {
         const searchBookByIdUseCase = new SearchBookByIdUseCase(searchBookById)
 
         try {
-            const bookId = req.params.book_Id
+            const bookId = req.params.bookId
 
             const quantity = req.body.quantity
 
@@ -32,14 +32,17 @@ class UpdateStock implements IController {
 
                 const updateStockUseCase = new UpdateStockUseCase(updateStock)
 
-                const stockInstance = await updateStockUseCase.execute({
+                const response = await updateStockUseCase.execute({
                     quantity: quantity,
                     book: IBookType
                 })
+                if(typeof response != "string"){
 
-                return serverResponse.ok(
-                    Formatter.handle<Stock>(stockInstance)
-                )
+                    return serverResponse.ok(
+                        Formatter.handle<Stock>(response)
+                    )
+                }
+
 
             }
             switch (true) {
@@ -65,7 +68,8 @@ class UpdateStock implements IController {
 
 
         } catch (error) {
-            throw new Error("Bad request: " + error)
+            console.log(error)
+            throw new Error("Something happened. Please try again later")
         }
 
 
