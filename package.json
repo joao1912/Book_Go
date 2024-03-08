@@ -8,7 +8,14 @@
     "test:unit": "jest --testPathPattern=test",
     "test:unit:orm": "jest ./test/unit/ormRepositories",
     "test:unit:usecases": "jest --testPathPattern=./test/unit/useCases",
-    "test:int": "jest ./test/integration/user --runInBand"
+    "test:int": "jest ./test/integration/ --runInBand",
+    "test:int:book": "jest ./test/integration/book --runInBand",
+    "test:int:finance": "jest ./test/integration/finance --runInBand",
+    "test:int:reservation": "jest ./test/integration/reservation --runInBand",
+    "test:int:stock": "jest ./test/integration/stock --runInBand",
+    "test:int:user": "jest ./test/integration/user --runInBand",
+    "test:int:comment": "jest ./test/integration/comment --runInBand"
+    
   },
   "author": "",
   "license": "MIT",

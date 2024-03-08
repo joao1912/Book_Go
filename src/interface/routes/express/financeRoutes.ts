@@ -4,7 +4,7 @@ import getAllFinanceController from "../../controllers/financeController/GetAllF
 
 const financeRouter = Router()
 
-financeRouter.get('/', getAllFinanceController.handle)
+financeRouter.get('/', Auth.execute, getAllFinanceController.handle)
 
 export default financeRouter
 
