@@ -4,12 +4,11 @@ import {
   makeReservation,
 } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols";
-import { Book, IBook } from "../../../../src/entities/Book";
+import { Book } from "../../../../src/entities/Book";
 import {
-  IReservation,
-  Reservation,
+  Reservation
 } from "../../../../src/entities/Reservation";
-import { IUser, User } from "../../../../src/entities/User";
+import { User } from "../../../../src/entities/User";
 import { GetReservationByBookIdUseCase } from "../../../../src/usecases/reservation/GetReservationByBookIdUseCase";
 
 describe("Criando dados necessários para pegar a reserva de um livro por id", () => {

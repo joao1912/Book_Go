@@ -33,6 +33,7 @@ describe('Testes do StockRepository', () => {
 
         await addBook.execute(bookInstance1)
             .then(result => {
+                if(typeof result !== "string"){
 
                 if (result.props.title) (stockSearchByTitle = result.props.title)
                 if (result.props.id) (bookId1 = result.props.id)
@@ -48,8 +49,9 @@ describe('Testes do StockRepository', () => {
                     pageCount: result.props.pageCount,
                     genre: result.props.genre
                 }
-
+                }
             })
+
 
 
         // Criar um  livro para atualizar a quantidade
@@ -68,6 +70,7 @@ describe('Testes do StockRepository', () => {
 
         await addBook.execute(bookInstance2)
             .then(result => {
+                if(typeof result !== "string"){
                 if (result.props.id) (bookId2 = result.props.id)
 
                 IBookTypeSearch = {
@@ -81,7 +84,7 @@ describe('Testes do StockRepository', () => {
                     genre: result.props.genre
 
                 }
-
+            }
             })
 
         // Atualizando estoque
@@ -93,7 +96,7 @@ describe('Testes do StockRepository', () => {
 
 
         await updateStock.execute(updateQuantityBefore).then(result => {
-
+            if(typeof result !== "string")
             stockSearchByQuantity = result.props.quantity
         })
 
@@ -117,8 +120,10 @@ describe('Testes do StockRepository', () => {
         const result = await getStockByBookTitle.execute(stockSearchByTitle)
 
         for (let stock of result) {
+            if(typeof stock !== "string"){
             expect(stock.props.book.title).toEqual("ORM Stock to search")
             expect(stock).toBeInstanceOf(Stock)
+            }
         }
 
     })

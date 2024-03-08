@@ -1,7 +1,6 @@
 
-import { GetStockByBookTitle } from "../../../../src/adapters/ormAdapter/prismaAdapter/stock/GetStockByBookTitle"
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { getStockByBookTitle, updateStock } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
+import { updateStock } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
 import { Book, IBook } from "../../../../src/entities/Book"
 import { IStock, Stock } from "../../../../src/entities/Stock"
 import { UpdateStockUseCase } from "../../../../src/usecases/stock/UpdateStockUseCase"

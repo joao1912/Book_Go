@@ -1,9 +1,9 @@
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols";
 import { getAllReservations, makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols";
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols";
-import { Book, IBook } from "../../../../src/entities/Book";
-import { IReservation, Reservation } from "../../../../src/entities/Reservation";
-import { IUser, User } from "../../../../src/entities/User";
+import { Book } from "../../../../src/entities/Book";
+import { Reservation } from "../../../../src/entities/Reservation";
+import { User } from "../../../../src/entities/User";
 import { GetAllReservationsUseCase } from "../../../../src/usecases/reservation/GetAllReservationsUseCase";
 
 

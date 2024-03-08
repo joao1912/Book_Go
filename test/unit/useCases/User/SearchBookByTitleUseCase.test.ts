@@ -1,8 +1,5 @@
-import { addBook, deleteBook, searchBookByGenre, searchBookByTitle } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { Book, IBook } from "../../../../src/entities/Book"
-import { AddBookUseCase } from "../../../../src/usecases/book/AddBookUseCase"
-import { DeleteBookUseCase } from "../../../../src/usecases/book/DeleteBookUseCase"
-import { SearchBookByGenreUseCase } from "../../../../src/usecases/book/SearchBookByGenreUseCase"
+import { addBook, searchBookByTitle } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
+import { Book } from "../../../../src/entities/Book"
 import { SearchBookByTitleUseCase } from "../../../../src/usecases/book/SearchBookByTitleUseCase"
 
 

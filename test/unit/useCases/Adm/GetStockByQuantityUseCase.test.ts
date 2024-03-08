@@ -1,7 +1,7 @@
 
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { getStockByBookTitle, getStockByQuantity } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
-import { Book, IBook } from "../../../../src/entities/Book"
+import { getStockByQuantity } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
+import { Book } from "../../../../src/entities/Book"
 import { Stock } from "../../../../src/entities/Stock"
 import { GetStockByQuantityUseCase } from "../../../../src/usecases/stock/GetStockByQuantityUseCase"
 

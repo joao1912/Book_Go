@@ -1,6 +1,6 @@
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { getAllStock } from "../../../../src/adapters/ormAdapter/protocols/stockProtocols"
-import { Book, IBook } from "../../../../src/entities/Book"
+import { Book } from "../../../../src/entities/Book"
 import { Stock } from "../../../../src/entities/Stock"
 import { GetAllStockUseCase } from "../../../../src/usecases/stock/GetAllStockUseCase"
 

@@ -1,12 +1,10 @@
-import { MakeReservation } from "../../../../src/adapters/ormAdapter/prismaAdapter/reservation/MakeReservation"
 import { addBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
 import { makeReservation } from "../../../../src/adapters/ormAdapter/protocols/reservationProtocols"
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
-import { Book, IBook } from "../../../../src/entities/Book"
+import { Book } from "../../../../src/entities/Book"
 import { IReservation, Reservation } from "../../../../src/entities/Reservation"
-import { IUser, User } from "../../../../src/entities/User"
+import { User } from "../../../../src/entities/User"
 import { MakeReservationUseCase } from "../../../../src/usecases/reservation/MakeReservationUseCase"
-import CleanDataBase from "../../../util/CleanDataBase"
 
 
 
