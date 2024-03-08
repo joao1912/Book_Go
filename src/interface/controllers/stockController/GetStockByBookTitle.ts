@@ -17,15 +17,16 @@ class GetStockByBookTitle implements IController {
           
             let titleText = req.params.title
 
-            const title = titleText.replaceAll("_", " ")
+            // const title = titleText.replaceAll("_", " ")
 
             const getStockByBookTitleUseCase = new GetStockByBookTitleUseCase(getStockByBookTitle)
 
-            const response = await getStockByBookTitleUseCase.execute(title)
+            const response = await getStockByBookTitleUseCase.execute(titleText)
 
-            let stockList: Array<IStock> = []
-           
+            
             if (typeof response !== 'string') {
+                let stockList: Array<IStock> = []
+                
                 for (let item of response) {
 
                     stockList.push(
@@ -36,7 +37,7 @@ class GetStockByBookTitle implements IController {
 
                 return serverResponse.ok(stockList)
             }
-            
+           
             switch (true) {
 
                 case (response == "Book not found."):

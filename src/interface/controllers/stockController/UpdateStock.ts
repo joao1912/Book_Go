@@ -27,8 +27,8 @@ class UpdateStock implements IController {
             const bookInstance = await searchBookByIdUseCase.execute(bookId)
 
             if (typeof bookInstance !== "string") {
+               
                 IBookType = bookInstance.props
-
 
                 const updateStockUseCase = new UpdateStockUseCase(updateStock)
 
@@ -36,7 +36,8 @@ class UpdateStock implements IController {
                     quantity: quantity,
                     book: IBookType
                 })
-                if(typeof response != "string"){
+
+                if(typeof response !== "string"){
 
                     return serverResponse.ok(
                         Formatter.handle<Stock>(response)

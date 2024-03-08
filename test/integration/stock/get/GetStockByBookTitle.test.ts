@@ -25,21 +25,21 @@ describe('## GET STOCK BY TITLE ##', () => {
         app = HTTPAdapter.getApp()
 
         const resultLogin = await request.agent(app)
-        .post("/v1/users/login")
-        .send({
-            email: "admin_teste@gmail.com",
-            password: "123"
-        })
-        .expect(200)
-    const tokenJSON = resultLogin.body;
-    expect(tokenJSON).toHaveProperty('token');
-    tokenAdmin = tokenJSON.token;
+            .post("/v1/users/login")
+            .send({
+                email: "admin_teste@gmail.com",
+                password: "123"
+            })
+            .expect(200)
+        const tokenJSON = resultLogin.body;
+        expect(tokenJSON).toHaveProperty('token');
+        tokenAdmin = tokenJSON.token;
 
-const resultBook = await request.agent(app)
-    .post(`/v1/book/add`)
-    .set('Authorization', `${tokenAdmin}`)
-    .send(addingBook)
-    .expect(200)
+        const resultBook = await request.agent(app)
+            .post(`/v1/book/add`)
+            .set('Authorization', `${tokenAdmin}`)
+            .send(addingBook)
+            .expect(200)
     })
 
     afterAll(async () => {
@@ -49,10 +49,10 @@ const resultBook = await request.agent(app)
 
     it("Deve mostrar o estoque de um livro", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/book/Route stock title`)
+            .get(`/v1/stock/book/Route%20stock%20title`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(200)
-             expect(result.body[0]).toHaveProperty("quantity");
+        expect(result.body[0]).toHaveProperty("quantity");
     })
 
     it("Deve tentar ver stock sem token", async () => {
@@ -61,12 +61,12 @@ const resultBook = await request.agent(app)
             .expect(401)
 
     })
-    it("Deve tentar ver stock de um livro inexistente", async () => {
+    fit("Deve tentar ver stock de um livro inexistente", async () => {
         const result = await request.agent(app)
             .get(`/v1/stock/book/esse livro nao existe`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(404)
-            expect(result.body).toEqual('Book not found.');
+        expect(result.body).toEqual('Book not found.');
 
 
     })

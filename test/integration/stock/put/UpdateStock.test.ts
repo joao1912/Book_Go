@@ -49,17 +49,19 @@ describe('## GET ALL STOCK ##', () => {
 
     })
 
-    it("Deve listar todos os livros com o estoque", async () => {
+    it("Deve atualizar estoque", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/update/book/${bookId}/`)
+            .get(`/v1/stock/update/book/${bookId}`)
             .set('Authorization', `${tokenAdmin}`)
+            .send({quantity: 20})
             .expect(200)
              expect(result.body[0]).toHaveProperty("quantity");
     })
 
-    it("Deve tentar ver todas o stock sem token", async () => {
+    it("Deve tentar atualizar o stock sem token", async () => {
         const result = await request.agent(app)
             .get(`/v1/stock/update/book/${bookId}/`)
+            .send({quantity: 30})
             .expect(401)
 
     })

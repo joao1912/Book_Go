@@ -5,14 +5,14 @@ export const handlePrismaError = (error: any): string => {
 
         case error instanceof Prisma.PrismaClientValidationError:
 
-            return "Invalid input type provided."
-
+            return ("Invalid input type provided.")
+            
         case error instanceof Prisma.PrismaClientKnownRequestError:
             const meta = error.meta
 
             if (error.code === "P2002" && meta) {
-
-                return (`This ${meta.target} already exists.`);
+                const target = meta.target
+                return (`This ${target} is already in use.`);
             }
 
             if (error.code === "P2025") {

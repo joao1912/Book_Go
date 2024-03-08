@@ -4,7 +4,7 @@ import { authAdapter } from "../../adapters/authAdapter/protocol";
 export default class Auth {
 
     public static async execute(req: HttpRequest, res: HttpResponse, next: HttpNext) {
-        // console.log(req.headers.authorization)
+
         const token = req.headers.authorization
 
         if (typeof token != 'string') {
@@ -16,7 +16,7 @@ export default class Auth {
             
             const id = authAdapter.checkToken(token)
 
-            if (typeof id != 'string') throw new Error('id must be a string')
+            if (typeof id != 'string') throw new Error('Id must be a string')
             
             req.userId = id
           
@@ -24,7 +24,7 @@ export default class Auth {
 
         } catch (error) {
             
-            res.status(401).json({message: 'Invalid Token'})
+            res.status(401).json({message: 'Invalid or expired token.'})
             
         }
 
