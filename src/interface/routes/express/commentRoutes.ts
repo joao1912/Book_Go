@@ -15,7 +15,7 @@ commentRouter.get('/searchAllComments/:bookId', getAllCommentsByBookIdController
 
 commentRouter.post('/createComment', Auth.execute, createCommentController.handle)
 
-commentRouter.put('/editComment', Auth.execute, updateCommentController.handle) // tem que arrumar
+commentRouter.put('/editComment', Auth.execute, updateCommentController.handle)
 
 commentRouter.delete('/removeComment/:commentId', Auth.execute, removeCommentController.handle)
 
