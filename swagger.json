@@ -1,0 +1,88 @@
+{
+    "openapi": "1.0.0",
+    "info": {
+        "title": "API do software book",
+        "description": "Essa api vai manipular os dados de uma biblioteca local",
+        "contact": {
+            "email": "joaopedrot1912@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8085",
+            "description": "API de produção"
+        }
+    ],
+    "path": {
+        "/v1/users/": {
+            "get": {
+                "summary": "Buscar todos os usuarios",
+                "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Usuario"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "Usuario": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "telephone": {
+                        "type": "string",
+                        "nullable": false
+                    }
+                }
+            }
+        }
+    }
+}

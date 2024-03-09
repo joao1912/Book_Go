@@ -2,6 +2,8 @@ import { HTTPAdapterRepository } from "./repository/HTTPAdapterRepository";
 import express, { Application } from "express";
 import cors from "cors"
 import {createHttpTerminator} from 'http-terminator'
+import swaggerUi from "swagger-ui-express";
+import swaggerDocs from "../../../swagger.json" assert { type: "json"};
 
 import userRouter from "../../interface/routes/express/userRoutes";
 import bookRouter from "../../interface/routes/express/bookRoutes";
@@ -39,6 +41,7 @@ export class expressAdapter implements HTTPAdapterRepository {
 
     config(): void {
 
+        this.app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cors())
