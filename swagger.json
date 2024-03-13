@@ -1,274 +1,427 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "API do Software Book",
-    "description": "Essa API vai manipular os dados de uma biblioteca local",
-    "contact": {
-      "emailOne": "joaopedrot1912@gmail.com",
-      "emailTwo": "ggisa.mj@gmail.com"
-    },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "http://localhost:8085",
-      "description": "API de produção"
-    }
-  ],
-  "tags": [
-    {
-      "name": "users",
-      "description": "Everything about users",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
-    },
-    {
-      "name": "book",
-      "description": "Everything about books",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
-    },
-    {
-      "name": "reservation",
-      "description": "Everything about reservations of our books",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
-    },
-    {
-      "name": "stock",
-      "description": "Everything about our stock",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
-    }
-  ],
-  "paths": {
-    "/v1/users/": {
-      "get": {
-        "summary": "Buscar todos os usuarios",
-        "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
-        "tags": ["users"],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Usuario"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/book/": {
-      "get": {
-        "tags": ["book"],
-        "summary": "Finds all books",
-        "description": "Finds all book on the database.",
-        "operationId": "getAllBooks",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "v1/book/delete/{id}": {
-      "delete": {
-        "tags": ["book"],
-        "summary": "Delete a book",
-        "description": "Delete a book of the database.",
-        "operationId": "deleteBook",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id of the book to delete",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The book with ID ${id} and title ${book.title} has been successfully deleted."
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Id provided does not exist."
-          },
-          "500": {
-            "description": "Internal server error"
-          }
+    "openapi": "3.0.1",
+    "info": {
+        "title": "API do Software Book",
+        "description": "Essa API vai manipular os dados de uma biblioteca local",
+        "contact": {
+            "emailOne": "joaopedrot1912@gmail.com",
+            "emailTwo": "ggisa.mj@gmail.com"
         },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    }
-  },
-  "components": {
-    "securitySchemes": {
-      "BearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
+        "version": "1.0.0"
     },
-    "schemas": {
-      "Usuario": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string",
-            "maxLength": 40
-          },
-          "password": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "maxLength": 40
-          },
-          "telephone": {
-            "type": "string",
-            "nullable": false
-          }
+    "servers": [
+        {
+            "url": "http://localhost:8085",
+            "description": "API de produção"
         }
-      },
-      "Book": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 40
-          },
-          "synopis": {
-            "type": "string"
-          },
-          "author": {
-            "type": "string",
-            "maxLength": 40
-          },
-          "price": {
-            "type": "number"
-          },
-          "pageCount": {
-            "type": "number"
-          },
-          "genre": {
-            "type": "string"
-          },
-          "publishedDate": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string",
-            "nullable": false
-          }
+    ],
+    "tags": [
+        {
+            "name": "users",
+            "description": "Everything about users",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "book",
+            "description": "Everything about books",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "reservation",
+            "description": "Everything about reservations of our books",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "stock",
+            "description": "Everything about our stock",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
         }
-      },
-      "Stock": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "quantity": {
-            "type": "number"
-          },
-          "book": {
-            "$ref": "#/components/schemas/Book"
-          }
+    ],
+    "paths": {
+        "/v1/users/": {
+            "get": {
+                "summary": "Buscar todos os usuarios",
+                "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
+                "tags": [
+                    "users"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Usuario"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/book/": {
+            "get": {
+                "tags": [
+                    "book"
+                ],
+                "summary": "Finds all books",
+                "description": "Finds all book on the database.",
+                "operationId": "getAllBooks",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Book"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Book"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "v1/book/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "book"
+                ],
+                "summary": "Delete a book",
+                "description": "Delete a book of the database.",
+                "operationId": "deleteBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the book to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The book with ID ${id} and title ${book.title} has been successfully deleted."
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Id provided does not exist."
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
         }
-      },
-      "Reservation": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "userId": {
-            "type": "string"
-          },
-          "bookId": {
-            "type": "string"
-          },
-          "author": {
-            "type": "string",
-            "maxLength": 40
-          },
-          "price": {
-            "type": "number"
-          },
-          "status": {
-            "type": "string"
-          },
-          "startedAt": {
-            "type": "Date",
-            "nullable": false
-          },
-          "endsAt": {
-            "type": "Date",
-            "nullable": false
-          }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "Usuario": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "unique": true
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "unique": true
+                    },
+                    "telephone": {
+                        "type": "string",
+                        "nullable": false,
+                        "unique": true
+                    }
+                }
+            },
+            "Book": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "synopis": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "pageCount": {
+                        "type": "number"
+                    },
+                    "genre": {
+                        "type": "string"
+                    },
+                    "publishedDate": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string",
+                        "nullable": false
+                    }
+                }
+            },
+            "Stock": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "type": "number"
+                    },
+                    "book": {
+                        "$ref": "#/components/schemas/Book"
+                    }
+                }
+            },
+            "Reservation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "startedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "endsAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            },
+            "Author": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            },
+            "Comment": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "fk_id_book": {
+                        "type": "string"
+                    },
+                    "fk_id_user": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            },
+            "Favorite": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "fk_id_book": {
+                        "type": "string"
+                    },
+                    "fk_id_user": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            },
+            "Finance": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "payments": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "fk_id_book": {
+                        "type": "string"
+                    },
+                    "fk_id_user": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            },
+            "Register": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "payments": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "telephone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            },
+            "Tag": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "genre": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
