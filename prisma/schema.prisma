@@ -37,7 +37,7 @@ model Book {
   favorites     Favorite[]
   finances      Finance[]
   reservations  Reservation[]
-  stock         Stock[]
+  stock         Stock?
   author        Author[]      @relation("AuthorToBook")
   tag           Tag[]         @relation("BookToTag")
 

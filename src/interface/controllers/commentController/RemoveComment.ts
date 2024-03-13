@@ -1,9 +1,9 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { deleteComment, getCommentById } from "../../../adapters/ormAdapter/protocols/commentProtocols";
-import { DeleteMyCommentUseCase } from "../../../usecases/comment/DeleteMyCommentUseCase";
-import { GetOneCommentUseCase } from "../../../usecases/comment/GetOneCommentUseCase";
-import { IController } from "../IController";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { deleteComment, getCommentById } from "../../../adapters/ormAdapter/protocols/commentProtocols.js";
+import { DeleteMyCommentUseCase } from "../../../usecases/comment/DeleteMyCommentUseCase.js";
+import { GetOneCommentUseCase } from "../../../usecases/comment/GetOneCommentUseCase.js";
+import { IController } from "../IController.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 interface IParams {
     commentId: string;

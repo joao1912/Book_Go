@@ -1,6 +1,6 @@
-import { prisma } from "../db";
-import { IUser, User } from "../../../../entities/User";
-import { IUpdateUser } from "../../repositories/user/IUpdateUser";
+import { prisma } from "../db.js";
+import { IUser, User } from "../../../../entities/User.js";
+import { IUpdateUser } from "../../repositories/user/IUpdateUser.js";
 
 export class UpdateUser implements IUpdateUser {
 

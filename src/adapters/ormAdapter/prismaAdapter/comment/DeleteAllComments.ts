@@ -1,5 +1,5 @@
-import { prisma } from "../db";
-import { IDeleteAllComments } from "../../repositories/comment/IDeleteAllComments";
+import { prisma } from "../db.js";
+import { IDeleteAllComments } from "../../repositories/comment/IDeleteAllComments.js";
 
 export class DeleteAllComments implements IDeleteAllComments {
 

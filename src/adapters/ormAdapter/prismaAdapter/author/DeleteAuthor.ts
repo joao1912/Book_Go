@@ -1,5 +1,5 @@
-import { IDeleteAuthor, IDeleteMessage } from "../../repositories/author/IDeleteAuthor";
-import { prisma } from "../db";
+import { IDeleteAuthor, IDeleteMessage } from "../../repositories/author/IDeleteAuthor.js";
+import { prisma } from "../db.js";
 
 
 export class DeleteAuthor implements IDeleteAuthor {

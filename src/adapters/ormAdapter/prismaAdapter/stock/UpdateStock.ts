@@ -1,7 +1,7 @@
-import { prisma } from "../db";
-import { IUpdateStock } from "../../repositories/stock/IUpdateStock";
-import { IStock, Stock } from "../../../../entities/Stock";
-import handlePrismaError from "../util/handlePrismaError";
+import { prisma } from "../db.js";
+import { IUpdateStock } from "../../repositories/stock/IUpdateStock.js";
+import { IStock, Stock } from "../../../../entities/Stock.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class UpdateStock implements IUpdateStock {
   async execute({ props }: Stock){

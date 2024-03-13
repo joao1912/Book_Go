@@ -1,6 +1,6 @@
 import { prisma } from "../db";
 import { IGetUser } from "../../repositories/user/IGetUser";
-import { User } from "../../../../entities/User";
+import { User } from "../../../../entities/User.js";
 
 export class GetById implements IGetUser {
 

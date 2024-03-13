@@ -1,6 +1,6 @@
-import { Book } from "../../../../entities/Book";
-import { ICreateFavorite, IFavoriteCreated } from "../../repositories/favorite/ICreateFavorite";
-import { prisma } from "../db";
+import { Book } from "../../../../entities/Book.js";
+import { ICreateFavorite, IFavoriteCreated } from "../../repositories/favorite/ICreateFavorite.js";
+import { prisma } from "../db.js";
 
 export class CreateFavorite implements ICreateFavorite {
   async execute(userId: string, bookId: string): Promise<IFavoriteCreated> {

@@ -1,13 +1,13 @@
-import { HttpNext, HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { searchBookById } from "../../../adapters/ormAdapter/protocols/bookProtocols";
-import { updateStock } from "../../../adapters/ormAdapter/protocols/stockProtocols";
-import { IBook } from "../../../entities/Book";
-import { IStock, Stock } from "../../../entities/Stock";
-import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseCase";
-import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpNext, HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { searchBookById } from "../../../adapters/ormAdapter/protocols/bookProtocols.js";
+import { updateStock } from "../../../adapters/ormAdapter/protocols/stockProtocols.js";
+import { IBook } from "../../../entities/Book.js";
+import { IStock, Stock } from "../../../entities/Stock.js";
+import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseCase.js";
+import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 
 class UpdateStock implements IController {

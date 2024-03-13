@@ -1,8 +1,8 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { deleteReservation } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
-import { DeleteReservationUseCase } from "../../../usecases/reservation/DeleteReservationUseCase";
-import { IController } from "../IController";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { deleteReservation } from "../../../adapters/ormAdapter/protocols/reservationProtocols.js";
+import { DeleteReservationUseCase } from "../../../usecases/reservation/DeleteReservationUseCase.js";
+import { IController } from "../IController.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 
 class DeleteReservation implements IController {

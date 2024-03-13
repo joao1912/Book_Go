@@ -1,5 +1,5 @@
-import { IDeleteFavorite, IDeleteMessage } from "../../repositories/favorite/IDeleteFavorite";
-import { prisma } from "../db";
+import { IDeleteFavorite, IDeleteMessage } from "../../repositories/favorite/IDeleteFavorite.js";
+import { prisma } from "../db.js";
 
 
 

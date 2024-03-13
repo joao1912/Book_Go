@@ -1,9 +1,9 @@
-import { CreateFinance } from "../prismaAdapter/finance/CreateFinance";
-import { DeleteAllFinances } from "../prismaAdapter/finance/DeleteAllFinances";
-import { DeleteFinance } from "../prismaAdapter/finance/DeleteFinance";
-import { GetAllFinances } from "../prismaAdapter/finance/GetAllFinances";
-import { GetFinanceById } from "../prismaAdapter/finance/GetFinanceById";
-import { UpdateFinance } from "../prismaAdapter/finance/UpdateFinance";
+import { CreateFinance } from "../prismaAdapter/finance/CreateFinance.js";
+import { DeleteAllFinances } from "../prismaAdapter/finance/DeleteAllFinances.js";
+import { DeleteFinance } from "../prismaAdapter/finance/DeleteFinance.js";
+import { GetAllFinances } from "../prismaAdapter/finance/GetAllFinances.js";
+import { GetFinanceById } from "../prismaAdapter/finance/GetFinanceById.js";
+import { UpdateFinance } from "../prismaAdapter/finance/UpdateFinance.js";
 
 
 export const createFinance = new CreateFinance()

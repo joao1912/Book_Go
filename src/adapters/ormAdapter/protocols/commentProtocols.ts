@@ -1,10 +1,10 @@
-import { CreateComment } from "../prismaAdapter/comment/CreateComment";
-import { DeleteAllComments } from "../prismaAdapter/comment/DeleteAllComments";
-import { DeleteComment } from "../prismaAdapter/comment/DeleteComment";
-import { GetAllComments } from "../prismaAdapter/comment/GetAllComments";
-import { GetAllCommentsByUserId } from "../prismaAdapter/comment/GetAllCommentsByUserId";
-import { GetCommentById } from "../prismaAdapter/comment/GetCommentById";
-import { UpdateComment } from "../prismaAdapter/comment/UpdateComment";
+import { CreateComment } from "../prismaAdapter/comment/CreateComment.js";
+import { DeleteAllComments } from "../prismaAdapter/comment/DeleteAllComments.js";
+import { DeleteComment } from "../prismaAdapter/comment/DeleteComment.js";
+import { GetAllComments } from "../prismaAdapter/comment/GetAllComments.js";
+import { GetAllCommentsByUserId } from "../prismaAdapter/comment/GetAllCommentsByUserId.js";
+import { GetCommentById } from "../prismaAdapter/comment/GetCommentById.js";
+import { UpdateComment } from "../prismaAdapter/comment/UpdateComment.js";
 
 
 export const createComment = new CreateComment()

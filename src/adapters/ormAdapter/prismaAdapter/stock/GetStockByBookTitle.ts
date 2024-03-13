@@ -1,7 +1,7 @@
-import { Stock } from "../../../../entities/Stock";
-import { IGetStockByBookTitle } from "../../repositories/stock/IGetStockByBookTitle";
-import { prisma } from "../db";
-import handlePrismaError from "../util/handlePrismaError";
+import { Stock } from "../../../../entities/Stock.js";
+import { IGetStockByBookTitle } from "../../repositories/stock/IGetStockByBookTitle.js";
+import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class GetStockByBookTitle implements IGetStockByBookTitle {
   async execute(title: string) {

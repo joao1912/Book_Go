@@ -1,6 +1,6 @@
 import { HTTPAdapterRepository } from "./adapters/HTTPAdapter/repository/HTTPAdapterRepository"
 
-export class Server {
+export default class Server {
 
     protected HTTPAdapter: HTTPAdapterRepository
     constructor(HTTP: HTTPAdapterRepository) {

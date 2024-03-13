@@ -1,5 +1,5 @@
-import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reservation/IMakeReservation"
-import { IReservation, Reservation } from "../../entities/Reservation"
+import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reservation/IMakeReservation.js"
+import { IReservation, Reservation } from "../../entities/Reservation.js"
 
 
 export class MakeReservationUseCase {

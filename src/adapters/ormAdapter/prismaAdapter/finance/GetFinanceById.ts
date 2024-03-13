@@ -1,7 +1,7 @@
-import { Finance } from "../../../../entities/Finance";
-import { typeOfPayment } from "../../repositories/finance/ICreateFinance";
-import { IGetFinanceById } from "../../repositories/finance/IGetFinanceById";
-import { prisma } from "../db";
+import { Finance } from "../../../../entities/Finance.js";
+import { typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
+import { IGetFinanceById } from "../../repositories/finance/IGetFinanceById.js";
+import { prisma } from "../db.js";
 
 
 export class GetFinanceById implements IGetFinanceById {

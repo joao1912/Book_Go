@@ -1,5 +1,5 @@
-import { IDeleteFinance, IDeleteMessage } from "../../repositories/finance/IDeleteFinance";
-import { prisma } from "../db";
+import { IDeleteFinance, IDeleteMessage } from "../../repositories/finance/IDeleteFinance.js";
+import { prisma } from "../db.js";
 
 
 export class DeleteFinance implements IDeleteFinance {

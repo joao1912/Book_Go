@@ -3,16 +3,16 @@ import express, { Application } from "express";
 import cors from "cors"
 import {createHttpTerminator} from 'http-terminator'
 import swaggerUi from "swagger-ui-express";
-import swaggerDocs from "../../../swagger.json" assert { type: "json"};
+// import swaggerDocs from "../../../swagger.json" assert { type: "json" };
 
-import userRouter from "../../interface/routes/express/userRoutes";
-import bookRouter from "../../interface/routes/express/bookRoutes";
-import reservationRouter from "../../interface/routes/express/reservationRoutes";
-import stockRouter from "../../interface/routes/express/stockRoutes";
-import commentRouter from "../../interface/routes/express/commentRoutes";
-import financeRouter from "../../interface/routes/express/financeRoutes";
+import userRouter from "../../interface/routes/express/userRoutes.js";
+import bookRouter from "../../interface/routes/express/bookRoutes.js";
+import reservationRouter from "../../interface/routes/express/reservationRoutes.js";
+import stockRouter from "../../interface/routes/express/stockRoutes.js";
+import commentRouter from "../../interface/routes/express/commentRoutes.js";
+import financeRouter from "../../interface/routes/express/financeRoutes.js";
 
-export class expressAdapter implements HTTPAdapterRepository {
+export default class expressAdapter implements HTTPAdapterRepository {
 
     protected app: Application
 
@@ -41,7 +41,7 @@ export class expressAdapter implements HTTPAdapterRepository {
 
     config(): void {
 
-        this.app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
+        // this.app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cors())

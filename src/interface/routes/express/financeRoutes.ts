@@ -1,6 +1,6 @@
 import { Router } from "express";
-import Auth from "../../middlewares/Auth";
-import getAllFinanceController from "../../controllers/financeController/GetAllFinance";
+import Auth from "../../middlewares/Auth.js";
+import getAllFinanceController from "../../controllers/financeController/GetAllFinance.js";
 
 const financeRouter = Router()
 

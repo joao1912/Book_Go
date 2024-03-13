@@ -1,4 +1,4 @@
-import { IGetStockByQuantity } from "../../adapters/ormAdapter/repositories/stock/IGetStockByQuantity"
+import { IGetStockByQuantity } from "../../adapters/ormAdapter/repositories/stock/IGetStockByQuantity.js"
 
 
 export class GetStockByQuantityUseCase {

@@ -1,6 +1,6 @@
-import { prisma } from "../db";
-import { IUser, User } from "../../../../entities/User";
-import { ICreateUser } from "../../repositories/user/ICreateUser";
+import { prisma } from "../db.js";
+import { IUser, User } from "../../../../entities/User.js";
+import { ICreateUser } from "../../repositories/user/ICreateUser.js";
 
 export class CreateUser implements ICreateUser {
 

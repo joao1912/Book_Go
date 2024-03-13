@@ -1,7 +1,7 @@
-import { prisma } from "../db";
-import { ISearchBookByTitle } from "../../repositories/book/ISearchBookByTitle";
-import { Book } from "../../../../entities/Book";
-import handlePrismaError from "../util/handlePrismaError";
+import { prisma } from "../db.js";
+import { ISearchBookByTitle } from "../../repositories/book/ISearchBookByTitle.js";
+import { Book } from "../../../../entities/Book.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class SearchBookByTitle implements ISearchBookByTitle {
   async execute(title: string) {

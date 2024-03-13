@@ -1,10 +1,10 @@
-import ServerResponse from "../utils/ServerResponse";
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { searchBookByGenre } from "../../../adapters/ormAdapter/protocols/bookProtocols";
-import { SearchBookByGenreUseCase } from "../../../usecases/book/SearchBookByGenreUseCase";
-import { IController } from "../IController";
-import { Book, IBook } from "../../../entities/Book";
-import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { searchBookByGenre } from "../../../adapters/ormAdapter/protocols/bookProtocols.js";
+import { SearchBookByGenreUseCase } from "../../../usecases/book/SearchBookByGenreUseCase.js";
+import { IController } from "../IController.js";
+import { Book, IBook } from "../../../entities/Book.js";
+import Formatter from "../utils/Formatter.js";
 
 
 

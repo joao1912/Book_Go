@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { getAllFavoritesByUserId } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
-import { Book, IBook } from "../../../entities/Book";
-import { GetMyFavoritesUseCase } from "../../../usecases/user/GetMyFavoritesUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { getAllFavoritesByUserId } from "../../../adapters/ormAdapter/protocols/favoriteProtocols.js";
+import { Book, IBook } from "../../../entities/Book.js";
+import { GetMyFavoritesUseCase } from "../../../usecases/user/GetMyFavoritesUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 class GetMyFavorites implements IController {
 

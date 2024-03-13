@@ -1,5 +1,5 @@
-import { IAddBook } from "../../adapters/ormAdapter/repositories/book/IAddBook"
-import { Book, IBook } from "../../entities/Book"
+import { IAddBook } from "../../adapters/ormAdapter/repositories/book/IAddBook.js"
+import { Book, IBook } from "../../entities/Book.js"
 
 
 export class AddBookUseCase {

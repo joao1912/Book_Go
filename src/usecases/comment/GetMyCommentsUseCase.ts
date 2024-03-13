@@ -1,4 +1,4 @@
-import { IGetAllCommentsByUserId } from "../../adapters/ormAdapter/repositories/comment/IGetAllCommentsByUserId"
+import { IGetAllCommentsByUserId } from "../../adapters/ormAdapter/repositories/comment/IGetAllCommentsByUserId.js"
 
 
 export class GetMyCommentsUseCase {

@@ -1,6 +1,6 @@
-import { Comment } from "../../../../entities/Comment";
-import { IGetAllCommentsByUserId } from "../../repositories/comment/IGetAllCommentsByUserId";
-import { prisma } from "../db";
+import { Comment } from "../../../../entities/Comment.js";
+import { IGetAllCommentsByUserId } from "../../repositories/comment/IGetAllCommentsByUserId.js";
+import { prisma } from "../db.js";
 
 
 

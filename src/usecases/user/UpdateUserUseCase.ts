@@ -1,5 +1,5 @@
-import { IUpdateUser } from "../../adapters/ormAdapter/repositories/user/IUpdateUser"
-import { IUser, User } from "../../entities/User"
+import { IUpdateUser } from "../../adapters/ormAdapter/repositories/user/IUpdateUser.js"
+import { IUser, User } from "../../entities/User.js"
 
 export class UpdateUserUseCase {
 

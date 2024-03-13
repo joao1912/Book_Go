@@ -1,5 +1,5 @@
-import { IDeleteAllAuthors } from "../../repositories/author/IDeleteAllAuthors";
-import { prisma } from "../db";
+import { IDeleteAllAuthors } from "../../repositories/author/IDeleteAllAuthors.js";
+import { prisma } from "../db.js";
 
 export class DeleteAllAuthors implements IDeleteAllAuthors {
 

@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { getAllCommentsByUserId } from "../../../adapters/ormAdapter/protocols/commentProtocols";
-import { Comment, IComment } from "../../../entities/Comment";
-import { GetMyCommentsUseCase } from "../../../usecases/comment/GetMyCommentsUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { getAllCommentsByUserId } from "../../../adapters/ormAdapter/protocols/commentProtocols.js";
+import { Comment, IComment } from "../../../entities/Comment.js";
+import { GetMyCommentsUseCase } from "../../../usecases/comment/GetMyCommentsUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 
 class GetMyComments implements IController {

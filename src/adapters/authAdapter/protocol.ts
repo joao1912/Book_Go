@@ -1,3 +1,3 @@
-import AuthJwt from "./jwtAdapter";
+import AuthJwt from "./jwtAdapter.js";
 
 export const authAdapter = AuthJwt

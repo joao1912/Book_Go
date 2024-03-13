@@ -1,4 +1,4 @@
-import { IGetStockByBookTitle } from "../../adapters/ormAdapter/repositories/stock/IGetStockByBookTitle"
+import { IGetStockByBookTitle } from "../../adapters/ormAdapter/repositories/stock/IGetStockByBookTitle.js"
 
 
 export class GetStockByBookTitleUseCase {

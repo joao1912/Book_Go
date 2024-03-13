@@ -1,5 +1,5 @@
-import { ISearchBookByTitle } from "../../adapters/ormAdapter/repositories/book/ISearchBookByTitle"
-import { IBook } from "../../entities/Book"
+import { ISearchBookByTitle } from "../../adapters/ormAdapter/repositories/book/ISearchBookByTitle.js"
+import { IBook } from "../../entities/Book.js"
 
 
 export class SearchBookByTitleUseCase {

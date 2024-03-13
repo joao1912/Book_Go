@@ -1,7 +1,7 @@
-import { prisma, BookUpdateInput} from "../db";
-import { Book } from "../../../../entities/Book";
-import { IUpdateBook } from "../../repositories/book/IUpdateBook";
-import handlePrismaError from "../util/handlePrismaError";
+import { prisma, BookUpdateInput} from "../db.js";
+import { Book } from "../../../../entities/Book.js";
+import { IUpdateBook } from "../../repositories/book/IUpdateBook.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class UpdateBook implements IUpdateBook {
   async execute({ props }: Book) {

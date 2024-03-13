@@ -1,9 +1,9 @@
-import { CreateUser } from "../prismaAdapter/user/CreateUser";
-import { DeleteAllUsers } from "../prismaAdapter/user/DeleteAllUsers";
-import { DeleteUser } from "../prismaAdapter/user/DeleteUser";
-import { GetAllUsers } from "../prismaAdapter/user/GetAllUsers";
-import {GetUser } from "../prismaAdapter/user/GetUser";
-import { UpdateUser } from "../prismaAdapter/user/UpdateUser";
+import { CreateUser } from "../prismaAdapter/user/CreateUser.js";
+import { DeleteAllUsers } from "../prismaAdapter/user/DeleteAllUsers.js";
+import { DeleteUser } from "../prismaAdapter/user/DeleteUser.js";
+import { GetAllUsers } from "../prismaAdapter/user/GetAllUsers.js";
+import {GetUser } from "../prismaAdapter/user/GetUser.js";
+import { UpdateUser } from "../prismaAdapter/user/UpdateUser.js";
 
 export const createUser = new CreateUser()
 

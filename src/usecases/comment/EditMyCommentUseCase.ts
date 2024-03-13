@@ -1,5 +1,5 @@
-import { IUpdateComment } from "../../adapters/ormAdapter/repositories/comment/IUpdateComment";
-import { Comment, IComment } from "../../entities/Comment";
+import { IUpdateComment } from "../../adapters/ormAdapter/repositories/comment/IUpdateComment.js";
+import { Comment, IComment } from "../../entities/Comment.js";
 
 
 export class EditMyCommentUseCase {

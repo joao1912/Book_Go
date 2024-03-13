@@ -1,5 +1,5 @@
-import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdateBook"
-import { Book, IBook } from "../../entities/Book"
+import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdateBook.js"
+import { Book, IBook } from "../../entities/Book.js"
 
 
 export class UpdateBookUseCase {

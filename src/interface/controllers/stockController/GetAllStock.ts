@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { getAllStock } from "../../../adapters/ormAdapter/protocols/stockProtocols";
-import { IStock, Stock } from "../../../entities/Stock";
-import { GetAllStockUseCase } from "../../../usecases/stock/GetAllStockUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { getAllStock } from "../../../adapters/ormAdapter/protocols/stockProtocols.js";
+import { IStock, Stock } from "../../../entities/Stock.js";
+import { GetAllStockUseCase } from "../../../usecases/stock/GetAllStockUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 
 class GetAllStock implements IController {

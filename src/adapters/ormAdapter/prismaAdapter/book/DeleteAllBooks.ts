@@ -1,5 +1,5 @@
-import { IDeleteAllBooks } from "../../repositories/book/IDeleteAllBooks";
-import { prisma } from "../db";
+import { IDeleteAllBooks } from "../../repositories/book/IDeleteAllBooks.js";
+import { prisma } from "../db.js";
 
 export class DeleteAllBooks implements IDeleteAllBooks {
 

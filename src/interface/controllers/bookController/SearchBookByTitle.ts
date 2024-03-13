@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { searchBookByTitle } from "../../../adapters/ormAdapter/protocols/bookProtocols";
-import { Book, IBook } from "../../../entities/Book";
-import { SearchBookByTitleUseCase } from "../../../usecases/book/SearchBookByTitleUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { searchBookByTitle } from "../../../adapters/ormAdapter/protocols/bookProtocols.js";
+import { Book, IBook } from "../../../entities/Book.js";
+import { SearchBookByTitleUseCase } from "../../../usecases/book/SearchBookByTitleUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 
 class SearchBookByTitle implements IController {

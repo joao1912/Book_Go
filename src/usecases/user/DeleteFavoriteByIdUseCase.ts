@@ -1,5 +1,5 @@
-import { IDeleteMessage } from "../../adapters/ormAdapter/repositories/favorite/IDeleteFavorite";
-import { IDeleteFavorite } from "../../adapters/ormAdapter/repositories/favorite/IDeleteFavorite";
+import { IDeleteMessage } from "../../adapters/ormAdapter/repositories/favorite/IDeleteFavorite.js";
+import { IDeleteFavorite } from "../../adapters/ormAdapter/repositories/favorite/IDeleteFavorite.js";
 
 
 export class DeleteFavoriteByIdUseCase {

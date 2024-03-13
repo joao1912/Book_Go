@@ -1,6 +1,6 @@
-import { Author } from "../../../../entities/Author";
-import { IGetAllAuthors } from "../../repositories/author/IGetAllAuthors";
-import { prisma } from "../db";
+import { Author } from "../../../../entities/Author.js";
+import { IGetAllAuthors } from "../../repositories/author/IGetAllAuthors.js";
+import { prisma } from "../db.js";
 
 
 export class GetAllAuthors implements IGetAllAuthors {

@@ -1,4 +1,4 @@
-import { IGetAllStock } from "../../adapters/ormAdapter/repositories/stock/IGetAllStock"
+import { IGetAllStock } from "../../adapters/ormAdapter/repositories/stock/IGetAllStock.js"
 
 
 export class GetAllStockUseCase {

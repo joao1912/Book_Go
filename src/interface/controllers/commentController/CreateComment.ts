@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { createComment } from "../../../adapters/ormAdapter/protocols/commentProtocols";
-import { Comment, IComment } from "../../../entities/Comment";
-import { CreateCommentUseCase } from "../../../usecases/comment/CreateCommentUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { createComment } from "../../../adapters/ormAdapter/protocols/commentProtocols.js";
+import { Comment, IComment } from "../../../entities/Comment.js";
+import { CreateCommentUseCase } from "../../../usecases/comment/CreateCommentUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 interface IBody extends IComment {}
 

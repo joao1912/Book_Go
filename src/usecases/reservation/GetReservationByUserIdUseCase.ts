@@ -1,4 +1,4 @@
-import { IGetReservationByUserId } from "../../adapters/ormAdapter/repositories/reservation/IGetReservationByUserId";
+import { IGetReservationByUserId } from "../../adapters/ormAdapter/repositories/reservation/IGetReservationByUserId.js";
 
 
 export class GetReservationByUserIdUseCase {

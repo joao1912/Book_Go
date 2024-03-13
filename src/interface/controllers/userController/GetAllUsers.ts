@@ -1,11 +1,11 @@
-import { GetAllUsersUseCase } from "../../../usecases/user/GetAllUsersUseCase";
-import { getAllUsers } from "../../../adapters/ormAdapter/protocols/userProtocols";
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import { User } from "../../../entities/User";
-import { IUser } from "../../../entities/User";
-import ServerResponse from "../utils/ServerResponse";
+import { GetAllUsersUseCase } from "../../../usecases/user/GetAllUsersUseCase.js";
+import { getAllUsers } from "../../../adapters/ormAdapter/protocols/userProtocols.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import { User } from "../../../entities/User.js";
+import { IUser } from "../../../entities/User.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 class GetAllUsers implements IController {
 

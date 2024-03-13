@@ -1,5 +1,5 @@
-import { IDeleteAllFavorites } from "../../repositories/favorite/IDeleteAllFavorites";
-import { prisma } from "../db";
+import { IDeleteAllFavorites } from "../../repositories/favorite/IDeleteAllFavorites.js";
+import { prisma } from "../db.js";
 
 export class DeleteAllFavorites implements IDeleteAllFavorites {
 

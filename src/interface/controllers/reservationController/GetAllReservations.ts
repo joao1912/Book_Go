@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { getAllReservations } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
-import { IReservation, Reservation } from "../../../entities/Reservation";
-import { GetAllReservationsUseCase } from "../../../usecases/reservation/GetAllReservationsUseCase";
-import { IController } from "../IController";
-import Formatter from "../utils/Formatter";
-import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
+import { getAllReservations } from "../../../adapters/ormAdapter/protocols/reservationProtocols.js";
+import { IReservation, Reservation } from "../../../entities/Reservation.js";
+import { GetAllReservationsUseCase } from "../../../usecases/reservation/GetAllReservationsUseCase.js";
+import { IController } from "../IController.js";
+import Formatter from "../utils/Formatter.js";
+import ServerResponse from "../utils/ServerResponse.js";
 
 class GetAllReservations implements IController {
 

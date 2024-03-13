@@ -1,4 +1,4 @@
-import { IGetAllReservation } from "../../adapters/ormAdapter/repositories/reservation/IGetAllReservations"
+import { IGetAllReservation } from "../../adapters/ormAdapter/repositories/reservation/IGetAllReservations.js"
 
 export class GetAllReservationsUseCase {
 

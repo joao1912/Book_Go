@@ -1,6 +1,6 @@
-import { Book } from "../../../../entities/Book";
-import { IGetAllBooks } from "../../repositories/book/IGetAllBooks";
-import { prisma } from "../db";
+import { Book } from "../../../../entities/Book.js";
+import { IGetAllBooks } from "../../repositories/book/IGetAllBooks.js";
+import { prisma } from "../db.js";
 
 export class GetAllBooks implements IGetAllBooks {
   async execute() {

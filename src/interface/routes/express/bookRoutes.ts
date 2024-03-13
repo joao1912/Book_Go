@@ -1,11 +1,11 @@
 import { Router } from "express";
-import getAllBooksController from "../../controllers/bookController/GetAllBooks";
-import addBookController from "../../controllers/bookController/AddBook";
-import searchBookByGenreController from "../../controllers/bookController/SearchBookByGenre";
-import searchBookByTitleController from "../../controllers/bookController/SearchBookByTitle";
-import updateBookController from "../../controllers/bookController/UpdateBook";
-import deleteBookController from "../../controllers/bookController/DeleteBook";
-import Auth from "../../middlewares/Auth";
+import getAllBooksController from "../../controllers/bookController/GetAllBooks.js";
+import addBookController from "../../controllers/bookController/AddBook.js";
+import searchBookByGenreController from "../../controllers/bookController/SearchBookByGenre.js";
+import searchBookByTitleController from "../../controllers/bookController/SearchBookByTitle.js";
+import updateBookController from "../../controllers/bookController/UpdateBook.js";
+import deleteBookController from "../../controllers/bookController/DeleteBook.js";
+import Auth from "../../middlewares/Auth.js";
 
 
 const bookRouter = Router()

@@ -1,4 +1,4 @@
-import { IGetCommentById } from "../../adapters/ormAdapter/repositories/comment/IGetCommentById"
+import { IGetCommentById } from "../../adapters/ormAdapter/repositories/comment/IGetCommentById.js"
 
 
 
