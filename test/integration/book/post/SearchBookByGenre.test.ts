@@ -1,23 +1,23 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { Book, IBook } from "../../../../src/entities/Book";
+import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
 
-describe('## GET BOOK TITLE ##', () => {
+describe('## POST BOOK GENRE ##', () => {
 
     let app: any;
     let id: string;
     let token: string;
        
     const Book1: IBook = {
-        title: "O Tijolo",
-        synopsis: "Usado nas construções",
+        title: "Bob",
+        synopsis: "Hey bob",
         price: 80,
-        author: "Pedro Pedreiro",
+        author: "Bob the bob",
         pageCount: 23,
         publishedDate: '2014-10-09',
-        genre: "Art"
+        genre: "Music"
     }
   
 
@@ -28,27 +28,27 @@ describe('## GET BOOK TITLE ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        // const adminBook: IUser = {
-        //     username: "admin_teste",
-        //     email: "admin_teste@gmail.com",
-        //     password: "123",
-        //     telephone: "43334458800"
-        // }
+        const adminBook: IUser = {
+            username: "admin2book",
+            email: "admin2book@gmail.com",
+            password: "123",
+            telephone: "5833458800"
+        }
 
 
-        // const result =  await request(app)
-        // .post('/v1/users/signIn')
-        // .send(adminBook)
-        // .expect(200)
+        const result =  await request(app)
+        .post('/v1/users/signIn')
+        .send(adminBook)
+        .expect(200)
         // const admin = result.body;
         // expect(admin).toHaveProperty('id');
         // id = admin.id;
 
 
-   const resultLogin = await request(app)
+   const resultLogin = await request.agent(app)
         .post("/v1/users/login")
         .send({
-            email: "admin_teste@gmail.com",
+            email: "admin2book@gmail.com",
             password: "123"
         })
         .expect(200)
@@ -71,26 +71,26 @@ describe('## GET BOOK TITLE ##', () => {
 
     })
     
-    it("Deve buscar livro por titulo", async()=>{
+    it("Deve buscar livro por genero", async()=>{
        const result = await request.agent(app)
-        .post(`/v1/book/title`)
+        .post(`/v1/book/genre`)
         .send({
-            title: Book1.title
+            genre: "Music"
         })
         .expect(200)
         const books = result.body
         for(let book of books) {
             expect(book).toHaveProperty("id")
-            expect(book.title).toEqual(Book1.title)
         }
     })
-    it("Deve tentar buscar um livro  que não existe", async()=>{
+    it("Deve tentar buscar um genero que não existe", async()=>{
        const result = await request.agent(app)
-        .post(`/v1/book/title`)
+        .post(`/v1/book/genre`)
         .send({
-            title: "dauishaiuhdsaiu"
+            genre: "blablabla"
         })
         .expect(404)
-        expect(result.body).toEqual(`Book not found.`)
+        expect(result.body).toEqual(`Genre not found.`)
+
     })
 })
