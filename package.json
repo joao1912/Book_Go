@@ -29,7 +29,8 @@
     "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
     "pg": "^8.11.3",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "ts-jest-resolver": "^2.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

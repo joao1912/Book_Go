@@ -80,16 +80,14 @@ describe('## DELETE BOOK  ##', () => {
             .expect(404)
 
         expect(result.body.message).toEqual(`Id provided does not exist.`)
-        // expect(result.body).toEqual({
-        //     message: `Id provided does not exist. exist.`
-        // })
+     
     })
 
     it("Deve tentar deletar livro sem token deve receber mensagem", async () => {
         const result = await request.agent(app)
             .delete(`/v1/book/delete/${id}`)
             .set('Authorization', `${token}`)
-            .expect(200)
+            .expect(401)
 
         expect(result.body).toEqual('Must have an authorization token')
     })
