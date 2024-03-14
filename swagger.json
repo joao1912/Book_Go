@@ -175,25 +175,37 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "username": {
                         "type": "string",
                         "maxLength": 40,
-                        "unique": true
+                        "unique": true,
+                        "nullable": false
                     },
                     "password": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "email": {
                         "type": "string",
                         "maxLength": 40,
-                        "unique": true
+                        "unique": true,
+                        "nullable": false
                     },
                     "telephone": {
                         "type": "string",
                         "nullable": false,
                         "unique": true
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
                     }
                 }
             },
@@ -201,34 +213,41 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "title": {
                         "type": "string",
-                        "maxLength": 40
+                        "maxLength": 40,
+                        "nullable": false
                     },
                     "synopis": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "author": {
                         "type": "string",
-                        "maxLength": 40
+                        "maxLength": 40,
+                        "nullable": false
                     },
                     "price": {
-                        "type": "number"
+                        "type": "number",
+                        "nullable": false
                     },
                     "pageCount": {
-                        "type": "number"
+                        "type": "number",
+                        "nullable": false
                     },
                     "genre": {
-                        "type": "string"
-                    },
-                    "publishedDate": {
-                        "type": "string"
-                    },
-                    "image": {
                         "type": "string",
                         "nullable": false
+                    },
+                    "publishedDate": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "image": {
+                        "type": "string"
                     }
                 }
             },
@@ -236,13 +255,24 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "quantity": {
-                        "type": "number"
+                        "type": "number",
+                        "nullable": false
                     },
-                    "book": {
-                        "$ref": "#/components/schemas/Book"
+                    "fk_id_book": {
+                        "unique": true,
+                        "nullable": false
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "nullable": false
+                    },
+                    "updatedAt": {
+                        "type": "Date",
+                        "nullable": false
                     }
                 }
             },
@@ -250,23 +280,28 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "userId": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "bookId": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "author": {
                         "type": "string",
-                        "maxLength": 40
+                        "nullable": false
                     },
                     "price": {
-                        "type": "number"
+                        "type": "number",
+                        "nullable": false
                     },
                     "status": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "startedAt": {
                         "type": "Date",
@@ -281,10 +316,13 @@
             "Author": {
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false,
+                        "unique": true
                     },
                     "description": {
                         "type": "string"
@@ -302,16 +340,20 @@
             "Comment": {
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "comment": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "fk_id_book": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "fk_id_user": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "createdAt": {
                         "type": "Date",
@@ -326,13 +368,16 @@
             "Favorite": {
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "fk_id_book": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "fk_id_user": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "createdAt": {
                         "type": "Date",
@@ -347,19 +392,24 @@
             "Finance": {
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "payments": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "total": {
-                        "type": "number"
+                        "type": "number",
+                        "nullable": false
                     },
                     "fk_id_book": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "fk_id_user": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "createdAt": {
                         "type": "Date",
@@ -374,25 +424,32 @@
             "Register": {
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "payments": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "total": {
-                        "type": "number"
+                        "type": "number",
+                        "nullable": false
                     },
                     "author": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "title": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "telephone": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "email": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "createdAt": {
                         "type": "Date",
@@ -407,10 +464,13 @@
             "Tag": {
                 "properties": {
                     "id": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false
                     },
                     "genre": {
-                        "type": "string"
+                        "type": "string",
+                        "nullable": false,
+                        "unique": true
                     },
                     "createdAt": {
                         "type": "Date",
