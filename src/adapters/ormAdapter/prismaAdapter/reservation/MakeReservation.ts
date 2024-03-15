@@ -1,7 +1,6 @@
 import { prisma } from "../db";
-import { IBook, Book } from "../../../../entities/Book";
 import { IMakeReservation } from "../../repositories/reservation/IMakeReservation";
-import { IReservation, Reservation } from "../../../../entities/Reservation";
+import { Reservation } from "../../../../entities/Reservation";
 import handlePrismaError from "../util/handlePrismaError";
 
 
@@ -45,7 +44,7 @@ export class MakeReservation implements IMakeReservation {
 
 
         } catch (error) {
-           return handlePrismaError(error)
+           return handlePrismaError("userError",error)
         }
 
 

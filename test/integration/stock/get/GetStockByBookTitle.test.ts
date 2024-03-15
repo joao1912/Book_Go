@@ -66,7 +66,7 @@ describe('## GET STOCK BY TITLE ##', () => {
             .get(`/v1/stock/book/esse livro nao existe`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(404)
-        expect(result.body).toEqual('Book not found.');
+        expect(result.body).toEqual('No results.');
 
 
     })

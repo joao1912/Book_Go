@@ -1,6 +1,7 @@
 import { Book } from "../../../../entities/Book";
 import { IGetAllBooks } from "../../repositories/book/IGetAllBooks";
 import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllBooks implements IGetAllBooks {
   async execute() {
@@ -30,8 +31,7 @@ export class GetAllBooks implements IGetAllBooks {
 
       return books;
     } catch (error) {
-      
-       throw new Error("Internal server error: " + error);
+      return handlePrismaError("bookError",error)
     }
   }
 }

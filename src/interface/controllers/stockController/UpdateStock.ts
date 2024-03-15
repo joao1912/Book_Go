@@ -1,7 +1,7 @@
 import { HttpNext, HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
 import { searchBookById } from "../../../adapters/ormAdapter/protocols/bookProtocols.js";
 import { updateStock } from "../../../adapters/ormAdapter/protocols/stockProtocols.js";
-import { IBook } from "../../../entities/Book.js";
+import { Book, IBook } from "../../../entities/Book.js";
 import { IStock, Stock } from "../../../entities/Stock.js";
 import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseCase.js";
 import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase.js";
@@ -19,59 +19,35 @@ class UpdateStock implements IController {
         let IBookType: IBook
         const searchBookByIdUseCase = new SearchBookByIdUseCase(searchBookById)
 
-        try {
-            const bookId = req.params.bookId
 
-            const quantity = req.body.quantity
+        const bookId = req.params.bookId
 
-            const bookInstance = await searchBookByIdUseCase.execute(bookId)
+        const quantity = req.body.quantity
 
-            if (typeof bookInstance !== "string") {
-               
-                IBookType = bookInstance.props
+        const responseBook = await searchBookByIdUseCase.execute(bookId)
+        //Verificando se id existe
+        if (responseBook instanceof Book) {
 
-                const updateStockUseCase = new UpdateStockUseCase(updateStock)
+            IBookType = responseBook.props
 
-                const response = await updateStockUseCase.execute({
-                    quantity: quantity,
-                    book: IBookType
-                })
+            const updateStockUseCase = new UpdateStockUseCase(updateStock)
 
-                if(typeof response !== "string"){
+            const response = await updateStockUseCase.execute({
+                quantity: quantity,
+                book: IBookType
+            })
 
-                    return serverResponse.ok(
-                        Formatter.handle<Stock>(response)
-                    )
-                }
-
-
-            }
-            switch (true) {
-
-                case (bookInstance == "Invalid input type provided."):
-                    return serverResponse.badRequest(bookInstance)
-                    break;
-
-                // case (response == ""):
-                //     return serverResponse.notFound(response)
-                //     break;
-
-                case (bookInstance == "Id provided does not exist."):
-                    return serverResponse.notFound(bookInstance)
-                    break;
-
-                case (bookInstance == "Internal server error"):
-                    return serverResponse.serverError(bookInstance)
-                    break;
+            if (response instanceof Stock) {
+                return serverResponse.ok(
+                    Formatter.handle<Stock>(response)
+                )
             }
 
-         
 
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
         }
+
+
+
 
 
     }

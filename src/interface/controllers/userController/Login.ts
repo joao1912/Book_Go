@@ -5,12 +5,15 @@ import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol.js
 import { getUser } from "../../../adapters/ormAdapter/protocols/userProtocols.js";
 import { GetUserUseCase } from "../../../usecases/user/GetUserUseCase.js";
 import { IController } from "../IController.js";
+import { User } from "../../../entities/User.js";
+import { CustomError } from "../utils/CustomError.js";
 
 
 class Login implements IController {
 
     async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<any> {
         const { email, password } = req.body
+
         const serverReponse = new ServerResponse(res)
 
         if (!email || !password) {
@@ -18,26 +21,23 @@ class Login implements IController {
             missingParam = (!email) ? "Enter your email " : ''
             missingParam = missingParam + ((!password) ? ("\n" + "Enter you password") : '')
            
-            return serverReponse.badRequest({ message: missingParam })
+            return serverReponse.missingParameters("userError", missingParam)
         }
 
-
-        try {
 
             const getUserUseCase = new GetUserUseCase(getUser)
 
             const userInstance = await getUserUseCase.execute(email)
 
-           
 
-            if (typeof userInstance !== "string") {
+            if (userInstance instanceof User) {
 
                 const dbHashPassword = userInstance.props.password
 
                 const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
 
                 if (!checkPassword) {
-                    return serverReponse.notAuthorized("Invalid password")
+                    return ServerResponse.notAuthorized("userError", "Invalid password")
                 }
 
                 if (userInstance.props.id) {
@@ -47,13 +47,9 @@ class Login implements IController {
                 }
             }
             
-            return serverReponse.notFound(userInstance)
 
-        } catch (error) {
 
-            console.log(error)
-            throw new Error("Something happened. Please try again later")            
-        }
+       
     }
 }
 

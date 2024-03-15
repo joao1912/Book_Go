@@ -10,18 +10,7 @@ export class GetUser implements IGetUser {
     try {
       const user = await prisma.user.findUnique({
         where: {
-          // id: input, 
-          // OR: [
-             email: input 
-          //   { id: input }
-          // ]
-        },
-        select: {
-          id: true,
-          username: true,
-          password: true,
-          email: true,
-          telephone: true
+          email: input
         }
       })
 
@@ -40,8 +29,5 @@ export class GetUser implements IGetUser {
       return handlePrismaError('UserError', error)
         
     }
-
-
   }
-
 }

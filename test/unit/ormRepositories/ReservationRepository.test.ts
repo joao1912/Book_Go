@@ -9,14 +9,14 @@ import { IUser, User } from "../../../src/entities/User";
 
 describe('Testes do ReservantionRepository', () => {
 
-    
+
     let stockSearchByTitle: string;
     let bookId1: string;
     let bookId2: string;
     let userId1: string;
     let userId2: string;
     let reservationId: string
-   
+
 
 
     beforeAll(async () => {
@@ -32,7 +32,7 @@ describe('Testes do ReservantionRepository', () => {
             pageCount: 123,
             publishedDate: '2003-10-09'
         })
-        
+
         const bookInstance1 = new Book(book1)
 
         await addBook.execute(bookInstance1)
@@ -52,7 +52,7 @@ describe('Testes do ReservantionRepository', () => {
             pageCount: 123,
             publishedDate: '2003-10-09'
         })
-        
+
         const bookInstance2 = new Book(book2)
 
         await addBook.execute(bookInstance2)
@@ -67,33 +67,33 @@ describe('Testes do ReservantionRepository', () => {
         // Criando user para reservar
 
         const user1: IUser = ({
-         username: "User ORMReservation",
-         email: "user@gmail.com",
-         password: "123",
-         telephone: "489999920304"   
+            username: "User ORMReservation",
+            email: "user@gmail.com",
+            password: "123",
+            telephone: "489999920304"
 
         })
 
         const userInstance = new User(user1)
 
         await createUser.execute(userInstance)
-        .then(result => {
-            if(result.props.id){userId1 = result.props.id}
-        })
+            .then(result => {
+                if (result.props.id) { userId1 = result.props.id }
+            })
         const user2: IUser = ({
-         username: "User2 ORMReservation",
-         email: "user2@gmail.com",
-         password: "123",
-         telephone: "489999920344"   
+            username: "User2 ORMReservation",
+            email: "user2@gmail.com",
+            password: "123",
+            telephone: "489999920344"
 
         })
 
         const userInstance2 = new User(user2)
 
         await createUser.execute(userInstance2)
-        .then(result => {
-            if(result.props.id){userId2 = result.props.id}
-        })
+            .then(result => {
+                if (result.props.id) { userId2 = result.props.id }
+            })
 
         //Fazer reserva para testes de delete e search
 
@@ -107,7 +107,7 @@ describe('Testes do ReservantionRepository', () => {
         const reservationInstance = new Reservation(reservation1)
 
         await makeReservation.execute(reservationInstance)
- 
+
         const reservationDelete: IReservation = ({
             userId: userId1,
             bookId: bookId1,
@@ -118,13 +118,13 @@ describe('Testes do ReservantionRepository', () => {
         const reservationInstance2 = new Reservation(reservationDelete)
 
         await makeReservation.execute(reservationInstance2)
-        .then(result =>{
+            .then(result => {
 
-            if (typeof result != 'string') {
-                reservationId = result.props.id!
-            }
+                if (typeof result != 'string') {
+                    reservationId = result.props.id!
+                }
 
-        })
+            })
 
 
 
@@ -140,37 +140,37 @@ describe('Testes do ReservantionRepository', () => {
         })
 
         const reservationInstance2 = new Reservation(reservation)
-        
+
         const result = await makeReservation.execute(reservationInstance2)
 
-        expect(result).toBeInstanceOf(Reservation)    
+        expect(result).toBeInstanceOf(Reservation)
 
     })
 
-    
+
     it('Deve deletar uma reserva', async () => {
 
         const result = await deleteReservation.execute(reservationId)
 
-        expect(result.message).toBe('Reservada deletada com sucesso!')
+        expect(result.message).toBe('Reservation deleted successfully.')
 
     })
 
-    
+
     it("Deve buscar reserva por id do livro", async () => {
-     
+
         const result = await getReservationByBookId.execute(bookId1)
-        for(let reserve of result){
+        for (let reserve of result) {
             expect(reserve).toBeInstanceOf(Reservation)
         }
     })
 
 
     it("Deve buscar reserva por id do user", async () => {
-     
+
         const result = await getReservationByUserId.execute(userId1)
 
-        for(let reserve of result){
+        for (let reserve of result) {
             expect(reserve).toBeInstanceOf(Reservation)
         }
     })

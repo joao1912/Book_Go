@@ -14,19 +14,15 @@ class SearchBookByGenre implements IController {
     async handle(req: HttpRequest, res: HttpResponse) {
         const serverResponse = new ServerResponse(res)
 
-        try {
             const genre = req.params.genre
 
             const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 
             const response = await searchBookByGenreUseCase.execute(genre)
             
-            if(typeof response == "string"){
-                return serverResponse.notFound(response)
-            }
 
             let bookList: Array<IBook> = []
-
+            if (response instanceof Book && Array.isArray(response)){
             for (let book of response) {
 
                 bookList.push(
@@ -36,12 +32,9 @@ class SearchBookByGenre implements IController {
             }
             
             return serverResponse.ok(bookList)
-            
-            
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")  
         }
+            
+      
     }
 }
 

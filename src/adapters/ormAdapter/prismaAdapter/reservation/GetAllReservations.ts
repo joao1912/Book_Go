@@ -5,10 +5,10 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllReservations implements IGetAllReservation {
 
-     async execute(){
-        
+    async execute() {
+
         try {
-        
+
             const data = await prisma.reservation.findMany({
                 select: {
                     id: true,
@@ -20,16 +20,16 @@ export class GetAllReservations implements IGetAllReservation {
                 }
             })
 
-        if(data.length == 0){
+            if (data.length == 0) {
                 const message = `No reserves found.`
                 return message
             }
             let dataArray = []
-            
-            for(let props of data){
-            
-        
-                dataArray.push( new Reservation ({
+
+            for (let props of data) {
+
+
+                dataArray.push(new Reservation({
                     id: props.id,
                     bookId: props.fk_id_book,
                     userId: props.fk_id_user,
@@ -38,16 +38,14 @@ export class GetAllReservations implements IGetAllReservation {
                     startedAt: props.createdAt
                 }))
             }
-           
-            return dataArray
-        
 
-         
+            return dataArray
+
 
         } catch (error) {
-            return handlePrismaError(error)
+            return handlePrismaError("adminError", error)
         }
-        
+
     }
-   
+
 }

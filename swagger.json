@@ -304,7 +304,7 @@
             }
           },
           "404": {
-            "description": "Genre not found."
+            "description": "No results."
           },
           "500": {
             "description": "Internal server error"
@@ -345,7 +345,7 @@
             }
           },
           "404": {
-            "description": "Book not found."
+            "description": "No results."
           },
           "500": {
             "description": "Internal server error"
@@ -478,7 +478,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -494,6 +493,9 @@
           },
           "500": {
             "description": "Internal server error"
+          },
+          "503": {
+            "description": "The database is currently unavailable. Please try again later."
           }
         }
       }
@@ -525,7 +527,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -543,7 +544,7 @@
             "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "REVER>>>>Book not found."
+            "description": "REVER>>>>No results."
           },
           "500": {
             "description": "Internal server error"
@@ -578,7 +579,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -596,7 +596,7 @@
             "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "Book not found."
+            "description": "No results."
           },
           "500": {
             "description": "Internal server error"
@@ -635,7 +635,7 @@
                 "$ref": "#/components/schemas/Stock",
                 "example": {
                   "quantity": 5,
-                  "id":20,
+                  "id": 20,
                   "title": "Route All stock",
                   "synopsis": "I just got lost",
                   "price": 80,
@@ -653,7 +653,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -666,6 +665,129 @@
           },
           "400": {
             "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/reservation/all/": {
+      "get": {
+        "tags": ["reservation"],
+        "summary": "Gets all reserves",
+        "description": "Get all books reservations",
+        "operationId": "getAllReservations",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "503": {
+            "description": "The database is currently unavailable. Please try again later."
+          }
+        }
+      }
+    },
+    "/reservation/book/${bookId}": {
+      "get": {
+        "tags": ["reservation"],
+        "summary": "Gets all reserves",
+        "description": "Gets books reservations by book id",
+        "operationId": "getReservationByBookId",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "Id of the book",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "503": {
+            "description": "The database is currently unavailable. Please try again later."
+          }
+        }
+      }
+    },
+    "/reservation/delete/${reservationId}": {
+      "delete": {
+        "tags": ["reservation"],
+        "summary": "Deletes a reserve",
+        "description": "Deletes a reservation of a book",
+        "operationId": "deleteReservation",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "description": "Id of the reserve to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation deleted successfully."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"

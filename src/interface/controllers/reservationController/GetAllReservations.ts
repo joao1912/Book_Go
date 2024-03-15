@@ -12,17 +12,18 @@ class GetAllReservations implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-        try {
-            
+
             const getAllReservationsUseCase = new GetAllReservationsUseCase(getAllReservations)
 
             const response = await getAllReservationsUseCase.execute()
 
+            if(typeof response == "string")
+            return serverResponse.ok(response)
           
-            if (typeof response !== 'string') {
-                let reservationList: Array<IReservation> = []
-
-                for (let reservation of response) {
+        let reservationList: Array<IReservation> = []
+        
+        if (response instanceof Reservation && Array.isArray(response)){
+            for (let reservation of response) {
     
                     reservationList.push(
                         Formatter.handle<Reservation>(reservation)
@@ -32,22 +33,8 @@ class GetAllReservations implements IController {
     
                 return serverResponse.ok(reservationList)    
             }
-            switch (true) {
-                
-                case (response == "No reserves found."):
-                    return serverResponse.ok(response)
-                    break;
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
-
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")          }
-    }
+        }
 }
 
 const getAllReservationsController = new GetAllReservations()
-export default getAllReservationsController
+export default getAllReservationsController;

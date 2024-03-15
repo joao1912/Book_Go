@@ -34,14 +34,14 @@ export class SearchBookByTitle implements ISearchBookByTitle {
         return books
       }
 
-      const message = `Book not found.`
+      const message = `No results.`
 
       return message
 
 
 
     } catch (error) {
-      return handlePrismaError(error)
+      return handlePrismaError("userError", error)
     }
   }
 }

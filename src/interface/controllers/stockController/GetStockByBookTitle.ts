@@ -13,8 +13,6 @@ class GetStockByBookTitle implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-        try {
-          
             let titleText = req.params.title
 
             // const title = titleText.replaceAll("_", " ")
@@ -22,11 +20,13 @@ class GetStockByBookTitle implements IController {
             const getStockByBookTitleUseCase = new GetStockByBookTitleUseCase(getStockByBookTitle)
 
             const response = await getStockByBookTitleUseCase.execute(titleText)
+            if(typeof response == "string"){
+                return serverResponse.ok(response)
+            }
 
-            
-            if (typeof response !== 'string') {
+            if (response instanceof Stock && Array.isArray(response)){
                 let stockList: Array<IStock> = []
-                
+
                 for (let item of response) {
 
                     stockList.push(
@@ -37,26 +37,7 @@ class GetStockByBookTitle implements IController {
 
                 return serverResponse.ok(stockList)
             }
-           
-            switch (true) {
 
-                case (response == "Book not found."):
-                    return serverResponse.notFound(response)
-                    break;
-
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
-                    break;
-
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
-        }
     }
 
 }

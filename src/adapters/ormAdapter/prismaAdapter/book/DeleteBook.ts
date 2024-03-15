@@ -4,7 +4,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteBook implements IDeleteBook {
 
-    async execute(id: string): Promise<IDeleteMessageBook> {
+    async execute(id: string){
 
         try {
             const bookDeleted = await prisma.book.delete({
@@ -22,8 +22,8 @@ export class DeleteBook implements IDeleteBook {
             }
 
         } catch (error) {
-            const message = handlePrismaError(error)
-            return {message: message}      
+            return handlePrismaError("adminError", error)
+          
                 
             }
     }

@@ -12,7 +12,7 @@ describe('## DELETE RESERVATION ##', () => {
     let tokenUser: string;
     let tokenAdmin: string;
 
-   
+
     beforeAll(async () => {
 
         HTTPAdapter.config()
@@ -45,15 +45,15 @@ describe('## DELETE RESERVATION ##', () => {
         tokenAdmin = tokenJSONAdmin.token;
 
 
-       const resultBook = await request.agent(app)
+        const resultBook = await request.agent(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${tokenAdmin}`)
             .send(book)
             .expect(200)
-            const bookProps = resultBook.body;
-            expect(bookProps).toHaveProperty('id');
-            book_Id = bookProps.id;
-    
+        const bookProps = resultBook.body;
+        expect(bookProps).toHaveProperty('id');
+        book_Id = bookProps.id;
+
 
         const result = await request(app)
             .post('/v1/users/signIn')
@@ -77,9 +77,9 @@ describe('## DELETE RESERVATION ##', () => {
         tokenUser = tokenJSONUser.token;
 
         const resultReserve = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
-        .set('Authorization', `${tokenUser}`)
-        .expect(200)
+            .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(200)
         expect(resultReserve.body).toHaveProperty('id');
         reservationId = resultReserve.body.id
 
@@ -90,30 +90,30 @@ describe('## DELETE RESERVATION ##', () => {
 
     })
 
-    
-    it("Deve deletar a reserva", async ()=>{
+
+    it("Deve deletar a reserva", async () => {
         const result = await request.agent(app)
-        .delete(`/v1/reservation/delete/${reservationId}`)
-        .set('Authorization', `${tokenUser}`)
-        .expect(200)
-        expect(result.body.message).toEqual("Reservada deletada com sucesso!");
+            .delete(`/v1/reservation/delete/${reservationId}`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(200)
+        expect(result.body.message).toEqual("Reservation deleted successfully.");
     })
 
-    it("Deve tentar deletar reserva com id inexistente", async ()=>{
+    it("Deve tentar deletar reserva com id inexistente", async () => {
         const result = await request.agent(app)
-        .delete(`/v1/reservation/delete/${reservationId}`)
-        .set('Authorization', `${tokenUser}`)
-        .expect(404)
+            .delete(`/v1/reservation/delete/${reservationId}`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(404)
         expect(result.body.message).toEqual('Id provided does not exist.');
     })
 
-    it("Deve tentar deletar reserva sem token", async ()=>{
+    it("Deve tentar deletar reserva sem token", async () => {
         const result = await request.agent(app)
-        .delete(`/v1/reservation/delete/${reservationId}`)
-        .expect(401)
-        expect(result.body.message).toEqual('Must have an authorization token' );
+            .delete(`/v1/reservation/delete/${reservationId}`)
+            .expect(401)
+        expect(result.body.message).toEqual('Must have an authorization token');
     })
 
-  
+
 
 })
