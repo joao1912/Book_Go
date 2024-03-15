@@ -1,7 +1,7 @@
-import { GetAllStock } from "../prismaAdapter/stock/GetAllStock.js";
-import { GetStockByBookTitle } from "../prismaAdapter/stock/GetStockByBookTitle.js";
-import { GetStockByQuantity } from "../prismaAdapter/stock/GetStockByQuantity.js";
-import { UpdateStock } from "../prismaAdapter/stock/UpdateStock.js";
+import { GetAllStock } from "../prismaAdapter/stock/GetAllStock";
+import { GetStockByBookTitle } from "../prismaAdapter/stock/GetStockByBookTitle";
+import { GetStockByQuantity } from "../prismaAdapter/stock/GetStockByQuantity";
+import { UpdateStock } from "../prismaAdapter/stock/UpdateStock";
 
 export const getAllStock = new GetAllStock()
 

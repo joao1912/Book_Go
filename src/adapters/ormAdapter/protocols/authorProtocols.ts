@@ -1,10 +1,10 @@
-import { CreateAuthor } from "../prismaAdapter/author/CreateAuthor.js";
-import { DeleteAllAuthors } from "../prismaAdapter/author/DeleteAllAuthors.js";
-import { DeleteAuthor } from "../prismaAdapter/author/DeleteAuthor.js";
-import { GetAllAuthors } from "../prismaAdapter/author/GetAllAuthors.js";
-import { GetAuthorById } from "../prismaAdapter/author/GetAuthorById.js";
-import { GetAuthorByName } from "../prismaAdapter/author/GetAuthorByName.js";
-import { UpdateAuthor } from "../prismaAdapter/author/UpdateAuthor.js";
+import { CreateAuthor } from "../prismaAdapter/author/CreateAuthor";
+import { DeleteAllAuthors } from "../prismaAdapter/author/DeleteAllAuthors";
+import { DeleteAuthor } from "../prismaAdapter/author/DeleteAuthor";
+import { GetAllAuthors } from "../prismaAdapter/author/GetAllAuthors";
+import { GetAuthorById } from "../prismaAdapter/author/GetAuthorById";
+import { GetAuthorByName } from "../prismaAdapter/author/GetAuthorByName";
+import { UpdateAuthor } from "../prismaAdapter/author/UpdateAuthor";
 
 
 export const createAuthor = new CreateAuthor()

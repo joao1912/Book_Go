@@ -1,6 +1,6 @@
-import { prisma } from "../db.js";
-import { IDeleteComment, IDeleteMessage } from "../../repositories/comment/IDeleteComment.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { prisma } from "../db";
+import { IDeleteComment, IDeleteMessage } from "../../repositories/comment/IDeleteComment";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteComment implements IDeleteComment {
 

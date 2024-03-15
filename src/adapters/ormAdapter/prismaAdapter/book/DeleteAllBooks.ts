@@ -1,6 +1,6 @@
-import { IDeleteAllBooks } from "../../repositories/book/IDeleteAllBooks.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IDeleteAllBooks } from "../../repositories/book/IDeleteAllBooks";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteAllBooks implements IDeleteAllBooks {
 

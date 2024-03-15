@@ -1,7 +1,7 @@
-import { prisma } from "../db.js";
-import { IMakeReservation } from "../../repositories/reservation/IMakeReservation.js";
-import { Reservation } from "../../../../entities/Reservation.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { prisma } from "../db";
+import { IMakeReservation } from "../../repositories/reservation/IMakeReservation";
+import { Reservation } from "../../../../entities/Reservation";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class MakeReservation implements IMakeReservation {

@@ -1,7 +1,7 @@
-import { Comment } from "../../../../entities/Comment.js";
-import { IGetAllCommentsByUserId } from "../../repositories/comment/IGetAllCommentsByUserId.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { Comment } from "../../../../entities/Comment";
+import { IGetAllCommentsByUserId } from "../../repositories/comment/IGetAllCommentsByUserId";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 

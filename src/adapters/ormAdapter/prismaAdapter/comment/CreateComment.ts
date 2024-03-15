@@ -1,8 +1,7 @@
-import { Prisma } from "@prisma/client";
-import { IComment, Comment } from "../../../../entities/Comment.js";
-import { ICreateComment } from "../../repositories/comment/ICreateComment.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IComment, Comment } from "../../../../entities/Comment";
+import { ICreateComment } from "../../repositories/comment/ICreateComment";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateComment implements ICreateComment {
 

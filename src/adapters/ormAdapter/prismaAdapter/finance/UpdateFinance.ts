@@ -1,8 +1,8 @@
-import { IFinance, Finance } from "../../../../entities/Finance.js";
-import { typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
-import { IUpdateFinance } from "../../repositories/finance/IUpdateFinance.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IFinance, Finance } from "../../../../entities/Finance";
+import { typeOfPayment } from "../../repositories/finance/ICreateFinance";
+import { IUpdateFinance } from "../../repositories/finance/IUpdateFinance";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class UpdateFinance implements IUpdateFinance {

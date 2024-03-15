@@ -1,7 +1,7 @@
-import { Book } from "../../../../entities/Book.js";
-import { IGetAllBooks } from "../../repositories/book/IGetAllBooks.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { Book } from "../../../../entities/Book";
+import { IGetAllBooks } from "../../repositories/book/IGetAllBooks";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllBooks implements IGetAllBooks {
   async execute() {

@@ -1,7 +1,7 @@
-import { prisma } from "../db.js";
-import { IComment, Comment } from "../../../../entities/Comment.js";
-import { IUpdateComment } from "../../repositories/comment/IUpdateComment.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { prisma } from "../db";
+import { IComment, Comment } from "../../../../entities/Comment";
+import { IUpdateComment } from "../../repositories/comment/IUpdateComment";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateComment implements IUpdateComment {
 

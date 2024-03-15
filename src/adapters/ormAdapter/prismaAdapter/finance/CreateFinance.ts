@@ -1,7 +1,7 @@
-import { IFinance, Finance } from "../../../../entities/Finance.js";
-import { ICreateFinance, IRegister, typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IFinance, Finance } from "../../../../entities/Finance";
+import { ICreateFinance, IRegister, typeOfPayment } from "../../repositories/finance/ICreateFinance";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateFinance implements ICreateFinance {
 

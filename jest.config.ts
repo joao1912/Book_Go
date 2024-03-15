@@ -2,7 +2,7 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config();
 import type { Config } from 'jest';
 

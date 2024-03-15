@@ -1,6 +1,6 @@
-import { IDeleteAuthor, IDeleteMessage } from "../../repositories/author/IDeleteAuthor.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IDeleteAuthor, IDeleteMessage } from "../../repositories/author/IDeleteAuthor";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class DeleteAuthor implements IDeleteAuthor {

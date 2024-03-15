@@ -1,7 +1,7 @@
-import { prisma } from "../db.js";
-import { IUser, User } from "../../../../entities/User.js";
-import { IUpdateUser } from "../../repositories/user/IUpdateUser.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { prisma } from "../db";
+import { IUser, User } from "../../../../entities/User";
+import { IUpdateUser } from "../../repositories/user/IUpdateUser";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateUser implements IUpdateUser {
 

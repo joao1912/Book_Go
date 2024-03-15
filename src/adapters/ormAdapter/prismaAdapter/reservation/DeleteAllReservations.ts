@@ -1,7 +1,7 @@
-import { prisma } from "../db.js";
+import { prisma } from "../db";
 
-import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservation/IDeleteReservation.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservation/IDeleteReservation";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteAllReservations implements IDeleteReservation {
 

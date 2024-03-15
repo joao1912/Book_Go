@@ -1,7 +1,6 @@
-// import * as jwt from "jsonwebtoken";
-import { IAuthAdapterRepository } from "./repository/IAuthAdapterRepository.js";
+import { IAuthAdapterRepository } from "./repository/IAuthAdapterRepository";
 import { JwtPayload } from "jsonwebtoken";
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 interface TokenPayload extends JwtPayload {
     
