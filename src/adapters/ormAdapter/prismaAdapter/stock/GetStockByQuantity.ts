@@ -1,7 +1,7 @@
-import { Stock } from "../../../../entities/Stock.js";
-import { IGetStockByQuantity } from "../../repositories/stock/IGetStockByQuantity.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { Stock } from "../../../../entities/Stock";
+import { IGetStockByQuantity } from "../../repositories/stock/IGetStockByQuantity";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetStockByQuantity implements IGetStockByQuantity {
   async execute(quantity: number) {

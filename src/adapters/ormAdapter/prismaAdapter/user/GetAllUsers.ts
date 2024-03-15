@@ -1,7 +1,7 @@
-import { User } from "../../../../entities/User.js";
-import { IGetAllUsers } from "../../repositories/user/IGetAllUsers.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { User } from "../../../../entities/User";
+import { IGetAllUsers } from "../../repositories/user/IGetAllUsers";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAllUsers implements IGetAllUsers {

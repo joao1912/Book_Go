@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import  expressAdapter  from "./expressAdapter.js";
+import  expressAdapter  from "./expressAdapter";
 const HTTPAdapter = new expressAdapter()
 
 

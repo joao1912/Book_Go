@@ -1,6 +1,6 @@
-import { IDeleteFavorite, IDeleteMessage } from "../../repositories/favorite/IDeleteFavorite.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IDeleteFavorite, IDeleteMessage } from "../../repositories/favorite/IDeleteFavorite";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 

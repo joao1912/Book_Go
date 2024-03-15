@@ -1,8 +1,8 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { deleteBook } from "../../../adapters/ormAdapter/protocols/bookProtocols.js";
-import { DeleteBookUseCase } from "../../../usecases/book/DeleteBookUseCase.js";
-import { IController } from "../IController.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { deleteBook } from "../../../adapters/ormAdapter/protocols/bookProtocols";
+import { DeleteBookUseCase } from "../../../usecases/book/DeleteBookUseCase";
+import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteBook implements IController {

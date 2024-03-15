@@ -1,7 +1,7 @@
-import { IAuthor, Author } from "../../../../entities/Author.js";
-import { ICreateAuthor } from "../../repositories/author/ICreateAuthor.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IAuthor, Author } from "../../../../entities/Author";
+import { ICreateAuthor } from "../../repositories/author/ICreateAuthor";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateAuthor implements ICreateAuthor {
 

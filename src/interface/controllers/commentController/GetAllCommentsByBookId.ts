@@ -1,11 +1,11 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { getAllComments } from "../../../adapters/ormAdapter/protocols/commentProtocols.js";
-import { Comment, IComment } from "../../../entities/Comment.js";
-import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase.js";
-import { IController } from "../IController.js";
-import { CustomError } from "../utils/CustomError.js";
-import Formatter from "../utils/Formatter.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { getAllComments } from "../../../adapters/ormAdapter/protocols/commentProtocols";
+import { Comment, IComment } from "../../../entities/Comment";
+import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase";
+import { IController } from "../IController";
+import { CustomError } from "../utils/CustomError";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IParams {
     bookId: string;

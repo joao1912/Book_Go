@@ -1,8 +1,8 @@
-import { DeleteReservation } from "../prismaAdapter/reservation/DeleteReservation.js";
-import { GetAllReservations } from "../prismaAdapter/reservation/GetAllReservations.js";
-import { GetReservationByBookId } from "../prismaAdapter/reservation/GetReservationByBookId.js";
-import { GetReservationByUserId } from "../prismaAdapter/reservation/GetReservationByUserId.js";
-import { MakeReservation } from "../prismaAdapter/reservation/MakeReservation.js";
+import { DeleteReservation } from "../prismaAdapter/reservation/DeleteReservation";
+import { GetAllReservations } from "../prismaAdapter/reservation/GetAllReservations";
+import { GetReservationByBookId } from "../prismaAdapter/reservation/GetReservationByBookId";
+import { GetReservationByUserId } from "../prismaAdapter/reservation/GetReservationByUserId";
+import { MakeReservation } from "../prismaAdapter/reservation/MakeReservation";
 
 
 export const deleteReservation = new DeleteReservation()

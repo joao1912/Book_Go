@@ -6,13 +6,13 @@ import {createHttpTerminator} from 'http-terminator'
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "../../../swagger.json" assert { type: "json" };
 
-import userRouter from "../../interface/routes/express/userRoutes.js";
-import bookRouter from "../../interface/routes/express/bookRoutes.js";
-import reservationRouter from "../../interface/routes/express/reservationRoutes.js";
-import stockRouter from "../../interface/routes/express/stockRoutes.js";
-import commentRouter from "../../interface/routes/express/commentRoutes.js";
-import financeRouter from "../../interface/routes/express/financeRoutes.js";
-import ErrorHandler from "../../interface/middlewares/ErrorHandler.js";
+import userRouter from "../../interface/routes/express/userRoutes";
+import bookRouter from "../../interface/routes/express/bookRoutes";
+import reservationRouter from "../../interface/routes/express/reservationRoutes";
+import stockRouter from "../../interface/routes/express/stockRoutes";
+import commentRouter from "../../interface/routes/express/commentRoutes";
+import financeRouter from "../../interface/routes/express/financeRoutes";
+import ErrorHandler from "../../interface/middlewares/ErrorHandler";
 
 export default class expressAdapter implements HTTPAdapterRepository {
 

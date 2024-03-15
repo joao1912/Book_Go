@@ -1,7 +1,7 @@
-import { prisma } from "../db.js";
-import { Comment } from "../../../../entities/Comment.js";
-import { IGetCommentById } from "../../repositories/comment/IGetCommentById.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { prisma } from "../db";
+import { Comment } from "../../../../entities/Comment";
+import { IGetCommentById } from "../../repositories/comment/IGetCommentById";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetCommentById implements IGetCommentById {
 

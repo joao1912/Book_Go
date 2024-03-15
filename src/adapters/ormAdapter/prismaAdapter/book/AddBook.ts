@@ -1,7 +1,7 @@
-import { prisma } from "../db.js";
-import { Book } from "../../../../entities/Book.js";
-import { IAddBook } from "../../repositories/book/IAddBook.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { prisma } from "../db";
+import { Book } from "../../../../entities/Book";
+import { IAddBook } from "../../repositories/book/IAddBook";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class AddBook implements IAddBook {

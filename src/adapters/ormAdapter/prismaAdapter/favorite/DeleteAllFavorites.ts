@@ -1,6 +1,6 @@
-import { IDeleteAllFavorites } from "../../repositories/favorite/IDeleteAllFavorites.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IDeleteAllFavorites } from "../../repositories/favorite/IDeleteAllFavorites";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteAllFavorites implements IDeleteAllFavorites {
 

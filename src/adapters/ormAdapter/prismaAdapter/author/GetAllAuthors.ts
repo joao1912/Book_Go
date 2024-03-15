@@ -1,7 +1,7 @@
-import { Author } from "../../../../entities/Author.js";
-import { IGetAllAuthors } from "../../repositories/author/IGetAllAuthors.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { Author } from "../../../../entities/Author";
+import { IGetAllAuthors } from "../../repositories/author/IGetAllAuthors";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAllAuthors implements IGetAllAuthors {

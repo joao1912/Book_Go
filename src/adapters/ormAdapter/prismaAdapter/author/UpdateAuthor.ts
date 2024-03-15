@@ -1,7 +1,7 @@
-import { IAuthor, Author } from "../../../../entities/Author.js";
-import { IUpdateAuthor } from "../../repositories/author/IUpdateAuthor.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { IAuthor, Author } from "../../../../entities/Author";
+import { IUpdateAuthor } from "../../repositories/author/IUpdateAuthor";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class UpdateAuthor implements IUpdateAuthor {

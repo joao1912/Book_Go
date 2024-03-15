@@ -1,7 +1,7 @@
-import { Reservation } from "../../../../entities/Reservation.js";
-import { IGetAllReservation } from "../../repositories/reservation/IGetAllReservations.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { Reservation } from "../../../../entities/Reservation";
+import { IGetAllReservation } from "../../repositories/reservation/IGetAllReservations";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllReservations implements IGetAllReservation {
 

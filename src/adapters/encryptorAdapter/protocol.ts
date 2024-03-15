@@ -1,3 +1,3 @@
-import { HashPassword } from "./HashPassword.js";
+import { HashPassword } from "./HashPassword";
 
 export const encryptorAdapter = new HashPassword()

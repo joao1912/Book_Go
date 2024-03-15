@@ -1,5 +1,5 @@
 import { hashSync, genSaltSync, compare } from "bcrypt";
-import { IEncryptorAdapterRepository } from "./repository/IEncryptorAdapterRepository.js";
+import { IEncryptorAdapterRepository } from "./repository/IEncryptorAdapterRepository";
 
 export class HashPassword implements IEncryptorAdapterRepository {
 

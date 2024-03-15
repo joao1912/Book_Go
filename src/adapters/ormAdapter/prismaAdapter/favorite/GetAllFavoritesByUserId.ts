@@ -1,7 +1,7 @@
-import { Book } from "../../../../entities/Book.js";
-import { IGetAllFavoritesByUserId } from "../../repositories/favorite/IGetAllFavoritesByUserId.js";
-import { prisma } from "../db.js";
-import handlePrismaError from "../util/handlePrismaError.js";
+import { Book } from "../../../../entities/Book";
+import { IGetAllFavoritesByUserId } from "../../repositories/favorite/IGetAllFavoritesByUserId";
+import { prisma } from "../db";
+import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {

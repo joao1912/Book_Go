@@ -1,6 +1,6 @@
-import { Stock } from "../../../../entities/Stock.js";
-import { IGetAllStock } from "../../repositories/stock/IGetAllStock.js";
-import { prisma } from "../db.js";
+import { Stock } from "../../../../entities/Stock";
+import { IGetAllStock } from "../../repositories/stock/IGetAllStock";
+import { prisma } from "../db";
 
 export class GetAllStock implements IGetAllStock {
   async execute() {
