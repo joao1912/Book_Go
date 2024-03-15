@@ -1,4 +1,4 @@
-import { IGetAllBooks } from "../../adapters/ormAdapter/repositories/book/IGetAllBooks.js"
+import { IGetAllBooks } from "../../adapters/ormAdapter/repositories/book/IGetAllBooks"
 
 export class GetAllBooksUseCase {
 

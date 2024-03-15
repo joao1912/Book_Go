@@ -1,4 +1,4 @@
-import { IGetAllFinances } from "../../adapters/ormAdapter/repositories/finance/IGetAllFinances.js";
+import { IGetAllFinances } from "../../adapters/ormAdapter/repositories/finance/IGetAllFinances";
 
 export class GetAllFinanceUseCase {
 

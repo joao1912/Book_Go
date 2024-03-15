@@ -1,4 +1,4 @@
-import { IDeleteBook } from "../../adapters/ormAdapter/repositories/book/IDeleteBook.js";
+import { IDeleteBook } from "../../adapters/ormAdapter/repositories/book/IDeleteBook";
 
 
 export class DeleteBookUseCase {

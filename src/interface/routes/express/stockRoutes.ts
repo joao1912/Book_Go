@@ -1,9 +1,9 @@
 import { Router } from "express";
-import getAllStockController from "../../controllers/stockController/GetAllStock.js";
-import getStockByBookTitleController from "../../controllers/stockController/GetStockByBookTitle.js";
-import getStockByQuantityController from "../../controllers/stockController/GetStockByQuantity.js";
-import updateStockController from "../../controllers/stockController/UpdateStock.js";
-import Auth from "../../middlewares/Auth.js";
+import getAllStockController from "../../controllers/stockController/GetAllStock";
+import getStockByBookTitleController from "../../controllers/stockController/GetStockByBookTitle";
+import getStockByQuantityController from "../../controllers/stockController/GetStockByQuantity";
+import updateStockController from "../../controllers/stockController/UpdateStock";
+import Auth from "../../middlewares/Auth";
 
 
 

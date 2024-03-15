@@ -1,5 +1,5 @@
-import { HttpNext, HttpRequest, HttpResponse } from "../../adapters/HTTPAdapter/protocol.js";
-import { authAdapter } from "../../adapters/authAdapter/protocol.js";
+import { HttpNext, HttpRequest, HttpResponse } from "../../adapters/HTTPAdapter/protocol";
+import { authAdapter } from "../../adapters/authAdapter/protocol";
 
 export default class Auth {
 

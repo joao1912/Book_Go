@@ -1,4 +1,4 @@
-import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdateBook.js"
+import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdateBook"
 import { Book, IBook } from "../../entities/Book.js"
 
 

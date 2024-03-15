@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { getReservationByBookId } from "../../../adapters/ormAdapter/protocols/reservationProtocols.js";
-import { IReservation, Reservation } from "../../../entities/Reservation.js";
-import { GetReservationByBookIdUseCase } from "../../../usecases/reservation/GetReservationByBookIdUseCase.js";
-import { IController } from "../IController.js";
-import Formatter from "../utils/Formatter.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { getReservationByBookId } from "../../../adapters/ormAdapter/protocols/reservationProtocols";
+import { IReservation, Reservation } from "../../../entities/Reservation";
+import { GetReservationByBookIdUseCase } from "../../../usecases/reservation/GetReservationByBookIdUseCase";
+import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class GetReservationByBookId implements IController {

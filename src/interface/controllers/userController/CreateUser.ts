@@ -1,12 +1,12 @@
-import { authAdapter } from "../../../adapters/authAdapter/protocol.js";
-import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol.js";
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols.js";
-import { IUser, User } from "../../../entities/User.js";
-import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase.js";
-import { IController } from "../IController.js";
-import Formatter from "../utils/Formatter.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { authAdapter } from "../../../adapters/authAdapter/protocol";
+import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
+import { IUser, User } from "../../../entities/User";
+import { CreateUserUseCase } from "../../../usecases/user/CreateUserUseCase";
+import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IUser {}
 

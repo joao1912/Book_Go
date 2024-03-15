@@ -1,4 +1,4 @@
-import { ISearchBookByGenre } from "../../adapters/ormAdapter/repositories/book/ISearchBookByGenre.js"
+import { ISearchBookByGenre } from "../../adapters/ormAdapter/repositories/book/ISearchBookByGenre"
 
 
 

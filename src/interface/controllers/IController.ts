@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse } from "../../adapters/HTTPAdapter/protocol.js";
+import { HttpRequest, HttpResponse } from "../../adapters/HTTPAdapter/protocol";
 
 export interface IController {
 

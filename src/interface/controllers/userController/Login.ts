@@ -1,12 +1,12 @@
-import ServerResponse from "../utils/ServerResponse.js";
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import authJwt from "../../../adapters/authAdapter/jwtAdapter.js";
-import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol.js";
-import { getUser } from "../../../adapters/ormAdapter/protocols/userProtocols.js";
-import { GetUserUseCase } from "../../../usecases/user/GetUserUseCase.js";
-import { IController } from "../IController.js";
-import { User } from "../../../entities/User.js";
-import { CustomError } from "../utils/CustomError.js";
+import ServerResponse from "../utils/ServerResponse";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import authJwt from "../../../adapters/authAdapter/jwtAdapter";
+import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
+import { getUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
+import { GetUserUseCase } from "../../../usecases/user/GetUserUseCase";
+import { IController } from "../IController";
+import { User } from "../../../entities/User";
+import { CustomError } from "../utils/CustomError";
 
 
 class Login implements IController {

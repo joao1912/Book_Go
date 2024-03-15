@@ -1,4 +1,4 @@
-import { IDeleteComment } from "../../adapters/ormAdapter/repositories/comment/IDeleteComment.js";
+import { IDeleteComment } from "../../adapters/ormAdapter/repositories/comment/IDeleteComment";
 
 
 

@@ -1,8 +1,8 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { deleteFavorite } from "../../../adapters/ormAdapter/protocols/favoriteProtocols.js";
-import { DeleteFavoriteByIdUseCase } from "../../../usecases/user/DeleteFavoriteByIdUseCase.js";
-import { IController } from "../IController.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { deleteFavorite } from "../../../adapters/ormAdapter/protocols/favoriteProtocols";
+import { DeleteFavoriteByIdUseCase } from "../../../usecases/user/DeleteFavoriteByIdUseCase";
+import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteFavorite implements IController {

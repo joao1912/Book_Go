@@ -1,12 +1,12 @@
-import { User } from "../../../entities/User.js";
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import AuthJwt from "../../../adapters/authAdapter/jwtAdapter.js";
-import { updateUser } from "../../../adapters/ormAdapter/protocols/userProtocols.js";
-import { IUser } from "../../../entities/User.js";
-import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase.js";
-import { IController } from "../IController.js";
-import Formatter from "../utils/Formatter.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { User } from "../../../entities/User";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import AuthJwt from "../../../adapters/authAdapter/jwtAdapter";
+import { updateUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
+import { IUser } from "../../../entities/User";
+import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase";
+import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IUser { }
 

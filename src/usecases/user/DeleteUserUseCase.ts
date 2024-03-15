@@ -1,4 +1,4 @@
-import { IDeleteUser } from "../../adapters/ormAdapter/repositories/user/IDeleteUser.js";
+import { IDeleteUser } from "../../adapters/ormAdapter/repositories/user/IDeleteUser";
 
 
 export class DeleteUserUseCase {

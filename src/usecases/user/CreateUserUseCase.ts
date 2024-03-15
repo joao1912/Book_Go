@@ -1,5 +1,5 @@
-import { ICreateUser } from "../../adapters/ormAdapter/repositories/user/ICreateUser.js"
-import { IUser, User } from "../../entities/User.js"
+import { ICreateUser } from "../../adapters/ormAdapter/repositories/user/ICreateUser"
+import { IUser, User } from "../../entities/User"
 
 
 export class CreateUserUseCase {

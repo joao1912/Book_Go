@@ -1,10 +1,10 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { getStockByQuantity } from "../../../adapters/ormAdapter/protocols/stockProtocols.js";
-import { IStock, Stock } from "../../../entities/Stock.js";
-import { GetStockByQuantityUseCase } from "../../../usecases/stock/GetStockByQuantityUseCase.js";
-import { IController } from "../IController.js";
-import Formatter from "../utils/Formatter.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { getStockByQuantity } from "../../../adapters/ormAdapter/protocols/stockProtocols";
+import { IStock, Stock } from "../../../entities/Stock";
+import { GetStockByQuantityUseCase } from "../../../usecases/stock/GetStockByQuantityUseCase";
+import { IController } from "../IController";
+import Formatter from "../utils/Formatter";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class GetStockByQuantity implements IController {

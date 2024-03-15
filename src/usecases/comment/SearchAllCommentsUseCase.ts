@@ -1,4 +1,4 @@
-import { IGetAllComments } from "../../adapters/ormAdapter/repositories/comment/IGetAllComments.js";
+import { IGetAllComments } from "../../adapters/ormAdapter/repositories/comment/IGetAllComments";
 
 
 export class SearchAllCommentsUseCase {

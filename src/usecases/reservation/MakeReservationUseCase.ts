@@ -1,4 +1,4 @@
-import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reservation/IMakeReservation.js"
+import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reservation/IMakeReservation"
 import { IReservation, Reservation } from "../../entities/Reservation.js"
 
 

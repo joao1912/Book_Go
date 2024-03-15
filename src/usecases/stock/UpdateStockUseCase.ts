@@ -1,4 +1,4 @@
-import { IUpdateStock } from "../../adapters/ormAdapter/repositories/stock/IUpdateStock.js"
+import { IUpdateStock } from "../../adapters/ormAdapter/repositories/stock/IUpdateStock"
 import { IStock, Stock } from "../../entities/Stock.js"
 
 

@@ -1,4 +1,4 @@
-import { IGetAllUsers } from "../../adapters/ormAdapter/repositories/user/IGetAllUsers.js"
+import { IGetAllUsers } from "../../adapters/ormAdapter/repositories/user/IGetAllUsers"
 
 // a classe vai receber como argumento(ormAdapter) o metodo do prisma que vai relizar a operação
 

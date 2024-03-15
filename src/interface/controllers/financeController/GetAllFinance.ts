@@ -1,8 +1,8 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { getAllFinances } from "../../../adapters/ormAdapter/protocols/financeProtocols.js";
-import { GetAllFinanceUseCase } from "../../../usecases/finance/GetAllFinanceUseCase.js";
-import { IController } from "../IController.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { getAllFinances } from "../../../adapters/ormAdapter/protocols/financeProtocols";
+import { GetAllFinanceUseCase } from "../../../usecases/finance/GetAllFinanceUseCase";
+import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 class GetAllFinance implements IController {
 

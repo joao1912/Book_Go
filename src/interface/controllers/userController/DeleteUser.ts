@@ -1,8 +1,8 @@
-import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol.js";
-import { deleteUser } from "../../../adapters/ormAdapter/protocols/userProtocols.js";
-import { DeleteUserUseCase } from "../../../usecases/user/DeleteUserUseCase.js";
-import { IController } from "../IController.js";
-import ServerResponse from "../utils/ServerResponse.js";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { deleteUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
+import { DeleteUserUseCase } from "../../../usecases/user/DeleteUserUseCase";
+import { IController } from "../IController";
+import ServerResponse from "../utils/ServerResponse";
 
 
 class DeleteUser implements IController {

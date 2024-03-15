@@ -1,15 +1,15 @@
 import {Router} from 'express';
 
-import getAllUsersController from '../../controllers/userController/GetAllUsers.js';
-import createUserController from '../../controllers/userController/CreateUser.js';
-import deleteFavoriteController from '../../controllers/userController/DeleteFavorite.js';
-import deleteUserController from '../../controllers/userController/DeleteUser.js';
-import updateUserController from '../../controllers/userController/UpdateUser.js';
-import createFavoriteController from '../../controllers/userController/CreateFavorite.js';
-import getMyFavoritesController from '../../controllers/userController/GetMyFavorites.js';
-import loginController from '../../controllers/userController/Login.js';
+import getAllUsersController from '../../controllers/userController/GetAllUsers';
+import createUserController from '../../controllers/userController/CreateUser';
+import deleteFavoriteController from '../../controllers/userController/DeleteFavorite';
+import deleteUserController from '../../controllers/userController/DeleteUser';
+import updateUserController from '../../controllers/userController/UpdateUser';
+import createFavoriteController from '../../controllers/userController/CreateFavorite';
+import getMyFavoritesController from '../../controllers/userController/GetMyFavorites';
+import loginController from '../../controllers/userController/Login';
 
-import Auth from '../../middlewares/Auth.js';
+import Auth from '../../middlewares/Auth';
 
 const userRouter = Router();
 

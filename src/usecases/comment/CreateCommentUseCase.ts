@@ -1,5 +1,5 @@
-import { ICreateComment } from "../../adapters/ormAdapter/repositories/comment/ICreateComment.js";
-import { Comment, IComment } from "../../entities/Comment.js";
+import { ICreateComment } from "../../adapters/ormAdapter/repositories/comment/ICreateComment";
+import { Comment, IComment } from "../../entities/Comment";
 
 
 export class CreateCommentUseCase {

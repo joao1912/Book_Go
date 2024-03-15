@@ -1,4 +1,4 @@
-import { IDeleteReservation } from "../../adapters/ormAdapter/repositories/reservation/IDeleteReservation.js";
+import { IDeleteReservation } from "../../adapters/ormAdapter/repositories/reservation/IDeleteReservation";
 
 
 export class DeleteReservationUseCase {
