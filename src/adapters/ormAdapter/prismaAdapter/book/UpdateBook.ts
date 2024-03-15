@@ -66,7 +66,7 @@ export class UpdateBook implements IUpdateBook {
 
 
     } catch (error) {
-      return handlePrismaError(error)
+      return handlePrismaError("adminError",error)
     
     }
   }
