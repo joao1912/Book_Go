@@ -52,8 +52,8 @@
   "paths": {
     "/users/": {
       "get": {
-        "summary": "Buscar todos os usuarios",
-        "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
+        "summary": "Buscar todos os Users",
+        "description": "Essa rota será responsável por buscar todos os Users cadastrados",
         "tags": ["users"],
         "security": [
           {
@@ -68,7 +68,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Usuario"
+                    "$ref": "#/components/schemas/User"
                   }
                 }
               }
@@ -90,33 +90,11 @@
         "description": "Logs user into the library system",
         "operationId": "login",
         "security": [],
-        "parameters": [
-          {
-            "name": "email",
-            "in": "query",
-            "description": "The email for login",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "testswagger@gmail.com"
-            }
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "The password for login",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "123"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type":"string",
+                "$ref": "#/components/schemas/User",
                 "example": {
                   "email": "admin_teste@gmail.com",
                   "password": "123"
@@ -146,6 +124,78 @@
         }
       }
     },
+    "/users/update/{id}": {
+      "put": {
+        "tags": ["users"],
+        "summary": "Update user",
+        "description": "This only can be logged",
+        "operationId": "updateBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User",
+                "example": {
+                  " username": "updateUser",
+                  "email": "updateuser@gmail.com",
+                  "password": "123",
+                  "telephone": "4299988800"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "409": {
+            "description": "This ${target} is already in use."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/book/": {
       "get": {
         "tags": ["book"],
@@ -156,14 +206,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              },
               "application/json": {
                 "schema": {
                   "type": "array",
@@ -173,6 +215,209 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/add": {
+      "post": {
+        "tags": ["book"],
+        "summary": "Adds/Creates a book",
+        "description": "Adds a new book to the library. This only can be done by an admin",
+        "operationId": "addBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Created book object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/book/genre/{genre}": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Searchs books by genre",
+        "description": "Search books by its genre",
+        "operationId": "searchBookByGenre",
+        "security": [],
+        "parameters": [
+          {
+            "name": "genre",
+            "in": "path",
+            "description": "Genre of a book",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genre not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/title/{title}": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Searchs books by title",
+        "description": "Search book by its title",
+        "operationId": "searchBookByTitle",
+        "security": [],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "description": "Title of a book",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/update/{bookId}": {
+      "put": {
+        "tags": ["book"],
+        "summary": "Updates book",
+        "description": "This only can be done by an admin",
+        "operationId": "updateBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "Id of the book to update",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2b"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updates an existing book of the library",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book",
+                "example": {
+                  "title": "Route All stock",
+                  "synopsis": "I just got lost",
+                  "price": 80,
+                  "author": "Coldplay",
+                  "pageCount": 23,
+                  "publishedDate": "2012-10-09",
+                  "genre": "Music"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
           },
           "500": {
             "description": "Internal server error"
@@ -218,143 +463,74 @@
         }
       }
     },
-    "/book/genre/{genre}": {
-      "post": {
-        "tags": ["book"],
-        "summary": "Search books by genre",
-        "description": "Search books by its genre",
-        "operationId": "searchBookByGenre",
-        "security": [],
-        "parameters": [
-          {
-            "name": "genre",
-            "in": "path",
-            "description": "Genre of a book",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Genre not found."
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/book/title/{title}": {
-      "post": {
-        "tags": ["book"],
-        "summary": "Searchs books by title",
-        "description": "Search book by its title",
-        "operationId": "searchBookByTitle",
-        "security": [],
-        "parameters": [
-          {
-            "name": "title",
-            "in": "path",
-            "description": "Title of a book",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Book not found."
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/book/add": {
-      "post": {
-        "tags": ["book"],
-        "summary": "Adds/Creates a book",
-        "description": "Adds a new book to the library. This only can be done by an admin",
-        "operationId": "addBook",
+    "/stock/all": {
+      "get": {
+        "tags": ["stock"],
+        "summary": "Finds all book with stock",
+        "description": "This only can be done by an admin",
+        "operationId": "getAllStock",
         "security": [
           {
             "BearerAuth": []
           }
         ],
-        "requestBody": {
-          "description": "Created book object",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Book"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "Successful operation",
             "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              },
+            
               "application/json": {
                 "schema": {
                   "type": "object",
                   "items": {
-                    "$ref": "#/components/schemas/Book"
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stock/book/quantity/{quantity}": {
+      "get": {
+        "tags": ["stock"],
+        "summary": "Finds the stock of a book by its quantity",
+        "description": "This only can be done by an admin",
+        "operationId": "getStockByBookTitle",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "quantity",
+            "in": "path",
+            "description": "Quantity of the book in stock",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+            
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
                   }
                 }
               }
@@ -366,18 +542,74 @@
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
+          "404": {
+            "description": "REVER>>>>Book not found."
+          },
           "500": {
             "description": "Internal server error"
           }
         }
       }
     },
-    "/book/update/{bookId}": {
-      "put": {
-        "tags": ["book"],
-        "summary": "Update book",
+    "/stock/book/${bookTitle}": {
+      "get": {
+        "tags": ["stock"],
+        "summary": "Finds the stock of a book by its title",
         "description": "This only can be done by an admin",
-        "operationId": "updateBook",
+        "operationId": "getStockByBookTitle",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bookTitle",
+            "in": "path",
+            "description": "Title of the book",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Once upon a time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+            
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stock/update/book/${bookId}": {
+      "put": {
+        "tags": ["stock"],
+        "summary": "Updates stock",
+        "description": "Updates a quantity of a book.This only can be done by an admin",
+        "operationId": "updateStock",
         "security": [
           {
             "BearerAuth": []
@@ -387,7 +619,7 @@
           {
             "name": "bookId",
             "in": "path",
-            "description": "Id of the book to update",
+            "description": "Id of the book to update quantity",
             "required": true,
             "schema": {
               "type": "string",
@@ -396,12 +628,14 @@
           }
         ],
         "requestBody": {
-          "description": "Updates an existing book of the library",
+          "description": "Object of type stock",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Book",
+                "$ref": "#/components/schemas/Stock",
                 "example": {
+                  "quantity": 5,
+                  "id":20,
                   "title": "Route All stock",
                   "synopsis": "I just got lost",
                   "price": 80,
@@ -419,19 +653,12 @@
           "200": {
             "description": "Successful operation",
             "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              },
+            
               "application/json": {
                 "schema": {
                   "type": "object",
                   "items": {
-                    "$ref": "#/components/schemas/Book"
+                    "$ref": "#/components/schemas/Stock"
                   }
                 }
               }
@@ -487,7 +714,7 @@
           }
         }
       },
-      "Usuario": {
+      "User": {
         "type": "object",
         "properties": {
           "id": {
@@ -570,6 +797,7 @@
           "book": {
             "$ref": "#/components/schemas/Book",
             "example": {
+              "id": "20",
               "title": "Route All stock",
               "synopsis": "I just got lost",
               "price": 80,

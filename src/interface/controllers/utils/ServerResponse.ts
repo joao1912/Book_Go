@@ -23,6 +23,9 @@ class ServerResponse {
     notFound(message: any): void {
         this.response.status(404).json(message);
     }
+    conflict(message: any): void {
+        this.response.status(409).json(message);
+    }
 
     missingParameters(message: any): void {
         this.response.status(422).json(message);

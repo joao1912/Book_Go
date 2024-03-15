@@ -29,7 +29,7 @@ class UpdateUser implements IController {
 
         try {
 
-            const userInstance = await updateUserUseCase.execute({
+            const response = await updateUserUseCase.execute({
                 id,
                 email,
                 password,
@@ -37,12 +37,28 @@ class UpdateUser implements IController {
                 username,
             })
 
-            return serverResponse.ok(
-                Formatter.handle<User>(userInstance)
-            )
+
+            switch (true) {
+                case (response instanceof User):
+                    return serverResponse.ok(Formatter.handle<User>(response))
+                    break;
+
+                case (response == "Invalid input type provided."):
+                    return serverResponse.badRequest(response)
+                    break;
+                case (typeof response == "string" && response.includes("is already in use")):
+                    return serverResponse.conflict(response)
+                    break;
+
+                case (response == "Internal server error"):
+                    return serverResponse.serverError(response)
+                    break;
+            }
 
         } catch (error) {
-            throw new Error("Bad request: " + error)
+            
+            console.log(error)
+            throw new Error("Something happened. Please try again later")   
         }
     }
 }

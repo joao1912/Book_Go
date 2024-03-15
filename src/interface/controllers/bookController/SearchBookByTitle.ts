@@ -16,7 +16,7 @@ class SearchBookByTitle implements IController {
         try {
             const serverResponse = new ServerResponse(res)
 
-            const title = req.body.title
+            const title = req.params.title
 
             const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 

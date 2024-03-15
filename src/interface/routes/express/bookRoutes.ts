@@ -14,9 +14,9 @@ bookRouter.get('/', getAllBooksController.handle)
 
 bookRouter.post('/add', Auth.execute, addBookController.handle)
 
-bookRouter.post('/genre', searchBookByGenreController.handle)
+bookRouter.get('/genre/:genre', searchBookByGenreController.handle)
 
-bookRouter.post('/title', searchBookByTitleController.handle)
+bookRouter.get('/title/:title', searchBookByTitleController.handle)
 
 bookRouter.put('/update/:id', Auth.execute, updateBookController.handle)
 

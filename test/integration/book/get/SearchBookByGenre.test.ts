@@ -9,6 +9,7 @@ describe('## POST BOOK GENRE ##', () => {
     let app: any;
     let id: string;
     let token: string;
+    let genre: string = "Music"
        
     const Book1: IBook = {
         title: "Bob",
@@ -73,10 +74,10 @@ describe('## POST BOOK GENRE ##', () => {
     
     it("Deve buscar livro por genero", async()=>{
        const result = await request.agent(app)
-        .post(`/v1/book/genre`)
-        .send({
-            genre: "Music"
-        })
+        .get(`/v1/book/genre/${genre}`)
+        // .send({
+        //     genre: "Music"
+        // })
         .expect(200)
         const books = result.body
         for(let book of books) {
@@ -85,10 +86,10 @@ describe('## POST BOOK GENRE ##', () => {
     })
     it("Deve tentar buscar um genero que não existe", async()=>{
        const result = await request.agent(app)
-        .post(`/v1/book/genre`)
-        .send({
-            genre: "blablabla"
-        })
+        .get(`/v1/book/genre/blablabla`)
+        // .send({
+        //     genre: "blablabla"
+        // })
         .expect(404)
         expect(result.body).toEqual(`Genre not found.`)
 
