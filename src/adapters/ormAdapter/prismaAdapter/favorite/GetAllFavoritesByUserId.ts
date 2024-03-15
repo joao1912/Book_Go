@@ -1,11 +1,12 @@
 import { Book } from "../../../../entities/Book.js";
 import { IGetAllFavoritesByUserId } from "../../repositories/favorite/IGetAllFavoritesByUserId.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
 
-    async execute(userId: string): Promise<Book[]> {
+    async execute(userId: string): Promise<Book[] | void> {
 
         try {
 
@@ -68,7 +69,7 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
 
         } catch (error) {
 
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("FavoriteError", error)
 
         }
 

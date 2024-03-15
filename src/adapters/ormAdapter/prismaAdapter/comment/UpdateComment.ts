@@ -1,10 +1,11 @@
 import { prisma } from "../db.js";
 import { IComment, Comment } from "../../../../entities/Comment.js";
 import { IUpdateComment } from "../../repositories/comment/IUpdateComment.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class UpdateComment implements IUpdateComment {
 
-    async execute({props}: Comment): Promise<Comment> {
+    async execute({props}: Comment): Promise<Comment | void> {
 
         try {
 
@@ -30,7 +31,7 @@ export class UpdateComment implements IUpdateComment {
 
         } catch (error) {
 
-            throw new Error("Something happened: " + error)
+            return handlePrismaError("CommentError", error)
 
         }
     }

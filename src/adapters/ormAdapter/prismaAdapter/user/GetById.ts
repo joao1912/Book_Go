@@ -1,10 +1,11 @@
 import { prisma } from "../db";
 import { IGetUser } from "../../repositories/user/IGetUser";
 import { User } from "../../../../entities/User.js";
+import handlePrismaError from "../util/handlePrismaError";
 
 export class GetById implements IGetUser {
 
-  async execute(input: string) {
+  async execute(input: string): Promise<User | void> {
 
     try {
       const user = await prisma.user.findUnique({
@@ -30,11 +31,8 @@ export class GetById implements IGetUser {
       })
     }
 
-      let message = "Invalid input "
-      return message
-
     } catch (error) {
-      throw new Error('Internal server error: ' + error)
+      return handlePrismaError("UserError", error)
     }
 
 

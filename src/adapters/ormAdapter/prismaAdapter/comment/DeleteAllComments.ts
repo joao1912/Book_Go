@@ -1,5 +1,6 @@
 import { prisma } from "../db.js";
 import { IDeleteAllComments } from "../../repositories/comment/IDeleteAllComments.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class DeleteAllComments implements IDeleteAllComments {
 
@@ -11,7 +12,7 @@ export class DeleteAllComments implements IDeleteAllComments {
             
         } catch (error) {
            
-            throw new Error('Internal server error: ' + error)
+            return handlePrismaError("CommentError", error)
 
         }
 

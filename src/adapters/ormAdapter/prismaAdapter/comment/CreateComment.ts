@@ -2,10 +2,11 @@ import { Prisma } from "@prisma/client";
 import { IComment, Comment } from "../../../../entities/Comment.js";
 import { ICreateComment } from "../../repositories/comment/ICreateComment.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class CreateComment implements ICreateComment {
 
-    async execute({props}: Omit<Comment, "id">): Promise<Comment> {
+    async execute({props}: Omit<Comment, "id">): Promise<Comment | void> {
 
         const {comment, bookId, userId} = props
         
@@ -30,15 +31,7 @@ export class CreateComment implements ICreateComment {
 
         } catch (error) {
 
-            if (error instanceof Prisma.PrismaClientKnownRequestError) {
-
-                console.log(error.code)
-                console.log(error.meta)
-                //tratar o erro aqui
-
-            }
-
-            throw error
+            return handlePrismaError("CommentError", error)
             
         }
     }

@@ -6,6 +6,6 @@ export interface IDeleteMessage {
 
 export interface IDeleteFinance {
 
-    execute(id: string): Promise<IDeleteMessage>
+    execute(id: string): Promise<IDeleteMessage | void>
 
 }

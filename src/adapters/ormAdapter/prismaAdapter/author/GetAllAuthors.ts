@@ -1,11 +1,12 @@
 import { Author } from "../../../../entities/Author.js";
 import { IGetAllAuthors } from "../../repositories/author/IGetAllAuthors.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class GetAllAuthors implements IGetAllAuthors {
 
-    async execute(): Promise<Author[]> {
+    async execute(): Promise<Author[] | void> {
         
         try {
 
@@ -31,7 +32,7 @@ export class GetAllAuthors implements IGetAllAuthors {
 
         } catch (error) {
             
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("AuthorError", error)
 
         }
 

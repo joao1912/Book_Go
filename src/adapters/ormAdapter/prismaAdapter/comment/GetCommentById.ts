@@ -1,10 +1,11 @@
 import { prisma } from "../db.js";
 import { Comment } from "../../../../entities/Comment.js";
 import { IGetCommentById } from "../../repositories/comment/IGetCommentById.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class GetCommentById implements IGetCommentById {
 
-    async execute(id: string): Promise<Comment | null> {
+    async execute(id: string): Promise<Comment | void> {
 
         try {
 
@@ -15,7 +16,7 @@ export class GetCommentById implements IGetCommentById {
             })
 
             if (comment == null) {
-                return null
+                return
             }
 
             const commentInstance = new Comment({
@@ -29,7 +30,7 @@ export class GetCommentById implements IGetCommentById {
             
         } catch (error) {
 
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("CommentError", error)
             
         }
     }

@@ -1,6 +1,7 @@
 import { IFinance, Finance } from "../../../../entities/Finance.js";
 import { ICreateFinance, IRegister, typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class CreateFinance implements ICreateFinance {
 
@@ -46,7 +47,7 @@ export class CreateFinance implements ICreateFinance {
 
     }
 
-    async execute({props}: Omit<Finance, "id">): Promise<Finance> {
+    async execute({props}: Omit<Finance, "id">): Promise<Finance | void> {
 
         const {payment, total, bookId, userId} = props;
 
@@ -99,7 +100,7 @@ export class CreateFinance implements ICreateFinance {
 
         } catch (error) {
 
-            throw new Error('internal server error: ' + error)
+            return handlePrismaError("FinanceError", error)
 
         }
     }

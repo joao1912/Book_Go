@@ -9,6 +9,6 @@ export interface IFavoriteCreated {
 
 export interface ICreateFavorite {
 
-    execute(userId: string, bookId: string): Promise<IFavoriteCreated>
+    execute(userId: string, bookId: string): Promise<IFavoriteCreated | void>
 
 }

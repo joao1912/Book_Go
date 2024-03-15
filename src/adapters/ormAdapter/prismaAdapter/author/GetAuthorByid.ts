@@ -1,11 +1,12 @@
 import { Author } from "../../../../entities/Author.js";
 import { IGetAuthorById } from "../../repositories/author/IGetAuthorById.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class GetAuthorById implements IGetAuthorById {
 
-    async execute(id: string): Promise<Author> {
+    async execute(id: string): Promise<Author | void> {
         try {
 
             const author = await prisma.author.findUnique({
@@ -26,7 +27,7 @@ export class GetAuthorById implements IGetAuthorById {
            
         } catch (error) {
             
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("AuthorError", error)
 
         }
     }

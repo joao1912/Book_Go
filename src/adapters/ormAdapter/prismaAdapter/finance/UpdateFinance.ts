@@ -2,6 +2,7 @@ import { IFinance, Finance } from "../../../../entities/Finance.js";
 import { typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
 import { IUpdateFinance } from "../../repositories/finance/IUpdateFinance.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class UpdateFinance implements IUpdateFinance {
@@ -32,7 +33,7 @@ export class UpdateFinance implements IUpdateFinance {
 
     }
 
-    async execute({props}: Partial<Finance>): Promise<Partial<Finance>> {
+    async execute({props}: Partial<Finance>): Promise<Partial<Finance> | void> {
         
         try {
 
@@ -56,7 +57,7 @@ export class UpdateFinance implements IUpdateFinance {
             
         } catch (error) {
 
-            throw new Error('Internal server error: ' + error)
+            return handlePrismaError("FinanceError", error)
 
         }
     }
