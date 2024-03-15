@@ -478,7 +478,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -525,7 +524,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -578,7 +576,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -635,7 +632,7 @@
                 "$ref": "#/components/schemas/Stock",
                 "example": {
                   "quantity": 5,
-                  "id":20,
+                  "id": 20,
                   "title": "Route All stock",
                   "synopsis": "I just got lost",
                   "price": 80,
@@ -653,7 +650,6 @@
           "200": {
             "description": "Successful operation",
             "content": {
-            
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -666,6 +662,44 @@
           },
           "400": {
             "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/reservation/delete/${reservationId}": {
+      "delete": {
+        "tags": ["reservationId"],
+        "summary": "Deletes a reserve",
+        "description": "Deletes a reservation of a book",
+        "operationId": "deleteReservation",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "description": "Id of the reserve to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation deleted successfully.."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"

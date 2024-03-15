@@ -5,19 +5,19 @@ import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservati
 export class DeleteAllReservations implements IDeleteReservation {
 
     async execute(reservationId: string): Promise<IDeleteMessage> {
-       
+
         try {
-            
+
             await prisma.reservation.deleteMany()
 
-            const message: IDeleteMessage =  {
-                message: 'Reservada deletada com sucesso!'
-            }            
+            const message: IDeleteMessage = {
+                message: 'Reservation deleted successfully.'
+            }
 
             return message
 
         } catch (error) {
-            
+
             throw new Error('internal server error' + error)
 
         }

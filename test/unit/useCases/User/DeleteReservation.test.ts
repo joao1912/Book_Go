@@ -51,7 +51,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
 
     const result = await deleteBookUseCase.execute(reservationId);
 
-    expect(result.message).toBe('Reservada deletada com sucesso!')
+    expect(result.message).toBe('Reservation deleted successfully.')
 
 
   });
