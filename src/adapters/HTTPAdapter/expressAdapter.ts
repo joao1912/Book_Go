@@ -11,6 +11,7 @@ import reservationRouter from "../../interface/routes/express/reservationRoutes.
 import stockRouter from "../../interface/routes/express/stockRoutes.js";
 import commentRouter from "../../interface/routes/express/commentRoutes.js";
 import financeRouter from "../../interface/routes/express/financeRoutes.js";
+import ErrorHandler from "../../interface/middlewares/ErrorHandler.js";
 
 export default class expressAdapter implements HTTPAdapterRepository {
 
@@ -46,6 +47,8 @@ export default class expressAdapter implements HTTPAdapterRepository {
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cors())
         this.setRoutes()
+        this.app.use(ErrorHandler.execute) // nao ta pegando
+
     }
 
     getApp(): Application {

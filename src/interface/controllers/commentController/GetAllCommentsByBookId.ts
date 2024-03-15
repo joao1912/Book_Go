@@ -3,6 +3,7 @@ import { getAllComments } from "../../../adapters/ormAdapter/protocols/commentPr
 import { Comment, IComment } from "../../../entities/Comment.js";
 import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase.js";
 import { IController } from "../IController.js";
+import { CustomError } from "../utils/CustomError.js";
 import Formatter from "../utils/Formatter.js";
 import ServerResponse from "../utils/ServerResponse.js";
 
