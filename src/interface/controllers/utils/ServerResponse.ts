@@ -1,38 +1,37 @@
 import { HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 
+class ServerResponse extends Error {
+    statusCode: number;
 
-class ServerResponse {
-    public response: HttpResponse;
-
-    constructor(res: HttpResponse) {
-        this.response = res;
+    constructor(message: string, statusCode: number) {
+        super(message);
+        this.statusCode = statusCode;
     }
 
-    ok(message: any): void {
-        this.response.status(200).json(message);
+    static ok(message: string): ServerResponse {
+        return new ServerResponse(message, 200);
+    }
+    static badRequest(message: string): ServerResponse {
+        return new ServerResponse(message, 400);
+    }
+    static notAuthorized(message: string): ServerResponse {
+        return new ServerResponse(message, 401);
     }
 
-    badRequest(message: any): void {
-        this.response.status(400).json(message);
+    static notFound(message: string): ServerResponse {
+        return new ServerResponse(message, 404);
     }
 
-    notAuthorized(message: any): void {
-        this.response.status(401).json(message);
+    static conflict(message: string): ServerResponse {
+        return new ServerResponse(message, 409);
     }
 
-    notFound(message: any): void {
-        this.response.status(404).json(message);
-    }
-    conflict(message: any): void {
-        this.response.status(409).json(message);
+    static missingParameters(message: string): ServerResponse {
+        return new ServerResponse(message, 422);
     }
 
-    missingParameters(message: any): void {
-        this.response.status(422).json(message);
-    }
-
-    serverError(message: any): void {
-        this.response.status(500).json(message);
+    static serviceUnavailable(message: string): ServerResponse {
+        return new ServerResponse(message, 503);
     }
 }
 

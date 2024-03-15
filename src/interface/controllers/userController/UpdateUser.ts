@@ -14,7 +14,7 @@ class UpdateUser implements IController {
     
     async handle(req: HttpRequest<{ id: string }, {}, IBody>, res: HttpResponse) {
 
-        const serverResponse = new ServerResponse(res)
+        // const serverResponse = new ServerResponse(res)
 
         const id = req.params.id
         
@@ -38,22 +38,22 @@ class UpdateUser implements IController {
             })
 
 
-            switch (true) {
-                case (response instanceof User):
-                    return serverResponse.ok(Formatter.handle<User>(response))
-                    break;
+            // switch (true) {
+            //     case (response instanceof User):
+            //         return serverResponse.ok(Formatter.handle<User>(response))
+            //         break;
 
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
-                    break;
-                case (typeof response == "string" && response.includes("is already in use")):
-                    return serverResponse.conflict(response)
-                    break;
+            //     case (response == "Invalid input type provided."):
+            //         return serverResponse.badRequest(response)
+            //         break;
+            //     case (typeof response == "string" && response.includes("is already in use")):
+            //         return serverResponse.conflict(response)
+            //         break;
 
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
+            //     case (response == "Internal server error"):
+            //         return serverResponse.serverError(response)
+            //         break;
+            // }
 
         } catch (error) {
             
