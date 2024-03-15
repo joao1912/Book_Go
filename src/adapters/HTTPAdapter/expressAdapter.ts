@@ -1,3 +1,4 @@
+import 'express-async-errors'; 
 import { HTTPAdapterRepository } from "./repository/HTTPAdapterRepository";
 import express, { Application } from "express";
 import cors from "cors"
@@ -47,7 +48,7 @@ export default class expressAdapter implements HTTPAdapterRepository {
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cors())
         this.setRoutes()
-        this.app.use(ErrorHandler.execute) // nao ta pegando
+        this.app.use(ErrorHandler.execute)
 
     }
 
