@@ -1,487 +1,855 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-        "title": "API do Software Book",
-        "description": "Essa API vai manipular os dados de uma biblioteca local",
-        "contact": {
-            "emailOne": "joaopedrot1912@gmail.com",
-            "emailTwo": "ggisa.mj@gmail.com"
-        },
-        "version": "1.0.0"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API do Software Book",
+    "description": "Essa API vai manipular os dados de uma biblioteca local",
+    "contact": {
+      "emailOne": "joaopedrot1912@gmail.com",
+      "emailTwo": "ggisa.mj@gmail.com"
     },
-    "servers": [
-        {
-            "url": "http://localhost:8085",
-            "description": "API de produção"
-        }
-    ],
-    "tags": [
-        {
-            "name": "users",
-            "description": "Everything about users",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
-        },
-        {
-            "name": "book",
-            "description": "Everything about books",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
-        },
-        {
-            "name": "reservation",
-            "description": "Everything about reservations of our books",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
-        },
-        {
-            "name": "stock",
-            "description": "Everything about our stock",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
-        }
-    ],
-    "paths": {
-        "/v1/users/": {
-            "get": {
-                "summary": "Buscar todos os usuarios",
-                "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
-                "tags": [
-                    "users"
-                ],
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Usuario"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "/book/": {
-            "get": {
-                "tags": [
-                    "book"
-                ],
-                "summary": "Finds all books",
-                "description": "Finds all book on the database.",
-                "operationId": "getAllBooks",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/xml": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Book"
-                                    }
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Book"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            }
-        },
-        "v1/book/delete/{id}": {
-            "delete": {
-                "tags": [
-                    "book"
-                ],
-                "summary": "Delete a book",
-                "description": "Delete a book of the database.",
-                "operationId": "deleteBook",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the book to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The book with ID ${id} and title ${book.title} has been successfully deleted."
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Id provided does not exist."
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        }
-    },
-    "components": {
-        "securitySchemes": {
-            "BearerAuth": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
-            }
-        },
-        "schemas": {
-            "Usuario": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "username": {
-                        "type": "string",
-                        "maxLength": 40,
-                        "unique": true,
-                        "nullable": false
-                    },
-                    "password": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "email": {
-                        "type": "string",
-                        "maxLength": 40,
-                        "unique": true,
-                        "nullable": false
-                    },
-                    "telephone": {
-                        "type": "string",
-                        "nullable": false,
-                        "unique": true
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Book": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "title": {
-                        "type": "string",
-                        "maxLength": 40,
-                        "nullable": false
-                    },
-                    "synopis": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "author": {
-                        "type": "string",
-                        "maxLength": 40,
-                        "nullable": false
-                    },
-                    "price": {
-                        "type": "number",
-                        "nullable": false
-                    },
-                    "pageCount": {
-                        "type": "number",
-                        "nullable": false
-                    },
-                    "genre": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "publishedDate": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "image": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Stock": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "quantity": {
-                        "type": "number",
-                        "nullable": false
-                    },
-                    "fk_id_book": {
-                        "unique": true,
-                        "nullable": false
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Reservation": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "userId": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "bookId": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "author": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "price": {
-                        "type": "number",
-                        "nullable": false
-                    },
-                    "status": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "startedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "endsAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Author": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "name": {
-                        "type": "string",
-                        "nullable": false,
-                        "unique": true
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Comment": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "comment": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "fk_id_book": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "fk_id_user": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Favorite": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "fk_id_book": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "fk_id_user": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Finance": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "payments": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "total": {
-                        "type": "number",
-                        "nullable": false
-                    },
-                    "fk_id_book": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "fk_id_user": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Register": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "payments": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "total": {
-                        "type": "number",
-                        "nullable": false
-                    },
-                    "author": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "title": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "telephone": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "email": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            },
-            "Tag": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "nullable": false
-                    },
-                    "genre": {
-                        "type": "string",
-                        "nullable": false,
-                        "unique": true
-                    },
-                    "createdAt": {
-                        "type": "Date",
-                        "nullable": false
-                    },
-                    "updatedAt": {
-                        "type": "Date",
-                        "nullable": false
-                    }
-                }
-            }
-        }
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8085/v1",
+      "description": "API de produção"
     }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Everything about users",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "book",
+      "description": "Everything about books",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "reservation",
+      "description": "Everything about reservations of our books",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "stock",
+      "description": "Everything about our stock",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/users/": {
+      "get": {
+        "summary": "Buscar todos os Users",
+        "description": "Essa rota será responsável por buscar todos os Users cadastrados",
+        "tags": ["users"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Logs user",
+        "description": "Logs user into the library system",
+        "operationId": "login",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User",
+                "example": {
+                  "email": "admin_teste@gmail.com",
+                  "password": "123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing parameters(email or password)."
+          },
+          "401": {
+            "description": "Invalid password."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/users/update/{id}": {
+      "put": {
+        "tags": ["users"],
+        "summary": "Update user",
+        "description": "This only can be logged",
+        "operationId": "updateBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User",
+                "example": {
+                  " username": "updateUser",
+                  "email": "updateuser@gmail.com",
+                  "password": "123",
+                  "telephone": "4299988800"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "409": {
+            "description": "This ${target} is already in use."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Finds all books",
+        "description": "Finds all book on the database.",
+        "operationId": "getAllBooks",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/add": {
+      "post": {
+        "tags": ["book"],
+        "summary": "Adds/Creates a book",
+        "description": "Adds a new book to the library. This only can be done by an admin",
+        "operationId": "addBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Created book object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/book/genre/{genre}": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Searchs books by genre",
+        "description": "Search books by its genre",
+        "operationId": "searchBookByGenre",
+        "security": [],
+        "parameters": [
+          {
+            "name": "genre",
+            "in": "path",
+            "description": "Genre of a book",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genre not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/title/{title}": {
+      "get": {
+        "tags": ["book"],
+        "summary": "Searchs books by title",
+        "description": "Search book by its title",
+        "operationId": "searchBookByTitle",
+        "security": [],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "description": "Title of a book",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/update/{bookId}": {
+      "put": {
+        "tags": ["book"],
+        "summary": "Updates book",
+        "description": "This only can be done by an admin",
+        "operationId": "updateBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "Id of the book to update",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2b"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updates an existing book of the library",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book",
+                "example": {
+                  "title": "Route All stock",
+                  "synopsis": "I just got lost",
+                  "price": 80,
+                  "author": "Coldplay",
+                  "pageCount": 23,
+                  "publishedDate": "2012-10-09",
+                  "genre": "Music"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/book/delete/{id}": {
+      "delete": {
+        "tags": ["book"],
+        "summary": "Deletes a book",
+        "description": "Delete a book of the database.",
+        "operationId": "deleteBook",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the book to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The book with ID ${id} and title ${book.title} has been successfully deleted."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stock/all": {
+      "get": {
+        "tags": ["stock"],
+        "summary": "Finds all book with stock",
+        "description": "This only can be done by an admin",
+        "operationId": "getAllStock",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+            
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stock/book/quantity/{quantity}": {
+      "get": {
+        "tags": ["stock"],
+        "summary": "Finds the stock of a book by its quantity",
+        "description": "This only can be done by an admin",
+        "operationId": "getStockByBookTitle",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "quantity",
+            "in": "path",
+            "description": "Quantity of the book in stock",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+            
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "REVER>>>>Book not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stock/book/${bookTitle}": {
+      "get": {
+        "tags": ["stock"],
+        "summary": "Finds the stock of a book by its title",
+        "description": "This only can be done by an admin",
+        "operationId": "getStockByBookTitle",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bookTitle",
+            "in": "path",
+            "description": "Title of the book",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Once upon a time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+            
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stock/update/book/${bookId}": {
+      "put": {
+        "tags": ["stock"],
+        "summary": "Updates stock",
+        "description": "Updates a quantity of a book.This only can be done by an admin",
+        "operationId": "updateStock",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "Id of the book to update quantity",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2b"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Object of type stock",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stock",
+                "example": {
+                  "quantity": 5,
+                  "id":20,
+                  "title": "Route All stock",
+                  "synopsis": "I just got lost",
+                  "price": 80,
+                  "author": "Coldplay",
+                  "pageCount": 23,
+                  "publishedDate": "2012-10-09",
+                  "genre": "Music"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+            
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Stock"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "Unauthorized": {
+        "description": "Must have an authorization token.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "required": true
+          },
+          "message": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "telephone": {
+            "type": "string",
+            "nullable": false
+          }
+        }
+      },
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "2b",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 40,
+            "example": "The one"
+          },
+          "synopsis": {
+            "type": "string",
+            "example": "This is a example of a synopsis"
+          },
+          "author": {
+            "type": "string",
+            "maxLength": 40,
+            "example": "Aurélio Dias"
+          },
+          "price": {
+            "type": "number",
+            "example": 54
+          },
+          "pageCount": {
+            "type": "number",
+            "example": 278
+          },
+          "genre": {
+            "type": "string",
+            "example": "Biography"
+          },
+          "publishedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2010-04-10"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Stock": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1a",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "example": 10
+          },
+          "book": {
+            "$ref": "#/components/schemas/Book",
+            "example": {
+              "id": "20",
+              "title": "Route All stock",
+              "synopsis": "I just got lost",
+              "price": 80,
+              "author": "Coldplay",
+              "pageCount": 23,
+              "publishedDate": "2012-10-09",
+              "genre": "Music"
+            }
+          }
+        }
+      },
+      "Reservation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "example": "1a"
+          },
+          "userId": {
+            "type": "string",
+            "example": "2b"
+          },
+          "bookId": {
+            "type": "string",
+            "example": "2b"
+          },
+          "author": {
+            "type": "string",
+            "maxLength": 40,
+            "example": "Aurélio Dias"
+          },
+          "price": {
+            "type": "number",
+            "example": 2
+          },
+          "status": {
+            "type": "string",
+            "example": "Finished"
+          },
+          "startedAt": {
+            "type": "Date",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endsAt": {
+            "type": "Date",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
 }

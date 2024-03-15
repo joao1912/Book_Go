@@ -1,9 +1,9 @@
-import { deleteAllAuthors } from "../../src/adapters/ormAdapter/protocols/authorProtocols"
-import { deleteAllBooks } from "../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { deleteAllComments } from "../../src/adapters/ormAdapter/protocols/commentProtocols"
-import { deleteAllFavorites } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols"
-import { deleteAllFinances } from "../../src/adapters/ormAdapter/protocols/financeProtocols"
-import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols"
+import { deleteAllAuthors } from "../../src/adapters/ormAdapter/protocols/authorProtocols.js"
+import { deleteAllBooks } from "../../src/adapters/ormAdapter/protocols/bookProtocols.js"
+import { deleteAllComments } from "../../src/adapters/ormAdapter/protocols/commentProtocols.js"
+import { deleteAllFavorites } from "../../src/adapters/ormAdapter/protocols/favoriteProtocols.js"
+import { deleteAllFinances } from "../../src/adapters/ormAdapter/protocols/financeProtocols.js"
+import { deleteAllUsers } from "../../src/adapters/ormAdapter/protocols/userProtocols.js"
 
 class CleanDataBase {
 

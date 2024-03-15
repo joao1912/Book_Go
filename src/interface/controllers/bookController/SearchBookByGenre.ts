@@ -15,7 +15,7 @@ class SearchBookByGenre implements IController {
         const serverResponse = new ServerResponse(res)
 
         try {
-            const genre = req.body.genre
+            const genre = req.params.genre
 
             const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 

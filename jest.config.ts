@@ -107,7 +107,7 @@ const config: Config = {
 
   // A preset that is used as a base for Jest's configuration
   preset: 'ts-jest',
-
+  resolver: "ts-jest-resolver",
   // Run tests from one or more projects
   // projects: undefined,
 
@@ -198,3 +198,7 @@ const config: Config = {
 };
 
 export default config;
+module.exports = {
+  preset: "ts-jest",
+  resolver: "ts-jest-resolver",
+};

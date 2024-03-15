@@ -1,10 +1,11 @@
 import { prisma } from "../db.js";
 import { IUser, User } from "../../../../entities/User.js";
 import { IUpdateUser } from "../../repositories/user/IUpdateUser.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class UpdateUser implements IUpdateUser {
 
-  async execute({ props }: User): Promise<User> {
+  async execute({ props }: User) {
 
     const { id, username, password, email, telephone } = props
     try {
@@ -40,12 +41,9 @@ export class UpdateUser implements IUpdateUser {
       //retornar os favoritos
 
     } catch (error) {
-
-      throw new Error("Something happened: " + error)
+    return handlePrismaError(error)
 
     }
-
-    // return users
 
   }
 }

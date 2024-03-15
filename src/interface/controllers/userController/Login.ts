@@ -41,7 +41,6 @@ class Login implements IController {
                 }
 
                 if (userInstance.props.id) {
-
                     const userToken = authJwt.sign(userInstance.props.id)
 
                     return serverReponse.ok({ token: userToken })

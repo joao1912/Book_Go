@@ -9,6 +9,7 @@ describe('## POST BOOK TITLE ##', () => {
     let app: any;
     let id: string;
     let token: string;
+    let title: string = "O Tijolo"
        
     const Book1: IBook = {
         title: "O Tijolo",
@@ -73,10 +74,10 @@ describe('## POST BOOK TITLE ##', () => {
     
     it("Deve buscar livro por titulo", async()=>{
        const result = await request.agent(app)
-        .post(`/v1/book/title`)
-        .send({
-            title: Book1.title
-        })
+        .get(`/v1/book/title/${Book1.title}`)
+        // .send({
+        //     title: Book1.title
+        // })
         .expect(200)
         const books = result.body
         for(let book of books) {
@@ -86,7 +87,7 @@ describe('## POST BOOK TITLE ##', () => {
     })
     it("Deve tentar buscar um livro  que não existe", async()=>{
        const result = await request.agent(app)
-        .post(`/v1/book/title`)
+        .get(`/v1/book/title/dauishaiuhdsaiu`)
         .send({
             title: "dauishaiuhdsaiu"
         })
