@@ -46,7 +46,7 @@ export class UpdateStock implements IUpdateStock {
       });
 
     } catch (error) {
-      return handlePrismaError(error)
+      return handlePrismaError("adminError", error)
     }
   }
 }

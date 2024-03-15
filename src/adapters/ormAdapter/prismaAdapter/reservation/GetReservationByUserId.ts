@@ -49,7 +49,7 @@ export class GetReservationByUserId implements IGetReservationByUserId {
             return dataArray
 
         } catch (error) {
-            return handlePrismaError(error)
+            return handlePrismaError("adminError", error)
         }
 
     }

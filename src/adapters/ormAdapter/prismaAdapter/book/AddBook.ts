@@ -63,7 +63,7 @@ export class AddBook implements IAddBook {
       });
 
     } catch (error) {
-      return handlePrismaError(error)
+      return handlePrismaError("adminError", error)
       
     }
   }

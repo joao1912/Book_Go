@@ -28,7 +28,7 @@ class ServerResponse {
         return new CustomError(name, message, 409);
     }
 
-    static missingParameters(name: string, message: string): CustomError {
+   missingParameters(name: string, message: string): CustomError {
         return new CustomError(name, message, 422);
     }
 

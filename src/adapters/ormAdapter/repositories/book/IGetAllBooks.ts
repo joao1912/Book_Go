@@ -1,5 +1,5 @@
 import { IBook, Book } from "../../../../entities/Book";
 
 export interface IGetAllBooks {
-    execute(): Promise <Book[]>
+    execute(): Promise <Book[] | void>
 }

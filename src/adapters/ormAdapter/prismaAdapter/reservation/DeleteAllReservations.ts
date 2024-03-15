@@ -1,10 +1,11 @@
 import { prisma } from "../db.js";
 
 import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservation/IDeleteReservation.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class DeleteAllReservations implements IDeleteReservation {
 
-    async execute(reservationId: string): Promise<IDeleteMessage> {
+    async execute(reservationId: string){
 
         try {
 
@@ -18,7 +19,7 @@ export class DeleteAllReservations implements IDeleteReservation {
 
         } catch (error) {
 
-            throw new Error('internal server error' + error)
+            return handlePrismaError ("reservationError", error)
 
         }
     }

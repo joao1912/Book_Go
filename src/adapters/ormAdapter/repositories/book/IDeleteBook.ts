@@ -4,5 +4,5 @@ export interface IDeleteMessageBook {
 }
 
 export interface IDeleteBook {
-    execute(id: String ): Promise<IDeleteMessageBook>
+    execute(id: String ): Promise<IDeleteMessageBook | void>
 }

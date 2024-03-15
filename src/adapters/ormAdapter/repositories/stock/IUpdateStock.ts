@@ -1,5 +1,5 @@
 import { IStock, Stock } from "../../../../entities/Stock"
 
 export interface IUpdateStock {
-    execute(stock: Stock ): Promise<Stock | string>
+    execute(stock: Stock ): Promise<Stock | void>
 }

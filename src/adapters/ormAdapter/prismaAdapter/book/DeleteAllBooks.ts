@@ -1,5 +1,6 @@
 import { IDeleteAllBooks } from "../../repositories/book/IDeleteAllBooks.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class DeleteAllBooks implements IDeleteAllBooks {
 
@@ -9,7 +10,7 @@ export class DeleteAllBooks implements IDeleteAllBooks {
            await prisma.book.deleteMany()
            
         } catch (error) {
-            throw new Error('Internal server error: ' + error)
+            return  handlePrismaError("adminError", error)
         }
 
     }

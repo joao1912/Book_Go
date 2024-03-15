@@ -25,8 +25,8 @@ export class GetStockByBookTitle implements IGetStockByBookTitle {
         },
       });
 
-      if(BooksStock.length == 0){
-        return "Book not found."
+      if (BooksStock.length == 0) {
+        return "No results."
       }
 
 
@@ -52,7 +52,7 @@ export class GetStockByBookTitle implements IGetStockByBookTitle {
       return stock;
 
     } catch (error) {
-      return handlePrismaError(error)
+      return handlePrismaError("adminError", error)
     }
 
   }

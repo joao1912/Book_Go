@@ -13,7 +13,7 @@ class AddBook implements IController {
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {
         const serverResponse = new ServerResponse(res)
 
-        try {
+  
             const {
                 title,
                 synopsis,
@@ -36,26 +36,9 @@ class AddBook implements IController {
                 pageCount
 
             })
-            
-            switch (true) {
-                case (response instanceof Book):
-                    return serverResponse.ok(Formatter.handle<Book>(response))
-                    break;
-
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
-                    break;
-
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
-        }
-
+            if (response instanceof Book)
+            return serverResponse.ok(Formatter.handle<Book>(response))
+                  
     }
 }
 

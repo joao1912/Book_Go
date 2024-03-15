@@ -50,7 +50,7 @@ export class GetStockByQuantity implements IGetStockByQuantity {
       return stock;
       
     } catch (error) {
-      return handlePrismaError(error)
+      return handlePrismaError("adminError", error)
     }
 
   }

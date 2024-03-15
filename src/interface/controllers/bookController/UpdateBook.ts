@@ -14,8 +14,6 @@ class UpdateBook implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-        try {
-            const serverResponse = new ServerResponse(res)
             const bookId = req.params.id
             const {
                 title,
@@ -40,26 +38,12 @@ class UpdateBook implements IController {
                 pageCount
             })
 
-            switch (true) {
-                case (response instanceof Book):
-                    return serverResponse.ok(Formatter.handle<Book>(response))
-                    break;
-
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
-                    break;
-
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
+            if(response instanceof Book)
+            return serverResponse.ok(Formatter.handle<Book>(response))
 
 
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
+        
         }
-    }
 
 }
 

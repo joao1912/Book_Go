@@ -9,20 +9,19 @@ import ServerResponse from "../utils/ServerResponse.js";
 
 class GetAllBooks implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse){
+    async handle(req: HttpRequest, res: HttpResponse) {
+
 
         const serverResponse = new ServerResponse(res)
+        
+        const getAllBooksUseCase = new GetAllBooksUseCase(getAllBooks)
 
-        try {
+        const response = await getAllBooksUseCase.execute()
 
-            const serverResponse = new ServerResponse(res)
-            const getAllBooksUseCase = new GetAllBooksUseCase(getAllBooks)
+        let bookList: Array<IBook> = []
 
-            const allBooks = await getAllBooksUseCase.execute()
-
-            let bookList: Array<IBook> = []
-
-            for (let book of allBooks) {
+        if (response instanceof Book && Array.isArray(response))
+            for (let book of response) {
 
                 bookList.push(
                     Formatter.handle<Book>(book)
@@ -30,14 +29,9 @@ class GetAllBooks implements IController {
 
             }
 
-            return serverResponse.ok(bookList)
-            
-        } catch (error) {
-            console.log("Erroou" + error)
-            
-            throw new Error("Internal server error")
-          
-        }
+        return serverResponse.ok(bookList)
+
+
     }
 }
 

@@ -9,33 +9,25 @@ import ServerResponse from "../utils/ServerResponse.js";
 
 class GetAllStock implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse){
-        
-        try {
+    async handle(req: HttpRequest, res: HttpResponse) {
+
             const serverResponse = new ServerResponse(res)
 
             const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
-            const stockInstances = await getAllStockUseCase.execute()
+            const response = await getAllStockUseCase.execute()
 
             let stockList: Array<IStock> = []
+            if (response instanceof Stock && Array.isArray(response))
+                for (let item of response) {
 
-            for (let item of stockInstances) {
+                    stockList.push(
+                        Formatter.handle<Stock>(item)
+                    )
 
-                stockList.push(
-                    Formatter.handle<Stock>(item)
-                )
-
-            }
+                }
 
             return serverResponse.ok(stockList)
-
-            
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
-        }
-
 
     }
 }

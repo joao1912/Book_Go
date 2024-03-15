@@ -3,12 +3,12 @@ import { Book } from "../../../../src/entities/Book"
 import { SearchBookByTitleUseCase } from "../../../../src/usecases/book/SearchBookByTitleUseCase"
 
 
-describe("Procurar  livros por titulo", ()=>{
-        let BookToSearchTitle: string
+describe("Procurar  livros por titulo", () => {
+    let BookToSearchTitle: string
 
-    
-    beforeAll(async ()=>{
-        
+
+    beforeAll(async () => {
+
         const BookGenreOne = new Book({
             title: "Search a title",
             synopsis: "This is a new book",
@@ -22,38 +22,38 @@ describe("Procurar  livros por titulo", ()=>{
 
         const bookDataOne = await addBook.execute(BookGenreOne)
 
-        if(bookDataOne instanceof Book)
-        BookToSearchTitle = bookDataOne.props.title
+        if (bookDataOne instanceof Book)
+            BookToSearchTitle = bookDataOne.props.title
 
     })
 
-    it("Procurando livros por titulo",async () => {
-        
-      
+    it("Procurando livros por titulo", async () => {
+
+
         const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
         const result = await searchBookByTitleUseCase.execute(BookToSearchTitle)
 
 
-        for (let prop of result){
+        for (let prop of result) {
 
             expect(prop).toBeInstanceOf(Book)
         }
-      
-},10000)
 
-it("Procurando um livro que não está registrado, deve retornar um erro",async () => {
-        
-      
-    const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
+    }, 10000)
 
-    const result = await searchBookByTitleUseCase.execute("NãoEstáRegistrado")
-
-    expect(result).toEqual("Book not found.")
-//     
+    it("Procurando um livro que não está registrado, deve retornar um erro", async () => {
 
 
-  
-})
+        const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
+
+        const result = await searchBookByTitleUseCase.execute("NãoEstáRegistrado")
+
+        expect(result).toEqual("No results.")
+        //     
+
+
+
+    })
 
 })

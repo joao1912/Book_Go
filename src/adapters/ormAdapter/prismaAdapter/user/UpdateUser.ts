@@ -38,10 +38,9 @@ export class UpdateUser implements IUpdateUser {
         username: user.username
       })
 
-      //retornar os favoritos
 
     } catch (error) {
-    return handlePrismaError(error)
+    return handlePrismaError("userError", error)
 
     }
 

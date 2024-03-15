@@ -12,17 +12,19 @@ class GetReservationByUserId implements IController {
     async handle(req: HttpRequest<{user_id: string}>, res: HttpResponse){
 
         const serverResponse = new ServerResponse(res)
-
-        try {
-        
+     
             const userId = req.params.user_id
             const getReservationByUserIdUseCase = new GetReservationByUserIdUseCase(getReservationByUserId)
 
             const response= await getReservationByUserIdUseCase.execute(userId)
 
-            if (typeof response !== 'string') {
-                let reservationList: Array<IReservation> = []
+            let reservationList: Array<IReservation> = []
+            
+            if(typeof response == "string"){
+                return serverResponse.ok(response)
+            }
 
+            if (response instanceof Reservation && Array.isArray(response)){
                 for (let reservation of response) {
     
                     reservationList.push(
@@ -33,30 +35,9 @@ class GetReservationByUserId implements IController {
     
                 return serverResponse.ok(reservationList)    
             }
-            
-            switch (true) {
+           
 
-                case (response == "You have no reserves."):
-                    return serverResponse.ok(response)
-                    break;
-
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
-                    break;
-
-                case (response == "Id provided does not exist."):
-                    return serverResponse.notFound(response)
-                    break;
-
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")  
-        }
+       
 
 
     }

@@ -12,47 +12,28 @@ class MakeReservation implements IController {
     async handle(req: HttpRequest<{ userId: string, bookId: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
-        try {
-            const {userId, bookId} = req.params
-     
 
-            let reserve = {
-                userId: userId,
-                bookId: bookId,
-                price: 20,
-                status: "string"
-
-            }
-
-            const makeReservationUseCase = new MakeReservationUseCase(makeReservation)
-
-            const response = await makeReservationUseCase.execute(reserve)
-
-            switch (true) {
-                case (response instanceof Reservation):
-                    return serverResponse.ok(Formatter.handle<Reservation>(response))
-                    break;
-
-                case (response == "Invalid input type provided."):
-                    return serverResponse.badRequest(response)
-                    break;
-
-                case (response == "Id provided does not exist."):
-                    return serverResponse.notFound(response)
-                    break;
-
-                case (response == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
+        const { userId, bookId } = req.params
 
 
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
+        let reserve = {
+            userId: userId,
+            bookId: bookId,
+            price: 20,
+            status: "string"
 
         }
+
+        const makeReservationUseCase = new MakeReservationUseCase(makeReservation)
+
+        const response = await makeReservationUseCase.execute(reserve)
+
+        if (response instanceof Reservation)
+            return serverResponse.ok(Formatter.handle<Reservation>(response))
+
+
+
+
 
     }
 }

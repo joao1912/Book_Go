@@ -9,26 +9,20 @@ import ServerResponse from "../utils/ServerResponse.js";
 
 class SearchBookByTitle implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse){
+    async handle(req: HttpRequest, res: HttpResponse) {
+
 
         const serverResponse = new ServerResponse(res)
 
-        try {
-            const serverResponse = new ServerResponse(res)
+        const title = req.params.title
 
-            const title = req.params.title
+        const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
-            const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
+        const response = await searchBookByTitleUseCase.execute(title)
 
-            const response = await searchBookByTitleUseCase.execute(title)
-         
-            if(typeof response == "string"){
-                return serverResponse.notFound(response)
-            }
-            
 
-            let bookList: Array<IBook> = []
-
+        let bookList: Array<IBook> = []
+        if (response instanceof Book && Array.isArray(response))
             for (let book of response) {
 
                 bookList.push(
@@ -36,14 +30,10 @@ class SearchBookByTitle implements IController {
                 )
 
             }
-
-            return serverResponse.ok(bookList)
-            
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")        }
+        return serverResponse.ok(bookList)
     }
 }
+
 
 const searchBookByTitleController = new SearchBookByTitle()
 

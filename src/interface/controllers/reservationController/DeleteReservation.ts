@@ -11,32 +11,14 @@ class DeleteReservation implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-        try {
             const reservationId = req.params.reservationId
 
             const deleteReservationUseCase = new DeleteReservationUseCase(deleteReservation)
 
             const response = await deleteReservationUseCase.execute(reservationId)
 
-            switch (true) {
-
-                case (response.message == "Id provided does not exist."):
-                    return serverResponse.notFound(response)
-                    break;
-
-                case (response.message == "Internal server error"):
-                    return serverResponse.serverError(response)
-                    break;
-            }
-
             return serverResponse.ok(response)
 
-
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")  
-        }
     }
 }
 
