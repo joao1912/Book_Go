@@ -9,7 +9,11 @@ export default class ErrorHandler {
 
         const statusCode = err.statusCode || 500;
         console.log('funciona caralho: ' + err)
-        return res.status(statusCode).json(err);
+        const message = err.statusCode ? err.message : 'Internal Server Error'
+
+        return res.status(statusCode).json({
+            message
+        });
 
     }
 
