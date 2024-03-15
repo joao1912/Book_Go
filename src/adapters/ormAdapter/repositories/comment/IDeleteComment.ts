@@ -5,6 +5,6 @@ export interface IDeleteMessage {
 
 export interface IDeleteComment {
 
-    execute(id: string): Promise<IDeleteMessage>
+    execute(id: string): Promise<IDeleteMessage | void>
 
 }

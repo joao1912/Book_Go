@@ -1,11 +1,12 @@
 import { IDeleteFavorite, IDeleteMessage } from "../../repositories/favorite/IDeleteFavorite.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 
 export class DeleteFavorite implements IDeleteFavorite {
 
-    async execute(id: string): Promise<IDeleteMessage> {
+    async execute(id: string): Promise<IDeleteMessage | void> {
        
         try {
 
@@ -21,7 +22,7 @@ export class DeleteFavorite implements IDeleteFavorite {
             
         } catch (error) {
             
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("FavoriteError", error)
 
         }
     }

@@ -1,5 +1,6 @@
 import { IDeleteAllAuthors } from "../../repositories/author/IDeleteAllAuthors.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class DeleteAllAuthors implements IDeleteAllAuthors {
 
@@ -11,7 +12,7 @@ export class DeleteAllAuthors implements IDeleteAllAuthors {
             
         } catch (error) {
             
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("AuthorError", error)
 
         }
 

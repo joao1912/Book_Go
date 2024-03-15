@@ -1,10 +1,11 @@
 import { IDeleteFinance, IDeleteMessage } from "../../repositories/finance/IDeleteFinance.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class DeleteFinance implements IDeleteFinance {
     
-    async execute(id: string): Promise<IDeleteMessage> {
+    async execute(id: string): Promise<IDeleteMessage | void> {
         
         try {
 
@@ -21,7 +22,7 @@ export class DeleteFinance implements IDeleteFinance {
 
         } catch (error) {
             
-            throw new Error('internal server error: ' + error)
+            return handlePrismaError("FinanceError", error)
 
         }
 

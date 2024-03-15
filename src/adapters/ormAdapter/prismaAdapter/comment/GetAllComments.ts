@@ -1,10 +1,11 @@
 import { prisma } from "../db.js";
 import { Comment } from "../../../../entities/Comment.js";
 import { IGetAllComments } from "../../repositories/comment/IGetAllComments.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class GetAllComments implements IGetAllComments {
 
-    async execute(bookId: string): Promise<Comment[]> {
+    async execute(bookId: string): Promise<Comment[] | void> {
         
         try {
             
@@ -33,7 +34,7 @@ export class GetAllComments implements IGetAllComments {
 
         } catch (error) {
 
-            throw new Error('Internal server error: ' + error)
+            return handlePrismaError("CommentError", error)
             
         }
     }

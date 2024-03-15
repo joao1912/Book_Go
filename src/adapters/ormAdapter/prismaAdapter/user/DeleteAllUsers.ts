@@ -1,5 +1,6 @@
 import { prisma } from "../db.js";
 import { IDeleteAllUsers } from "../../repositories/user/IDeleteAllUsers.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class DeleteAllUsers implements IDeleteAllUsers {
 
@@ -15,7 +16,7 @@ export class DeleteAllUsers implements IDeleteAllUsers {
             })
 
         } catch (error) {
-            throw new Error('Internal server error: ' + error)
+          return handlePrismaError("UserError", error)
         }
 
     }

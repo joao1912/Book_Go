@@ -1,10 +1,11 @@
 import { IDeleteAuthor, IDeleteMessage } from "../../repositories/author/IDeleteAuthor.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class DeleteAuthor implements IDeleteAuthor {
 
-    async execute(id: string): Promise<IDeleteMessage> {
+    async execute(id: string): Promise<IDeleteMessage | void> {
         
         try {
 
@@ -20,7 +21,7 @@ export class DeleteAuthor implements IDeleteAuthor {
             
         } catch (error) {
             
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("AuthorError", error)
 
         }
 

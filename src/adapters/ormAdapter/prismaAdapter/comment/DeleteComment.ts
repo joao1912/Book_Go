@@ -1,9 +1,10 @@
 import { prisma } from "../db.js";
 import { IDeleteComment, IDeleteMessage } from "../../repositories/comment/IDeleteComment.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class DeleteComment implements IDeleteComment {
 
-    async execute(id: string): Promise<IDeleteMessage> {
+    async execute(id: string): Promise<IDeleteMessage | void> {
        
         try {
             
@@ -21,7 +22,7 @@ export class DeleteComment implements IDeleteComment {
 
         } catch (error) {
             
-            throw new Error('internal server error' + error)
+            return handlePrismaError("CommentError", error)
 
         }
     }

@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError.js";
 
 export class GetUser implements IGetUser {
 
-  async execute(input: string) {
+  async execute(input: string): Promise<User | void> {
 
     try {
       const user = await prisma.user.findUnique({
@@ -35,11 +35,9 @@ export class GetUser implements IGetUser {
       })
     }
 
-      let message = `Email not registered`
-      return message
-
     } catch (error) {
-      return handlePrismaError(error)
+
+      return handlePrismaError('UserError', error)
         
     }
 

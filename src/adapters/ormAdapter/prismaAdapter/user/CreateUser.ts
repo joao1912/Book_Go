@@ -1,40 +1,48 @@
 import { prisma } from "../db.js";
 import { IUser, User } from "../../../../entities/User.js";
 import { ICreateUser } from "../../repositories/user/ICreateUser.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class CreateUser implements ICreateUser {
 
 
-  async execute({ props }: Omit<User, "id">): Promise<User> {
+  async execute({ props }: Omit<User, "id">): Promise<User | void> {
 
     const { username, email, telephone, password } = props
 
-    const user = await prisma.user.create({
-      data: {
-        username: username,
-        password: password,
-        email: email,
-        telephone: telephone
+    try {
 
-      },
-      select: {
-        id: true,
-        username: true,
-        password: true,
-        email: true,
-        telephone: true,
+      const user = await prisma.user.create({
+        data: {
+          username: username,
+          password: password,
+          email: email,
+          telephone: telephone
 
-      }
-    })
+        },
+        select: {
+          id: true,
+          username: true,
+          password: true,
+          email: true,
+          telephone: true,
 
-    return new User({
-      id: user.id,
-      email: user.email,
-      telephone: user.telephone,
-      password: user.password,
-      username: user.username,
-      favoritesBooks: []
-    })
+        }
+      })
 
+      return new User({
+        id: user.id,
+        email: user.email,
+        telephone: user.telephone,
+        password: user.password,
+        username: user.username,
+        favoritesBooks: []
+      })
+
+    } catch (error) {
+
+      return handlePrismaError("UserError", error)
+
+    }
   }
 }

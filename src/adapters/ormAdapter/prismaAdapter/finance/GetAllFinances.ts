@@ -2,6 +2,7 @@ import { Finance } from "../../../../entities/Finance.js";
 import { typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
 import { IAllFinance, IGetAllFinances } from "../../repositories/finance/IGetAllFinances.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class GetAllFinances implements IGetAllFinances {
@@ -32,7 +33,7 @@ export class GetAllFinances implements IGetAllFinances {
 
     }
 
-    async execute(): Promise<IAllFinance[]> {
+    async execute(): Promise<IAllFinance[] | void> {
 
         try {
 
@@ -100,7 +101,7 @@ export class GetAllFinances implements IGetAllFinances {
 
         } catch (error) {
 
-            throw new Error('Internal server error: ' + error)
+            return handlePrismaError("FinanceError", error)
 
         }
 

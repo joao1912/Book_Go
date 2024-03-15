@@ -1,5 +1,6 @@
 import { IDeleteAllFinances } from "../../repositories/finance/IDeleteAllFinances.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class DeleteAllFinances implements IDeleteAllFinances {
@@ -12,7 +13,7 @@ export class DeleteAllFinances implements IDeleteAllFinances {
 
         } catch (error) {
 
-            throw new Error('internal server error: ' + error)
+            return handlePrismaError("FinanceError", error)
             
         }
 

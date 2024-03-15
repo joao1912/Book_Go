@@ -1,9 +1,10 @@
 import { Book } from "../../../../entities/Book.js";
 import { ICreateFavorite, IFavoriteCreated } from "../../repositories/favorite/ICreateFavorite.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class CreateFavorite implements ICreateFavorite {
-  async execute(userId: string, bookId: string): Promise<IFavoriteCreated> {
+  async execute(userId: string, bookId: string): Promise<IFavoriteCreated | void> {
     try {
       const favorited = await prisma.favorite.create({
         data: {
@@ -51,8 +52,9 @@ export class CreateFavorite implements ICreateFavorite {
         })
       }
     } catch (error) {
-      console.log("Erro" + error)
-      throw new Error("Internal server error" + error);
+      
+      return handlePrismaError("FavoriteError", error)
+
     }
   }
 }

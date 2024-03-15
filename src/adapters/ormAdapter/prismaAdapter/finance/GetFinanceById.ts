@@ -2,6 +2,7 @@ import { Finance } from "../../../../entities/Finance.js";
 import { typeOfPayment } from "../../repositories/finance/ICreateFinance.js";
 import { IGetFinanceById } from "../../repositories/finance/IGetFinanceById.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 
 export class GetFinanceById implements IGetFinanceById {
@@ -32,7 +33,7 @@ export class GetFinanceById implements IGetFinanceById {
 
     }
 
-    async execute(id: string): Promise<Finance> {
+    async execute(id: string): Promise<Finance | void> {
 
         try {
 
@@ -56,7 +57,7 @@ export class GetFinanceById implements IGetFinanceById {
             
         } catch (error) {
 
-            throw new Error('Internal server error: ' + error)
+            return handlePrismaError("FinanceError", error)
             
         }
     }

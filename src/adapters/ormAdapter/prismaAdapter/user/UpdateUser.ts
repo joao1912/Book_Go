@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError.js";
 
 export class UpdateUser implements IUpdateUser {
 
-  async execute({ props }: User) {
+  async execute({ props }: User): Promise<User | void> {
 
     const { id, username, password, email, telephone } = props
     try {
@@ -38,10 +38,9 @@ export class UpdateUser implements IUpdateUser {
         username: user.username
       })
 
-      //retornar os favoritos
-
     } catch (error) {
-    return handlePrismaError(error)
+
+      return handlePrismaError('UserError', error)
 
     }
 

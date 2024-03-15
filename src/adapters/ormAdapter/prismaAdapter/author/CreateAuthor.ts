@@ -1,10 +1,11 @@
 import { IAuthor, Author } from "../../../../entities/Author.js";
 import { ICreateAuthor } from "../../repositories/author/ICreateAuthor.js";
 import { prisma } from "../db.js";
+import handlePrismaError from "../util/handlePrismaError.js";
 
 export class CreateAuthor implements ICreateAuthor {
 
-    async execute({props}: Omit<Author, "id">): Promise<Author> {
+    async execute({props}: Omit<Author, "id">): Promise<Author | void> {
 
         const {description, name} = props;
 
@@ -25,7 +26,7 @@ export class CreateAuthor implements ICreateAuthor {
             
         } catch (error) {
             
-            throw new Error('Internal server error' + error)
+            return handlePrismaError("AuthorError", error)
 
         }
     }
