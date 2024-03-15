@@ -718,8 +718,8 @@
     "/reservation/book/${bookId}": {
       "get": {
         "tags": ["reservation"],
-        "summary": "Gets all reserves",
-        "description": "Gets books reservations by book id",
+        "summary": "Gets reserves by book Id",
+        "description": "Gets books reservations by book Id",
         "operationId": "getReservationByBookId",
         "security": [
           {
@@ -753,6 +753,134 @@
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "503": {
+            "description": "The database is currently unavailable. Please try again later."
+          }
+        }
+      }
+    },
+    "/reservation/user/${userId}": {
+      "get": {
+        "tags": ["reservation"],
+        "summary": "Gets reserves by user Id",
+        "description": "Gets books reservations by user Id",
+        "operationId": "getReservationByUserId",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Id of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "503": {
+            "description": "The database is currently unavailable. Please try again later."
+          }
+        }
+      }
+    },
+    "/reservation/user/${userId}/book/${book_Id}": {
+      "post": {
+        "tags": ["reservation"],
+        "summary": "Creates a book reservation",
+        "description": "Reserves a book of the library. This only can be done by an logged user",
+        "operationId": "makeReservation",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Id of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "Id of the book",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Created reservation object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reservation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input type provided."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Id provided does not exist."
           },
           "500": {
             "description": "Internal server error"
