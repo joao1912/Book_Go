@@ -1,6 +1,5 @@
 import { addBook, deleteBook } from "../../../../src/adapters/ormAdapter/protocols/bookProtocols"
-import { Book, IBook } from "../../../../src/entities/Book"
-import { AddBookUseCase } from "../../../../src/usecases/book/AddBookUseCase"
+import { Book } from "../../../../src/entities/Book"
 import { DeleteBookUseCase } from "../../../../src/usecases/book/DeleteBookUseCase"
 
 

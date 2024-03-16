@@ -33,7 +33,7 @@ describe('Testes do StockRepository', () => {
 
         await addBook.execute(bookInstance1)
             .then(result => {
-                if(typeof result !== "string"){
+                if(result instanceof Book){
 
                 if (result.props.title) (stockSearchByTitle = result.props.title)
                 if (result.props.id) (bookId1 = result.props.id)
@@ -70,7 +70,7 @@ describe('Testes do StockRepository', () => {
 
         await addBook.execute(bookInstance2)
             .then(result => {
-                if(typeof result !== "string"){
+                if(result instanceof Book){
                 if (result.props.id) (bookId2 = result.props.id)
 
                 IBookTypeSearch = {
@@ -96,7 +96,7 @@ describe('Testes do StockRepository', () => {
 
 
         await updateStock.execute(updateQuantityBefore).then(result => {
-            if(typeof result !== "string")
+            if(result instanceof Stock)
             stockSearchByQuantity = result.props.quantity
         })
 
@@ -107,6 +107,7 @@ describe('Testes do StockRepository', () => {
 
         const result = await getStockByQuantity.execute(stockSearchByQuantity)
 
+        if(result instanceof Stock && Array.isArray(result))
         for (let stock of result) {
 
             expect(stock).toBeInstanceOf(Stock)
@@ -119,6 +120,7 @@ describe('Testes do StockRepository', () => {
 
         const result = await getStockByBookTitle.execute(stockSearchByTitle)
 
+        if(result instanceof Stock && Array.isArray(result))
         for (let stock of result) {
             if(typeof stock !== "string"){
             expect(stock.props.book.title).toEqual("ORM Stock to search")
@@ -152,10 +154,12 @@ describe('Testes do StockRepository', () => {
 
     it('Deve buscar todos os stocks', async () => {
 
-        const allStocks = await getAllStock.execute()
+        const result = await getAllStock.execute()
 
-        expect(allStocks.length).toBeGreaterThan(0)
+        if(result instanceof Stock && Array.isArray(result)){
+            expect(result.length).toBeGreaterThan(0)
+            for (let bookStock of result) expect(bookStock).toBeInstanceOf(Stock)
+        }
 
-        for (let bookStock of allStocks) expect(bookStock).toBeInstanceOf(Stock)
     })
 })

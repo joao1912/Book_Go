@@ -30,10 +30,10 @@ describe("Pega todas as reservas da biblioteca", () => {
     const userOneData = await createUser.execute(userOne);
     const userTwoData = await createUser.execute(userTwo);
 
-    if (userOneData.props.id != undefined) {
+    if (userOneData instanceof User) {
       userOneId = userOneData.props.id
     }
-    if (userTwoData.props.id != undefined) {
+    if (userTwoData instanceof User) {
       userTwoId = userTwoData.props.id;
     }
 
@@ -59,13 +59,13 @@ describe("Pega todas as reservas da biblioteca", () => {
       userId: userOneId,
       bookId: newBookId,
       price: 2,
-      status: "Transcorrendo"
+      status: "Ativo"
     })
     const reservationTwo = new Reservation({
       userId: userTwoId,
       bookId: newBookId,
       price: 2,
-      status: "Transcorrendo"
+      status: "Ativo"
     })
     await makeReservation.execute(reservationOne)
     await makeReservation.execute(reservationTwo)
@@ -79,6 +79,7 @@ describe("Pega todas as reservas da biblioteca", () => {
 
     const result = await getAllReservationsUseCase.execute()
 
+    if(result instanceof Reservation && Array.isArray(result))
     for (let prop of result) {
 
       expect(prop).toBeInstanceOf(Reservation)

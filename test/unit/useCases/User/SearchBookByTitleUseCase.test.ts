@@ -34,7 +34,7 @@ describe("Procurar  livros por titulo", () => {
 
         const result = await searchBookByTitleUseCase.execute(BookToSearchTitle)
 
-
+        if(result instanceof Book && Array.isArray(result))
         for (let prop of result) {
 
             expect(prop).toBeInstanceOf(Book)

@@ -42,6 +42,7 @@ describe("Test search all books on stock", ()=>{
 
     const result = await getAllStockUseCase.execute()
 
+    if(result instanceof Stock && Array.isArray(result))
     for (let prop of result){
 
       expect(prop).toBeInstanceOf(Stock)

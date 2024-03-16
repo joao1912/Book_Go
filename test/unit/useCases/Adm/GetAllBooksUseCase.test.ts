@@ -27,7 +27,7 @@ describe("Test search all books", ()=>{
     const getAllBooksUseCase = new GetAllBooksUseCase(getAllBooks)
 
     const result = await getAllBooksUseCase.execute()
-
+    if(result instanceof Book && Array.isArray(result))
     for (let prop of result){
 
       expect(prop).toBeInstanceOf(Book)

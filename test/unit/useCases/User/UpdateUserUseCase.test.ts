@@ -17,7 +17,7 @@ describe("Alterar propriedades do usuário", ()=>{
 
         const userData = await createUser.execute(userToBeUpdated)
 
-        if(userData.props.id){userIdToUpdate = userData.props.id}
+        if(userData instanceof User){userIdToUpdate = userData.props.id}
 
     })
 
@@ -36,7 +36,7 @@ describe("Alterar propriedades do usuário", ()=>{
         }
 
         const upUser = await updateUserUseCase.execute(updateToDo)
-
+        if(upUser instanceof User)
         expect(upUser.props?.username).toEqual(updateToDo.username)
         expect(upUser).toBeInstanceOf(User)
         

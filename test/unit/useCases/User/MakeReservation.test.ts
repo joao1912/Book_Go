@@ -33,7 +33,7 @@ describe ("Teste de reservas", () => {
         const userToReserve = await createUser.execute(newUser)
         const bookToReserve = await addBook.execute(newBook)
 
-        if(userToReserve.props.id){userIdToReserve = userToReserve.props.id}
+        if(userToReserve instanceof User){userIdToReserve = userToReserve.props.id}
         if(bookToReserve instanceof Book && bookToReserve.props.id){bookIdToReserve = bookToReserve.props.id}
 
     })
@@ -43,7 +43,7 @@ describe ("Teste de reservas", () => {
             userId: userIdToReserve,
             bookId: bookIdToReserve,
             price: 20,
-            status: "Transcorrendo",
+            status: "Ativo",
             
         }
 

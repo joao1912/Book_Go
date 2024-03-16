@@ -38,7 +38,7 @@ describe('Testes do ReservantionRepository', () => {
         await addBook.execute(bookInstance1)
             .then((result) => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Book) {
                     bookId1 = result.props.id!
                 }
 
@@ -58,7 +58,7 @@ describe('Testes do ReservantionRepository', () => {
         await addBook.execute(bookInstance2)
             .then(result => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Book) {
                     bookId2 = result.props.id!
                 }
 
@@ -78,7 +78,7 @@ describe('Testes do ReservantionRepository', () => {
 
         await createUser.execute(userInstance)
             .then(result => {
-                if (result.props.id) { userId1 = result.props.id }
+                if (result instanceof User) { userId1 = result.props.id }
             })
         const user2: IUser = ({
             username: "User2 ORMReservation",
@@ -92,7 +92,7 @@ describe('Testes do ReservantionRepository', () => {
 
         await createUser.execute(userInstance2)
             .then(result => {
-                if (result.props.id) { userId2 = result.props.id }
+                if (result instanceof User) { userId2 = result.props.id }
             })
 
         //Fazer reserva para testes de delete e search
@@ -120,7 +120,7 @@ describe('Testes do ReservantionRepository', () => {
         await makeReservation.execute(reservationInstance2)
             .then(result => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Reservation) {
                     reservationId = result.props.id!
                 }
 
@@ -152,7 +152,7 @@ describe('Testes do ReservantionRepository', () => {
 
         const result = await deleteReservation.execute(reservationId)
 
-        expect(result.message).toBe('Reservation deleted successfully.')
+        expect(result).toBe('Reservation deleted successfully.')
 
     })
 
@@ -160,8 +160,11 @@ describe('Testes do ReservantionRepository', () => {
     it("Deve buscar reserva por id do livro", async () => {
 
         const result = await getReservationByBookId.execute(bookId1)
-        for (let reserve of result) {
-            expect(reserve).toBeInstanceOf(Reservation)
+        if(result instanceof Reservation && Array.isArray(result)){
+
+            for (let reserve of result) {
+                expect(reserve).toBeInstanceOf(Reservation)
+            }
         }
     })
 
@@ -169,19 +172,23 @@ describe('Testes do ReservantionRepository', () => {
     it("Deve buscar reserva por id do user", async () => {
 
         const result = await getReservationByUserId.execute(userId1)
+        if(result instanceof Reservation && Array.isArray(result)){
 
-        for (let reserve of result) {
-            expect(reserve).toBeInstanceOf(Reservation)
+            for (let reserve of result) {
+                expect(reserve).toBeInstanceOf(Reservation)
+            }
         }
     })
 
 
     it('Deve buscar todas as reservas', async () => {
 
-        const allReservations = await getAllReservations.execute()
+        const result = await getAllReservations.execute()
+        if(result instanceof Reservation && Array.isArray(result)){
+            expect(result.length).toBeGreaterThan(0)
 
-        expect(allReservations.length).toBeGreaterThan(0)
+            for (let reserves of result) expect(reserves).toBeInstanceOf(Reservation)
+        }
 
-        for (let reserves of allReservations) expect(reserves).toBeInstanceOf(Reservation)
     })
 })

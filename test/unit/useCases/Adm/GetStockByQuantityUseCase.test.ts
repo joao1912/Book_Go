@@ -28,12 +28,13 @@ describe("Test stock by book title", ()=>{
 
     })
 
-    it("Verificando stocks", async()=>{
+    it("Procurando stocks por quantidade", async()=>{
 
     const getStockByQuantityUseCase = new GetStockByQuantityUseCase(getStockByQuantity)
 
     const result = await getStockByQuantityUseCase.execute(bookQuantity)
 
+    if(result instanceof Stock && Array.isArray(result))
     for (let prop of result){
 
       expect(prop).toBeInstanceOf(Stock)

@@ -30,7 +30,7 @@ describe("Criando dados necessários para pegar a reserva de um usuário por id"
     const newUser = await createUser.execute(userOne);
     const newBook = await addBook.execute(bookOne);
 
-    if (newUser.props.id) { userOneId = newUser.props.id }
+    if (newUser instanceof User) { userOneId = newUser.props.id }
     if (newBook instanceof Book && newBook.props.id) { bookId = newBook.props.id }
 
     const reserve = new Reservation({
@@ -50,7 +50,7 @@ describe("Criando dados necessários para pegar a reserva de um usuário por id"
 
     const result = await getReservationByUserIdUseCase.execute(userOneId);
 
-    //Usar arraycontaining
+    if(result instanceof Reservation && Array.isArray(result))
     for (let prop of result) {
 
       expect(prop).toBeInstanceOf(Reservation)

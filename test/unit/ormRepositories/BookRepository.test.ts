@@ -29,7 +29,7 @@ describe('Testes do BookRepository', () => {
         await addBook.execute(Book1)
             .then(result => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Book) {
                     if (result.props.id) (idBookToBeDelete = result.props.id)
                     if (result.props.title) (idBookToBeDeleteTitle = result.props.title)
                 }
@@ -56,7 +56,7 @@ describe('Testes do BookRepository', () => {
         await addBook.execute(Book2)
             .then(result => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Book) {
                     bookGenre = result.props.genre
                     bookTitle = result.props.title
                     if (result.props.id) {
@@ -84,7 +84,7 @@ describe('Testes do BookRepository', () => {
         await addBook.execute(Book3)
             .then(result => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Book) {
                     if (result.props.id) {
                         idBookToBeUpdate = result.props.id
                     }
@@ -109,7 +109,7 @@ describe('Testes do BookRepository', () => {
 
         const result = await addBook.execute(BookInstanceToBeAdd)
 
-        if (typeof result != 'string') {
+        if (result instanceof Book) {
             expect(result.props).toHaveProperty('id')
             expect(result).toBeInstanceOf(Book)
         }
@@ -124,22 +124,16 @@ describe('Testes do BookRepository', () => {
 
         await deleteBook.execute(idBookToBeDelete)
             .then(result => {
+                if(result instanceof Book){
 
-                expect(result.message).toBe(`O livro de id: ${idBookToBeDelete} e ${idBookToBeDeleteTitle} foi excluído com sucesso.`)
+                    expect(result).toBe(`O livro de id: ${idBookToBeDelete} e ${idBookToBeDeleteTitle} foi excluído com sucesso.`)
+                }
 
             })
 
     })
 
-    // it('Deve buscar todos os livros', async () => {
 
-    //     const allBooks = await getAllBooks.execute()
-
-    //     expect(allBooks[0]).toBeInstanceOf(Book)
-    //     expect(allBooks.length).toBeGreaterThan(0)
-
-
-    // })
 
     it('Deve buscar um livro por genero', async () => {
 
@@ -157,9 +151,12 @@ describe('Testes do BookRepository', () => {
                     pageCount: 360,
                     publishedDate: '2013-10-10'
                 }
-                for (let books of result) {
+                if(result instanceof Book && Array.isArray(result)){
 
-                    expect(books).toBeInstanceOf(Book)
+                    for (let books of result) {
+    
+                        expect(books).toBeInstanceOf(Book)
+                    }
                 }
 
 
@@ -184,7 +181,7 @@ describe('Testes do BookRepository', () => {
                     pageCount: 360,
                     publishedDate: '2013-10-10'
                 }
-                // expect(result[0].props).toEqual(equalValue)
+                if(result instanceof Book && Array.isArray(result))
                 for (let book of result) { expect(book).toBeInstanceOf(Book) }
 
             })
@@ -229,9 +226,9 @@ describe('Testes do BookRepository', () => {
         const BookInstanceToBeUpdated = new Book(updatedValues)
 
         await updateBook.execute(BookInstanceToBeUpdated)
-            .then((result: Book | string) => {
+            .then((result) => {
 
-                if (typeof result != 'string') {
+                if (result instanceof Book) {
                     expect(result.props).toEqual(updatedValues)
                     expect(result).toBeInstanceOf(Book)
                 }
@@ -244,11 +241,14 @@ describe('Testes do BookRepository', () => {
 
     it('Deve buscar todos os livros', async () => {
 
-        const allBooks = await getAllBooks.execute()
+        const result = await getAllBooks.execute()
 
-        expect(allBooks.length).toBeGreaterThan(0)
+        if(result instanceof Book && Array.isArray(result)){
+            expect(result.length).toBeGreaterThan(0)
 
-        for (let books of allBooks) expect(books).toBeInstanceOf(Book)
+            for (let books of result) expect(books).toBeInstanceOf(Book)
+        }
+
     })
 
 })

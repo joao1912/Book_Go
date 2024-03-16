@@ -32,7 +32,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
     const newUser = await createUser.execute(userOne);
     const newBook = await addBook.execute(bookOne);
 
-    if (newUser.props.id) { userOneId = newUser.props.id };
+    if (newUser instanceof User) { userOneId = newUser.props.id };
     if (newBook instanceof Book && newBook.props.id) { bookId = newBook.props.id }
 
     const reserve = new Reservation({
@@ -43,7 +43,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
     });
 
     const reserveData = await makeReservation.execute(reserve);
-    if (typeof reserveData !== "string" && reserveData.props.id) { reservationId = reserveData.props.id }
+    if ( reserveData instanceof Reservation) { reservationId = reserveData.props.id }
   });
 
   it("Pesquisando reserva por book id", async () => {
@@ -51,7 +51,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
 
     const result = await deleteBookUseCase.execute(reservationId);
 
-    expect(result.message).toBe('Reservation deleted successfully.')
+    expect(result).toBe('Reservation deleted successfully.')
 
 
   });
