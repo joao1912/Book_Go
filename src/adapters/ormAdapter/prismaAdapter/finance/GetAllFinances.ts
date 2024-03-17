@@ -32,7 +32,7 @@ export class GetAllFinances implements IGetAllFinances {
 
     }
 
-    async execute(): Promise<IAllFinance[] | void> {
+    async execute(): Promise<IAllFinance[]> {
 
         try {
 
@@ -100,7 +100,7 @@ export class GetAllFinances implements IGetAllFinances {
 
         } catch (error) {
 
-            return handlePrismaError("FinanceError", error)
+            handlePrismaError("FinanceError", error)
 
         }
 

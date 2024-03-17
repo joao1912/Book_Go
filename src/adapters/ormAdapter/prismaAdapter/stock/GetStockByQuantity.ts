@@ -4,7 +4,8 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetStockByQuantity implements IGetStockByQuantity {
-  async execute(quantity: number) {
+  
+  async execute(quantity: number): Promise<Stock[]> {
     try {
       const BooksStock = await prisma.stock.findMany({
         where: {
@@ -24,11 +25,8 @@ export class GetStockByQuantity implements IGetStockByQuantity {
           }
         }
       });
-      if(BooksStock.length == 0){
-        return "No books found with this quantity."
-      }
       
-      let stock = [];
+      let stock: Stock[] = [];
       for (let bookProp of BooksStock) {
   
         stock.push(new Stock({
@@ -50,7 +48,7 @@ export class GetStockByQuantity implements IGetStockByQuantity {
       return stock;
       
     } catch (error) {
-      return handlePrismaError("adminError", error)
+      handlePrismaError("StockError", error)
     }
 
   }

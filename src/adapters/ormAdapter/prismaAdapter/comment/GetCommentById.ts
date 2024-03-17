@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetCommentById implements IGetCommentById {
 
-    async execute(id: string): Promise<Comment | void> {
+    async execute(id: string): Promise<Comment> {
 
         try {
 
@@ -30,7 +30,7 @@ export class GetCommentById implements IGetCommentById {
             
         } catch (error) {
 
-            return handlePrismaError("CommentError", error)
+            handlePrismaError("CommentError", error)
             
         }
     }

@@ -6,7 +6,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllUsers implements IGetAllUsers {
 
-  async execute(): Promise<User[] | void> {
+  async execute(): Promise<User[]> {
 
     try {
 
@@ -38,7 +38,7 @@ export class GetAllUsers implements IGetAllUsers {
       return users;
     } catch (error) {
 
-      return handlePrismaError("UserError", error)
+      handlePrismaError("UserError", error)
 
     }
   }

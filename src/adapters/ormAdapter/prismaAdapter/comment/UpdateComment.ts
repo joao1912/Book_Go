@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateComment implements IUpdateComment {
 
-    async execute({props}: Comment): Promise<Comment | void> {
+    async execute({props}: Comment): Promise<Comment> {
 
         try {
 
@@ -31,7 +31,7 @@ export class UpdateComment implements IUpdateComment {
 
         } catch (error) {
 
-            return handlePrismaError("CommentError", error)
+            handlePrismaError("CommentError", error)
 
         }
     }

@@ -3,6 +3,8 @@ export default class Formatter {
 
     static handle<T>(model: T) : T[Extract<keyof T, string>]{
 
+       if (model)
+
         for(let prop in model) {
 
             if (prop == 'props') {

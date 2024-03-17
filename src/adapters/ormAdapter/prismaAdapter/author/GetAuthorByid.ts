@@ -6,7 +6,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAuthorById implements IGetAuthorById {
 
-    async execute(id: string): Promise<Author | void> {
+    async execute(id: string): Promise<Author> {
         try {
 
             const author = await prisma.author.findUnique({
@@ -27,7 +27,7 @@ export class GetAuthorById implements IGetAuthorById {
            
         } catch (error) {
             
-            return handlePrismaError("AuthorError", error)
+            handlePrismaError("AuthorError", error)
 
         }
     }

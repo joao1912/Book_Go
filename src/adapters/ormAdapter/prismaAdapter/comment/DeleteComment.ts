@@ -4,7 +4,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteComment implements IDeleteComment {
 
-    async execute(id: string): Promise<IDeleteMessage | void> {
+    async execute(id: string): Promise<IDeleteMessage> {
        
         try {
             
@@ -22,7 +22,7 @@ export class DeleteComment implements IDeleteComment {
 
         } catch (error) {
             
-            return handlePrismaError("CommentError", error)
+            handlePrismaError("CommentError", error)
 
         }
     }

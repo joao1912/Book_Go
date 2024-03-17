@@ -12,7 +12,7 @@ export class DeleteAllAuthors implements IDeleteAllAuthors {
             
         } catch (error) {
             
-            return handlePrismaError("AuthorError", error)
+            handlePrismaError("AuthorError", error)
 
         }
 

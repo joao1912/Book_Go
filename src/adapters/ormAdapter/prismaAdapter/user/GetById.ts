@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetById implements IGetUser {
 
-  async execute(input: string): Promise<User | void> {
+  async execute(input: string): Promise<User> {
 
     try {
       const user = await prisma.user.findUnique({
@@ -32,7 +32,7 @@ export class GetById implements IGetUser {
     }
 
     } catch (error) {
-      return handlePrismaError("UserError", error)
+      handlePrismaError("UserError", error)
     }
 
 

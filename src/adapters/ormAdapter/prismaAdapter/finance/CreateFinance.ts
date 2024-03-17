@@ -100,7 +100,7 @@ export class CreateFinance implements ICreateFinance {
 
         } catch (error) {
 
-            return handlePrismaError("FinanceError", error)
+            handlePrismaError("FinanceError", error)
 
         }
     }

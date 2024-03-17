@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteAllReservations implements IDeleteReservation {
 
-    async execute(reservationId: string){
+    async execute(): Promise<IDeleteMessage> {
 
         try {
 
@@ -19,7 +19,7 @@ export class DeleteAllReservations implements IDeleteReservation {
 
         } catch (error) {
 
-            return handlePrismaError ("reservationError", error)
+            handlePrismaError ("ReservationError", error)
 
         }
     }

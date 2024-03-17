@@ -12,7 +12,7 @@ export class DeleteAllComments implements IDeleteAllComments {
             
         } catch (error) {
            
-            return handlePrismaError("CommentError", error)
+            handlePrismaError("CommentError", error)
 
         }
 

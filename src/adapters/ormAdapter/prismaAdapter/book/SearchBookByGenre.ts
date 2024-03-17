@@ -4,7 +4,8 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookByGenre implements ISearchBookByGenre {
-  async execute(genre: string) {
+  
+  async execute(genre: string): Promise<Book[]> {
     try {
       const bookSearch = await prisma.book.findMany({
         where: {
@@ -18,8 +19,9 @@ export class SearchBookByGenre implements ISearchBookByGenre {
           tag: true
         }
       });
+
       if (bookSearch.length !== 0) {
-        let books = [];
+        let books: Book[] = [];
         for (let bookProp of bookSearch) {
 
           books.push(new Book({
@@ -38,10 +40,9 @@ export class SearchBookByGenre implements ISearchBookByGenre {
         return books
       }
 
-      const message = `No results.`
-      return message
     } catch (error) {
-      return handlePrismaError("userError", error)
+
+      handlePrismaError("BookError", error)
 
     }
   }

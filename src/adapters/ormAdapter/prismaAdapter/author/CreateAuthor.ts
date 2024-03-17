@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateAuthor implements ICreateAuthor {
 
-    async execute({props}: Omit<Author, "id">): Promise<Author | void> {
+    async execute({props}: Omit<Author, "id">): Promise<Author> {
 
         const {description, name} = props;
 
@@ -26,7 +26,7 @@ export class CreateAuthor implements ICreateAuthor {
             
         } catch (error) {
             
-            return handlePrismaError("AuthorError", error)
+            handlePrismaError("AuthorError", error)
 
         }
     }
