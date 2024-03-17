@@ -6,7 +6,6 @@ import { getUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { GetUserUseCase } from "../../../usecases/user/GetUserUseCase";
 import { IController } from "../IController";
 import { User } from "../../../entities/User";
-import { CustomError } from "../utils/CustomError";
 
 
 class Login implements IController {
@@ -16,14 +15,6 @@ class Login implements IController {
 
         const serverReponse = new ServerResponse(res)
 
-<<<<<<< HEAD
-        if (!email || !password) {
-            let missingParam: string
-            missingParam = (!email) ? "Enter your email " : ''
-            missingParam = missingParam + ((!password) ? ("\n" + "Enter you password") : '')
-           
-            ServerResponse.missingParameters("userError", missingParam)
-=======
 
         const getUserUseCase = new GetUserUseCase(getUser)
 
@@ -45,35 +36,11 @@ class Login implements IController {
 
                 return serverReponse.ok({ token: userToken })
             }
->>>>>>> b080af50bd02fef5932c40ad42bc8a5cfefe41e9
         }
 
 
 
 
-<<<<<<< HEAD
-            if (userInstance instanceof User) {
-
-                const dbHashPassword = userInstance.props.password
-
-                const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
-
-                if (!checkPassword) {
-                   ServerResponse.notAuthorized("userError", "Invalid password")
-                }
-
-                if (userInstance.props.id) {
-                    const userToken = authJwt.sign(userInstance.props.id)
-
-                    return serverReponse.ok({ token: userToken })
-                }
-            }
-            
-
-
-       
-=======
->>>>>>> b080af50bd02fef5932c40ad42bc8a5cfefe41e9
     }
 }
 
