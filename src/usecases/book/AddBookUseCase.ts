@@ -16,7 +16,7 @@ export class AddBookUseCase {
             let valueProp = bookData[keyProp]
             console.log(typeof keyProp, typeof bookData[keyProp])
             if (!valueProp) {
-                ServerResponse.badRequest("adminError", `${keyProp.toUpperCase()} cannot be empty/undefined`)
+                ServerResponse.badRequest("AdminError", `${keyProp.toUpperCase()} cannot be empty/undefined`)
             }
         }
 

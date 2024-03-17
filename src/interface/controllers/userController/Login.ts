@@ -21,7 +21,7 @@ class Login implements IController {
             missingParam = (!email) ? "Enter your email " : ''
             missingParam = missingParam + ((!password) ? ("\n" + "Enter you password") : '')
            
-            return serverReponse.missingParameters("userError", missingParam)
+            ServerResponse.missingParameters("userError", missingParam)
         }
 
 
@@ -37,7 +37,7 @@ class Login implements IController {
                 const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
 
                 if (!checkPassword) {
-                    return ServerResponse.notAuthorized("userError", "Invalid password")
+                   ServerResponse.notAuthorized("userError", "Invalid password")
                 }
 
                 if (userInstance.props.id) {

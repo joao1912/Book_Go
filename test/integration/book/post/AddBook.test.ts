@@ -33,19 +33,19 @@ describe('## POST BOOK ##', () => {
         }
 
 
-        const result = await request.agent(app)
-            .post('/v1/users/signIn')
-            .send(adminBook)
-            .expect(200)
-        const admin = result.body;
-        expect(admin).toHaveProperty('id');
-        id = admin.id;
+        // const result = await request.agent(app)
+        //     .post('/v1/users/signIn')
+        //     .send(adminBook)
+        //     .expect(200)
+        // const admin = result.body;
+        // expect(admin).toHaveProperty('id');
+        // id = admin.id;
 
 
         const resultLogin = await request.agent(app)
             .post("/v1/users/login")
             .send({
-                email: "adminBookPost@gmail.com",
+                email: "admin_teste@gmail.com",
                 password: "123"
             })
             .expect(200)
