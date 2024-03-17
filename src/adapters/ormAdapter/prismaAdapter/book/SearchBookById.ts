@@ -4,9 +4,10 @@ import { ISearchBookById } from "../../repositories/book/ISearchBookById";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookById implements ISearchBookById {
-  async execute(id: string) {
+  
+  async execute(id: string): Promise<Book> {
     try {
-      console.log("Id", id)
+     
       const bookProp = await prisma.book.findUnique({
         where: { id: id },
 
@@ -29,11 +30,10 @@ export class SearchBookById implements ISearchBookById {
         })
       }
 
-      let message = "There is no book with the id provided "
-      return message
-
     } catch (error) {
-      return handlePrismaError("adminError", error)
+
+      handlePrismaError("BookError", error)
+
     }
   }
 }

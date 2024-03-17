@@ -6,7 +6,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteFavorite implements IDeleteFavorite {
 
-    async execute(id: string): Promise<IDeleteMessage | void> {
+    async execute(id: string): Promise<IDeleteMessage> {
        
         try {
 
@@ -22,7 +22,7 @@ export class DeleteFavorite implements IDeleteFavorite {
             
         } catch (error) {
             
-            return handlePrismaError("FavoriteError", error)
+            handlePrismaError("FavoriteError", error)
 
         }
     }

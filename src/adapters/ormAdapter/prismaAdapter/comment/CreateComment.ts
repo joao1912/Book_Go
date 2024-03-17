@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateComment implements ICreateComment {
 
-    async execute({props}: Omit<Comment, "id">): Promise<Comment | void> {
+    async execute({props}: Omit<Comment, "id">): Promise<Comment> {
 
         const {comment, bookId, userId} = props
         
@@ -30,7 +30,7 @@ export class CreateComment implements ICreateComment {
 
         } catch (error) {
 
-            return handlePrismaError("CommentError", error)
+            handlePrismaError("CommentError", error)
             
         }
     }

@@ -4,7 +4,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteUser implements IDeleteUser {
 
-    async execute(id: string): Promise<IDeleteMessage | void> {
+    async execute(id: string): Promise<IDeleteMessage> {
 
         try {
             await prisma.user.delete({
@@ -18,7 +18,7 @@ export class DeleteUser implements IDeleteUser {
             }
 
         } catch (error) {
-            return handlePrismaError("UserError", error)
+            handlePrismaError("UserError", error)
         }
 
     }

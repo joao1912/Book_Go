@@ -33,7 +33,7 @@ export class UpdateFinance implements IUpdateFinance {
 
     }
 
-    async execute({props}: Partial<Finance>): Promise<Partial<Finance> | void> {
+    async execute({props}: Partial<Finance>): Promise<Partial<Finance>> {
         
         try {
 
@@ -57,7 +57,7 @@ export class UpdateFinance implements IUpdateFinance {
             
         } catch (error) {
 
-            return handlePrismaError("FinanceError", error)
+            handlePrismaError("FinanceError", error)
 
         }
     }

@@ -6,7 +6,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllAuthors implements IGetAllAuthors {
 
-    async execute(): Promise<Author[] | void> {
+    async execute(): Promise<Author[]> {
         
         try {
 
@@ -32,7 +32,7 @@ export class GetAllAuthors implements IGetAllAuthors {
 
         } catch (error) {
             
-            return handlePrismaError("AuthorError", error)
+            handlePrismaError("AuthorError", error)
 
         }
 

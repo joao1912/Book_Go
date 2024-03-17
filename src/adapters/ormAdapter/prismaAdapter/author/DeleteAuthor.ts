@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteAuthor implements IDeleteAuthor {
 
-    async execute(id: string): Promise<IDeleteMessage | void> {
+    async execute(id: string): Promise<IDeleteMessage> {
         
         try {
 
@@ -21,7 +21,7 @@ export class DeleteAuthor implements IDeleteAuthor {
             
         } catch (error) {
             
-            return handlePrismaError("AuthorError", error)
+            handlePrismaError("AuthorError", error)
 
         }
 

@@ -13,6 +13,6 @@ export interface IAllFinance {
 
 export interface IGetAllFinances {
 
-    execute(): Promise<IAllFinance[] | void>
+    execute(): Promise<IAllFinance[]>
 
 }

@@ -13,7 +13,7 @@ export class DeleteAllFinances implements IDeleteAllFinances {
 
         } catch (error) {
 
-            return handlePrismaError("FinanceError", error)
+            handlePrismaError("FinanceError", error)
             
         }
 

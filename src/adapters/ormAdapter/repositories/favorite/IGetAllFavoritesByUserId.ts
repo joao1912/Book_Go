@@ -3,6 +3,6 @@ import { Book } from "../../../../entities/Book";
 
 export interface IGetAllFavoritesByUserId {
 
-    execute(userId: string): Promise<Book[] | void>
+    execute(userId: string): Promise<Book[]>
 
 }

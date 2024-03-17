@@ -10,7 +10,7 @@ export class DeleteAllBooks implements IDeleteAllBooks {
            await prisma.book.deleteMany()
            
         } catch (error) {
-            return  handlePrismaError("adminError", error)
+            handlePrismaError("BookError", error)
         }
 
     }

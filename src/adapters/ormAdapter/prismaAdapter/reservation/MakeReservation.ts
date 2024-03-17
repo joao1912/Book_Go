@@ -6,7 +6,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class MakeReservation implements IMakeReservation {
 
-    async execute({ props }: Reservation) {
+    async execute({ props }: Reservation): Promise<Reservation> {
 
         const { userId, bookId, price, startedAt, endsAt, status } = props
 
@@ -44,7 +44,7 @@ export class MakeReservation implements IMakeReservation {
 
 
         } catch (error) {
-           return handlePrismaError("userError",error)
+            handlePrismaError("ReservationError",error)
         }
 
 

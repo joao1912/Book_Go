@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class GetReservationByUserId implements IGetReservationByUserId {
 
-    async execute(userId: string) {
+    async execute(userId: string): Promise<Reservation[]> {
 
         try {
 
@@ -24,13 +24,8 @@ export class GetReservationByUserId implements IGetReservationByUserId {
                 }
             })
 
-            if (data.length == 0) {
-                const message = "You have no reserves."
-                return message
-            }
 
-
-            let dataArray = []
+            let dataArray: Reservation[] = []
             for (let props of data) {
 
                 dataArray.push(new Reservation
@@ -49,7 +44,7 @@ export class GetReservationByUserId implements IGetReservationByUserId {
             return dataArray
 
         } catch (error) {
-            return handlePrismaError("adminError", error)
+            handlePrismaError("ReservationError", error)
         }
 
     }

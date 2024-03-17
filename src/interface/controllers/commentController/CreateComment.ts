@@ -19,7 +19,7 @@ class CreateComment implements IController {
         const userId = req.userId;
 
         if (typeof userId != 'string') {
-            return serverResponse.badRequest('Bad Request: userId can not be other type besides string')
+            return ServerResponse.badRequest('CommentError', 'Bad Request: userId can not be other type besides string')
         }
 
         try {
