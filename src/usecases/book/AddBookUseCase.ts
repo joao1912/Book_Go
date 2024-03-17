@@ -11,11 +11,10 @@ export class AddBookUseCase {
     }
 
     async execute(bookData: IBook) {
-   
-
+     
         for (let keyProp in bookData) {
             let valueProp = bookData[keyProp]
-
+            console.log(typeof keyProp, typeof bookData[keyProp])
             if (!valueProp) {
                 ServerResponse.badRequest("adminError", `${keyProp.toUpperCase()} cannot be empty/undefined`)
             }
