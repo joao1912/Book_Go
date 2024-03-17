@@ -47,7 +47,7 @@ export class CreateFinance implements ICreateFinance {
 
     }
 
-    async execute({props}: Omit<Finance, "id">): Promise<Finance | void> {
+    async execute({props}: Omit<Finance, "id">): Promise<Finance> {
 
         const {payment, total, bookId, userId} = props;
 
