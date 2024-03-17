@@ -1,5 +1,6 @@
 import { IAddBook } from "../../adapters/ormAdapter/repositories/book/IAddBook"
 import { Book, IBook } from "../../entities/Book"
+import ServerResponse from "../../interface/controllers/utils/ServerResponse"
 
 
 export class AddBookUseCase {
@@ -10,12 +11,21 @@ export class AddBookUseCase {
     }
 
     async execute(bookData: IBook) {
+   
+
+        for (let keyProp in bookData) {
+            let valueProp = bookData[keyProp]
+
+            if (!valueProp) {
+                ServerResponse.badRequest("adminError", `${keyProp.toUpperCase()} cannot be empty/undefined`)
+            }
+        }
+
+
 
         const bookInstance = new Book(bookData)
 
         return await this.bookService.execute(bookInstance)
-
-    
 
     }
 

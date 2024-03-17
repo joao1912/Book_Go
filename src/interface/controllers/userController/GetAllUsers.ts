@@ -17,11 +17,11 @@ class GetAllUsers implements IController {
             
             const getAllUsersUseCase = new GetAllUsersUseCase(getAllUsers)
 
-            const allUsersInstances = await getAllUsersUseCase.execute()
+            const response = await getAllUsersUseCase.execute()
 
             let usersList: Array<IUser> = []
-
-            for(let user of allUsersInstances) {
+            if(response instanceof User && Array.isArray(response))
+            for(let user of response) {
 
                 usersList.push(
                     Formatter.handle<User>(user)
