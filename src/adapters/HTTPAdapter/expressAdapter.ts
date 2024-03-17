@@ -4,7 +4,9 @@ import express, { Application } from "express";
 import cors from "cors"
 import {createHttpTerminator} from 'http-terminator'
 import swaggerUi from "swagger-ui-express";
-import swaggerDocs from "../../../swagger.json" assert { type: "json" };
+
+//@ts-ignore
+import swaggerDocs from "../../../swagger.json" with { type: "json" };
 
 import userRouter from "../../interface/routes/express/userRoutes";
 import bookRouter from "../../interface/routes/express/bookRoutes";
