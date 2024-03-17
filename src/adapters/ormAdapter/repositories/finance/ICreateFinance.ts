@@ -20,7 +20,7 @@ export interface IRegister {
 
 export interface ICreateFinance {
 
-    execute(financeData: Omit<Finance, 'id'>): Promise<Finance | void>
+    execute(financeData: Omit<Finance, 'id'>): Promise<Finance>
 
     insertIntoRegister(data: IRegister): Promise<void>
 

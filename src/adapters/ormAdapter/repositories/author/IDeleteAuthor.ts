@@ -4,6 +4,6 @@ export interface IDeleteMessage {
 
 export interface IDeleteAuthor {
 
-    execute(id: string): Promise<IDeleteMessage | void>
+    execute(id: string): Promise<IDeleteMessage>
 
 }
