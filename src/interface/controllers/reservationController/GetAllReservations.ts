@@ -8,32 +8,32 @@ import ServerResponse from "../utils/ServerResponse";
 
 class GetAllReservations implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse){
+    async handle(req: HttpRequest, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
+        const getAllReservationsUseCase = new GetAllReservationsUseCase(getAllReservations)
 
-            const getAllReservationsUseCase = new GetAllReservationsUseCase(getAllReservations)
+        const response = await getAllReservationsUseCase.execute()
 
-            const response = await getAllReservationsUseCase.execute()
-
-            if(typeof response == "string")
+        if (response.length == 0) {
             return serverResponse.ok(response)
-          
-        let reservationList: Array<IReservation> = []
-        
-        if (response instanceof Reservation && Array.isArray(response)){
-            for (let reservation of response) {
-    
-                    reservationList.push(
-                        Formatter.handle<Reservation>(reservation)
-                    )
-    
-                }
-    
-                return serverResponse.ok(reservationList)    
-            }
         }
+
+        let reservationList: Array<IReservation> = []
+
+        if (response instanceof Reservation && Array.isArray(response)) {
+            for (let reservation of response) {
+
+                reservationList.push(
+                    Formatter.handle<Reservation>(reservation)
+                )
+
+            }
+
+            return serverResponse.ok(reservationList)
+        }
+    }
 }
 
 const getAllReservationsController = new GetAllReservations()

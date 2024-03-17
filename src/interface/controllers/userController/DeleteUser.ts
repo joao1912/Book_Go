@@ -13,27 +13,15 @@ class DeleteUser implements IController {
 
         const userId = req.userId;
 
-        if (!userId) {
-            return serverResponse.badRequest('BadRequest: userId can not be undefined.')
-        }
+        const deleteUserUseCase = new DeleteUserUseCase(deleteUser)
 
-        try {
-            
-            const deleteUserUseCase = new DeleteUserUseCase(deleteUser)
+        await deleteUserUseCase.execute(userId)
+            .then(result => {
 
-            await deleteUserUseCase.execute(userId)
-                .then(result => {
+                return serverResponse.ok(result)
 
-                    return serverResponse.ok(result)
+            })
 
-                })
-
-        } catch (error) {
-            
-            throw new Error('Bad Request: ' + error)
-
-        }
-            
     }
 
 }

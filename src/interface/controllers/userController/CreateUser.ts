@@ -8,7 +8,7 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
-interface IBody extends IUser {}
+interface IBody extends IUser { }
 
 export class CreateUser implements IController {
 
@@ -16,49 +16,41 @@ export class CreateUser implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-        try {
+        const {
 
-            const {
+            email,
+            password,
+            telephone,
+            username,
 
-                email,
-                password,
-                telephone,
-                username,
+        } = req.body
 
-            } = req.body
-            
-            const createUserUseCase = new CreateUserUseCase(createUser)
+        const createUserUseCase = new CreateUserUseCase(createUser)
 
-            const passwordHash = encryptorAdapter.hash(password)
+        const passwordHash = encryptorAdapter.hash(password)
 
-            const userInstance = await createUserUseCase.execute({
-                email,
-                password: passwordHash,
-                telephone,
-                username,
-            })
+        const userInstance = await createUserUseCase.execute({
+            email,
+            password: passwordHash,
+            telephone,
+            username,
+        })
 
-            const userData: any = Formatter.handle<User>(userInstance)
-            delete userData.password
+        const userData = Formatter.handle<User>(userInstance)
+        delete userData.password
 
-            const token = authAdapter.sign(userData.id)
+        const token = authAdapter.sign(userData.id)
 
-            const response = {
-                user: {
-                    ...userData
-                },
-                token: token
-            }
-
-            return serverResponse.ok( 
-                response
-            )
-
-        } catch (error) {
-            console.log(error)
-            throw new Error("Something happened. Please try again later")
-            
+        const response = {
+            user: {
+                ...userData
+            },
+            token: token
         }
+
+        return serverResponse.ok(
+            response
+        )
 
     }
 

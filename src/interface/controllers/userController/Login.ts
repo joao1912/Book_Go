@@ -16,40 +16,32 @@ class Login implements IController {
 
         const serverReponse = new ServerResponse(res)
 
-        if (!email || !password) {
-            let missingParam: string
-            missingParam = (!email) ? "Enter your email " : ''
-            missingParam = missingParam + ((!password) ? ("\n" + "Enter you password") : '')
-           
-            return serverReponse.missingParameters("userError", missingParam)
+
+        const getUserUseCase = new GetUserUseCase(getUser)
+
+        const userInstance = await getUserUseCase.execute(email)
+
+
+        if (userInstance instanceof User) {
+
+            const dbHashPassword = userInstance.props.password
+
+            const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
+
+            if (!checkPassword) {
+                ServerResponse.notAuthorized("UserError", "Invalid password")
+            }
+
+            if (userInstance.props.id) {
+                const userToken = authJwt.sign(userInstance.props.id)
+
+                return serverReponse.ok({ token: userToken })
+            }
         }
 
 
-            const getUserUseCase = new GetUserUseCase(getUser)
-
-            const userInstance = await getUserUseCase.execute(email)
 
 
-            if (userInstance instanceof User) {
-
-                const dbHashPassword = userInstance.props.password
-
-                const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
-
-                if (!checkPassword) {
-                    return ServerResponse.notAuthorized("userError", "Invalid password")
-                }
-
-                if (userInstance.props.id) {
-                    const userToken = authJwt.sign(userInstance.props.id)
-
-                    return serverReponse.ok({ token: userToken })
-                }
-            }
-            
-
-
-       
     }
 }
 

@@ -13,15 +13,13 @@ class GetAllUsers implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-        try {
-            
-            const getAllUsersUseCase = new GetAllUsersUseCase(getAllUsers)
+        const getAllUsersUseCase = new GetAllUsersUseCase(getAllUsers)
 
-            const response = await getAllUsersUseCase.execute()
+        const response = await getAllUsersUseCase.execute()
 
-            let usersList: Array<IUser> = []
-            if(response instanceof User && Array.isArray(response))
-            for(let user of response) {
+        let usersList: Array<IUser> = []
+        if (response instanceof User && Array.isArray(response))
+            for (let user of response) {
 
                 usersList.push(
                     Formatter.handle<User>(user)
@@ -29,13 +27,7 @@ class GetAllUsers implements IController {
 
             }
 
-            return serverResponse.ok(usersList)
-
-        } catch (error) {
-
-            throw new Error('Bad Request: ' + error)
-            
-        }
+        return serverResponse.ok(usersList)
 
     }
 

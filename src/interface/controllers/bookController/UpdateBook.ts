@@ -39,7 +39,7 @@ class UpdateBook implements IController {
             })
 
             if(response instanceof Book)
-            return serverResponse.ok(Formatter.handle<Book>(response))
+                serverResponse.ok(Formatter.handle<Book>(response))
 
 
         

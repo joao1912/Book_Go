@@ -13,17 +13,13 @@ class GetStockByQuantity implements IController {
 
         const serverResponse = new ServerResponse(res)
 
-
         const quantity = Number(req.params.quantity)
 
         const getStockByQuantityUseCase = new GetStockByQuantityUseCase(getStockByQuantity)
 
         const response = await getStockByQuantityUseCase.execute(quantity)
 
-        let stockList: Array<IStock> = []
-
-
-        if (typeof response == "string") {
+        if (response.length == 0) {
             return serverResponse.ok(response)
         }
 

@@ -36,8 +36,8 @@ class UpdateUser implements IController {
             })
 
 
-        if(response instanceof User)
-         return serverResponse.ok(Formatter.handle<User>(response))
+        if (response instanceof User) 
+            serverResponse.ok(Formatter.handle<User>(response))
     
     }
 }

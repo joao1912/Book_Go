@@ -20,9 +20,8 @@ class SearchBookByTitle implements IController {
 
         const response = await searchBookByTitleUseCase.execute(title)
 
-
         let bookList: Array<IBook> = []
-        if (response instanceof Book && Array.isArray(response))
+        if (response instanceof Book && Array.isArray(response)) {
             for (let book of response) {
 
                 bookList.push(
@@ -30,6 +29,8 @@ class SearchBookByTitle implements IController {
                 )
 
             }
+        }
+            
         return serverResponse.ok(bookList)
     }
 }

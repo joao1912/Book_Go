@@ -20,9 +20,6 @@ class GetStockByBookTitle implements IController {
             const getStockByBookTitleUseCase = new GetStockByBookTitleUseCase(getStockByBookTitle)
 
             const response = await getStockByBookTitleUseCase.execute(titleText)
-            if(typeof response == "string"){
-                return serverResponse.ok(response)
-            }
 
             if (response instanceof Stock && Array.isArray(response)){
                 let stockList: Array<IStock> = []
