@@ -6,7 +6,7 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
-interface IBody extends IComment {}
+interface IBody extends IComment { }
 
 class CreateComment implements IController {
 
@@ -18,28 +18,16 @@ class CreateComment implements IController {
 
         const userId = req.userId;
 
-        if (typeof userId != 'string') {
-            return ServerResponse.badRequest('CommentError', 'Bad Request: userId can not be other type besides string')
-        }
+        const createCommentUseCase = new CreateCommentUseCase(createComment)
 
-        try {
-            
-            const createCommentUseCase = new CreateCommentUseCase(createComment)
+        const newComment = await createCommentUseCase.execute({ ...commentData, userId })
 
-            const newComment = await createCommentUseCase.execute({...commentData, userId})
-
-            return serverResponse.ok(
-                Formatter.handle<Comment>(newComment)
-            )
-
-        } catch (error) {
-
-            throw new Error('Bad request: ' + error)
-            
-        }
+        return serverResponse.ok(
+            Formatter.handle<Comment>(newComment)
+        )
 
     }
-    
+
 }
 
 const createCommentController = new CreateComment()

@@ -17,10 +17,7 @@ class DeleteBook implements IController {
 
         const response = await deleteBookUseCase.execute(bookId)
 
-
         return serverResponse.ok(response)
-
-
 
     }
 }

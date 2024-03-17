@@ -15,13 +15,11 @@ class MakeReservation implements IController {
 
         const { userId, bookId } = req.params
 
-
         let reserve = {
             userId: userId,
             bookId: bookId,
             price: 20,
             status: "string"
-
         }
 
         const makeReservationUseCase = new MakeReservationUseCase(makeReservation)
@@ -30,10 +28,6 @@ class MakeReservation implements IController {
 
         if (response instanceof Reservation)
             return serverResponse.ok(Formatter.handle<Reservation>(response))
-
-
-
-
 
     }
 }

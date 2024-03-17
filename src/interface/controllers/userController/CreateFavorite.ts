@@ -16,12 +16,6 @@ export class CreateFavorite implements IController {
         const userId = req.userId;
         const { bookId } = req.params;
 
-        if (typeof userId != 'string') {
-
-            return serverResponse.badRequest('can not read the token')
-
-        }
-
         const createFavoriteUseCase = new FavoriteBookUseCase(createFavorite)
 
         const favorite = await createFavoriteUseCase.execute(userId, bookId)

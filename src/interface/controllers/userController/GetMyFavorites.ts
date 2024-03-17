@@ -14,10 +14,6 @@ class GetMyFavorites implements IController {
 
         const userId = req.userId
 
-        if (!userId) {
-            return serverResponse.badRequest('Bad request: userId can not be undefined')
-        }
-
         const getMyFavoritesUseCase = new GetMyFavoritesUseCase(getAllFavoritesByUserId)
 
         const favoritesInstances = await getMyFavoritesUseCase.execute(userId)

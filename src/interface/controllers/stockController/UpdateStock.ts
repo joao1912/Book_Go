@@ -19,7 +19,6 @@ class UpdateStock implements IController {
         let IBookType: IBook
         const searchBookByIdUseCase = new SearchBookByIdUseCase(searchBookById)
 
-
         const bookId = req.params.bookId
 
         const quantity = req.body.quantity

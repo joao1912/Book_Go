@@ -16,11 +16,11 @@ class GetReservationByUserId implements IController {
             const userId = req.params.user_id
             const getReservationByUserIdUseCase = new GetReservationByUserIdUseCase(getReservationByUserId)
 
-            const response= await getReservationByUserIdUseCase.execute(userId)
+            const response = await getReservationByUserIdUseCase.execute(userId)
 
             let reservationList: Array<IReservation> = []
             
-            if(typeof response == "string"){
+            if (response.length == 0) {
                 return serverResponse.ok(response)
             }
 

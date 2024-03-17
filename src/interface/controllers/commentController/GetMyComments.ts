@@ -15,33 +15,21 @@ class GetMyComments implements IController {
 
         const userId = req.userId
 
-        if (!userId) {
-            return serverResponse.badRequest('Bad Request: userId can not be undefined')
-        }
-
         const getMycommentsUseCase = new GetMyCommentsUseCase(getAllCommentsByUserId)
 
-        try {
-            
-            const comments = await getMycommentsUseCase.execute(userId)
+        const comments = await getMycommentsUseCase.execute(userId)
 
-            let commentList: Array<IComment> = []
+        let commentList: Array<IComment> = []
 
-            for (let comment of comments) {
-                
-                commentList.push(
-                    Formatter.handle<Comment>(comment)
-                )
+        for (let comment of comments) {
 
-            }
+            commentList.push(
+                Formatter.handle<Comment>(comment)
+            )
 
-            return serverResponse.ok(commentList)
-
-        } catch (error) {
-
-            throw new Error('Bad Request: ' + error)
-            
         }
+
+        return serverResponse.ok(commentList)
 
     }
 

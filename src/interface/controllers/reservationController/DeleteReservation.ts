@@ -7,17 +7,17 @@ import ServerResponse from "../utils/ServerResponse";
 
 class DeleteReservation implements IController {
 
-    async handle(req: HttpRequest<{reservationId:string}>, res: HttpResponse){
+    async handle(req: HttpRequest<{ reservationId: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
-            const reservationId = req.params.reservationId
+        const reservationId = req.params.reservationId
 
-            const deleteReservationUseCase = new DeleteReservationUseCase(deleteReservation)
+        const deleteReservationUseCase = new DeleteReservationUseCase(deleteReservation)
 
-            const response = await deleteReservationUseCase.execute(reservationId)
+        const response = await deleteReservationUseCase.execute(reservationId)
 
-            return serverResponse.ok(response)
+        return serverResponse.ok(response)
 
     }
 }

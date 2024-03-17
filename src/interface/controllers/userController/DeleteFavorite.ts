@@ -13,22 +13,14 @@ class DeleteFavorite implements IController {
 
         const deleteFavoriteByIdUseCase = new DeleteFavoriteByIdUseCase(deleteFavorite)
 
-        try {
-            
-            const {favoriteId} = req.params;
+        const { favoriteId } = req.params;
 
-            await deleteFavoriteByIdUseCase.execute(favoriteId)
-                .then(result => {
+        await deleteFavoriteByIdUseCase.execute(favoriteId)
+            .then(result => {
 
-                    return serverResponse.ok(result)
+                return serverResponse.ok(result)
 
-                })
-
-        } catch (error) {
-
-            throw new Error('Bad Request: ' + error)
-            
-        }
+            })
 
     }
 

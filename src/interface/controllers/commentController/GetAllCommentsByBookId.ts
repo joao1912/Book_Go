@@ -19,33 +19,22 @@ class GetAllCommentsByBookId implements IController {
 
         const bookId = req.params.bookId;
 
-        if (typeof bookId != 'string') {
-            return serverResponse.badRequest('Bad Request: bookId can not be other type besides string')
+
+        const searchAllCommentsUseCase = new SearchAllCommentsUseCase(getAllComments)
+
+        const comments = await searchAllCommentsUseCase.execute(bookId)
+
+        let commentList: Array<IComment> = []
+
+        for (let comment of comments) {
+
+            commentList.push(
+                Formatter.handle<Comment>(comment)
+            )
+
         }
 
-        try {
-            
-            const searchAllCommentsUseCase = new SearchAllCommentsUseCase(getAllComments)
-
-            const comments = await searchAllCommentsUseCase.execute(bookId)
-
-            let commentList: Array<IComment> = []
-
-            for (let comment of comments) {
-                
-                commentList.push(
-                    Formatter.handle<Comment>(comment)
-                )
-
-            }
-
-            return serverResponse.ok(commentList)
-
-        } catch (error) {
-
-            throw new Error('Bad request: ' + error)
-            
-        }
+        return serverResponse.ok(commentList)
 
     }
 

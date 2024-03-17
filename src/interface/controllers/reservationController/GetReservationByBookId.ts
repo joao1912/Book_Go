@@ -19,13 +19,12 @@ class GetReservationByBookId implements IController {
 
         const response = await getReservationByUserIdUseCase.execute(bookId)
 
-
         let reservationList: Array<IReservation> = []
 
-        
+        if (response.length == 0) {
 
-        if(typeof response == "string"){
             return serverResponse.ok(response)
+            
         }
 
         if (response instanceof Reservation && Array.isArray(response)) {

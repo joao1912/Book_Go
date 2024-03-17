@@ -16,20 +16,42 @@ class Login implements IController {
 
         const serverReponse = new ServerResponse(res)
 
+<<<<<<< HEAD
         if (!email || !password) {
             let missingParam: string
             missingParam = (!email) ? "Enter your email " : ''
             missingParam = missingParam + ((!password) ? ("\n" + "Enter you password") : '')
            
             ServerResponse.missingParameters("userError", missingParam)
+=======
+
+        const getUserUseCase = new GetUserUseCase(getUser)
+
+        const userInstance = await getUserUseCase.execute(email)
+
+
+        if (userInstance instanceof User) {
+
+            const dbHashPassword = userInstance.props.password
+
+            const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
+
+            if (!checkPassword) {
+                ServerResponse.notAuthorized("UserError", "Invalid password")
+            }
+
+            if (userInstance.props.id) {
+                const userToken = authJwt.sign(userInstance.props.id)
+
+                return serverReponse.ok({ token: userToken })
+            }
+>>>>>>> b080af50bd02fef5932c40ad42bc8a5cfefe41e9
         }
 
 
-            const getUserUseCase = new GetUserUseCase(getUser)
-
-            const userInstance = await getUserUseCase.execute(email)
 
 
+<<<<<<< HEAD
             if (userInstance instanceof User) {
 
                 const dbHashPassword = userInstance.props.password
@@ -50,6 +72,8 @@ class Login implements IController {
 
 
        
+=======
+>>>>>>> b080af50bd02fef5932c40ad42bc8a5cfefe41e9
     }
 }
 
