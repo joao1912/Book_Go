@@ -37,19 +37,16 @@ class AuthJwt implements IAuthAdapterRepository {
     }
 
     public checkToken(token: string): string | null {
-        try {
-            const secretKey = process.env.MY_SECRET;
-    
-            if (secretKey !== undefined) {
-                const decoded = jwt.verify(token, secretKey) as TokenPayload;
-                return decoded.id;
-            } else {
-                throw new Error('Chave secreta não definida');
-            }
-        } catch (error) {
-            console.error(error);
-            return null;
-        }
+
+       
+        const secretKey = process.env.MY_SECRET;
+
+        if (secretKey == undefined) throw new Error('Chave secreta não definida');
+
+        const decoded = jwt.verify(token, secretKey) as TokenPayload;
+        
+        return decoded.id;
+
     }
 
     public getAuth() {

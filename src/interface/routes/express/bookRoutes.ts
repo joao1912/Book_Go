@@ -10,7 +10,7 @@ import Auth from "../../middlewares/Auth";
 
 const bookRouter = Router()
 
-bookRouter.get('/', getAllBooksController.handle)
+bookRouter.get('/', Auth.execute, getAllBooksController.handle)
 
 bookRouter.post('/add', Auth.execute, addBookController.handle)
 

@@ -1,5 +1,6 @@
 import { HttpNext, HttpRequest, HttpResponse } from "../../adapters/HTTPAdapter/protocol";
 import { authAdapter } from "../../adapters/authAdapter/protocol";
+import ServerResponse from "../controllers/utils/ServerResponse";
 
 export default class Auth {
 
@@ -24,7 +25,8 @@ export default class Auth {
 
         } catch (error) {
             
-            res.status(401).json({message: 'Invalid or expired token.'})
+            console.log(error)
+            ServerResponse.notAuthorized('JsonWebTokenError', 'Invalid or expired token.')
             
         }
 

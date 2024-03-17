@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
+    "dev:w": "tsx --watch src/index.ts",
     "build": "tsup src",
     "test:unit": "jest --testPathPattern=test",
     "test:unit:orm": "jest ./test/unit/ormRepositories",
