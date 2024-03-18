@@ -1,17 +1,28 @@
-export interface IUser  {
+import { z } from "zod"
+
+/* export interface IUser  {
     id?: string
     username: string
     password: string
     email: string 
     telephone: string
     favoritesBooks?: number[]
-}
+} */
 
+export const userSchema = z.object({
+    id: z.string().optional(),
+    username: z.string().max(40, { message: 'O nome pode ter no maximo 40 caracteres.' }),
+    password: z.string().min(6, { message: 'A Senha precisa de no minimo 6 caracteres.' }),
+    email: z.string().email().max(40, { message: 'O email pode ter no maximo 40 caracteres.' }),
+    telephone: z.string(),
+    favoritesBooks: z.array(z.number()).optional() 
+})
+
+export type IUser = z.infer<typeof userSchema>
 
 export class User {
     
     readonly props: IUser
-
 
     constructor(props: IUser) {
      
@@ -31,7 +42,6 @@ export class User {
             telephone: this.props.telephone,
         }
     }
-
 
 
 }

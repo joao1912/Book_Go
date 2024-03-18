@@ -1,17 +1,12 @@
-import ServerResponse from "../../interface/controllers/utils/ServerResponse";
-import { IValidatorAdapterRepository, returnData } from "./repository/IValidatorAdapterRepository";
+import { CustomError } from "../../interface/controllers/utils/CustomError";
+import { IValidatorAdapterRepository } from "./repository/IValidatorAdapterRepository";
 import { ZodObject, ZodRawShape } from "zod";
 
 export class ZodAdapter implements IValidatorAdapterRepository {
 
-    validate<T, S extends ZodObject<ZodRawShape>>(data: T, schema: S): Partial<returnData<T>> {
+    validate<T, S>(data: T, schema: ZodObject<ZodRawShape>): S {
 
         const result = schema.safeParse(data)
-
-        const returnValues = {
-            success: result.success,
-            data: result.success ? result.data : result.error.message
-        }
 
         if (!result.success) {
 
@@ -19,11 +14,15 @@ export class ZodAdapter implements IValidatorAdapterRepository {
 
             // versao mais simples: result.error.format()
 
-            ServerResponse.badRequest('ValidatorError', JSON.stringify(errors))
+            throw new CustomError('ValidatorError', JSON.stringify(errors), 400);
 
+        } else {
+
+            const validData: S = result.data.shape
+            
+            return validData 
+            
         }
-
-        return returnValues
 
     }
 
