@@ -1,10 +1,11 @@
 import { CustomError } from "../../interface/controllers/utils/CustomError";
+import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 import { IValidatorAdapterRepository } from "./repository/IValidatorAdapterRepository";
-import { ZodObject, ZodRawShape } from "zod";
+import { ZodObject, ZodRawShape, z } from "zod";
 
 export class ZodAdapter implements IValidatorAdapterRepository {
 
-    validate<T, S>(data: T, schema: ZodObject<ZodRawShape>): S {
+    validateSchema<T, S>(data: T, schema: ZodObject<ZodRawShape>): S {
 
         const result = schema.safeParse(data)
 
@@ -26,4 +27,23 @@ export class ZodAdapter implements IValidatorAdapterRepository {
 
     }
 
+    validateId(id: string | undefined): string {
+
+        const idZod = z.string().uuid({message: 'O id está inválido'})
+
+        const result = idZod.safeParse(id)
+
+        if (!result.success) {
+
+            ServerResponse.badRequest('ValidatorError', JSON.stringify(result.error.issues))
+
+        } else {
+
+            return result.data
+
+        }
+
+    }
+
 }
+ 

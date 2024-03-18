@@ -1,5 +1,6 @@
 import { ICreateFavorite, IFavoriteCreated } from "../../adapters/ormAdapter/repositories/favorite/ICreateFavorite";
 import { Book } from "../../entities/Book";
+import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 
 
 export class FavoriteBookUseCase {
@@ -11,7 +12,9 @@ export class FavoriteBookUseCase {
 
     }
 
-    async execute(userId: string, bookId: string): Promise<IFavoriteCreated> {
+    async execute(userId: string | undefined, bookId: string | undefined): Promise<IFavoriteCreated> {
+
+        if (!userId || !bookId) ServerResponse.missingParameters('UserError', 'Missing parameters')
 
         const bookFavorited = await this.createFavoriteAdapter.execute(userId, bookId)
 

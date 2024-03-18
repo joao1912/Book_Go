@@ -37,17 +37,18 @@ export class CreateUser implements IController {
         })
 
         const userData = Formatter.handle<User>(userInstance)
+        //@ts-ignore
         delete userData.password
-
+    
         const token = authAdapter.sign(userData.id!)
 
         const response = {
             user: {
                 ...userData
             },
-            token: token
+          token: token
         }
-
+        
         return serverResponse.ok(
             response
         )

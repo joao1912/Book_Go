@@ -1,4 +1,6 @@
 import { IDeleteUser } from "../../adapters/ormAdapter/repositories/user/IDeleteUser";
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
+import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 
 
 export class DeleteUserUseCase {
@@ -9,17 +11,11 @@ export class DeleteUserUseCase {
         this.userService = ormAdapter
     }
 
-    async execute(id: string) {
+    async execute(id: string | undefined) {
 
-        try {
-            
-            return await this.userService.execute(id)
+        const validatedId = validatorAdapter.validateId(id) 
 
-        } catch (error) {
-
-            throw new Error('Internal server error: ' + error)
-            
-        }
+        return await this.userService.execute(validatedId)
 
     }
 
