@@ -33,7 +33,7 @@ export class SearchBookById implements ISearchBookById {
     } catch (error) {
 
       handlePrismaError("BookError", error)
-
+      throw error
     }
   }
 }

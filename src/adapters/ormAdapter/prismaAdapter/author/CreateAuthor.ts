@@ -27,7 +27,7 @@ export class CreateAuthor implements ICreateAuthor {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-
+            throw error
         }
     }
 }

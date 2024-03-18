@@ -13,7 +13,7 @@ export class DeleteAllFavorites implements IDeleteAllFavorites {
         } catch (error) {
             
             handlePrismaError("FavoriteError", error)
-
+            throw error
         }
     }
 }

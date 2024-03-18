@@ -39,6 +39,7 @@ export class GetAllUsers implements IGetAllUsers {
     } catch (error) {
 
       handlePrismaError("UserError", error)
+      throw error
 
     }
   }

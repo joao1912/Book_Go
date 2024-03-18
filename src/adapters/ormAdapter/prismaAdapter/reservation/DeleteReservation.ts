@@ -24,7 +24,7 @@ export class DeleteReservation implements IDeleteReservation {
         } catch (error) {
             
             handlePrismaError("ReservationError", error)
-
+            throw error
         }
     }
 }

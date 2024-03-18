@@ -101,7 +101,7 @@ export class GetAllFinances implements IGetAllFinances {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-
+            throw error
         }
 
     }

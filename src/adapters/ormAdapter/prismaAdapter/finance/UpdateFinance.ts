@@ -58,7 +58,7 @@ export class UpdateFinance implements IUpdateFinance {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-
+            throw error
         }
     }
 }

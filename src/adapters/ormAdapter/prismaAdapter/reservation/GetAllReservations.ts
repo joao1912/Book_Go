@@ -39,6 +39,7 @@ export class GetAllReservations implements IGetAllReservation {
 
         } catch (error) {
             handlePrismaError("ReservationError", error)
+            throw error
         }
 
     }

@@ -43,7 +43,7 @@ export class SearchBookByGenre implements ISearchBookByGenre {
     } catch (error) {
 
       handlePrismaError("BookError", error)
-
+      throw error
     }
   }
 }

@@ -35,7 +35,7 @@ export class GetAllComments implements IGetAllComments {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            
+            throw error
         }
     }
 }

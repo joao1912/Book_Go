@@ -46,6 +46,7 @@ export class GetAllStock implements IGetAllStock {
       
     } catch (error) {
       handlePrismaError("StockError", error)
+      throw error
     }
 
   }

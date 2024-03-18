@@ -33,7 +33,7 @@ export class GetAllAuthors implements IGetAllAuthors {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-
+            throw error
         }
 
     }

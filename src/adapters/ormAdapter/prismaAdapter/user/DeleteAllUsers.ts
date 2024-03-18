@@ -17,6 +17,7 @@ export class DeleteAllUsers implements IDeleteAllUsers {
 
         } catch (error) {
           handlePrismaError("UserError", error)
+          throw error
         }
 
     }

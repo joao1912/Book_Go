@@ -47,6 +47,7 @@ export class UpdateStock implements IUpdateStock {
 
     } catch (error) {
       handlePrismaError("StockError", error)
+      throw error
     }
   }
 }

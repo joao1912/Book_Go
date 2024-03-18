@@ -48,6 +48,7 @@ export class GetStockByBookTitle implements IGetStockByBookTitle {
 
     } catch (error) {
       handlePrismaError("StockError", error)
+      throw error
     }
 
   }

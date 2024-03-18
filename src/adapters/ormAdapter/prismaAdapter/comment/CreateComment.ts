@@ -31,7 +31,7 @@ export class CreateComment implements ICreateComment {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            
+            throw error
         }
     }
 }

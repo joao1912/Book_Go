@@ -58,7 +58,7 @@ export class GetFinanceById implements IGetFinanceById {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-            
+            throw error
         }
     }
 }

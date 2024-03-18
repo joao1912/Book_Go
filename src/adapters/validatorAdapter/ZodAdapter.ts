@@ -18,7 +18,7 @@ export class ZodAdapter implements IValidatorAdapterRepository {
 
         } else {
 
-            const validData: S = result.data.shape
+            const validData = result.data as S
             
             return validData 
             

@@ -28,7 +28,7 @@ export class GetAuthorById implements IGetAuthorById {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-
+            throw error
         }
     }
 }

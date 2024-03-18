@@ -23,7 +23,7 @@ export class DeleteComment implements IDeleteComment {
         } catch (error) {
             
             handlePrismaError("CommentError", error)
-
+            throw error
         }
     }
 }

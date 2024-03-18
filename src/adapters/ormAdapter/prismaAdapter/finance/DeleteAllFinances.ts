@@ -14,7 +14,7 @@ export class DeleteAllFinances implements IDeleteAllFinances {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-            
+            throw error
         }
 
     }

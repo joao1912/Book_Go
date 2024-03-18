@@ -24,7 +24,7 @@ export class DeleteBook implements IDeleteBook {
         } catch (error) {
 
             handlePrismaError("BookError", error)
-
+            throw error
         }
     }
 }

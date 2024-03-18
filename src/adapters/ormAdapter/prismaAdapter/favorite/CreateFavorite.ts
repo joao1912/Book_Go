@@ -54,7 +54,7 @@ export class CreateFavorite implements ICreateFavorite {
     } catch (error) {
       
       handlePrismaError("FavoriteError", error)
-
+      throw error
     }
   }
 }

@@ -41,6 +41,7 @@ export class UpdateUser implements IUpdateUser {
     } catch (error) {
 
       handlePrismaError('UserError', error)
+      throw error
 
     }
 

@@ -14,20 +14,21 @@ export class GetUser implements IGetUser {
         }
       })
 
-      if(user != null){ 
+
       return new User({
-        id: user.id,
-        username: user.username,
-        password: user.password,
-        email: user.email,
-        telephone: user.telephone,
+        id: user!.id,
+        username: user!.username,
+        password: user!.password,
+        email: user!.email,
+        telephone: user!.telephone,
       })
-    }
+
 
     } catch (error) {
 
       handlePrismaError('UserError', error)
-        
+      throw error
+
     }
   }
 }

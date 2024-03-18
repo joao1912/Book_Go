@@ -45,6 +45,7 @@ export class MakeReservation implements IMakeReservation {
 
         } catch (error) {
             handlePrismaError("ReservationError",error)
+            throw error
         }
 
 

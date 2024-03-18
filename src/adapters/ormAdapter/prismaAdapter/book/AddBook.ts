@@ -64,7 +64,7 @@ export class AddBook implements IAddBook {
 
     } catch (error) {
       handlePrismaError("BookError", error)
-      
+      throw error
     }
   }
 }

@@ -22,7 +22,7 @@ export class DeleteAuthor implements IDeleteAuthor {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-
+            throw error
         }
 
     }

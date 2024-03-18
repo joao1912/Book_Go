@@ -70,7 +70,7 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
         } catch (error) {
 
             handlePrismaError("FavoriteError", error)
-
+            throw error
         }
 
     }

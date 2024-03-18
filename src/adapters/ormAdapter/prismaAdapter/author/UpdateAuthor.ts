@@ -29,7 +29,7 @@ export class UpdateAuthor implements IUpdateAuthor {
         } catch (error) {
 
             handlePrismaError("AuthorError", error)
-
+            throw error
         }
     }
 }

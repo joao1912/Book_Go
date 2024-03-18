@@ -32,7 +32,7 @@ export class UpdateComment implements IUpdateComment {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-
+            throw error
         }
     }
 }

@@ -33,6 +33,7 @@ export class GetById implements IGetUser {
 
     } catch (error) {
       handlePrismaError("UserError", error)
+      throw error
     }
 
 

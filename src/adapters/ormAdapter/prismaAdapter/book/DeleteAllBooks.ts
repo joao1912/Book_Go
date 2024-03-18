@@ -11,6 +11,7 @@ export class DeleteAllBooks implements IDeleteAllBooks {
            
         } catch (error) {
             handlePrismaError("BookError", error)
+            throw error
         }
 
     }

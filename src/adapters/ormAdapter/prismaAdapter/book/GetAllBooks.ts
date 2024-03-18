@@ -35,7 +35,7 @@ export class GetAllBooks implements IGetAllBooks {
     } catch (error) {
 
       handlePrismaError("BookError",error)
-
+      throw error
     }
   }
 }

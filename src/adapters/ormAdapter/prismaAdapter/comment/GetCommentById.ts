@@ -31,7 +31,7 @@ export class GetCommentById implements IGetCommentById {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            
+            throw error
         }
     }
 }

@@ -19,6 +19,7 @@ export class DeleteUser implements IDeleteUser {
 
         } catch (error) {
             handlePrismaError("UserError", error)
+            throw error
         }
 
     }

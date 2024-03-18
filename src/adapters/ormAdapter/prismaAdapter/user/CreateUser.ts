@@ -39,9 +39,10 @@ export class CreateUser implements ICreateUser {
         favoritesBooks: []
       })
 
-    } catch (error) {
+    } catch (error: any) {
 
       handlePrismaError("UserError", error)
+      throw error
 
     }
   }

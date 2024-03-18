@@ -45,6 +45,7 @@ export class GetReservationByUserId implements IGetReservationByUserId {
 
         } catch (error) {
             handlePrismaError("ReservationError", error)
+            throw error
         }
 
     }
