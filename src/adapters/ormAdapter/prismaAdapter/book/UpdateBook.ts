@@ -4,7 +4,7 @@ import { IUpdateBook } from "../../repositories/book/IUpdateBook";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateBook implements IUpdateBook {
-  
+  //@ts-ignore
   async execute({ props }: Book): Promise<Book> {
 
     const { id, title, synopsis, price, genre, author, publishedDate, pageCount, image } = props

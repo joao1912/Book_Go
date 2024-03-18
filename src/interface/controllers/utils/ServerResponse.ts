@@ -13,26 +13,26 @@ class ServerResponse {
         this.response.status(200).json(message);
     }
 
-    static badRequest(name: string, message: string): CustomError {
+    static badRequest(name: string, message: string): never {
         throw new CustomError(name, message, 400);
     }
-    static notAuthorized(name: string, message: string): CustomError {
+    static notAuthorized(name: string, message: string): never {
         throw new CustomError(name, message, 401);
     }
 
-    static notFound(name: string, message: string): CustomError {
+    static notFound(name: string, message: string): never {
         throw new CustomError(name, message, 404);
     }
 
-    static conflict(name: string, message: string): CustomError {
+    static conflict(name: string, message: string): never {
         throw new CustomError(name, message, 409);
     }
 
-    static missingParameters(name: string, message: string): CustomError {
+    static missingParameters(name: string, message: string): never {
         throw new CustomError(name, message, 422);
     }
 
-    static serviceUnavailable(name: string, message: string): CustomError {
+    static serviceUnavailable(name: string, message: string): never {
         throw new CustomError(name, message, 503);
     }
 

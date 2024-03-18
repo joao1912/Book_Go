@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
-
+    //@ts-ignore
     async execute(userId: string): Promise<Book[]> {
 
         try {
@@ -70,7 +70,7 @@ export class GetAllFavoritesByUserId implements IGetAllFavoritesByUserId {
         } catch (error) {
 
             handlePrismaError("FavoriteError", error)
-
+            
         }
 
     }

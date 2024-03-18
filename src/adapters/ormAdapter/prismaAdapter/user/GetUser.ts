@@ -4,7 +4,7 @@ import { User } from "../../../../entities/User";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetUser implements IGetUser {
-
+  //@ts-ignore
   async execute(input: string): Promise<User> {
 
     try {
@@ -14,20 +14,20 @@ export class GetUser implements IGetUser {
         }
       })
 
-      if(user != null){ 
+
       return new User({
-        id: user.id,
-        username: user.username,
-        password: user.password,
-        email: user.email,
-        telephone: user.telephone,
+        id: user!.id,
+        username: user!.username,
+        password: user!.password,
+        email: user!.email,
+        telephone: user!.telephone,
       })
-    }
+
 
     } catch (error) {
 
       handlePrismaError('UserError', error)
-        
+
     }
   }
 }

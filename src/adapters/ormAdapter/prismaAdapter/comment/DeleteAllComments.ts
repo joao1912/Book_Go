@@ -3,7 +3,7 @@ import { IDeleteAllComments } from "../../repositories/comment/IDeleteAllComment
 import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteAllComments implements IDeleteAllComments {
-
+    //@ts-ignore
     async execute(): Promise<void> {
 
         try {
@@ -13,7 +13,7 @@ export class DeleteAllComments implements IDeleteAllComments {
         } catch (error) {
            
             handlePrismaError("CommentError", error)
-
+            
         }
 
     }

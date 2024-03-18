@@ -2,14 +2,14 @@ import { Prisma } from "@prisma/client";
 import ServerResponse from "../../../../interface/controllers/utils/ServerResponse";
 
 
-export const handlePrismaError = (name: string, error: any) => {
+export const handlePrismaError = (name: string, error: any): never => {
     
     switch (true) {
 
         case error instanceof Prisma.PrismaClientValidationError:
 
             ServerResponse.badRequest (name, "Invalid input type provided.")
-            break
+            
 
         case error instanceof Prisma.PrismaClientKnownRequestError:
             const meta = error.meta
@@ -23,7 +23,7 @@ export const handlePrismaError = (name: string, error: any) => {
 
                 ServerResponse.notFound (name, "Id provided does not exist.")
             }
-            break
+            
 
         default:
             console.log(error)

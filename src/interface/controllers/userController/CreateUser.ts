@@ -39,7 +39,7 @@ export class CreateUser implements IController {
         const userData = Formatter.handle<User>(userInstance)
         delete userData.password
 
-        const token = authAdapter.sign(userData.id)
+        const token = authAdapter.sign(userData.id!)
 
         const response = {
             user: {

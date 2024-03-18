@@ -3,7 +3,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteUser implements IDeleteUser {
-
+    //@ts-ignore
     async execute(id: string): Promise<IDeleteMessage> {
 
         try {

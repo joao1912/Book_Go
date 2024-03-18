@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetStockByQuantity implements IGetStockByQuantity {
-  
+  //@ts-ignore
   async execute(quantity: number): Promise<Stock[]> {
     try {
       const BooksStock = await prisma.stock.findMany({

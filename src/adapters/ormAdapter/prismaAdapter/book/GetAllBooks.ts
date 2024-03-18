@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllBooks implements IGetAllBooks {
-  
+  //@ts-ignore
   async execute(): Promise<Book[]> {
     try {
       const bookSearch = await prisma.book.findMany({
@@ -35,7 +35,7 @@ export class GetAllBooks implements IGetAllBooks {
     } catch (error) {
 
       handlePrismaError("BookError",error)
-
+      
     }
   }
 }

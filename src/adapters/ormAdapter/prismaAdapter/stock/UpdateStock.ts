@@ -4,6 +4,7 @@ import { IStock, Stock } from "../../../../entities/Stock";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateStock implements IUpdateStock {
+  //@ts-ignore
   async execute({ props }: Stock): Promise<Stock> {
 
     const { id, quantity, book } = props

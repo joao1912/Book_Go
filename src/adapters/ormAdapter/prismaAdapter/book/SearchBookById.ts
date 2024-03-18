@@ -4,7 +4,7 @@ import { ISearchBookById } from "../../repositories/book/ISearchBookById";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookById implements ISearchBookById {
-  
+  //@ts-ignore
   async execute(id: string): Promise<Book> {
     try {
      
@@ -33,7 +33,7 @@ export class SearchBookById implements ISearchBookById {
     } catch (error) {
 
       handlePrismaError("BookError", error)
-
+   
     }
   }
 }

@@ -46,7 +46,7 @@ export class CreateFinance implements ICreateFinance {
         return typePayment
 
     }
-
+    //@ts-ignore
     async execute({props}: Omit<Finance, "id">): Promise<Finance> {
 
         const {payment, total, bookId, userId} = props;
@@ -101,7 +101,6 @@ export class CreateFinance implements ICreateFinance {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-
         }
     }
 }

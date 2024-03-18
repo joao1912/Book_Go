@@ -32,7 +32,7 @@ export class UpdateFinance implements IUpdateFinance {
         return typePayment
 
     }
-
+    //@ts-ignore
     async execute({props}: Partial<Finance>): Promise<Partial<Finance>> {
         
         try {
@@ -58,7 +58,6 @@ export class UpdateFinance implements IUpdateFinance {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-
         }
     }
 }

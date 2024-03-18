@@ -4,7 +4,7 @@ import { IGetAllComments } from "../../repositories/comment/IGetAllComments";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllComments implements IGetAllComments {
-
+    //@ts-ignore
     async execute(bookId: string): Promise<Comment[]> {
         
         try {
@@ -35,7 +35,7 @@ export class GetAllComments implements IGetAllComments {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            
+         
         }
     }
 }

@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class MakeReservation implements IMakeReservation {
-
+    //@ts-ignore
     async execute({ props }: Reservation): Promise<Reservation> {
 
         const { userId, bookId, price, startedAt, endsAt, status } = props

@@ -32,7 +32,7 @@ export class GetFinanceById implements IGetFinanceById {
         return typePayment
 
     }
-
+    //@ts-ignore
     async execute(id: string): Promise<Finance> {
 
         try {
@@ -58,7 +58,6 @@ export class GetFinanceById implements IGetFinanceById {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-            
         }
     }
 }

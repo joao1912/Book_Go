@@ -3,7 +3,7 @@ import { IDeleteComment, IDeleteMessage } from "../../repositories/comment/IDele
 import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteComment implements IDeleteComment {
-
+    //@ts-ignore
     async execute(id: string): Promise<IDeleteMessage> {
        
         try {
@@ -23,7 +23,7 @@ export class DeleteComment implements IDeleteComment {
         } catch (error) {
             
             handlePrismaError("CommentError", error)
-
+          
         }
     }
 }

@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetReservationByUserId implements IGetReservationByUserId {
-
+    //@ts-ignore
     async execute(userId: string): Promise<Reservation[]> {
 
         try {

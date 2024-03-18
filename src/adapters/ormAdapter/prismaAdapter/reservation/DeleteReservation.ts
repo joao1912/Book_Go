@@ -4,7 +4,7 @@ import { IDeleteMessage, IDeleteReservation } from "../../repositories/reservati
 import handlePrismaError from "../util/handlePrismaError";
 
 export class DeleteReservation implements IDeleteReservation {
-
+    //@ts-ignore
     async execute(reservationId: string): Promise<IDeleteMessage> {
 
         try {
@@ -24,7 +24,6 @@ export class DeleteReservation implements IDeleteReservation {
         } catch (error) {
             
             handlePrismaError("ReservationError", error)
-
         }
     }
 }

@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateAuthor implements ICreateAuthor {
-
+    //@ts-ignore
     async execute({props}: Omit<Author, "id">): Promise<Author> {
 
         const {description, name} = props;
@@ -27,7 +27,7 @@ export class CreateAuthor implements ICreateAuthor {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-
+           
         }
     }
 }

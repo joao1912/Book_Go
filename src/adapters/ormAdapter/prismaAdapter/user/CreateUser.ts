@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateUser implements ICreateUser {
 
-
+  //@ts-ignore
   async execute({ props }: Omit<User, "id">): Promise<User> {
 
     const { username, email, telephone, password } = props
@@ -39,7 +39,7 @@ export class CreateUser implements ICreateUser {
         favoritesBooks: []
       })
 
-    } catch (error) {
+    } catch (error: any) {
 
       handlePrismaError("UserError", error)
 

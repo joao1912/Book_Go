@@ -31,7 +31,7 @@ export class GetAllFinances implements IGetAllFinances {
         return typePayment
 
     }
-
+    //@ts-ignore
     async execute(): Promise<IAllFinance[]> {
 
         try {
@@ -101,7 +101,6 @@ export class GetAllFinances implements IGetAllFinances {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-
         }
 
     }
