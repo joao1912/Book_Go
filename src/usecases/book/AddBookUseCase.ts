@@ -1,7 +1,8 @@
 import { IAddBook } from "../../adapters/ormAdapter/repositories/book/IAddBook"
 import { Book, IBook } from "../../entities/Book"
 import ServerResponse from "../../interface/controllers/utils/ServerResponse"
-import z from 'zod'
+import * as z from 'zod'
+import zodErrorMap from "../utils/zodErrorMap"
 
 export class AddBookUseCase {
 
@@ -43,8 +44,9 @@ export class AddBookUseCase {
     
             
         } catch (error) {
-            console.log("errrrro", error)
-            ServerResponse.badRequest("AdminError",`Field: . ${error.message}`)
+              zodErrorMap
+            
+            console.log("Erro desconhecido addbook", error)
         }
        
     }
