@@ -1,6 +1,7 @@
 import { ICreateUser } from "../../adapters/ormAdapter/repositories/user/ICreateUser"
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
-import { IUser, User, userSchema } from "../../entities/User"
+import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository"
+import { IUser, User } from "../../entities/User"
 
 
 export class CreateUserUseCase {
@@ -12,7 +13,7 @@ export class CreateUserUseCase {
 
     async execute(userData: IUser) {
 
-        const data = validatorAdapter.validateSchema<IUser, typeof userSchema['_output']>(userData, userSchema)
+        const data = validatorAdapter.validateSchema<IUser>(userData, SchemaKey.user)
 
         const userInstance = new User(data)
         const user = await this.userService.execute(userInstance)

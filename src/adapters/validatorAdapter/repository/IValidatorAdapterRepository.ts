@@ -1,7 +1,10 @@
+export enum SchemaKey {
+    user = "user",
+}
 
 export interface IValidatorAdapterRepository {
 
-    validateSchema<T, S>(data: T, schema: any): S
+    validateSchema<T>(data: T, schemaKey: SchemaKey): T
 
 }
 
