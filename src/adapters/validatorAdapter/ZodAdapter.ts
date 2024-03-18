@@ -1,7 +1,12 @@
+import { userSchema } from "../../entities/User";
 import { CustomError } from "../../interface/controllers/utils/CustomError";
 import ServerResponse from "../../interface/controllers/utils/ServerResponse";
-import { IValidatorAdapterRepository, SchemaKey, schemaMap } from "./repository/IValidatorAdapterRepository";
-import { z } from "zod";
+import { IValidatorAdapterRepository, SchemaKey } from "./repository/IValidatorAdapterRepository";
+import { ZodObject, ZodRawShape, z } from "zod";
+
+export const schemaMap: Record<SchemaKey, ZodObject<ZodRawShape>> = {
+    [SchemaKey.user]: userSchema,
+};
 
 export class ZodAdapter implements IValidatorAdapterRepository {
 
