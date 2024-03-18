@@ -1,5 +1,6 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createComment } from "../../../adapters/ormAdapter/protocols/commentProtocols";
+import { validatorAdapter } from "../../../adapters/validatorAdapter/protocol";
 import { Comment, IComment } from "../../../entities/Comment";
 import { CreateCommentUseCase } from "../../../usecases/comment/CreateCommentUseCase";
 import { IController } from "../IController";
@@ -18,9 +19,11 @@ class CreateComment implements IController {
 
         const userId = req.userId;
 
+        const validatedId = validatorAdapter.validateId(userId)
+
         const createCommentUseCase = new CreateCommentUseCase(createComment)
 
-        const newComment = await createCommentUseCase.execute({ ...commentData, userId })
+        const newComment = await createCommentUseCase.execute({ ...commentData, userId: validatedId })
 
         return serverResponse.ok(
             Formatter.handle<Comment>(newComment)

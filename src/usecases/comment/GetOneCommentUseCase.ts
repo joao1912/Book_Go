@@ -1,4 +1,5 @@
 import { IGetCommentById } from "../../adapters/ormAdapter/repositories/comment/IGetCommentById"
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 
 
 
@@ -12,9 +13,11 @@ export class GetOneCommentUseCase {
             
     }
 
-    async execute(commentId: string) {
+    async execute(commentId: string | undefined) {
 
-        const comment = await this.getOneCommentAdapter.execute(commentId)
+        const validatedId = validatorAdapter.validateId(commentId)
+
+        const comment = await this.getOneCommentAdapter.execute(validatedId)
 
         if (!comment) throw new Error('Bad Request: this comment dont exists.')
             

@@ -6,6 +6,8 @@ import { ZodObject, ZodRawShape, z } from "zod";
 
 export const schemaMap: Record<SchemaKey, ZodObject<ZodRawShape>> = {
     [SchemaKey.user]: userSchema,
+    [SchemaKey.comment]: userSchema,
+    [SchemaKey.book]: userSchema,
 };
 
 export class ZodAdapter implements IValidatorAdapterRepository {

@@ -19,7 +19,6 @@ class GetAllCommentsByBookId implements IController {
 
         const bookId = req.params.bookId;
 
-
         const searchAllCommentsUseCase = new SearchAllCommentsUseCase(getAllComments)
 
         const comments = await searchAllCommentsUseCase.execute(bookId)
