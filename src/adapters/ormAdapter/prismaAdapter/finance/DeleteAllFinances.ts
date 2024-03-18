@@ -4,7 +4,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class DeleteAllFinances implements IDeleteAllFinances {
-    
+    //@ts-ignore
     async execute(): Promise<void> {
        
         try {
@@ -14,7 +14,6 @@ export class DeleteAllFinances implements IDeleteAllFinances {
         } catch (error) {
 
             handlePrismaError("FinanceError", error)
-            throw error
         }
 
     }

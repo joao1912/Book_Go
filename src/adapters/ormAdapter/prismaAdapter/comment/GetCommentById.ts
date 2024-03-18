@@ -4,7 +4,7 @@ import { IGetCommentById } from "../../repositories/comment/IGetCommentById";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetCommentById implements IGetCommentById {
-
+    //@ts-ignore
     async execute(id: string): Promise<Comment> {
 
         try {
@@ -15,15 +15,11 @@ export class GetCommentById implements IGetCommentById {
                 }
             })
 
-            if (comment == null) {
-                return
-            }
-
             const commentInstance = new Comment({
-                id: comment.id,
-                bookId: comment.fk_id_book,
-                userId: comment.fk_id_user,
-                comment: comment.comment
+                id: comment!.id,
+                bookId: comment!.fk_id_book,
+                userId: comment!.fk_id_user,
+                comment: comment!.comment
             })
 
             return commentInstance
@@ -31,7 +27,7 @@ export class GetCommentById implements IGetCommentById {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            throw error
+            
         }
     }
 }

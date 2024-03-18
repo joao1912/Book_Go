@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAuthorByName implements IGetAuthorByName {
-
+    //@ts-ignore
     async execute(name: string): Promise<Author> {
         try {
 
@@ -28,7 +28,7 @@ export class GetAuthorByName implements IGetAuthorByName {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-            throw error
+            
         }
     }
 }

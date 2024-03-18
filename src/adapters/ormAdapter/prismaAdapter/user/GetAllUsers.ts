@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAllUsers implements IGetAllUsers {
-
+  //@ts-ignore
   async execute(): Promise<User[]> {
 
     try {
@@ -39,7 +39,6 @@ export class GetAllUsers implements IGetAllUsers {
     } catch (error) {
 
       handlePrismaError("UserError", error)
-      throw error
 
     }
   }

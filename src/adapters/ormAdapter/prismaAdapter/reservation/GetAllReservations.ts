@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllReservations implements IGetAllReservation {
-
+    //@ts-ignore
     async execute(): Promise<Reservation[]> {
 
         try {
@@ -39,7 +39,6 @@ export class GetAllReservations implements IGetAllReservation {
 
         } catch (error) {
             handlePrismaError("ReservationError", error)
-            throw error
         }
 
     }

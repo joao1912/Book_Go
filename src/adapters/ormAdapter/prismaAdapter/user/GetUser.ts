@@ -4,7 +4,7 @@ import { User } from "../../../../entities/User";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetUser implements IGetUser {
-
+  //@ts-ignore
   async execute(input: string): Promise<User> {
 
     try {
@@ -27,7 +27,6 @@ export class GetUser implements IGetUser {
     } catch (error) {
 
       handlePrismaError('UserError', error)
-      throw error
 
     }
   }

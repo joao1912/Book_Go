@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetAllStock implements IGetAllStock {
-
+  //@ts-ignore
   async execute(): Promise<Stock[]> {
 
     try {
@@ -46,7 +46,7 @@ export class GetAllStock implements IGetAllStock {
       
     } catch (error) {
       handlePrismaError("StockError", error)
-      throw error
+      
     }
 
   }

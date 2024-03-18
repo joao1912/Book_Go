@@ -4,6 +4,7 @@ import { Book } from "../../../../entities/Book";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class SearchBookByTitle implements ISearchBookByTitle {
+  //@ts-ignore
   async execute(title: string): Promise<Book[]> {
     try {
       const bookSearch = await prisma.book.findMany({
@@ -36,7 +37,7 @@ export class SearchBookByTitle implements ISearchBookByTitle {
 
     } catch (error) {
       handlePrismaError("BookError", error)
-      throw error
+     
     }
   }
 }

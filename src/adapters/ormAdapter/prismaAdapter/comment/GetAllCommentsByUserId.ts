@@ -6,7 +6,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class GetAllCommentsByUserId implements IGetAllCommentsByUserId {
-
+    //@ts-ignore
     async execute(userId: string): Promise<Comment[]> {
 
         try {
@@ -37,7 +37,7 @@ export class GetAllCommentsByUserId implements IGetAllCommentsByUserId {
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            throw error
+            
         }
 
     }

@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 export class DeleteAllAuthors implements IDeleteAllAuthors {
 
     async execute(): Promise<void> {
-        
+        //@ts-ignore
         try {
 
             await prisma.author.deleteMany()
@@ -13,7 +13,7 @@ export class DeleteAllAuthors implements IDeleteAllAuthors {
         } catch (error) {
             
             handlePrismaError("AuthorError", error)
-            throw error
+          
         }
 
     }

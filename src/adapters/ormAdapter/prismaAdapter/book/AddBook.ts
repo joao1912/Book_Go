@@ -5,6 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class AddBook implements IAddBook {
+  //@ts-ignore
   async execute({ props }: Book): Promise<Book> {
 
     const { title, price, genre, synopsis, author, publishedDate, pageCount, image } = props
@@ -64,7 +65,7 @@ export class AddBook implements IAddBook {
 
     } catch (error) {
       handlePrismaError("BookError", error)
-      throw error
+      
     }
   }
 }

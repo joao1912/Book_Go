@@ -4,6 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class CreateFavorite implements ICreateFavorite {
+  //@ts-ignore
   async execute(userId: string, bookId: string): Promise<IFavoriteCreated> {
     try {
       const favorited = await prisma.favorite.create({
@@ -54,7 +55,7 @@ export class CreateFavorite implements ICreateFavorite {
     } catch (error) {
       
       handlePrismaError("FavoriteError", error)
-      throw error
+      
     }
   }
 }

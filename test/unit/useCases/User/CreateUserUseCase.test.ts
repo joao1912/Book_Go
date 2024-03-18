@@ -12,7 +12,7 @@ describe ("Deve criar um novo usário", () => {
         const userToBeCreated: IUser = {
             username: 'cleiton4',
             password: 'cleiton123',
-            email: 'cleiton1@gmail.com',
+            email: 'cleiton3345@gmail.com',
             telephone: '5548978453627'
         }
 

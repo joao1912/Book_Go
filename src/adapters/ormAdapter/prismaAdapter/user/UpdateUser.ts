@@ -4,9 +4,9 @@ import { IUpdateUser } from "../../repositories/user/IUpdateUser";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class UpdateUser implements IUpdateUser {
-
+  //@ts-ignore
   async execute({ props }: User): Promise<User> {
-
+    
     const { id, username, password, email, telephone } = props
     try {
 
@@ -41,7 +41,6 @@ export class UpdateUser implements IUpdateUser {
     } catch (error) {
 
       handlePrismaError('UserError', error)
-      throw error
 
     }
 

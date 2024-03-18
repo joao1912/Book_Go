@@ -1,6 +1,7 @@
 import { IAuthAdapterRepository } from "./repository/IAuthAdapterRepository";
 import { JwtPayload } from "jsonwebtoken";
 import * as jwt from 'jsonwebtoken';
+import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 
 interface TokenPayload extends JwtPayload {
     
@@ -13,6 +14,7 @@ class AuthJwt implements IAuthAdapterRepository {
 
         let secretKey = process.env.MY_SECRET
 
+        if (!id) ServerResponse.notAuthorized('JsonWebTokenError', 'Id can not be undefined.')
 
         if (secretKey != undefined) {
 

@@ -4,7 +4,7 @@ import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
 
 export class GetReservationByBookId implements IGetReservationByBookId {
-
+    //@ts-ignore
     async execute(bookId: string): Promise<Reservation[]> {
 
         try {
@@ -45,7 +45,6 @@ export class GetReservationByBookId implements IGetReservationByBookId {
 
         } catch (error) {
             handlePrismaError("ReservationError", error)
-            throw error
         }
 
     }

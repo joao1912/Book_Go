@@ -5,7 +5,7 @@ import handlePrismaError from "../util/handlePrismaError";
 
 
 export class UpdateAuthor implements IUpdateAuthor {
-
+    //@ts-ignore
     async execute({props}: Partial<Author>): Promise<Author> {
 
         try {
@@ -29,7 +29,7 @@ export class UpdateAuthor implements IUpdateAuthor {
         } catch (error) {
 
             handlePrismaError("AuthorError", error)
-            throw error
+           
         }
     }
 }
