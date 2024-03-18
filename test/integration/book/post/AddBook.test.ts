@@ -70,4 +70,20 @@ describe('## POST BOOK ##', () => {
         expect(book).toHaveProperty("id")
        
     },25000)
+    it("Deve tentar adicionar um livro sem titulo", async () => {
+        const result = await request.agent(app)
+            .post(`/v1/book/add`)
+            .set('Authorization', `${token}`)
+            .send({ 
+                synopsis: "I just got lost",
+                price: 80,
+                author: "Coldplay",
+                pageCount: 23,
+                publishedDate: '2012-10-09',
+                genre: "Music"
+            })
+                .expect(400)
+     
+       
+    },25000)
 })
