@@ -1,20 +1,34 @@
 import { ZodType, z } from "zod"
 
-export interface IUser  {
+export interface IUser {
     id?: string;
     username: string;
     password: string;
-    email: string ;
+    email: string;
     telephone: string;
     favoritesBooks?: number[];
-} 
+}
 
 export const userSchema = z.object({
     id: z.string().optional(),
-    username: z.string().max(40, { message: 'O nome pode ter no maximo 40 caracteres.' }),
-    password: z.string().min(6, { message: 'A Senha precisa de no minimo 6 caracteres.' }),
-    email: z.string().email().max(40, { message: 'O email pode ter no maximo 40 caracteres.' }),
+
+    username: z.string()
+        .regex(new RegExp("^[A-Za-z][A-Za-z0-9_]*$"), { message: "Username must start with an alphabet." })
+        .max(40, { message: 'Username must be a maximum of 40 characters in length.' }),
+
+    password: z.string()
+        .regex(new RegExp(".*[A-Z].*"), { message: "Password must contain at least one uppercase character." })
+        .regex(new RegExp(".*[a-z].*"), { message: "Password must contain at least one lowercase character." })
+        .regex(new RegExp(".*\\d.*"), { message: "Password must contain at least one number." })
+        .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), { message: "Password must contain at least one special character." })
+        .min(8, { message: "Password must be at least 8 characters in length." })
+        .max(25, { message: 'Password must be a maximum of 25 characters in length.' }),
+
+    email: z.string().email()
+        .max(40, { message: 'Email must be a maximum of 40 characters in length.' }),
+
     telephone: z.string(),
+
     favoritesBooks: z.array(z.number()).optional()
 }) satisfies ZodType<IUser>
 
