@@ -13,16 +13,16 @@ export const userSchema = z.object({
     id: z.string().optional(),
 
     username: z.string()
-        .regex(new RegExp("^[A-Za-z][A-Za-z0-9_]*$"), { message: "Username must start with an alphabet." })
-        .max(40, { message: 'Username must be a maximum of 40 characters in length.' }),
+    .max(40, { message: 'Username must be a maximum of 40 characters in length.' })
+    .regex(/^[A-Za-z][A-Za-z0-9_]*$/, { message: "Username must start with an alphabet." }),
 
     password: z.string()
-        .regex(new RegExp(".*[A-Z].*"), { message: "Password must contain at least one uppercase character." })
-        .regex(new RegExp(".*[a-z].*"), { message: "Password must contain at least one lowercase character." })
-        .regex(new RegExp(".*\\d.*"), { message: "Password must contain at least one number." })
-        .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), { message: "Password must contain at least one special character." })
         .min(8, { message: "Password must be at least 8 characters in length." })
-        .max(25, { message: 'Password must be a maximum of 25 characters in length.' }),
+        // .max(25, { message: "Password must be a maximum of 25 characters in length." })
+        .regex(/.*[A-Z].*/, { message: "Password must contain at least one uppercase character." })
+        .regex(/.*[a-z].*/, { message: "Password must contain at least one lowercase character." })
+        .regex(/.*\\d.*/, { message: "Password must contain at least one number." })
+        .regex(/.*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*/, { message: "Password must contain at least one special character." }),
 
     email: z.string().email()
         .max(40, { message: 'Email must be a maximum of 40 characters in length.' }),
