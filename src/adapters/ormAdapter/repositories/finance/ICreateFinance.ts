@@ -1,4 +1,5 @@
 import { Finance, IFinance } from "../../../../entities/Finance";
+import { ZodType, z } from "zod"
 
 export enum typeOfPayment {
 
@@ -7,6 +8,9 @@ export enum typeOfPayment {
     DebitCard = "Debit card",
     Pix = "Pix"
 }
+
+export const typeOfPaymentSchema = z.nativeEnum(typeOfPayment)
+
 
 export interface IRegister {
     id?: string;

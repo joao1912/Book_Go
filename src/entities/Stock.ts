@@ -1,4 +1,6 @@
-import { IBook } from "./Book";
+import { IBook, bookSchema } from "./Book";
+import { ZodType, z } from "zod"
+
 
 export interface IStock {
     id?: string;
@@ -7,10 +9,16 @@ export interface IStock {
 }
 
 
+export const stockSchema = z.object({
+    id: z.string().optional(),
+    quantity: z.number(),
+    book: bookSchema
+}) satisfies ZodType<IStock>
+
+
 export class Stock {
  
     public readonly props: IStock;
-
 
  constructor(props: IStock){
    const {id, quantity, book} = props

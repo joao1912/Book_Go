@@ -1,4 +1,6 @@
-import { typeOfPayment } from "../adapters/ormAdapter/repositories/finance/ICreateFinance";
+import { typeOfPayment, typeOfPaymentSchema } from "../adapters/ormAdapter/repositories/finance/ICreateFinance";
+import { ZodType, z } from "zod"
+
 
 export interface IFinance {
     id?: string;
@@ -7,6 +9,14 @@ export interface IFinance {
     userId: string;
     total: number;
 }
+
+export const financeSchema = z.object({
+    id: z.string().optional(),
+    payment: typeOfPaymentSchema,
+    bookId: z.string(),
+    userId: z.string(),
+    total: z.number()
+}) satisfies ZodType<IFinance>
 
 export class Finance {
 
