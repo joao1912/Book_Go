@@ -1,4 +1,5 @@
 import { IGetAllCommentsByUserId } from "../../adapters/ormAdapter/repositories/comment/IGetAllCommentsByUserId"
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 
 
 export class GetMyCommentsUseCase {
@@ -11,9 +12,11 @@ export class GetMyCommentsUseCase {
             
     }
 
-    async execute(userId: string) {
+    async execute(userId: string | undefined) {
 
-        const comments = await this.getAllCommentsAdapter.execute(userId)
+        const validatedId = validatorAdapter.validateId(userId)
+
+        const comments = await this.getAllCommentsAdapter.execute(validatedId)
 
         if (comments == null) {
             return []

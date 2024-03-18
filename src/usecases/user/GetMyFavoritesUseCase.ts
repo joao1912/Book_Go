@@ -1,4 +1,5 @@
 import { GetAllFavoritesByUserId } from "../../adapters/ormAdapter/prismaAdapter/favorite/GetAllFavoritesByUserId";
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 
 export class GetMyFavoritesUseCase {
@@ -9,9 +10,11 @@ export class GetMyFavoritesUseCase {
         this.getFavoritesAdapter = ormAdapter
     }
 
-    async execute(userId: string) {
+    async execute(userId: string | undefined) {
 
-        const favorites = await this.getFavoritesAdapter.execute(userId)
+        const validatedUserId = validatorAdapter.validateId(userId) 
+
+        const favorites = await this.getFavoritesAdapter.execute(validatedUserId)
 
         return favorites
 

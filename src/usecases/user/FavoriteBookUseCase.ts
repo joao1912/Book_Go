@@ -1,4 +1,5 @@
 import { ICreateFavorite, IFavoriteCreated } from "../../adapters/ormAdapter/repositories/favorite/ICreateFavorite";
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 import { Book } from "../../entities/Book";
 import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 
@@ -14,9 +15,10 @@ export class FavoriteBookUseCase {
 
     async execute(userId: string | undefined, bookId: string | undefined): Promise<IFavoriteCreated> {
 
-        if (!userId || !bookId) ServerResponse.missingParameters('UserError', 'Missing parameters')
+        const validatedUserId = validatorAdapter.validateId(userId) 
+        const validatedBookId = validatorAdapter.validateId(bookId) 
 
-        const bookFavorited = await this.createFavoriteAdapter.execute(userId, bookId)
+        const bookFavorited = await this.createFavoriteAdapter.execute(validatedUserId, validatedBookId)
 
         return bookFavorited
 
