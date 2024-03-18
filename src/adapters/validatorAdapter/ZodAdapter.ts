@@ -1,11 +1,13 @@
 import { CustomError } from "../../interface/controllers/utils/CustomError";
 import ServerResponse from "../../interface/controllers/utils/ServerResponse";
-import { IValidatorAdapterRepository } from "./repository/IValidatorAdapterRepository";
-import { ZodObject, ZodRawShape, z } from "zod";
+import { IValidatorAdapterRepository, SchemaKey, schemaMap } from "./repository/IValidatorAdapterRepository";
+import { z } from "zod";
 
 export class ZodAdapter implements IValidatorAdapterRepository {
 
-    validateSchema<T, S>(data: T, schema: ZodObject<ZodRawShape>): S {
+    validateSchema<T>(data: T, schemaKey: SchemaKey): T {
+
+        const schema = schemaMap[schemaKey];
 
         const result = schema.safeParse(data)
 
@@ -13,13 +15,11 @@ export class ZodAdapter implements IValidatorAdapterRepository {
 
             const errors = result.error.issues
 
-            // versao mais simples: result.error.format()
-
             throw new CustomError('ValidatorError', JSON.stringify(errors), 400);
 
         } else {
 
-            const validData = result.data as S
+            const validData = result.data as T
             
             return validData 
             

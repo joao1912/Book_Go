@@ -1,5 +1,5 @@
 import { createUser } from "../../../../src/adapters/ormAdapter/protocols/userProtocols"
-import { IUser, User } from "../../../../src/entities/User"
+import { IUser } from "../../../../src/entities/User"
 import { CreateUserUseCase } from "../../../../src/usecases/user/CreateUserUseCase"
 
 
@@ -10,10 +10,10 @@ describe ("Deve criar um novo usário", () => {
         const createUserUseCase = new CreateUserUseCase(createUser)
 
         const userToBeCreated: IUser = {
-            username: 'cleiton4',
+            username: 'cleiton4123',
             password: 'cleiton123',
-            email: 'cleiton3345@gmail.com',
-            telephone: '5548978453627'
+            email: 'cleiton335@gmail.com',
+            telephone: '5548932453627'
         }
 
         const user = await createUserUseCase.execute(userToBeCreated)
