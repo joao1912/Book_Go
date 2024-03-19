@@ -11,10 +11,10 @@ export interface IFinance {
 }
 
 export const financeSchema = z.object({
-    id: z.string().optional(),
+    id: z.string().uuid().optional(),
     payment: typeOfPaymentSchema,
-    bookId: z.string(),
-    userId: z.string(),
+    bookId: z.string().uuid(),
+    userId: z.string().uuid(),
     total: z.number()
 }) satisfies ZodType<IFinance>
 

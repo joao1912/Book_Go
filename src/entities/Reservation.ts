@@ -14,9 +14,9 @@ export interface IReservation {
 }
 
 export const reservationSchema = z.object({
-    id: z.string().optional(),
-    userId: z.string(),
-    bookId: z.string(),
+    id: z.string().uuid().optional(),
+    userId: z.string().uuid(),
+    bookId: z.string().uuid(),
     price: z.number(),
     status: z.string(),
     startedAt: z.date().optional(),

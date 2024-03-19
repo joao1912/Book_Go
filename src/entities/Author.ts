@@ -11,7 +11,9 @@ export const authorSchema = z.object({
     name: z.string()
         .min(3, { message: 'The author name must be at least 3 character long.' })
         .max(40, { message: "The author name must be a maximum of 40 characters in length." }),
-    description: z.string().min(20, { message: 'A descrição precisa de no minimo 20 caracteres.' })
+    description: z.string()
+    .min(12, { message: "The description must be at least 12 character long." })
+    .max(200, { message: "The description must be a maximum of 200 characters in length" })
 }) satisfies ZodType<IAuthor>
 
 

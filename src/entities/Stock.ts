@@ -10,7 +10,7 @@ export interface IStock {
 
 
 export const stockSchema = z.object({
-    id: z.string().optional(),
+    id: z.string().uuid().optional(),
     quantity: z.number(),
     book: bookSchema
 }) satisfies ZodType<IStock>
