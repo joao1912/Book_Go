@@ -16,7 +16,7 @@ export const userSchema = z.object({
         .min(3, { message: "Username must be at least 3 characters in length." })
 
         .max(40, { message: "Username must be a maximum of 40 characters in length." })
-        .regex(/^[A-Za-z][A-Za-z0-9_]*$/, { message: "Username must start with an alphabet." }),
+        .regex(/^[A-Za-z][A-Za-z0-9_ ]*$/, { message: "Username must start with an alphabet." }),
 
     password: z.string()
         .min(8, { message: "Password must be at least 8 characters in length." })
@@ -24,13 +24,13 @@ export const userSchema = z.object({
         .regex(/.*[A-Z].*/, { message: "Password must contain at least one uppercase character." })
         .regex(/.*[a-z].*/, { message: "Password must contain at least one lowercase character." })
         .regex(/.*[0-9].*/, { message: "Password must contain at least one number." })
-        .regex(/.*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*/, { message: "Password must contain at least one special character." }),
+        .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), { message: `Password must contain at least one of these special characters: "#@%*&-."` }),
 
     email: z.string().email()
         .max(40, { message: 'Email must be a maximum of 40 characters in length.' }),
 
-    telephone: z.string()
-    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,  { message: 'Please enter a valid telephone number.' }),
+    telephone: z.string(),
+    // .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,  { message: 'Please enter a valid telephone number.' }),
 
     favoritesBooks: z.array(z.number()).optional()
 }) satisfies ZodType<IUser>
