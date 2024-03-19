@@ -19,7 +19,7 @@ export const userSchema = z.object({
         .regex(/^[A-Za-z][A-Za-z0-9_ ]*$/, { message: "Username must start with an alphabet." }),
 
     password: z.string()
-        .min(8, { message: "Password must be at least 8 characters in length." })
+        .min(6, { message: "Password must be at least 6 characters in length." })
         .max(25, { message: "Password must be a maximum of 25 characters in length." })
         .regex(/.*[A-Z].*/, { message: "Password must contain at least one uppercase character." })
         .regex(/.*[a-z].*/, { message: "Password must contain at least one lowercase character." })
