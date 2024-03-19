@@ -9,7 +9,7 @@ describe("Adicionar um livro", ()=>{
         
         const addingBook: IBook = {
             title: "New book to add",
-            synopsis: "This is a new book",
+            synopsis: "This is a new bookkk",
             price: 20,
             author: "Jupiter",
             pageCount: 23,

@@ -91,7 +91,7 @@ describe('Teste do DeleteMyCommentUseCase', () => {
 
         const deleteMyCommentUseCase = new DeleteMyCommentUseCase(deleteComment)
 
-        await deleteMyCommentUseCase.execute(commentId)
+        await deleteMyCommentUseCase.execute(commentId, userId)
             .then(result => {
 
                 expect(result.message).toBe('Comentário deletado com sucesso!')

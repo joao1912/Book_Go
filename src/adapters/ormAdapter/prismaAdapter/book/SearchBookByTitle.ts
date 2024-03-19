@@ -2,6 +2,7 @@ import { prisma } from "../db";
 import { ISearchBookByTitle } from "../../repositories/book/ISearchBookByTitle";
 import { Book } from "../../../../entities/Book";
 import handlePrismaError from "../util/handlePrismaError";
+import ServerResponse from "../../../../interface/controllers/utils/ServerResponse";
 
 export class SearchBookByTitle implements ISearchBookByTitle {
   //@ts-ignore
@@ -34,6 +35,8 @@ export class SearchBookByTitle implements ISearchBookByTitle {
         }
         return books
       }
+
+      ServerResponse.notFound('BookError', 'Este titulo nao foi encontrado.')
 
     } catch (error) {
       handlePrismaError("BookError", error)

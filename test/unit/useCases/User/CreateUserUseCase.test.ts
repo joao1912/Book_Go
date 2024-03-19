@@ -11,9 +11,9 @@ describe ("Deve criar um novo usário", () => {
 
         const userToBeCreated: IUser = {
             username: 'cleiton4123',
-            password: 'cleiton123',
+            password: 'Cleiton_123',
             email: 'cleiton335@gmail.com',
-            telephone: '5548932453627'
+            telephone: '5548998332618'
         }
 
         const user = await createUserUseCase.execute(userToBeCreated)
