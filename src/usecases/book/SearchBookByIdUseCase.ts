@@ -1,4 +1,5 @@
 import { ISearchBookById } from "../../adapters/ormAdapter/repositories/book/ISearchBookById"
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 
 
 export class SearchBookByIdUseCase {
@@ -8,9 +9,11 @@ export class SearchBookByIdUseCase {
         this.bookService = ormAdapter
     }
 
-    async execute(id: string) {
+    async execute(id: string | undefined) {
 
-        return await this.bookService.execute(id)
+        const validatedId = validatorAdapter.validateId(id)
+
+        return await this.bookService.execute(validatedId)
 
     }
 

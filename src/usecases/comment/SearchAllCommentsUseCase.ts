@@ -1,4 +1,5 @@
 import { IGetAllComments } from "../../adapters/ormAdapter/repositories/comment/IGetAllComments";
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 
 export class SearchAllCommentsUseCase {
@@ -13,7 +14,9 @@ export class SearchAllCommentsUseCase {
 
     async execute(bookId: string) {
 
-        return await this.getAllCommentsAdapter.execute(bookId)
+        const validatedId = validatorAdapter.validateId(bookId)
+
+        return await this.getAllCommentsAdapter.execute(validatedId)
             
     }
 

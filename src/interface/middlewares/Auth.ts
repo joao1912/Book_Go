@@ -9,15 +9,15 @@ export default class Auth {
         const token = req.headers.authorization
 
         if (typeof token != 'string') {
-         
-            return res.status(401).json({message: 'Must have an authorization token'})
+            ServerResponse
+                .notAuthorized('JsonWebTokenError', 'Must have an authorization token')
         }
 
         try {
             
             const id = authAdapter.checkToken(token)
 
-            if (typeof id != 'string') throw new Error('Id must be a string')
+            if (typeof id != 'string') ServerResponse.badRequest('JsonWebTokenError', 'Id must be a string')
             
             req.userId = id
           

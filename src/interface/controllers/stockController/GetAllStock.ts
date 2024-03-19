@@ -15,7 +15,7 @@ class GetAllStock implements IController {
 
             const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
-            const response = await getAllStockUseCase.execute()
+            const response: Stock[] = await getAllStockUseCase.execute()
 
             let stockList: Array<IStock> = []
             if (response instanceof Stock && Array.isArray(response))

@@ -1,4 +1,5 @@
 import { ISearchBookByTitle } from "../../adapters/ormAdapter/repositories/book/ISearchBookByTitle"
+import ServerResponse from "../../interface/controllers/utils/ServerResponse"
 
 
 export class SearchBookByTitleUseCase {
@@ -9,6 +10,8 @@ export class SearchBookByTitleUseCase {
     }
 
     async execute(bookTitle: string) {
+
+        if (!bookTitle) ServerResponse.missingParameters('BookError', 'Precisa do titulo em string')
 
         return await this.bookService.execute(bookTitle)
 

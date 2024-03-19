@@ -1,4 +1,5 @@
 import { IGetAllUsers } from "../../adapters/ormAdapter/repositories/user/IGetAllUsers"
+import { User } from "../../entities/User"
 
 export class GetAllUsersUseCase {
 
@@ -7,7 +8,7 @@ export class GetAllUsersUseCase {
         this.userService = ormAdapter
     }
 
-    async execute() {
+    async execute(): Promise<User[]> {
 
         return await this.userService.execute()
 

@@ -13,21 +13,20 @@ class GetAllBooks implements IController {
 
 
         const serverResponse = new ServerResponse(res)
-        
+
         const getAllBooksUseCase = new GetAllBooksUseCase(getAllBooks)
 
-        const response = await getAllBooksUseCase.execute()
+        const response: Book[] = await getAllBooksUseCase.execute()
 
         let bookList: Array<IBook> = []
 
-        if (response instanceof Book && Array.isArray(response))
-            for (let book of response) {
+        for (let book of response) {
 
-                bookList.push(
-                    Formatter.handle<Book>(book)
-                )
+            bookList.push(
+                Formatter.handle<Book>(book)
+            )
 
-            }
+        }
 
         return serverResponse.ok(bookList)
 

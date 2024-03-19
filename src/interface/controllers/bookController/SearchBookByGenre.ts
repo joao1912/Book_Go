@@ -6,35 +6,32 @@ import { IController } from "../IController";
 import { Book, IBook } from "../../../entities/Book";
 import Formatter from "../utils/Formatter";
 
-
-
-
 class SearchBookByGenre implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse) {
+    async handle(req: HttpRequest<{ genre: string }>, res: HttpResponse) {
+
         const serverResponse = new ServerResponse(res)
 
-            const genre = req.params.genre
+        const genre = req.params.genre
 
-            const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
+        const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 
-            const response = await searchBookByGenreUseCase.execute(genre)
-            
+        const response: Book[] = await searchBookByGenreUseCase.execute(genre)
 
-            let bookList: Array<IBook> = []
-            if (response instanceof Book && Array.isArray(response)){
-            for (let book of response) {
+        let bookList: Array<IBook> = []
 
-                bookList.push(
-                    Formatter.handle<Book>(book)
-                )
+        for (let book of response) {
 
-            }
-            
-            return serverResponse.ok(bookList)
+            bookList.push(
+                Formatter.handle<Book>(book)
+            )
+
         }
-            
-      
+
+        return serverResponse.ok(bookList)
+
+
+
     }
 }
 

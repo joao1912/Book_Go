@@ -1,5 +1,6 @@
 import { IUpdateUser } from "../../adapters/ormAdapter/repositories/user/IUpdateUser"
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
+import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository"
 import { IUser, User, userSchema } from "../../entities/User"
 
 export class UpdateUserUseCase {
@@ -10,17 +11,12 @@ export class UpdateUserUseCase {
     }
 
     async execute(userData: IUser) {
-        try {
 
-            const validatedData = validatorAdapter.validateSchema<IUser, typeof userSchema['_output']>(userData, userSchema)
+        const validatedData = validatorAdapter.validateSchema<IUser>(userData, SchemaKey.user)
 
-            const userInstance = new User(validatedData)
+        const userInstance = new User(validatedData)
 
-            return await this.userService.execute(userInstance)
-        } catch (error) {
-            throw new Error("Internal server error: " + error)
-        }
-      
+        return await this.userService.execute(userInstance)
 
     }
 

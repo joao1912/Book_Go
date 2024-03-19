@@ -9,7 +9,6 @@ class DeleteBook implements IController {
 
     async handle(req: HttpRequest<{ id: any }>, res: HttpResponse) {
 
-
         const serverResponse = new ServerResponse(res)
 
         const bookId = req.params.id

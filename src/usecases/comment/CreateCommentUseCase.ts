@@ -1,5 +1,6 @@
 import { ICreateComment } from "../../adapters/ormAdapter/repositories/comment/ICreateComment";
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
+import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository";
 import { Comment, IComment } from "../../entities/Comment";
 
 
@@ -15,9 +16,9 @@ export class CreateCommentUseCase {
 
     async execute(commentData: IComment) {
 
-        //const validatedData = validatorAdapter.validateSchema<IComment, typeof bookSchema>(commentData, bookSchema)
+        const validatedData = validatorAdapter.validateSchema<IComment>(commentData, SchemaKey.book)
 
-        const commentInstance = new Comment(commentData)
+        const commentInstance = new Comment(validatedData)
 
         return await this.createCommentAdapter.execute(commentInstance)
 

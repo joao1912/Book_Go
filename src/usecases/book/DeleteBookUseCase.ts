@@ -1,4 +1,5 @@
 import { IDeleteBook } from "../../adapters/ormAdapter/repositories/book/IDeleteBook";
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 
 export class DeleteBookUseCase {
@@ -9,17 +10,11 @@ export class DeleteBookUseCase {
         this.bookService = ormAdapter
     }
 
-    async execute(id: string) {
+    async execute(id: string | undefined) {
 
-        try {
-            
-            return await this.bookService.execute(id)
+        const validatedId = validatorAdapter.validateId(id)
 
-        } catch (error) {
-
-            throw new Error('Internal server error: ' + error)
-            
-        }
+        return await this.bookService.execute(validatedId)
 
     }
 

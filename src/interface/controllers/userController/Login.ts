@@ -15,11 +15,9 @@ class Login implements IController {
 
         const serverReponse = new ServerResponse(res)
 
-
         const getUserUseCase = new GetUserUseCase(getUser)
 
         const userInstance = await getUserUseCase.execute(email)
-
 
         if (userInstance instanceof User) {
 

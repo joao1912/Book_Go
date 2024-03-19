@@ -8,8 +8,9 @@ export class GetAllReservationsUseCase {
     }
 
     async execute (){
-        let result = await this.reservationService.execute()
-        return result
+        
+        return await this.reservationService.execute()
+       
     }
 
 }

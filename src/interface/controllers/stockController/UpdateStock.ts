@@ -24,7 +24,7 @@ class UpdateStock implements IController {
         const quantity = req.body.quantity
 
         const responseBook = await searchBookByIdUseCase.execute(bookId)
-        //Verificando se id existe
+        
         if (responseBook instanceof Book) {
 
             IBookType = responseBook.props

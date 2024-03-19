@@ -9,8 +9,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 class SearchBookByTitle implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse) {
-
+    async handle(req: HttpRequest<{title: string}>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
@@ -18,7 +17,7 @@ class SearchBookByTitle implements IController {
 
         const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 
-        const response = await searchBookByTitleUseCase.execute(title)
+        const response: Book[] = await searchBookByTitleUseCase.execute(title)
 
         let bookList: Array<IBook> = []
         if (response instanceof Book && Array.isArray(response)) {
