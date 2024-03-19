@@ -15,8 +15,6 @@ class GetStockByBookTitle implements IController {
 
             let titleText = req.params.title
 
-            // const title = titleText.replaceAll("_", " ")
-
             const getStockByBookTitleUseCase = new GetStockByBookTitleUseCase(getStockByBookTitle)
 
             const response = await getStockByBookTitleUseCase.execute(titleText)

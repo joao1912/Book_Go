@@ -1,3 +1,9 @@
+import { authorSchema } from "../../entities/Author";
+import { bookSchema } from "../../entities/Book";
+import { commentSchema } from "../../entities/Comment";
+import { financeSchema } from "../../entities/Finance";
+import { reservationSchema } from "../../entities/Reservation";
+import { stockSchema } from "../../entities/Stock";
 import { userSchema } from "../../entities/User";
 import { CustomError } from "../../interface/controllers/utils/CustomError";
 import ServerResponse from "../../interface/controllers/utils/ServerResponse";
@@ -6,8 +12,12 @@ import { ZodObject, ZodRawShape, z } from "zod";
 
 export const schemaMap: Record<SchemaKey, ZodObject<ZodRawShape>> = {
     [SchemaKey.user]: userSchema,
-    [SchemaKey.comment]: userSchema,
-    [SchemaKey.book]: userSchema,
+    [SchemaKey.comment]: commentSchema,
+    [SchemaKey.book]: bookSchema,
+    [SchemaKey.author]: authorSchema,
+    [SchemaKey.finance]: financeSchema,
+    [SchemaKey.reservation]: reservationSchema,
+    [SchemaKey.stock]: stockSchema
 };
 
 export class ZodAdapter implements IValidatorAdapterRepository {

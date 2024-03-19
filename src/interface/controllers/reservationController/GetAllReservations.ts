@@ -22,17 +22,16 @@ class GetAllReservations implements IController {
 
         let reservationList: Array<IReservation> = []
 
-        if (response instanceof Reservation && Array.isArray(response)) {
-            for (let reservation of response) {
+        for (let reservation of response) {
 
-                reservationList.push(
-                    Formatter.handle<Reservation>(reservation)
-                )
+            reservationList.push(
+                Formatter.handle<Reservation>(reservation)
+            )
 
-            }
-
-            return serverResponse.ok(reservationList)
         }
+
+        return serverResponse.ok(reservationList)
+
     }
 }
 

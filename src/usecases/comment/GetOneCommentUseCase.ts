@@ -1,5 +1,6 @@
 import { IGetCommentById } from "../../adapters/ormAdapter/repositories/comment/IGetCommentById"
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
+import ServerResponse from "../../interface/controllers/utils/ServerResponse"
 
 
 
@@ -19,7 +20,7 @@ export class GetOneCommentUseCase {
 
         const comment = await this.getOneCommentAdapter.execute(validatedId)
 
-        if (!comment) throw new Error('Bad Request: this comment dont exists.')
+        if (!comment) ServerResponse.notFound('CommentError', 'this comment dont exists.')
             
         return comment
         

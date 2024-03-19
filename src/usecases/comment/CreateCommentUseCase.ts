@@ -18,7 +18,7 @@ export class CreateCommentUseCase {
 
         const validatedData = validatorAdapter.validateSchema<IComment>(commentData, SchemaKey.book)
 
-        const commentInstance = new Comment(commentData)
+        const commentInstance = new Comment(validatedData)
 
         return await this.createCommentAdapter.execute(commentInstance)
 

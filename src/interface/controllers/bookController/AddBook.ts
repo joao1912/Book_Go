@@ -36,7 +36,7 @@ class AddBook implements IController {
                 pageCount
 
             })
-            if (response instanceof Book)
+           
             return serverResponse.ok(Formatter.handle<Book>(response))
                   
     }

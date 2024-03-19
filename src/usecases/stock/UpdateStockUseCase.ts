@@ -1,4 +1,6 @@
 import { IUpdateStock } from "../../adapters/ormAdapter/repositories/stock/IUpdateStock"
+import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
+import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository"
 import { IStock, Stock } from "../../entities/Stock.js"
 
 
@@ -11,10 +13,11 @@ export class UpdateStockUseCase {
 
     async execute(stockData: IStock) {
 
-    const stockInstance = new Stock(stockData)
-       return await this.stockService.execute(stockInstance)
+        const validatedData = validatorAdapter.validateSchema<IStock>(stockData, SchemaKey.stock)
 
-    
+        const stockInstance = new Stock(validatedData)
+
+        return await this.stockService.execute(stockInstance)
 
     }
 
