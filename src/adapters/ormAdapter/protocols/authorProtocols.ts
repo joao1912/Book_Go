@@ -2,8 +2,9 @@ import { CreateAuthor } from "../prismaAdapter/author/CreateAuthor";
 import { DeleteAllAuthors } from "../prismaAdapter/author/DeleteAllAuthors";
 import { DeleteAuthor } from "../prismaAdapter/author/DeleteAuthor";
 import { GetAllAuthors } from "../prismaAdapter/author/GetAllAuthors";
-import { GetAuthorById } from "../prismaAdapter/author/GetAuthorById";
+
 import { GetAuthorByName } from "../prismaAdapter/author/GetAuthorByName";
+import { GetAuthorById } from "../prismaAdapter/author/GetAuthorById";
 import { UpdateAuthor } from "../prismaAdapter/author/UpdateAuthor";
 
 

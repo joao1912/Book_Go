@@ -1,7 +1,7 @@
 import { IUpdateBook } from "../../adapters/ormAdapter/repositories/book/IUpdateBook"
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository"
-import { Book, IBook } from "../../entities/Book.js"
+import { Book, IBook } from "../../entities/Book"
 
 
 export class UpdateBookUseCase {

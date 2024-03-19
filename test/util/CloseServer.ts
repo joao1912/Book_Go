@@ -1,4 +1,4 @@
-import HTTPAdapter from "../../src/adapters/HTTPAdapter/protocol.js";
+import HTTPAdapter from "../../src/adapters/HTTPAdapter/protocol";
 
 class CloseServer {
 

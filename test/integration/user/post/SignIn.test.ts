@@ -17,7 +17,7 @@ describe("## POST ##", () => {
     it('Deve criar um usuário', async () => {
 
         const userData = {
-            username: "JoanirTeixeira",
+            username: "Joanir Teixeira",
             email: "joanirTeixeira@teste.com",
             telephone: "48998553785"
         }
@@ -28,7 +28,7 @@ describe("## POST ##", () => {
             .expect(200)
             .then( response => {
 
-                console.log(response)
+                
 
                 const userId = response.body.user.id
                 const token =  response.body.token

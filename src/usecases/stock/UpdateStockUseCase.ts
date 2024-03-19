@@ -1,7 +1,7 @@
 import { IUpdateStock } from "../../adapters/ormAdapter/repositories/stock/IUpdateStock"
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository"
-import { IStock, Stock } from "../../entities/Stock.js"
+import { IStock, Stock } from "../../entities/Stock"
 
 
 export class UpdateStockUseCase {

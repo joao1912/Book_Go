@@ -1,7 +1,7 @@
 import { IMakeReservation } from "../../adapters/ormAdapter/repositories/reservation/IMakeReservation"
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidatorAdapterRepository"
-import { IReservation, Reservation } from "../../entities/Reservation.js"
+import { IReservation, Reservation } from "../../entities/Reservation"
 
 
 export class MakeReservationUseCase {

@@ -9,11 +9,11 @@ import type { Config } from 'jest';
 
 const config: Config = {
   
+  globalSetup: './test/util/CleanDataBase.ts',
+  globalTeardown: './test/util/CloseServer.ts',
   clearMocks: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
-  globalSetup: './test/util/CleanDataBase.ts',
-  globalTeardown: './test/util/CloseServer.ts',
 
   // moduleNameMapper: {
   //   '@src/(.*)': '<rootDir>/src/$1',
@@ -26,8 +26,10 @@ const config: Config = {
 
 };
 
-export default config;
 module.exports = {
+  globalSetup: './test/util/CleanDataBase.ts',
+  globalTeardown: './test/util/CloseServer.ts',
   preset: "ts-jest",
   resolver: "ts-jest-resolver",
 };
+export default config;
