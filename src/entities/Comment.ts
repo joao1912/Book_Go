@@ -9,10 +9,12 @@ export interface IComment {
 }
 
 export const commentSchema = z.object({
-    id: z.string().optional(),
-    bookId: z.string(),
-    userId: z.string(),
-    comment: z.string().min(6, { message: 'A descrição precisa de no minimo 6 caracteres.' }),
+    id: z.string().uuid().optional(),
+    bookId: z.string().uuid(),
+    userId: z.string().uuid(),
+    comment: z.string()
+    .min(3, { message: "Comments must be at least 3 characters long." })
+    .max(200, { message: "Comments must be a maximum of 35 characters in length." }),
 }) satisfies ZodType<IComment>
 
 export class Comment {

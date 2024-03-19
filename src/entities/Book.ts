@@ -1,5 +1,5 @@
 
-import { z,  ZodType } from "zod";
+import { z, ZodType } from "zod";
 
 export interface IBook {
     id?: string;
@@ -15,16 +15,26 @@ export interface IBook {
 }
 
 export const bookSchema = z.object({
-    id: z.string().optional(),
-    title: z.string().min(3, { message: 'O nome precisa de no minimo 3 caracteres.' }),
-    author: z.string().min(6, { message: 'O nome precisa de no minimo 6 caracteres.' }),
-    synopsis: z.string().min(20, { message: 'A descrição precisa de no minimo 20 caracteres.' }),
+    id: z.string().uuid().optional(),
+    title: z.string()
+        .min(1, { message: "The title must be at least 1 character long." })
+        .max(50, { message: "The title must be a maximum of 50 characters in length.'." }),
+
+    author: z.string()
+        .min(3, { message: 'The author name must be at least 3 character long.' })
+        .max(40, { message: "The author name must be a maximum of 40 characters in length." }),
+   
+    synopsis: z.string()
+        .min(20, { message: "The synopsis must be at least 20 characters long." })
+        .max(200, { message: "The synopsis must be at most 200 characters long." }),
     price: z.number(),
-    genre: z.string(),
+    genre: z.string()
+    .min(3, { message: "The genre must be at least 3 characters long." })
+    .max(25, { message: "The genre must be a maximum of 35 characters in length." }),
     publishedDate: z.string(),
     pageCount: z.number(),
     image: z.any().optional()
-  
+
 }) satisfies ZodType<IBook>
 
 

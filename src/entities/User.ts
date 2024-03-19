@@ -13,8 +13,10 @@ export const userSchema = z.object({
     id: z.string().optional(),
 
     username: z.string()
-    .max(40, { message: 'Username must be a maximum of 40 characters in length.' })
-    .regex(/^[A-Za-z][A-Za-z0-9_]*$/, { message: "Username must start with an alphabet." }),
+        .min(3, { message: "Username must be at least 3 characters in length." })
+
+        .max(40, { message: "Username must be a maximum of 40 characters in length." })
+        .regex(/^[A-Za-z][A-Za-z0-9_]*$/, { message: "Username must start with an alphabet." }),
 
     password: z.string()
         .min(8, { message: "Password must be at least 8 characters in length." })
@@ -27,7 +29,8 @@ export const userSchema = z.object({
     email: z.string().email()
         .max(40, { message: 'Email must be a maximum of 40 characters in length.' }),
 
-    telephone: z.string(),
+    telephone: z.string()
+    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,  { message: 'Please enter a valid telephone number.' }),
 
     favoritesBooks: z.array(z.number()).optional()
 }) satisfies ZodType<IUser>
