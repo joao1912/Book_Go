@@ -31,10 +31,10 @@ describe("Pega todas as reservas da biblioteca", () => {
     const userTwoData = await createUser.execute(userTwo);
 
     if (userOneData instanceof User) {
-      userOneId = userOneData.props.id
+      userOneId = userOneData.props.id!
     }
     if (userTwoData instanceof User) {
-      userTwoId = userTwoData.props.id;
+      userTwoId = userTwoData.props.id!
     }
 
 

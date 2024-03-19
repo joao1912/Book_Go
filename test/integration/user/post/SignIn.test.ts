@@ -17,16 +17,18 @@ describe("## POST ##", () => {
     it('Deve criar um usuário', async () => {
 
         const userData = {
-            username: "Joanir Teixeira",
+            username: "JoanirTeixeira",
             email: "joanirTeixeira@teste.com",
             telephone: "48998553785"
         }
 
-        await request(app)
+        const teste = await request(app)
             .post('/v1/users/signIn')
             .send({...userData,  password: "Joanir_123",})
             .expect(200)
             .then( response => {
+
+                console.log(response)
 
                 const userId = response.body.user.id
                 const token =  response.body.token
@@ -37,8 +39,7 @@ describe("## POST ##", () => {
                 }
                 
                 expect(response.body).toEqual(dataExpected)
-
-            })
+            }) 
 
     })
 

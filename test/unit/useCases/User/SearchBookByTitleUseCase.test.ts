@@ -49,8 +49,8 @@ describe("Procurar  livros por titulo", () => {
 
         const result = await searchBookByTitleUseCase.execute("NãoEstáRegistrado")
 
-        expect(result).toEqual("No results.")
-        //     
+        expect(result).toThrow()
+            
 
 
 

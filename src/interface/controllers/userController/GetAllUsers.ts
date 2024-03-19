@@ -18,14 +18,14 @@ class GetAllUsers implements IController {
         const response = await getAllUsersUseCase.execute()
 
         let usersList: Array<IUser> = []
-        if (response instanceof User && Array.isArray(response))
-            for (let user of response) {
 
-                usersList.push(
-                    Formatter.handle<User>(user)
-                )
+        for (let user of response) {
 
-            }
+            usersList.push(
+                Formatter.handle<User>(user)
+            )
+
+        }
 
         return serverResponse.ok(usersList)
 

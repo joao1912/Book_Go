@@ -17,7 +17,7 @@ describe("Alterar propriedades do usuário", ()=>{
 
         const userData = await createUser.execute(userToBeUpdated)
 
-        if(userData instanceof User){userIdToUpdate = userData.props.id}
+        if(userData instanceof User){userIdToUpdate = userData.props.id!}
 
     })
 

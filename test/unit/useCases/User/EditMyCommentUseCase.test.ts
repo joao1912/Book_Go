@@ -89,18 +89,18 @@ describe('Teste do EditMyCommentUseCase', () => {
 
         const editMyCommentUseCase = new EditMyCommentUseCase(updateComment)
 
-        const updateValues = new Comment({
+        const updateValues =  {
             userId: userId,
             bookId: bookId,
             comment: 'O comentário mudou!',
             id: commentId
-        })
+        }
 
         await editMyCommentUseCase.execute(updateValues)
             .then(result => {
 
                 expect(result).toBeInstanceOf(Comment)
-                expect(result.props).toEqual(updateValues.props)
+                expect(result.props).toEqual(updateValues)
 
             })
 
