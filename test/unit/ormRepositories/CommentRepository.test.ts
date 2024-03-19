@@ -21,17 +21,17 @@ interface ICommentToBeUpdate {
 
 interface IUserToCommentTest { 
     id?: string;
-    username: 'um nome2';
-    email: 'teste@gmail.com2';
-    telephone: '550000000002';
+    username: 'MariaSilva';
+    email: 'mariasilva@email.com';
+    telephone: '5548998332736';
     password: 'senha_segura';
 }
 
 interface IBookToCommentTest { 
     id?: string
-    title: 'Um livro de testes';
-    author: 'Um author' 
-    synopsis: 'bla bla bla';
+    title: 'O Segredo das Montanhas';
+    author: 'Pedro Almeida' 
+    synopsis: 'Uma emocionante história sobre amizade e coragem nas alturas das montanhas mais remotas.';
     price: 15,
     pageCount: 123,
     publishedDate: '2003-10-09',
@@ -54,9 +54,9 @@ describe('Testes do CommentRepository', () => {
         // Criar um usuário para os testes
 
         const user: IUserToCommentTest = { 
-            username: 'um nome2', 
-            email: 'teste@gmail.com2', 
-            telephone: '550000000002', 
+            username: 'MariaSilva', 
+            email: 'mariasilva@email.com', 
+            telephone: '5548998332736', 
             password: 'senha_segura' 
         }
 
@@ -76,9 +76,9 @@ describe('Testes do CommentRepository', () => {
         // Crir um livro para os testes
 
         const book: IBookToCommentTest = {
-            title: "Um livro de testes",
-            author: "Um author",
-            synopsis: "bla bla bla",
+            title: "O Segredo das Montanhas",
+            author: "Pedro Almeida",
+            synopsis: "Uma emocionante história sobre amizade e coragem nas alturas das montanhas mais remotas.",
             price: 15,
             pageCount: 123,
             publishedDate: '2003-10-09',

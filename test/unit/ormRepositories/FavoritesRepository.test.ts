@@ -18,9 +18,9 @@ interface IFavoriteToBeUpdate {
 
 interface IUserToFavoriteTest {
     id?: string;
-    username: 'um nome2eawefaer';
-    email: 'teste@gmail.coaefaefm2';
-    telephone: '550000500002';
+    username: 'JoaoPedro';
+    email: 'joaopedro@email.com';
+    telephone: '5548998332714';
     password: 'senha_segura';
 }
 
@@ -39,9 +39,9 @@ describe('Testes do FavoriteRepository', () => {
         // Criar um usuário para os testes
 
         const user: IUserToFavoriteTest = {
-            username: 'um nome2eawefaer',
-            email: 'teste@gmail.coaefaefm2',
-            telephone: '550000500002',
+            username: 'JoaoPedro',
+            email: 'joaopedro@email.com',
+            telephone: '5548998332714',
             password: 'senha_segura'
         }
 
@@ -63,9 +63,9 @@ describe('Testes do FavoriteRepository', () => {
         // Crir um livro para os testes
 
         const book1 = {
-            title: "Um livro de tesaefvacetes",
+            title: "Aventuras de um Viajante",
             author: "Um author",
-            synopsis: "bla bla bla",
+            synopsis: "Um jovem parte em uma jornada épica pelo mundo em busca de conhecimento e aventura.",
             price: 15,
             pageCount: 123,
             publishedDate: '2003-10-09',
@@ -74,9 +74,9 @@ describe('Testes do FavoriteRepository', () => {
         }
 
         const book2 = {
-            title: "Um livro de tescaefcaetes2",
+            title: "Segredos do Deserto",
             author: "Um author2",
-            synopsis: "bla bla bla2",
+            synopsis: "Um romance envolvente ambientado nos vastos desertos do Oriente Médio.",
             price: 15,
             pageCount: 123,
             publishedDate: '2003-10-09',

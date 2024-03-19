@@ -78,7 +78,11 @@ describe('Testes do ReservantionRepository', () => {
 
         await createUser.execute(userInstance)
             .then(result => {
-                if (result instanceof User) { userId1 = result.props.id }
+                if (result instanceof User) { 
+
+                    userId1 = result.props.id! 
+
+                }
             })
         const user2: IUser = ({
             username: "User2 ORMReservation",
@@ -92,7 +96,9 @@ describe('Testes do ReservantionRepository', () => {
 
         await createUser.execute(userInstance2)
             .then(result => {
-                if (result instanceof User) { userId2 = result.props.id }
+                if (result instanceof User) { 
+                    userId2 = result.props.id! 
+                }
             })
 
         //Fazer reserva para testes de delete e search
@@ -152,7 +158,9 @@ describe('Testes do ReservantionRepository', () => {
 
         const result = await deleteReservation.execute(reservationId)
 
-        expect(result).toBe('Reservation deleted successfully.')
+        expect(result).toEqual({
+            message: "Reservation deleted successfully."
+        })
 
     })
 

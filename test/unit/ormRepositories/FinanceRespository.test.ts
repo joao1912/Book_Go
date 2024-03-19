@@ -8,17 +8,17 @@ import { User } from "../../../src/entities/User";
 
 interface IUserToFinanceTest {
     id?: string;
-    username: 'um nome';
-    email: 'teste@gmail.com';
-    telephone: '55000000000';
+    username: 'PedroSouza';
+    email: 'pedrosouza@email.com';
+    telephone: '5548998332725';
     password: 'senha_segura';
 }
 
 interface IBookToFinanceTest {
     id?: string
-    title: 'Um livro de testes';
-    author: 'Um author'
-    synopsis: 'bla bla bla';
+    title: 'Noite de Mistérios';
+    author: 'Maria Costa'
+    synopsis: 'Um suspense emocionante que mantém o leitor na ponta da cadeira até a última página.';
     price: 15
     pageCount: 123,
      publishedDate: '2003-10-09'
@@ -38,9 +38,9 @@ describe('Testes do FinanceRepository', () => {
         // Criar um usuário para os testes
 
         const user: IUserToFinanceTest = {
-            username: 'um nome',
-            email: 'teste@gmail.com',
-            telephone: '55000000000',
+            username: 'PedroSouza',
+            email: 'pedrosouza@email.com',
+            telephone: '5548998332725',
             password: 'senha_segura'
         }
 
@@ -60,9 +60,9 @@ describe('Testes do FinanceRepository', () => {
         // Crir um livro para os testes
 
         const book: IBookToFinanceTest = {
-            title: "Um livro de testes",
-            author: "Um author",
-            synopsis: "bla bla bla",
+            title: "Noite de Mistérios",
+            author: "Maria Costa",
+            synopsis: "Um suspense emocionante que mantém o leitor na ponta da cadeira até a última página.",
             price: 15,
             pageCount: 123,
             publishedDate: '2003-10-09',
