@@ -36,9 +36,10 @@ export class SearchBookByTitle implements ISearchBookByTitle {
         return books
       }
 
-      ServerResponse.notFound('BookError', 'Este titulo nao foi encontrado.')
+      ServerResponse.notFound('BookError', 'No results.')
 
     } catch (error) {
+
       handlePrismaError("BookError", error)
      
     }

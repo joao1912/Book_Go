@@ -46,7 +46,7 @@ describe("Criando dados necessários para pegar a reserva de um livro por id", (
     if ( reserveData instanceof Reservation) { reservationId = reserveData.props.id! }
   });
 
-  it("Pesquisando reserva por book id", async () => {
+  it("Deletando reserva por book id", async () => {
     const deleteBookUseCase = new DeleteReservationUseCase(deleteReservation);
 
     const result = await deleteBookUseCase.execute(reservationId);

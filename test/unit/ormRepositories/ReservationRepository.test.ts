@@ -70,7 +70,7 @@ describe('Testes do ReservantionRepository', () => {
             username: "User ORMReservation",
             email: "user@gmail.com",
             password: "123Ab.",
-            telephone: "489999920304"
+            telephone: "48999992304"
 
         })
 
@@ -87,8 +87,8 @@ describe('Testes do ReservantionRepository', () => {
         const user2: IUser = ({
             username: "User2 ORMReservation",
             email: "user2@gmail.com",
-            password: "123",
-            telephone: "489999920344"
+            password: "123Ab#",
+            telephone: "48999992024"
 
         })
 
