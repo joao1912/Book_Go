@@ -24,7 +24,7 @@ export const userSchema = z.object({
         .regex(/.*[A-Z].*/, { message: "Password must contain at least one uppercase character." })
         .regex(/.*[a-z].*/, { message: "Password must contain at least one lowercase character." })
         .regex(/.*[0-9].*/, { message: "Password must contain at least one number." })
-        .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), { message: `Password must contain at least one of these special characters: "#@%*&-."` }),
+        .regex(/[@#*\-_.]/, { message: `Password must contain at least one of these special characters: "#@%*&-."` }),
 
     email: z.string().email()
         .max(40, { message: 'Email must be a maximum of 40 characters in length.' }),

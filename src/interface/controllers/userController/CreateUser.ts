@@ -27,11 +27,11 @@ export class CreateUser implements IController {
 
         const createUserUseCase = new CreateUserUseCase(createUser)
 
-        const passwordHash = encryptorAdapter.hash(password)
+        // const passwordHash = encryptorAdapter.hash(password)
 
         const userInstance = await createUserUseCase.execute({
             email,
-            password: passwordHash,
+            password,
             telephone,
             username,
         })

@@ -28,7 +28,7 @@ describe("## POST ##", () => {
             .expect(200)
             .then( response => {
 
-                
+   
 
                 const userId = response.body.user.id
                 const token =  response.body.token
@@ -40,6 +40,25 @@ describe("## POST ##", () => {
                 
                 expect(response.body).toEqual(dataExpected)
             }) 
+
+    })
+    fit('Deve tentar criar um usuário sem um caracter especial. Deve receber erro', async () => {
+
+        const userData = {
+            username: "Gus Teixeira",
+            email: "gusTeixeira@teste.com",
+            telephone: "48995553785"
+        }
+
+        const teste = await request(app)
+            .post('/v1/users/signIn')
+            .send({...userData,  password: "Gus123",})
+            .expect(400)
+            .then( response => {
+
+                // expect(response.body.message).toContain(`Password must contain at least one of these special characters: \\"#@%*&-."`)
+            }) 
+
 
     })
 

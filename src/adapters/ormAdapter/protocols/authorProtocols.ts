@@ -4,7 +4,7 @@ import { DeleteAuthor } from "../prismaAdapter/author/DeleteAuthor";
 import { GetAllAuthors } from "../prismaAdapter/author/GetAllAuthors";
 
 import { GetAuthorByName } from "../prismaAdapter/author/GetAuthorByName";
-import { GetAuthorById } from "../prismaAdapter/author/GetAuthorByid";
+import { GetAuthorById } from "../prismaAdapter/author/GetAuthorById";
 import { UpdateAuthor } from "../prismaAdapter/author/UpdateAuthor";
 
 
