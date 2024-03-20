@@ -39,7 +39,7 @@ describe('## GET BOOK ##', () => {
         const adminBook: IUser = {
             username: "getmeAllBooks",
             email: "getAllbooks@gmail.com",
-            password: "123",
+            password: "123.aB",
             telephone: "4233458800"
         }
 
@@ -57,7 +57,7 @@ describe('## GET BOOK ##', () => {
         .post("/v1/users/login")
         .send({
             email: "getAllbooks@gmail.com",
-            password: "123"
+            password: "123.aB",
         })
         .expect(200)
         const tokenJSON= resultLogin.body;

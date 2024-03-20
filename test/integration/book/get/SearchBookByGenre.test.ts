@@ -32,7 +32,7 @@ describe('## POST BOOK GENRE ##', () => {
         const adminBook: IUser = {
             username: "admin2book",
             email: "admin2book@gmail.com",
-            password: "123",
+            password: "123.aB",
             telephone: "5833458800"
         }
 
@@ -50,7 +50,7 @@ describe('## POST BOOK GENRE ##', () => {
             .post("/v1/users/login")
             .send({
                 email: "admin2book@gmail.com",
-                password: "123"
+                password: "123.aB",
             })
             .expect(200)
         const tokenJSON = resultLogin.body;

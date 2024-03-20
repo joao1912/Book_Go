@@ -1,6 +1,7 @@
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import request from "supertest"
 import { IUser } from "../../../../src/entities/User"
+import { json } from "stream/consumers"
 
 describe("## POST ##", () => {
 
@@ -55,7 +56,7 @@ describe("## POST ##", () => {
             .send({...userData,  password: "Gus123",})
             .expect(400)
             .then( response => {
-
+                
                 // expect(response.body.message).toContain(`Password must contain at least one of these special characters: \\"#@%*&-."`)
             }) 
 

@@ -38,7 +38,6 @@ export const handlePrismaError = (name: string, error: any): never => {
             
 
         default:
-            console.log("oiii", error, error.code)
             ServerResponse.notFound(name, "No results.")
     }
 };

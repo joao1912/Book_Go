@@ -33,7 +33,7 @@ describe('## GET BOOK TITLE ##', () => {
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
-                password: "123"
+                password: "123.aB"
             })
             .expect(200)
         const tokenJSON = resultLogin.body;

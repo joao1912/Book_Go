@@ -12,7 +12,7 @@ describe('## POST BOOK ##', () => {
 
     const addingBook: IBook = {
         title: "A Route too add book",
-        synopsis: "I just got lost",
+        synopsis: "I just got lost in the mountain while I was travelling to...",
         price: 80,
         author: "Coldplay",
         pageCount: 23,
@@ -28,7 +28,7 @@ describe('## POST BOOK ##', () => {
         const adminBook: IUser = {
             username: "adminBookPost",
             email: "adminBookPost@gmail.com",
-            password: "123",
+            password: "123.aB",
             telephone: "4233458800"
         }
 
@@ -46,7 +46,7 @@ describe('## POST BOOK ##', () => {
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
-                password: "123"
+                password: "123.aB",
             })
             .expect(200)
         const tokenJSON = resultLogin.body;
@@ -75,7 +75,7 @@ describe('## POST BOOK ##', () => {
             .post(`/v1/book/add`)
             .set('Authorization', `${token}`)
             .send({ 
-                synopsis: "I just got lost",
+                synopsis: "I just got lost in the mountain while I was travelling to...",
                 price: 80,
                 author: "Coldplay",
                 pageCount: 23,
@@ -83,6 +83,40 @@ describe('## POST BOOK ##', () => {
                 genre: "Music"
             })
                 .expect(400)
+     
+       
+    },25000)
+    it("Deve tentar adicionar um livro sem titulo", async () => {
+        const result = await request.agent(app)
+            .post(`/v1/book/add`)
+            .set('Authorization', `${token}`)
+            .send({ 
+                synopsis: "I just got lost in the mountain while I was travelling to...",
+                price: 80,
+                author: "Coldplay",
+                pageCount: 23,
+                publishedDate: '2012-10-09',
+                genre: "Music"
+            })
+                .expect(400)
+     
+       
+    },25000)
+    it("Deve tentar adicionar um livro com sinopse bem pequena fora do limite", async () => {
+        const result = await request.agent(app)
+            .post(`/v1/book/add`)
+            .set('Authorization', `${token}`)
+            .send({ 
+                title: "Hello Moon",
+                synopsis: "I just ",
+                price: 80,
+                author: "Coldplay",
+                pageCount: 23,
+                publishedDate: '2012-10-09',
+                genre: "Music"
+            })
+                .expect(400)
+                
      
        
     },25000)

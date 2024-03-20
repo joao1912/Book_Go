@@ -12,7 +12,7 @@ describe('## POST ##', () => {
 
         const userToLogin: IUser = {
             username: "Login Teste",
-            password: "123",
+            password: "123.aB*",
             email: "testelogin@gmail.com",
             telephone: "4899988800"
         }
@@ -45,7 +45,7 @@ describe('## POST ##', () => {
             .post("/v1/users/login")
             .send({
                 email: "testelogin@gmail.com",
-                password: "123"
+                password: "123.aB*"
             })
             .expect(200)
             .then(response => {
@@ -77,7 +77,7 @@ describe('## POST ##', () => {
         await request.agent(app)
             .post("/v1/users/login")
             .send({
-                password: "123"
+                password: "123.aB."
             })
             .expect(400)
             .then(response => {
@@ -127,7 +127,7 @@ describe('## POST ##', () => {
             })
             .expect(404)
             .then(response => {
-                expect(response.text).toContain("Email not registered")
+                expect(response.text).toContain("No results")
             //     expect(response.text).toBe("Email not registered")
 
             })

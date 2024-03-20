@@ -29,12 +29,12 @@ describe('## POST BOOK TITLE ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        // const adminBook: IUser = {
-        //     username: "admin_teste",
-        //     email: "admin_teste@gmail.com",
-        //     password: "123",
-        //     telephone: "43334458800"
-        // }
+        const adminBook: IUser = {
+            username: "admin_teste",
+            email: "admin_teste@gmail.com",
+            password: "123.aB",
+            telephone: "43334458800"
+        }
 
 
         // const result =  await request(app)
@@ -50,7 +50,7 @@ describe('## POST BOOK TITLE ##', () => {
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
-                password: "123"
+                password: "123.aB"
             })
             .expect(200)
         const tokenJSON = resultLogin.body;
@@ -92,6 +92,6 @@ describe('## POST BOOK TITLE ##', () => {
                 title: "dauishaiuhdsaiu"
             })
             .expect(404)
-        expect(result.body).toEqual(`No results.`)
+        expect(result.body.message).toEqual(`No results.`)
     })
 })
