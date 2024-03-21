@@ -4,7 +4,7 @@ import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
 
-describe('## GET BOOK ##', () => {
+describe('## GET ##', () => {
 
     let app: any;
     let id: string;

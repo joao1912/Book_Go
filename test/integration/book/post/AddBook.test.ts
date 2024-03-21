@@ -1,10 +1,8 @@
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import { IBook } from "../../../../src/entities/Book";
-import { IUser } from "../../../../src/entities/User";
 
-
-describe('## POST BOOK ##', () => {
+describe('## POST ##', () => {
 
     let app: any;
     let token: string;
