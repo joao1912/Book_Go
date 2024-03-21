@@ -35,14 +35,14 @@ describe('## PUT ##', () => {
             })
 
         const addingBook: IBook = {
-            title: "Um nome para testar o update do comment",
-            synopsis: "bla bla bla bla",
+            title: "Harmonias Celestiais",
+            synopsis: "Deixe-se levar pelas melodias divinas deste registro musical, onde cada nota é uma expressão da beleza e da transcendência.",
             price: 20,
             author: "Coldplay",
             pageCount: 53,
-            publishedDate: '2012-10-09',
+            publishedDate: "2012-10-09",
             genre: "Music"
-        }
+        }        
 
         await request(app)
             .post(`/v1/book/add`)

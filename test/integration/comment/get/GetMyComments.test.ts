@@ -34,12 +34,12 @@ describe('## GET ##', () => {
             })
 
         const addingBook: IBook = {
-            title: "Um nome para testar o create do finance",
-            synopsis: "bla bla bla bla",
+            title: "Sinfonia da Alma",
+            synopsis: "Embale-se nas notas emocionantes desta jornada musical, onde cada acorde conta uma história de amor, perda e redescoberta.",
             price: 20,
             author: "Coldplay",
             pageCount: 53,
-            publishedDate: '2012-10-09',
+            publishedDate: "2012-10-09",
             genre: "Music"
         }
 

@@ -52,14 +52,14 @@ describe('## GET ##', () => {
             })
 
         const addingBook: IBook = {
-            title: "Um nome para testar o buscar comments",
-            synopsis: "bla bla bla bla",
+            title: "Aventura Sonora",
+            synopsis: "Descubra um mundo de melodias e ritmos enquanto mergulha nesta emocionante exploração musical.",
             price: 20,
             author: "Coldplay",
             pageCount: 53,
-            publishedDate: '2012-10-09',
+            publishedDate: "2012-10-09",
             genre: "Music"
-        }
+        }        
 
         await request(app)
             .post(`/v1/book/add`)
