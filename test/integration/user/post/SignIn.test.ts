@@ -18,7 +18,7 @@ describe("## POST ##", () => {
     it('Deve criar um usuário', async () => {
 
         const userData = {
-            username: "Joanir Teixeira",
+            username: "João Áçeixeira",
             email: "joanirTeixeira@teste.com",
             telephone: "48998553785"
         }
@@ -43,7 +43,7 @@ describe("## POST ##", () => {
             }) 
 
     })
-    fit('Deve tentar criar um usuário sem um caracter especial. Deve receber erro', async () => {
+    it('Deve tentar criar um usuário sem um caracter especial. Deve receber erro', async () => {
 
         const userData = {
             username: "Gus Teixeira",
