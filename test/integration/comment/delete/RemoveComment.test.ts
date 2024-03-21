@@ -17,34 +17,34 @@ describe('## DELETE ##', () => {
         app = HTTPAdapter.getApp()
 
         const userData = {
-            username: "José alves",
-            email: "JoséAlves@teste.com",
+            username: "Jose alves",
+            email: "JoseAlves@gmail.com",
             telephone: "34956473893"
         }
 
         await request(app)
             .post('/v1/users/signIn')
-            .send({ ...userData, password: "jose_123", })
+            .send({ ...userData, password: "Jose_123", })
             .expect(200)
             .then(response => {
-
+            
                 userId = response.body.user.id
                 token = response.body.token
 
             })
 
         const addingBook: IBook = {
-            title: "Um nome para testar o delete do comment",
-            synopsis: "bla bla bla bla",
+            title: "A Head Full of Dreams",
+            synopsis: "Explore a jornada emocionante de uma das bandas mais icônicas da história da música, enquanto eles compartilham suas experiências, inspirações e aspirações neste cativante relato.",
             price: 20,
             author: "Coldplay",
             pageCount: 53,
-            publishedDate: '2012-10-09',
+            publishedDate: "2012-10-09",
             genre: "Music"
         }
 
         await request(app)
-            .post(`/v1/book/add`)
+            .post('/v1/book/add')
             .set('Authorization', `${token}`)
             .send(addingBook)
             .expect(200)
@@ -66,7 +66,7 @@ describe('## DELETE ##', () => {
             .send(comment)
             .expect(200)
             .then(response => {
-
+        
                 commentId = response.body.id
 
             })

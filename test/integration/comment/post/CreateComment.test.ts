@@ -33,14 +33,15 @@ describe('## POST ##', () => {
             })
 
         const addingBook: IBook = {
-            title: "Um nome para testar o create do comment",
-            synopsis: "bla bla bla bla",
+            title: "Canções da Alma",
+            synopsis: "Explore as profundezas da emoção humana através dessas melodias cativantes, cada uma contando sua própria história de amor, esperança e resiliência.",
             price: 20,
             author: "Coldplay",
             pageCount: 53,
-            publishedDate: '2012-10-09',
+            publishedDate: "2012-10-09",
             genre: "Music"
         }
+        
 
         await request(app)
             .post(`/v1/book/add`)
