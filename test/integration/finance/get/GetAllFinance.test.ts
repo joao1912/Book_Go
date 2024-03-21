@@ -15,12 +15,12 @@ describe('## GET ##', () => {
     let userId: string;
 
     const addingBook: IBook = {
-        title: "A Route too add finance",
-        synopsis: "bla bla bla",
-        price: 60,
+        title: "Melodias do Coração",
+        synopsis: "Adentre o universo musical dessas composições envolventes, onde cada nota ressoa com as emoções mais profundas e verdadeiras.",
+        price: 20,
         author: "Coldplay",
-        pageCount: 59,
-        publishedDate: '2012-10-09',
+        pageCount: 53,
+        publishedDate: "2012-10-09",
         genre: "Music"
     }
 
@@ -33,7 +33,7 @@ describe('## GET ##', () => {
 
         const user: IUser = {
             username: "Um User do finance",
-            password: "umaSenhaLoucaDeVerdade123",
+            password: "umaSenhaLouca_123",
             email: "userDoFinance123@gmail.com",
             telephone: "48958043853"
         }
@@ -43,7 +43,7 @@ describe('## GET ##', () => {
             .send(user)
             .expect(200)
             .then(response => {
-
+               
                 userId = response.body.user.id
 
             })
