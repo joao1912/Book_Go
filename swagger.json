@@ -271,7 +271,7 @@
       }
     },
 
-    "/book/genre/{genre}": {
+    "/book/genre": {
       "get": {
         "tags": ["book"],
         "summary": "Searchs books by genre",
@@ -281,7 +281,7 @@
         "parameters": [
           {
             "name": "genre",
-            "in": "path",
+            "in": "query",
             "description": "Genre of a book",
             "required": true,
             "schema": {
@@ -312,7 +312,7 @@
         }
       }
     },
-    "/book/title/{title}": {
+    "/book/title": {
       "get": {
         "tags": ["book"],
         "summary": "Searchs books by title",
@@ -322,7 +322,7 @@
         "parameters": [
           {
             "name": "title",
-            "in": "path",
+            "in": "query",
             "description": "Title of a book",
             "required": true,
             "schema": {
@@ -500,7 +500,7 @@
         }
       }
     },
-    "/stock/book/quantity/{quantity}": {
+    "/stock/book/quantity": {
       "get": {
         "tags": ["stock"],
         "summary": "Finds the stock of a book by its quantity",
@@ -514,7 +514,7 @@
         "parameters": [
           {
             "name": "quantity",
-            "in": "path",
+            "in": "query",
             "description": "Quantity of the book in stock",
             "required": true,
             "schema": {
@@ -552,7 +552,7 @@
         }
       }
     },
-    "/stock/book/${bookTitle}": {
+    "/stock/book/": {
       "get": {
         "tags": ["stock"],
         "summary": "Finds the stock of a book by its title",
@@ -566,7 +566,7 @@
         "parameters": [
           {
             "name": "bookTitle",
-            "in": "path",
+            "in": "query",
             "description": "Title of the book",
             "required": true,
             "schema": {
@@ -715,7 +715,7 @@
         }
       }
     },
-    "/reservation/book/${bookId}": {
+    "/reservation/book": {
       "get": {
         "tags": ["reservation"],
         "summary": "Gets reserves by book Id",
@@ -729,7 +729,7 @@
         "parameters": [
           {
             "name": "bookId",
-            "in": "path",
+            "in": "query",
             "description": "Id of the book",
             "required": true,
             "schema": {
@@ -766,7 +766,7 @@
         }
       }
     },
-    "/reservation/user/${userId}": {
+    "/reservation/user": {
       "get": {
         "tags": ["reservation"],
         "summary": "Gets reserves by user Id",
