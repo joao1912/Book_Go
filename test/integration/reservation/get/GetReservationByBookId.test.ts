@@ -104,7 +104,7 @@ describe('## GET ##', () => {
 
         await request(app)
             .get(`/v1/reservation/book/${bookId}`)
-            .set('Authorization', `${tokenAdmin}`)
+            .set('Authorization', `${tokenUser}`)
             .expect(200)
             .then(response => {
 

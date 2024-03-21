@@ -24,9 +24,9 @@ class Login implements IController {
             const dbHashPassword = userInstance.props.password
 
             const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
-
+            console.log("Senha validacao = ",checkPassword)
             if (!checkPassword) {
-                ServerResponse.notAuthorized("UserError", "Invalid password")
+                ServerResponse.forbidden("UserError", "Invalid password")
             }
 
             if (userInstance.props.id) {
