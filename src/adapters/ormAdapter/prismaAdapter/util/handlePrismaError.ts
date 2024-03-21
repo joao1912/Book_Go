@@ -1,8 +1,9 @@
 import { Prisma } from "@prisma/client";
 import ServerResponse from "../../../../interface/controllers/utils/ServerResponse";
+import { CustomError } from "../../../../interface/controllers/utils/CustomError";
 
 
-export const handlePrismaError = (name: string, error: any): never => {
+export const handlePrismaError = (name: string, error: any) => {
 
     switch (true) {
 
@@ -23,7 +24,7 @@ export const handlePrismaError = (name: string, error: any): never => {
 
 
         case error instanceof Prisma.PrismaClientKnownRequestError:
-            console.log("oioioi")
+           
             const meta = error.meta
 
             if (error.code === "P2002" && meta) {
@@ -38,6 +39,13 @@ export const handlePrismaError = (name: string, error: any): never => {
             
 
         default:
+
+            if (error instanceof CustomError) {
+
+                throw error
+                  
+            }
+
             ServerResponse.notFound(name, "No results.")
     }
 };

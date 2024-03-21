@@ -10,9 +10,9 @@ describe ("Deve criar um novo usário", () => {
         const createUserUseCase = new CreateUserUseCase(createUser)
 
         const userToBeCreated: IUser = {
-            username: 'cleiton4123',
-            password: 'Cleiton_123',
-            email: 'cleiton335@gmail.com',
+            username: 'Cleitin',
+            password: '123.aB',
+            email: 'admin_teste@gmail.com',
             telephone: '5548998332618'
         }
 

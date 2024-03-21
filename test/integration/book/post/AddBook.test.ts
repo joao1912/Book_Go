@@ -7,7 +7,6 @@ import { IUser } from "../../../../src/entities/User";
 describe('## POST BOOK ##', () => {
 
     let app: any;
-    let id: string;
     let token: string;
 
     const addingBook: IBook = {
@@ -25,56 +24,45 @@ describe('## POST BOOK ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        const adminBook: IUser = {
-            username: "adminBookPost",
-            email: "adminBookPost@gmail.com",
-            password: "123.aB",
-            telephone: "4233458800"
-        }
-
-
-        // const result = await request.agent(app)
-        //     .post('/v1/users/signIn')
-        //     .send(adminBook)
-        //     .expect(200)
-        // const admin = result.body;
-        // expect(admin).toHaveProperty('id');
-        // id = admin.id;
-
-
-        const resultLogin = await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
                 password: "123.aB",
             })
             .expect(200)
-        const tokenJSON = resultLogin.body;
-        expect(tokenJSON).toHaveProperty('token');
-        token = tokenJSON.token;
+            .then(response => {
 
-    },25000)
+                const tokenJSON = response.body;
+                expect(tokenJSON).toHaveProperty('token');
+                token = tokenJSON.token;
 
-    afterAll(async () => {
-        HTTPAdapter.close()
+            })
 
     })
 
     it("Deve adicionar um livro", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${token}`)
             .send(addingBook)
             .expect(200)
-        const book = result.body
-        expect(book).toHaveProperty("id")
-       
-    },25000)
+            .then(response => {
+
+                const book = response.body
+                expect(book).toHaveProperty("id")
+
+            })
+
+    })
+
     it("Deve tentar adicionar um livro sem titulo", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${token}`)
-            .send({ 
+            .send({
                 synopsis: "I just got lost in the mountain while I was travelling to...",
                 price: 80,
                 author: "Coldplay",
@@ -82,15 +70,31 @@ describe('## POST BOOK ##', () => {
                 publishedDate: '2012-10-09',
                 genre: "Music"
             })
-                .expect(400)
-     
-       
-    },25000)
+            .expect(400)
+            .then(response => {
+
+                const error = JSON.parse(response.body.message)
+
+                expect(error).toEqual([
+                    {
+                        code: "invalid_type",
+                        expected: "string",
+                        received: "undefined",
+                        path: ["title"],
+                        message: "Required"
+                    }
+                ])
+
+            })
+
+    })
+
     it("Deve tentar adicionar um livro sem titulo", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${token}`)
-            .send({ 
+            .send({
                 synopsis: "I just got lost in the mountain while I was travelling to...",
                 price: 80,
                 author: "Coldplay",
@@ -98,15 +102,31 @@ describe('## POST BOOK ##', () => {
                 publishedDate: '2012-10-09',
                 genre: "Music"
             })
-                .expect(400)
-     
-       
-    },25000)
+            .expect(400)
+            .then(response => {
+
+                const error = JSON.parse(response.body.message)
+
+                expect(error).toEqual([
+                    {
+                        code: "invalid_type",
+                        expected: "string",
+                        received: "undefined",
+                        path: ["title"],
+                        message: "Required"
+                    }
+                ])
+
+            })
+
+    })
+
     it("Deve tentar adicionar um livro com sinopse bem pequena fora do limite", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${token}`)
-            .send({ 
+            .send({
                 title: "Hello Moon",
                 synopsis: "I just ",
                 price: 80,
@@ -115,9 +135,30 @@ describe('## POST BOOK ##', () => {
                 publishedDate: '2012-10-09',
                 genre: "Music"
             })
-                .expect(400)
-                
-     
-       
-    },25000)
+            .expect(400)
+            .then(response => {
+
+                const error = JSON.parse(response.body.message)
+
+                expect(error).toEqual([
+                    {
+                        code: "too_small",
+                        minimum: 20,
+                        type: "string",
+                        inclusive: true,
+                        exact: false,
+                        message: "The synopsis must be at least 20 characters long.",
+                        path: ["synopsis"]
+                    }
+                ])
+
+            })
+    })
+
+    afterAll(async () => {
+        
+        HTTPAdapter.close()
+
+    })
+
 })

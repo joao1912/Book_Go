@@ -9,7 +9,7 @@ describe('## GET BOOK ##', () => {
     let app: any;
     let id: string;
     let token: string;
-       
+
     const Book1: IBook = {
         title: "Arabella",
         synopsis: "When shen needs shelter from",
@@ -19,6 +19,7 @@ describe('## GET BOOK ##', () => {
         publishedDate: '2014-10-09',
         genre: "Music"
     }
+
     const Book2: IBook = {
         title: "A História",
         synopsis: "A história da estória",
@@ -29,8 +30,6 @@ describe('## GET BOOK ##', () => {
         genre: "History"
     }
 
-
-   
     beforeAll(async () => {
 
         HTTPAdapter.config()
@@ -43,54 +42,69 @@ describe('## GET BOOK ##', () => {
             telephone: "4233458800"
         }
 
+        await request(app)
+            .post('/v1/users/signIn')
+            .send(adminBook)
+            .expect(200)
+            .then(response => {
 
-        const result =  await request(app)
-        .post('/v1/users/signIn')
-        .send(adminBook)
-        .expect(200)
-        const admin = result.body;
-        expect(admin).toHaveProperty('id');
-        id = admin.id;
+                const admin = response.body;
+                expect(admin.user).toHaveProperty('id');
+                id = admin.user.id;
 
+            })
 
-   const resultLogin = await request.agent(app)
-        .post("/v1/users/login")
-        .send({
-            email: "getAllbooks@gmail.com",
-            password: "123.aB",
-        })
-        .expect(200)
-        const tokenJSON= resultLogin.body;
-        expect(tokenJSON).toHaveProperty('token');
-        token = tokenJSON.token;
+        await request(app)
+            .post("/v1/users/login")
+            .send({
+                email: "getAllbooks@gmail.com",
+                password: "123.aB",
+            })
+            .expect(200)
+            .then(response => {
 
-        await request.agent(app)
-        .post(`/v1/book/add`)
-        .set('Authorization', `${token}`)
-        .send(Book1)
-        .expect(200)
+                const tokenJSON = response.body;
+                expect(tokenJSON).toHaveProperty('token');
+                token = tokenJSON.token;
 
-         await request.agent(app)
-        .post(`/v1/book/add`)
-        .set('Authorization', `${token}`)
-        .send(Book2)
-        .expect(200)
+            })
 
-     
+        await request(app)
+            .post(`/v1/book/add`)
+            .set('Authorization', `${token}`)
+            .send(Book1)
+            .expect(200)
+
+        await request(app)
+            .post(`/v1/book/add`)
+            .set('Authorization', `${token}`)
+            .send(Book2)
+            .expect(200)
+
+    })
+
+    it("Deve buscar todos os livros", async () => {
+
+        await request(app)
+            .get(`/v1/book/`)
+            .expect(200)
+            .then(response => {
+
+                const books = response.body
+
+                expect(books.length).toBeGreaterThan(0)
+                for (let book of books) {
+                    expect(book).toHaveProperty('id')
+                }
+
+            })
+
     })
 
     afterAll(async () => {
+        
         HTTPAdapter.close()
 
     })
     
-    it("Deve buscar todos os livros", async()=>{
-       const result = await request.agent(app)
-        .get(`/v1/book/`)
-        .expect(200)
-        const books = result.body
-        for(let book of books) {
-            expect(book).toHaveProperty("props.id")
-        }
-    })
 })

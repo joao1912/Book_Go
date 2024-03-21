@@ -1,4 +1,5 @@
 import { Book } from "../../../../entities/Book";
+import ServerResponse from "../../../../interface/controllers/utils/ServerResponse";
 import { ISearchBookByGenre } from "../../repositories/book/ISearchBookByGenre";
 import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
@@ -39,6 +40,8 @@ export class SearchBookByGenre implements ISearchBookByGenre {
 
         return books
       }
+
+      ServerResponse.notFound('BookError', 'The genre of this book was not found.')
 
     } catch (error) {
 
