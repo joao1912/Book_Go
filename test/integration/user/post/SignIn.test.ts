@@ -18,7 +18,7 @@ describe("## POST ##", () => {
     it('Deve criar um usuário', async () => {
 
         const userData = {
-            username: "João Áeixeira",
+            username: "João Áçeixeira",
             email: "joanirTeixeira@teste.com",
             telephone: "48998553785"
         }
