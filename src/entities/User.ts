@@ -16,7 +16,8 @@ export const userSchema = z.object({
         .min(3, { message: "Username must be at least 3 characters in length." })
 
         .max(40, { message: "Username must be a maximum of 40 characters in length." })
-        .regex(/^[A-Za-z][A-Za-z0-9_ ]*$/, { message: "Username must start with an alphabet." }),
+        .regex(/^[A-Za-záàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ--][A-Za-z0-9_ ]*$/
+        , { message: "Username must start with an alphabet." }),
 
     password: z.string()
         .min(6, { message: "Password must be at least 6 characters in length." })
