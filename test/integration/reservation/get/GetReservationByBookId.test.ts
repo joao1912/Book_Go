@@ -3,105 +3,121 @@ import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol";
 import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
-describe('## GET ALL RESERVATION ##', () => {
+describe('## GET ##', () => {
 
     let app: any;
     let userId: string;
     let bookId: string;
-    let reservationId: string;
     let tokenUser: string;
     let tokenAdmin: string;
 
-   
     beforeAll(async () => {
 
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
+
         const book: IBook = {
-            title: "Route get all reserve",
-            synopsis: "Um copo meio cheio",
-            price: 80,
-            author: "Route Get",
-            pageCount: 23,
-            publishedDate: '2024-10-09',
-            genre: "Route"
+            title: "Ritmo da Vida",
+            synopsis: "Sinta a pulsação da vida nesta vibrante coleção de canções que celebram a jornada humana com ritmos envolventes e letras inspiradoras.",
+            price: 20,
+            author: "Coldplay",
+            pageCount: 53,
+            publishedDate: "2012-10-09",
+            genre: "Music"
         }
+
         const user: IUser = {
             username: "getabookreserve",
             email: "getbookreserve@gmail.com",
-            password: "123",
+            password: "Teste_123",
             telephone: "435062658800"
         }
 
-        const loginAdmin = await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
-                password: "123",
+                password: "123.aB",
             })
             .expect(200)
-        const tokenJSONAdmin = loginAdmin.body;
-        expect(tokenJSONAdmin).toHaveProperty('token');
-        tokenAdmin = tokenJSONAdmin.token;
+            .then(response => {
 
+                const tokenJSONAdmin = response.body;
+                expect(tokenJSONAdmin).toHaveProperty('token');
+                tokenAdmin = tokenJSONAdmin.token;
 
-       const resultBook = await request.agent(app)
+            })
+
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${tokenAdmin}`)
             .send(book)
             .expect(200)
-            const bookProps = resultBook.body;
-            expect(bookProps).toHaveProperty('id');
-            bookId = bookProps.id;
-    
+            .then(response => {
 
-        const result = await request(app)
+                const bookProps = response.body;
+                expect(bookProps).toHaveProperty('id');
+                bookId = bookProps.id;
+
+            })
+
+        await request(app)
             .post('/v1/users/signIn')
             .send(user)
             .expect(200)
+            .then(response => {
 
-        const userSignIn = result.body;
-        expect(userSignIn).toHaveProperty('id');
-        userId = userSignIn.id;
+                const userSignIn = response.body;
+                expect(userSignIn.user).toHaveProperty('id');
+                userId = userSignIn.user.id;
 
+            })
 
-        const loginUser = await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "getbookreserve@gmail.com",
-                password: "123",
+                password: "Teste_123",
             })
             .expect(200)
-        const tokenJSONUser = loginUser.body;
-        expect(tokenJSONUser).toHaveProperty('token');
-        tokenUser = tokenJSONUser.token;
+            .then(response => {
 
-        const resultReserve = await request.agent(app)
-        .post(`/v1/reservation/user/${userId}/book/${bookId}`)
-        .set('Authorization', `${tokenUser}`)
-        .expect(200)
-        expect(resultReserve.body).toHaveProperty('id');
-        reservationId = resultReserve.body.id
+                const tokenJSONUser = response.body;
+                expect(tokenJSONUser).toHaveProperty('token');
+                tokenUser = tokenJSONUser.token;
 
+            })
+
+        await request(app)
+            .post(`/v1/reservation/user/${userId}/book/${bookId}`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(200)
+            .then(response => {
+
+                expect(response.body).toHaveProperty('id');
+
+            })
+
+    })
+
+    it("Deve listar todas as reservas de um livro", async () => {
+
+        await request(app)
+            .get(`/v1/reservation/book/${bookId}`)
+            .set('Authorization', `${tokenAdmin}`)
+            .expect(200)
+            .then(response => {
+
+                expect(response.body[0]).toHaveProperty("id");
+
+            })
+        
     })
 
     afterAll(async () => {
+
         HTTPAdapter.close()
 
     })
-
-    
-    it("Deve listar todas as reservas de um livro", async ()=>{
-        const result = await request.agent(app)
-        .get(`/v1/reservation/book?bookId=${bookId}`)
-        .set('Authorization', `${tokenAdmin}`)
-        .expect(200)
-        expect(result.body[0]).toHaveProperty("id");
-    })
-
-
-  
-
-  
 
 })

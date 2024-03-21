@@ -3,7 +3,7 @@ import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol";
 import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
-describe('## DELETE RESERVATION ##', () => {
+describe('## DELETE ##', () => {
 
     let app: any;
     let userId: string;
@@ -17,103 +17,138 @@ describe('## DELETE RESERVATION ##', () => {
 
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
+
         const book: IBook = {
             title: "Route delete a reserve",
-            synopsis: "Um copo meio cheio",
+            synopsis: "Um copo meio cheio, mas que sabe ele está cheio",
             price: 80,
             author: "Route Delete",
             pageCount: 23,
             publishedDate: '2024-10-09',
             genre: "Route"
         }
+
         const user: IUser = {
             username: "deletereserve",
             email: "deletereserve@gmail.com",
-            password: "123",
+            password: "123.cB",
             telephone: "46642658800"
         }
 
-        const loginAdmin = await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
-                password: "123",
+                password: "123.aB",
             })
             .expect(200)
-        const tokenJSONAdmin = loginAdmin.body;
-        expect(tokenJSONAdmin).toHaveProperty('token');
-        tokenAdmin = tokenJSONAdmin.token;
+            .then(response => {
+
+                const tokenJSONAdmin = response.body;
+                expect(tokenJSONAdmin).toHaveProperty('token');
+                tokenAdmin = tokenJSONAdmin.token;
+
+            })
 
 
-        const resultBook = await request.agent(app)
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${tokenAdmin}`)
             .send(book)
             .expect(200)
-        const bookProps = resultBook.body;
-        expect(bookProps).toHaveProperty('id');
-        book_Id = bookProps.id;
+            .then(response => {
 
+                const bookProps = response.body;
+                expect(bookProps).toHaveProperty('id');
+                book_Id = bookProps.id;
 
-        const result = await request(app)
+            })
+
+        await request(app)
             .post('/v1/users/signIn')
             .send(user)
             .expect(200)
+            .then(response => {
 
-        const userSignIn = result.body;
-        expect(userSignIn).toHaveProperty('id');
-        userId = userSignIn.id;
+                const userSignIn = response.body;
+                expect(userSignIn.user).toHaveProperty('id');
+                userId = userSignIn.user.id;
 
+            })
 
-        const loginUser = await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "deletereserve@gmail.com",
-                password: "123",
+                password: "123.cB",
             })
             .expect(200)
-        const tokenJSONUser = loginUser.body;
-        expect(tokenJSONUser).toHaveProperty('token');
-        tokenUser = tokenJSONUser.token;
+            .then(response => {
 
-        const resultReserve = await request.agent(app)
+                const tokenJSONUser = response.body;
+                expect(tokenJSONUser).toHaveProperty('token');
+                tokenUser = tokenJSONUser.token;
+
+            })
+        
+        await request(app)
             .post(`/v1/reservation/user/${userId}/book/${book_Id}`)
             .set('Authorization', `${tokenUser}`)
             .expect(200)
-        expect(resultReserve.body).toHaveProperty('id');
-        reservationId = resultReserve.body.id
+            .then(response => {
+                
+                expect(response.body).toHaveProperty('id');
+                reservationId = response.body.id
+
+            })
 
     })
-
-    afterAll(async () => {
-        HTTPAdapter.close()
-
-    })
-
 
     it("Deve deletar a reserva", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .delete(`/v1/reservation/delete/${reservationId}`)
             .set('Authorization', `${tokenUser}`)
             .expect(200)
-        expect(result.body.message).toEqual("Reservation deleted successfully.");
+            .then(response => {
+
+                expect(response.body.message).toEqual("Reservation deleted successfully.");
+
+            })
+        
     })
 
     it("Deve tentar deletar reserva com id inexistente", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .delete(`/v1/reservation/delete/${reservationId}`)
             .set('Authorization', `${tokenUser}`)
             .expect(404)
-        expect(result.body.message).toEqual('Id provided does not exist.');
+            .then(response => {
+
+                expect(response.body.message).toEqual('Unable to perform update operation. The specified column cannot be modified as it is either part of the primary key, marked as read-only, or automatically generated.');
+
+            })
+        
     })
 
     it("Deve tentar deletar reserva sem token", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .delete(`/v1/reservation/delete/${reservationId}`)
             .expect(401)
-        expect(result.body.message).toEqual('Must have an authorization token');
+            .then(response => {
+
+                expect(response.body.message).toEqual('Must have an authorization token');
+
+            })
+        
     })
 
+    afterAll(async () => {
 
+        HTTPAdapter.close()
+
+    })
 
 })

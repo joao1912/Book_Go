@@ -9,11 +9,11 @@ import ServerResponse from "../utils/ServerResponse";
 
 class GetReservationByBookId implements IController {
 
-    async handle(req: HttpRequest<{},{},{},{ bookId: string }>, res: HttpResponse) {
+    async handle(req: HttpRequest<{ bookId: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
-        const bookId = req.query.bookId
+        const bookId = req.params.bookId
 
         const getReservationByUserIdUseCase = new GetReservationByBookIdUseCase(getReservationByBookId)
 

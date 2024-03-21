@@ -32,12 +32,16 @@ export const handlePrismaError = (name: string, error: any) => {
                 ServerResponse.conflict(name, `This ${target} is already in use.`);
             }
 
-            if (error.code === "P2025") {
+            if (error.code === "P2003") {
 
                 ServerResponse.notFound(name, "Id provided does not exist.")
             }
-            
 
+            if (error.code === "P2025") {
+
+                ServerResponse.notFound(name, "Unable to perform update operation. The specified column cannot be modified as it is either part of the primary key, marked as read-only, or automatically generated.")
+            }
+            
         default:
 
             if (error instanceof CustomError) {
