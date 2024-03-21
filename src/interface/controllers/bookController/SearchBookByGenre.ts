@@ -8,11 +8,10 @@ import Formatter from "../utils/Formatter";
 
 class SearchBookByGenre implements IController {
 
-    async handle(req: HttpRequest<{ genre: string }>, res: HttpResponse) {
+    async handle(req: HttpRequest<{},{},{},{genre: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
-
-        const genre = req.params.genre
+        const genre = req.query.genre
 
         const searchBookByGenreUseCase = new SearchBookByGenreUseCase(searchBookByGenre)
 

@@ -49,7 +49,7 @@ describe('## GET STOCK BY TITLE ##', () => {
 
     it("Deve mostrar o estoque de um livro", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/book/Route%20stock%20title`)
+            .get(`/v1/stock/book/title?title=Route%20stock%20title`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(200)
         expect(result.body[0]).toHaveProperty("quantity");
@@ -57,13 +57,13 @@ describe('## GET STOCK BY TITLE ##', () => {
 
     it("Deve tentar ver stock sem token", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/book/${addingBook.title}`)
+            .get(`/v1/stock/book/title?title=${addingBook.title}`)
             .expect(401)
 
     })
     fit("Deve tentar ver stock de um livro inexistente", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/book/esse livro nao existe`)
+            .get(`/v1/stock/book/title?title=esse livro nao existe`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(404)
         expect(result.body).toEqual('No results.');

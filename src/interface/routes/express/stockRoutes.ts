@@ -11,9 +11,9 @@ const stockRouter = Router()
 
 stockRouter.get("/all", Auth.execute, getAllStockController.handle)
 
-stockRouter.get('/book/:title', Auth.execute, getStockByBookTitleController.handle)
+stockRouter.get('/book/title', Auth.execute, getStockByBookTitleController.handle)
 
-stockRouter.get('/book/quantity/:quantity',Auth.execute, getStockByQuantityController.handle)
+stockRouter.get('/book/quantity',Auth.execute, getStockByQuantityController.handle)
 
 stockRouter.put('/update/book/:bookId/', Auth.execute, updateStockController.handle)
 

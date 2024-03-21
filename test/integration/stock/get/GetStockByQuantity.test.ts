@@ -50,7 +50,7 @@ describe('## GET STOCK BY QUANTITY ##', () => {
 
     it("Deve procurar estoque por quantidade", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/book/quantity/1`)
+            .get(`/v1/stock/book/quantity?quantity=1`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(200)
         expect(result.body[0]).toHaveProperty("quantity");
@@ -58,7 +58,7 @@ describe('## GET STOCK BY QUANTITY ##', () => {
 
     it("Deve tentar ver stock sem token", async () => {
         const result = await request.agent(app)
-            .get(`/v1/stock/book/quantity/1`)
+            .get(`/v1/stock/book/quantity?quantity=1`)
             .expect(401)
 
     })

@@ -64,7 +64,7 @@ describe('## POST ##', () => {
     it("Deve buscar livro por genero", async () => {
 
         await request(app)
-            .get(`/v1/book/genre/${genre}`)
+            .get(`/v1/book/genre?genre=${genre}`)
             .expect(200)
             .then(response => {
 
@@ -80,10 +80,11 @@ describe('## POST ##', () => {
     it("Deve tentar buscar um genero que não existe", async () => {
 
         await request(app)
-            .get(`/v1/book/genre/blablabla`)
+            .get(`/v1/book/genre?genre=9i0daisd0afafaç`)
             .expect(404)
             .then(response => {
 
+             
                 expect(response.body).toEqual({ message: `The genre of this book was not found.` })
 
             })

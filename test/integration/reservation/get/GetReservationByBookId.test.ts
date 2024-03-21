@@ -93,7 +93,7 @@ describe('## GET ALL RESERVATION ##', () => {
     
     it("Deve listar todas as reservas de um livro", async ()=>{
         const result = await request.agent(app)
-        .get(`/v1/reservation/book/${bookId}`)
+        .get(`/v1/reservation/book?bookId=${bookId}`)
         .set('Authorization', `${tokenAdmin}`)
         .expect(200)
         expect(result.body[0]).toHaveProperty("id");

@@ -11,9 +11,9 @@ const reservationRouter = Router()
 
 reservationRouter.get('/all', Auth.execute, getAllReservationsController.handle)
 
-reservationRouter.get('/book/:bookId', Auth.execute, getReservationByBookIdController.handle)
+reservationRouter.get('/book', Auth.execute, getReservationByBookIdController.handle)
 
-reservationRouter.get('/user/:userId', Auth.execute, getReservationByUserIdController.handle)
+reservationRouter.get('/user', Auth.execute, getReservationByUserIdController.handle)
 
 reservationRouter.post('/user/:userId/book/:bookId', Auth.execute, makeReservationController.handle)
 

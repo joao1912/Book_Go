@@ -48,7 +48,7 @@ describe('## POST ##', () => {
     it("Deve buscar livro por titulo", async () => {
 
         await request(app)
-            .get(`/v1/book/title/${Book1.title}`)
+            .get(`/v1/book/title?title=${Book1.title}`)
             .expect(200)
             .then(response => {
 
@@ -65,7 +65,7 @@ describe('## POST ##', () => {
     it("Deve tentar buscar um livro que não existe", async () => {
 
         await request(app)
-            .get(`/v1/book/title/dauishaiuhdsaiu`)
+            .get(`/v1/book/title?title=auishaiuhdsaiu`)
             .expect(404)
             .then(response => {
 

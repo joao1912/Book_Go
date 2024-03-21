@@ -9,11 +9,11 @@ import ServerResponse from "../utils/ServerResponse";
 
 class SearchBookByTitle implements IController {
 
-    async handle(req: HttpRequest<{title: string}>, res: HttpResponse) {
+    async handle(req: HttpRequest<{},{},{},{title: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
-        const title = req.params.title
+        const title = req.query.title
 
         const searchBookByTitleUseCase = new SearchBookByTitleUseCase(searchBookByTitle)
 

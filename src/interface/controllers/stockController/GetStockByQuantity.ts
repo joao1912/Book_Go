@@ -9,11 +9,11 @@ import ServerResponse from "../utils/ServerResponse";
 
 class GetStockByQuantity implements IController {
 
-    async handle(req: HttpRequest<{ quantity: number }>, res: HttpResponse) {
+    async handle(req: HttpRequest<{},{},{},{ quantity: number }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
-        const quantity = Number(req.params.quantity)
+        const quantity = Number(req.query.quantity)
 
         const getStockByQuantityUseCase = new GetStockByQuantityUseCase(getStockByQuantity)
 
