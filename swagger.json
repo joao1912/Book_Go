@@ -97,7 +97,7 @@
                 "$ref": "#/components/schemas/User",
                 "example": {
                   "email": "admin_teste@gmail.com",
-                  "password": "123"
+                  "password": "123.aB"
                 }
               }
             }
@@ -157,7 +157,7 @@
                 "example": {
                   " username": "updateUser",
                   "email": "updateuser@gmail.com",
-                  "password": "123",
+                  "password": "123_Bn",
                   "telephone": "4299988800"
                 }
               }
