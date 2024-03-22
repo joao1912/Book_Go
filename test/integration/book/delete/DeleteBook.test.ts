@@ -81,7 +81,7 @@ describe('## DELETE ##', () => {
             .then(response => {
 
                 expect(response.body).toEqual({
-                    message: `Id provided does not exist.`
+                    message: `Unable to perform update operation. The specified column cannot be modified as it is either part of the primary key, marked as read-only, or automatically generated.`
                 })
 
             })

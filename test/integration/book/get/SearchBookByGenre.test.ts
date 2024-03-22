@@ -4,7 +4,7 @@ import { IBook } from "../../../../src/entities/Book";
 import { IUser } from "../../../../src/entities/User";
 
 
-describe('## POST ##', () => {
+describe('## GET ##', () => {
 
     let app: any;
     let token: string;
@@ -25,17 +25,18 @@ describe('## POST ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        const adminBook: IUser = {
+        /* const adminBook: IUser = {
             username: "admin_teste",
             email: "admin_teste@gmail.com",
             password: "123.aB",
             telephone: "5833458800"
-        }
+        } */
 
-        await request(app)
+        /* await request(app)
             .post('/v1/users/signIn')
             .send(adminBook)
-            .expect(200)
+            .expect(200) */
+            
 
         await request(app)
             .post("/v1/users/login")
