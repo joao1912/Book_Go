@@ -23,7 +23,7 @@ userRouter.post('/login', loginController.handle);
 
 userRouter.post('/addFavorite/:bookId', Auth.execute, createFavoriteController.handle);
 
-userRouter.put('/update/:id', Auth.execute, updateUserController.handle);
+userRouter.put('/update', Auth.execute, updateUserController.handle);
 
 userRouter.delete(
   '/removeFavorite/:favoriteId',

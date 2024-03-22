@@ -10,6 +10,7 @@ export default class Formatter {
 
                 if (prop == 'props') {
                     //@ts-ignore
+
                     return model[prop]
 
                 }
@@ -17,9 +18,8 @@ export default class Formatter {
             }
         }
 
-        throw new Error('Can not read this class')
+        ServerResponse.badRequest('UnexpectedError', 'Can not read this class')
         
-
     }
 
 }

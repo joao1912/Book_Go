@@ -1,10 +1,7 @@
 
-import { response } from "express"
 import request from "supertest"
 import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import { IUser } from "../../../../src/entities/User"
-
-
 
 describe('## PUT ##', () => {
 
@@ -12,107 +9,128 @@ describe('## PUT ##', () => {
     let token: string
     let id: string
 
- 
+    const userToLogin: IUser = {
+        username: "updateUser",
+        email: "updateuser@gmail.com",
+        password: "Teste_123",
+        telephone: "4299988800"
+    }
+
+    const newValues: IUser = {
+        password: "Teste_456",
+        email: "newupdateuser@gmail.com",
+        telephone: "998337846",
+        username: "newUserNameToUser"
+    }
+
     beforeAll(async () => {
 
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        const userToLogin: IUser = {
-            username: "updateUser",
-            email: "updateuser@gmail.com",
-            password: "Teste_123",
-            telephone: "4299988800"
-        }
-
-
-      const result =  await request(app)
+        const result = await request(app)
             .post('/v1/users/signIn')
             .send(userToLogin)
             .expect(200)
-            const user = result.body.user;
-            expect(user).toHaveProperty('id');
-            id = user.id;
+        const user = result.body.user;
+        expect(user).toHaveProperty('id');
+        id = user.id;
 
-    
-       const resultLogin = await request(app)
+
+        const resultLogin = await request(app)
             .post("/v1/users/login")
             .send({
                 email: "updateuser@gmail.com",
                 password: "Teste_123",
             })
             .expect(200)
-            const tokenOBJ = resultLogin.body;
-            expect(tokenOBJ).toHaveProperty('token');
-            token = tokenOBJ.token;
-        })     
+        const tokenOBJ = resultLogin.body;
+        expect(tokenOBJ).toHaveProperty('token');
+        token = tokenOBJ.token;
+    })
 
-    afterAll(async () => {
-        HTTPAdapter.close()
+    it("Deve mudar a senha", async () => {
+
+        
+
+        await request(app)
+            .put(`/v1/users/update`)
+            .set('Authorization', `${token}`)
+            .send(newValues.password)
+            .expect(200)
+            .then(response => {
+
+                expect(response.body).toEqual({
+                    email: userToLogin.email,
+                    id: id,
+                    telephone: userToLogin.telephone,
+                    username: userToLogin.username,
+                })
+
+            })
 
     })
 
-
-    it("Deve mudar a senha", async()=>{
-
-        const newValues: IUser = {
-            password: "Teste_456",
-            email: "newupdateuser@gmail.com",
-            telephone: "998337846",
-            username: "newUserNameToUser"
-        }
-
+    it("Deve mudar o telefone", async()=>{
         await request(app)
-        .put(`/v1/users/update/${id}`)
+        .put(`/v1/users/update`)
         .set('Authorization', `${token}`)
-        .send(newValues)
+        .send(newValues.telephone)
         .expect(200)
         .then(response => {
 
-            const id = response.body.id
+            const data = response.body;
 
             expect(response.body).toEqual({
-                id: id,
-                ...newValues
+                telephone: newValues.telephone,
+                ...data
+            })
+
+        })
+        
+    })
+    it("Deve mudar o username", async()=>{
+        await request(app)
+        .put(`/v1/users/update`)
+        .set('Authorization', `${token}`)
+        .send(newValues.username)
+        .expect(200)
+        .then(response => {
+
+            const data = response.body;
+
+            expect(response.body).toEqual({
+                username: newValues.username,
+                ...data
+            })
+
+        })
+       
+    })
+
+    it("Deve dar erro ao tentar mudar o email", async () => {
+        await request(app)
+        .put(`/v1/users/update`)
+        .set('Authorization', `${token}`)
+        .send(newValues.email)
+        .expect(200)
+        .then(response => {
+
+            const data = response.body;
+
+            expect(response.body).toEqual({
+                email: newValues.email,
+                ...data
             })
 
         })
 
     })
-    /* it("Deve mudar o email", async()=>{
-        await request(app)
-        .put(`/v1/users/update/${id}`)
-        .set('Authorization', `${token}`)
-        .send({
-            email: "newupdateuser@gmail.com"
-        })
-        .expect(200)
+
+    afterAll(async () => {
+
+        HTTPAdapter.close()
 
     })
-    it("Deve mudar o telefone", async()=>{
-        await request(app)
-        .put(`/v1/users/update/${id}`)
-        .set('Authorization', `${token}`)
-        .send({
-            telefone: "50-000443320"
-        })
-        .expect(200)
-
-        // .then(response => {
-        //     console.log(response.text)
-        // })
-    })
-    it("Deve mudar o username", async()=>{
-        await request(app)
-        .put(`/v1/users/update/${id}`)
-        .set('Authorization', `${token}`)
-        .send({
-            username: "new-update-user@gmail.com"
-        })
-        .expect(200)
-        // .then(response => {
-        //     console.log(response.text)
-        // })
-    }) */
 
 })

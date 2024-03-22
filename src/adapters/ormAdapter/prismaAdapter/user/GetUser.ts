@@ -6,13 +6,13 @@ import ServerResponse from "../../../../interface/controllers/utils/ServerRespon
 
 export class GetUser implements IGetUser {
   //@ts-ignore
-  async execute(email: string): Promise<User> {
+  async execute(input: string): Promise<User> {
 
     try {
 
       const user = await prisma.user.findUnique({
         where: {
-          email: email
+          email: input
         }
       })
 
