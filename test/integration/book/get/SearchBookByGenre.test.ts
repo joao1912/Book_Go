@@ -26,8 +26,8 @@ describe('## POST ##', () => {
         app = HTTPAdapter.getApp()
 
         const adminBook: IUser = {
-            username: "admin2book",
-            email: "admin2book@gmail.com",
+            username: "admin_teste",
+            email: "admin_teste@gmail.com",
             password: "123.aB",
             telephone: "5833458800"
         }
@@ -40,7 +40,7 @@ describe('## POST ##', () => {
         await request(app)
             .post("/v1/users/login")
             .send({
-                email: "admin2book@gmail.com",
+                email: "admin_teste@gmail.com",
                 password: "123.aB",
             })
             .expect(200)

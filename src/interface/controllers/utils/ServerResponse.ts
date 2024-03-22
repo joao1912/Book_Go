@@ -19,6 +19,9 @@ class ServerResponse {
     static notAuthorized(name: string, message: string): never {
         throw new CustomError(name, message, 401);
     }
+    static forbidden(name: string, message: string): never {
+        throw new CustomError(name, message, 403);
+    }
 
     static notFound(name: string, message: string): never {
         throw new CustomError(name, message, 404);
