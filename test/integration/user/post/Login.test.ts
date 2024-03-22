@@ -22,26 +22,13 @@ describe('## POST ##', () => {
             .post('/v1/users/signIn')
             .send(userToLogin)
             .expect(200)
-        // .then(response => {
-
-        //     console.log(response.body)
-
-        // })
-    })
-
-    afterAll(async () => {
-        HTTPAdapter.close()
 
     })
-
-
-
-
 
     it("Deve fazer login e receber um token", async () => {
 
 
-        await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "testelogin@gmail.com",
@@ -49,15 +36,16 @@ describe('## POST ##', () => {
             })
             .expect(200)
             .then(response => {
-                expect(response.text).toContain("token")
-                // console.log(response.text)
 
+                expect(response.text).toContain("token")
+                
             })
 
     })
+
     it("Tentativa fazer login sem senha deve receber uma mensagem", async () => {
 
-        await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "testelogin@gmail.com",
@@ -65,16 +53,18 @@ describe('## POST ##', () => {
             })
             .expect(400)
             .then(response => {
+          
 
-                expect(response.text).toContain("Enter you password")
-                // HTTPAdapter.close()
+                expect(response.body).toEqual({ message: 'Invalid password.'})
+             
 
             })
 
     })
+
     it("Tentativa de fazer login sem email deve receber uma mensagem", async () => {
 
-        await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 password: "123.aB."
@@ -82,15 +72,15 @@ describe('## POST ##', () => {
             .expect(400)
             .then(response => {
 
-                expect(response.text).toBeTruthy
-                // HTTPAdapter.close()
+                expect(response.body).toEqual({message: 'Email must be valid.'})
 
             })
 
     })
+
     it("Tentativa de fazer login com senha incorreta deve receber uma mensagem", async () => {
 
-        await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "testelogin@gmail.com",
@@ -100,14 +90,15 @@ describe('## POST ##', () => {
             .expect(401)
             .then(response => {
 
-                expect(response.text).toContain("Invalid password")
+                expect(response.body).toEqual({ message: 'Email or password is incorrect.' })
 
             })
 
     })
+
     it("Tentativa de fazer login sem email e senha: deve receber uma mensagem", async () => {
 
-        await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .expect(400)
             .then(response => {
@@ -117,23 +108,28 @@ describe('## POST ##', () => {
             })
 
     })
+
     it("Tentativa de fazer login com email incorreto: deve receber uma mensagem", async () => {
 
-        await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "testelog@gmail.com",
-                password: "123"
+                password: "Teste_123"
             })
-            .expect(404)
+            .expect(401)
             .then(response => {
-                expect(response.text).toContain("No results")
-            //     expect(response.text).toBe("Email not registered")
+
+                expect(response.body).toEqual({ message: 'Email or password is incorrect.' })
 
             })
 
-    },10000)
+    })
 
+    afterAll(async () => {
+        
+        HTTPAdapter.close()
 
+    })
 
 }) 

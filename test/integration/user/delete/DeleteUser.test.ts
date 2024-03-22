@@ -14,9 +14,9 @@ describe('## DELETE ##', () => {
         app = HTTPAdapter.getApp()
 
         user = {
-            email: 'userToDeleteUserTest@teste.com',
-            password: 'umaSenhaParaTeste',
-            telephone: '02101201212',
+            email: 'userToDeleteUserTest@gmail.com',
+            password: 'Teste_123',
+            telephone: '998332678',
             username: 'userToDeleteUserTest',
         }
 

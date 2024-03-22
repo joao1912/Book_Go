@@ -16,20 +16,20 @@ describe('## POST ##', () => {
         app = HTTPAdapter.getApp()
 
         user = {
-            email: 'userToFavoriteTest@teste.com',
-            password: 'umaSenhaParaTeste',
+            email: 'userToFavoriteTest@gmail.com',
+            password: 'Teste_123',
             telephone: '00000000000',
             username: 'userToFavoriteTests',
         }
 
         const book: IBook = {
-            title: "O livro de testes do livro favorito",
-            author: "Author",
-            synopsis: "bla bla",
-            price: 10,
-            genre: "teste",
-            publishedDate: "2024-12-20",
-            pageCount: 232
+            title: "O Eco dos Sonhos",
+            synopsis: "Navegue pelos labirintos da mente humana através destes poemas que ecoam os sonhos mais profundos e os desejos mais secretos. Uma jornada poética que convida você a explorar os recantos mais íntimos da imaginação.",
+            price: 19,
+            author: "Emily Dickinson",
+            pageCount: 68,
+            publishedDate: "1862-11-01",
+            genre: "Poesia"
         }
 
         await request(app)

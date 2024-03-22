@@ -21,7 +21,7 @@ describe('## PUT ##', () => {
         const userToLogin: IUser = {
             username: "updateUser",
             email: "updateuser@gmail.com",
-            password: "123",
+            password: "Teste_123",
             telephone: "4299988800"
         }
 
@@ -39,7 +39,7 @@ describe('## PUT ##', () => {
             .post("/v1/users/login")
             .send({
                 email: "updateuser@gmail.com",
-                password: "123",
+                password: "Teste_123",
             })
             .expect(200)
             const tokenOBJ = resultLogin.body;
@@ -54,19 +54,32 @@ describe('## PUT ##', () => {
 
 
     it("Deve mudar a senha", async()=>{
+
+        const newValues: IUser = {
+            password: "Teste_456",
+            email: "newupdateuser@gmail.com",
+            telephone: "998337846",
+            username: "newUserNameToUser"
+        }
+
         await request(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
-        .send({
-            password: "YEAH"
-        })
+        .send(newValues)
         .expect(200)
+        .then(response => {
 
-        // .then(response => {
-        //     console.log(response.text)
-        // })
+            const id = response.body.id
+
+            expect(response.body).toEqual({
+                id: id,
+                ...newValues
+            })
+
+        })
+
     })
-    it("Deve mudar o email", async()=>{
+    /* it("Deve mudar o email", async()=>{
         await request(app)
         .put(`/v1/users/update/${id}`)
         .set('Authorization', `${token}`)
@@ -75,9 +88,6 @@ describe('## PUT ##', () => {
         })
         .expect(200)
 
-        // .then(response => {
-        //     console.log(response.text)
-        // })
     })
     it("Deve mudar o telefone", async()=>{
         await request(app)
@@ -103,6 +113,6 @@ describe('## PUT ##', () => {
         // .then(response => {
         //     console.log(response.text)
         // })
-    })
+    }) */
 
 })

@@ -17,7 +17,7 @@ describe('## GET ##' ,() => {
 
         const user: IUser = {
             username: "a gis",
-            password: "umaSenhaLoucaDeVerdade",
+            password: "Teste_123",
             email: "giDasSenhaLouca@gmail.com",
             telephone: "48998003827"
         }
@@ -28,24 +28,5 @@ describe('## GET ##' ,() => {
             .expect(200)
 
     })
-
-    // it('Deve tentar criar usuário com email já cadastrado', async () => {
-
-    //     const user: IUser = {
-    //         username: "a gis",
-    //         password: "umaSenhaLoucaDeVerdade",
-    //         email: "admin_teste@gmail.com",
-    //         telephone: "48998003827"
-    //     }
-
-    //     await request(app)
-    //         .post('/v1/users/signIn')
-    //         .send(user)
-    //         // .expect(400)
-    //         .then(response =>{
-    //             console.log(response.body)
-    //         })
-
-    // })
 
 })

@@ -17,7 +17,7 @@ describe('## GET ##' ,() => {
 
         const user: IUser = {
             username: "Um User",
-            password: "umaSenhaLoucaDeVerdade123",
+            password: "Teste_123",
             email: "giDasSenhaLouca123@gmail.com",
             telephone: "48996003856"
         }

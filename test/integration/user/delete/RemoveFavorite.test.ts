@@ -11,28 +11,27 @@ describe('## DELETE ##', () => {
     let bookId: string;
     let favoriteId: string;
 
-
     beforeAll(async () => {
 
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
         user = {
-            email: 'userToDeleteFavoriteTest@teste.com',
-            password: 'umaSenhaParaTeste',
-            telephone: '00101001010',
+            email: 'userToDeleteFavoriteTest@gmail.com',
+            password: 'Teste_123',
+            telephone: '9983367899',
             username: 'userToDeleteFavoriteTest',
         }
 
         const book: IBook = {
-            title: "O livro de testes do remove favorite",
-            author: "Author",
-            synopsis: "bla bla",
-            price: 10,
-            genre: "teste",
-            publishedDate: "2024-12-20",
-            pageCount: 235
-        }
+            title: "Vozes da Natureza",
+            synopsis: "Deixe-se envolver pelas melodias da natureza, capturadas nestes versos que ecoam o sussurro das árvores, o canto dos pássaros e o murmúrio dos rios. Uma celebração poética da beleza e da harmonia do mundo natural.",
+            price: 16,
+            author: "Mary Oliver",
+            pageCount: 56,
+            publishedDate: "1992-06-15",
+            genre: "Poesia"
+        }        
 
         await request(app)
             .post('/v1/users/signIn')
@@ -64,7 +63,6 @@ describe('## DELETE ##', () => {
                 favoriteId = response.body.favoriteId 
 
             })
-            
 
     })
 

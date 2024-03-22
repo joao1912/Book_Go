@@ -11,30 +11,29 @@ import { User } from "../../../entities/User";
 class Login implements IController {
 
     async handle(req: HttpRequest<{}, {}, { email: string, password: string }>, res: HttpResponse): Promise<any> {
+
         const { email, password } = req.body
 
         const serverReponse = new ServerResponse(res)
 
         const getUserUseCase = new GetUserUseCase(getUser)
 
-        const userInstance = await getUserUseCase.execute(email)
+        const userInstance: User = await getUserUseCase.execute(email)
 
-        if (userInstance instanceof User) {
+        const dbHashPassword = userInstance.props.password
 
-            const dbHashPassword = userInstance.props.password
+        const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
 
-            const checkPassword = await encryptorAdapter.validatePassword(password, dbHashPassword)
-          
-            if (!checkPassword) {
-                ServerResponse.forbidden("UserError", "Invalid password")
-            }
-
-            if (userInstance.props.id) {
-                const userToken = authJwt.sign(userInstance.props.id)
-
-                return serverReponse.ok({ token: userToken })
-            }
+        if (!checkPassword) {
+            ServerResponse.notAuthorized("UserError", "Email or password is incorrect.")
         }
+
+        if (userInstance.props.id) {
+            const userToken = authJwt.sign(userInstance.props.id)
+
+            return serverReponse.ok({ token: userToken })
+        }
+
 
 
 

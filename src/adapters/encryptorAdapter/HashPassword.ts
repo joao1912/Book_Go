@@ -1,5 +1,6 @@
 import { hashSync, genSaltSync, compare } from "bcrypt";
 import { IEncryptorAdapterRepository } from "./repository/IEncryptorAdapterRepository";
+import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 
 export class HashPassword implements IEncryptorAdapterRepository {
 
@@ -15,6 +16,12 @@ export class HashPassword implements IEncryptorAdapterRepository {
     }
 
     public async validatePassword(password: string, hash: string): Promise<boolean> {
+
+        if (!password) {
+
+            ServerResponse.badRequest('UserError', 'Invalid password.')
+
+        }
 
         return await compare(password, hash)
 
