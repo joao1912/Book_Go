@@ -25,23 +25,23 @@ describe('## GET ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        /* const adminBook: IUser = {
-            username: "admin_teste",
-            email: "admin_teste@gmail.com",
+         const adminBook: IUser = {
+            username: "admin_bookgenre",
+            email: "admin_bookgenre@gmail.com",
             password: "123.aB",
             telephone: "5833458800"
-        } */
+        } 
 
-        /* await request(app)
+        await request(app)
             .post('/v1/users/signIn')
             .send(adminBook)
-            .expect(200) */
+            .expect(200) 
             
 
         await request(app)
             .post("/v1/users/login")
             .send({
-                email: "admin_teste@gmail.com",
+                email: "admin_bookgenre@gmail.com",
                 password: "123.aB",
             })
             .expect(200)

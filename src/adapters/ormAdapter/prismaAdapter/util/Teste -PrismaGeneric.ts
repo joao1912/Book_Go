@@ -27,7 +27,7 @@ export class BasePrisma {
                         // Get the current model at runtime
                         const context = Prisma.getExtensionContext(this)
 
-                        const result = await (context as any).findUnique({ where })
+                        const result = await (context as any).findMany({ where })
                         return result !== null
                     },
                     async delete<T>(
