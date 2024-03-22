@@ -8,6 +8,7 @@ export class GetAllStock implements IGetAllStock {
   async execute(): Promise<Stock[]> {
 
     try {
+
       const BooksStock = await prisma.stock.findMany({
         select: {
           id: true,
@@ -23,7 +24,7 @@ export class GetAllStock implements IGetAllStock {
 
       let stock: Stock[] = [];
       for (let bookProp of BooksStock) {
-  
+        
         stock.push (new Stock ({
           id: bookProp.id,
           quantity: bookProp.quantity,
@@ -41,7 +42,7 @@ export class GetAllStock implements IGetAllStock {
   
    
       }
-  
+      
       return stock;
       
     } catch (error) {

@@ -3,20 +3,19 @@ import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
 import { IBook } from "../../../../src/entities/Book";
 
 
-describe('## GET STOCK BY QUANTITY ##', () => {
+describe('## GET ##', () => {
 
     let app: any;
-    let id: string;
     let tokenAdmin: string;
 
     const addingBook: IBook = {
-        title: "Route stock quantity",
-        synopsis: "I just got lost",
-        price: 80,
-        author: "Coldplay",
-        pageCount: 23,
-        publishedDate: '2012-10-09',
-        genre: "Music"
+        title: "O Jardim das Almas",
+        synopsis: "Adentre os segredos ocultos nos recantos mais profundos da alma humana. Este livro é uma jornada poética que mergulha nas complexidades da existência, convidando você a refletir sobre a beleza e a escuridão que residem em cada um de nós.",
+        price: 20,
+        author: "Khalil Gibran",
+        pageCount: 72,
+        publishedDate: "1923-04-06",
+        genre: "Poesia"
     }
 
     beforeAll(async () => {
@@ -24,42 +23,54 @@ describe('## GET STOCK BY QUANTITY ##', () => {
         HTTPAdapter.config()
         app = HTTPAdapter.getApp()
 
-        const resultLogin = await request.agent(app)
+        await request(app)
             .post("/v1/users/login")
             .send({
                 email: "admin_teste@gmail.com",
-                password: "123"
+                password: "123.aB"
             })
             .expect(200)
-        const tokenJSON = resultLogin.body;
-        expect(tokenJSON).toHaveProperty('token');
-        tokenAdmin = tokenJSON.token;
+            .then(response => {
 
-        const resultBook = await request.agent(app)
+                const tokenJSON = response.body;
+                expect(tokenJSON).toHaveProperty('token');
+                tokenAdmin = tokenJSON.token;
+
+            })
+        
+
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${tokenAdmin}`)
             .send(addingBook)
             .expect(200)
-    })
-
-
-    afterAll(async () => {
-        HTTPAdapter.close()
 
     })
 
     it("Deve procurar estoque por quantidade", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .get(`/v1/stock/book/quantity?quantity=1`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(200)
-        expect(result.body[0]).toHaveProperty("quantity");
+            .then(response => {
+
+                expect(response.body[0]).toHaveProperty("quantity");
+
+            })
+       
     })
 
     it("Deve tentar ver stock sem token", async () => {
-        const result = await request.agent(app)
+
+        await request(app)
             .get(`/v1/stock/book/quantity?quantity=1`)
             .expect(401)
+            .then(response => {
+
+                expect(response.body).toEqual({ message:"Must have an authorization token" })
+
+            })
 
     })
 
@@ -72,6 +83,12 @@ describe('## GET STOCK BY QUANTITY ##', () => {
 
 
     // })
+
+    afterAll(async () => {
+        
+        HTTPAdapter.close()
+
+    })
 
 
 })

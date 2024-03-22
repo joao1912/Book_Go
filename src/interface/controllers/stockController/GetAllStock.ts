@@ -11,23 +11,23 @@ class GetAllStock implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
 
-            const serverResponse = new ServerResponse(res)
+        const serverResponse = new ServerResponse(res)
 
-            const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
+        const getAllStockUseCase = new GetAllStockUseCase(getAllStock)
 
-            const response: Stock[] = await getAllStockUseCase.execute()
+        const response: Stock[] = await getAllStockUseCase.execute()
 
-            let stockList: Array<IStock> = []
-            if (response instanceof Stock && Array.isArray(response))
-                for (let item of response) {
+        let stockList: Array<IStock> = []
 
-                    stockList.push(
-                        Formatter.handle<Stock>(item)
-                    )
+        for (let item of response) {
 
-                }
+            stockList.push(
+                Formatter.handle<Stock>(item)
+            )
 
-            return serverResponse.ok(stockList)
+        }
+
+        return serverResponse.ok(stockList)
 
     }
 }
