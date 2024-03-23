@@ -11,25 +11,14 @@ export class UpdateBook implements IUpdateBook {
 
     try {
 
-      let newData: BookUpdateInput = {
-        title: title || undefined,
-        synopsis: synopsis || undefined,
-        price: price || undefined,
-        publishedDate: publishedDate || undefined,
-        pageCount: pageCount || undefined,
-        image: image || undefined,
-      }
-
-      if (genre) {
-
-        newData = {
+       let newData: BookUpdateInput = {
           title: title || undefined,
           synopsis: synopsis || undefined,
           price: price || undefined,
           publishedDate: publishedDate || undefined,
           pageCount: pageCount || undefined,
           image: image || undefined,
-          tag: {
+          tag: genre? {
             set: [],
             connectOrCreate: {
               where: {
@@ -39,9 +28,22 @@ export class UpdateBook implements IUpdateBook {
                 genre: genre
               }
             }
-          }
+          } : undefined,
+          author: author? {
+            set: [],
+            connectOrCreate: {
+              where: {
+                name: author
+              },
+              create: {
+                name: author
+              }
+            }
+          } : undefined
         }
-      }
+      
+
+   
 
       const book = await prisma.book.update({
         where: {
