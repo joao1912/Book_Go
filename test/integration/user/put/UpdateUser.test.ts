@@ -108,7 +108,7 @@ describe('## PUT ##', () => {
        
     })
 
-    it("Deve dar erro ao tentar mudar o email", async () => {
+    it("Deve mudar o email", async () => {
         await request(app)
         .put(`/v1/users/update`)
         .set('Authorization', `${token}`)

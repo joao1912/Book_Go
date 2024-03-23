@@ -10,12 +10,22 @@ describe('## PUT ##', () => {
 
     const Book1: IBook = {
         title: "O Livro do Update",
-        synopsis: "Usado nas construções",
+        synopsis: "Usado nas construções mais incriveis que se pode fazer!",
         price: 80,
         author: "Pedro Cascau",
         pageCount: 23,
         publishedDate: '2014-10-09',
         genre: "Art"
+    }
+
+    const newValues: IBook = {
+        title: "O Livro do update que foi alterado",
+        synopsis: "Usado nas construções, pena que ja foi alterado, agora é só esperar!",
+        price: 60,
+        author: "Pedro Cascau",
+        pageCount: 40,
+        publishedDate: '2014-11-09',
+        genre: "Art V2"
     }
 
     beforeAll(async () => {
@@ -59,20 +69,99 @@ describe('## PUT ##', () => {
         await request(app)
             .put(`/v1/book/update/${bookId}`)
             .set('Authorization', `${token}`)
-            .send({
-                title: "ORM Book to update",
-                price: 80,
-                genre: "Music",
-                author: "Wilson da silva",
-                pageCount: 360,
-                publishedDate: '2013-10-10',
-                synopsis: "Welcome to the enchanted forest!!!"
-            })
+            .send(newValues)
             .expect(200)
             .then(response => {
 
                 const bookEdited = response.body
                 expect(bookEdited).toHaveProperty("id")
+               
+                expect(bookEdited).toEqual({ id: bookId, ...newValues })
+
+            })
+
+    })
+
+    it("Deve atualizar apenas o 'title' do livro", async () => {
+
+        await request(app)
+            .put(`/v1/book/update/${bookId}`)
+            .set('Authorization', `${token}`)
+            .send(newValues.title)
+            .expect(200)
+            .then(response => {
+
+                const bookEdited = response.body
+                expect(bookEdited).toHaveProperty("id")
+                expect(bookEdited).toEqual({ id: bookId, title: newValues.title, ...bookEdited })
+
+            })
+
+    })
+
+    it("Deve atualizar apenas o 'synopsis' do livro", async () => {
+
+        await request(app)
+            .put(`/v1/book/update/${bookId}`)
+            .set('Authorization', `${token}`)
+            .send({synopsis: newValues.synopsis})
+            .expect(200)
+            .then(response => {
+
+                const bookEdited = response.body
+                expect(bookEdited).toHaveProperty("id")
+                expect(bookEdited).toEqual({ id: bookId, synopsis: newValues.synopsis, ...bookEdited })
+
+            })
+
+    })
+
+    it("Deve atualizar apenas o 'price' do livro", async () => {
+
+        await request(app)
+            .put(`/v1/book/update/${bookId}`)
+            .set('Authorization', `${token}`)
+            .send({price: newValues.price})
+            .expect(200)
+            .then(response => {
+
+                const bookEdited = response.body
+                expect(bookEdited).toHaveProperty("id")
+                expect(bookEdited).toEqual({ id: bookId, price: newValues.price, ...bookEdited })
+
+            })
+
+    })
+
+    it("Deve atualizar apenas o 'pageCount' do livro", async () => {
+
+        await request(app)
+            .put(`/v1/book/update/${bookId}`)
+            .set('Authorization', `${token}`)
+            .send({pageCount: newValues.pageCount})
+            .expect(200)
+            .then(response => {
+
+                const bookEdited = response.body
+                expect(bookEdited).toHaveProperty("id")
+                expect(bookEdited).toEqual({ id: bookId, pageCount: newValues.pageCount, ...bookEdited })
+
+            })
+
+    })
+
+    it("Deve atualizar apenas o 'genre' do livro", async () => {
+
+        await request(app)
+            .put(`/v1/book/update/${bookId}`)
+            .set('Authorization', `${token}`)
+            .send({genre: newValues.genre})
+            .expect(200)
+            .then(response => {
+
+                const bookEdited = response.body
+                expect(bookEdited).toHaveProperty("id")
+                expect(bookEdited).toEqual({ id: bookId, genre: newValues.genre, ...bookEdited })
 
             })
 
@@ -89,67 +178,16 @@ describe('## PUT ##', () => {
             .expect(400)
             .then(response => {
 
-                const bookEdited = response.body
+                const erro = response.body
 
-                const erro = JSON.parse(bookEdited.message)
-
-                expect(erro).toEqual([
-                    {
-                        code: "invalid_type",
-                        expected: "string",
-                        received: "number",
-                        path: ["title"],
-                        message: "Expected string, received number"
-                    },
-                    {
-                        code: "invalid_type",
-                        expected: "string",
-                        received: "undefined",
-                        path: ["author"],
-                        message: "Required"
-                    },
-                    {
-                        code: "invalid_type",
-                        expected: "string",
-                        received: "undefined",
-                        path: ["synopsis"],
-                        message: "Required"
-                    },
-                    {
-                        code: "invalid_type",
-                        expected: "number",
-                        received: "undefined",
-                        path: ["price"],
-                        message: "Required"
-                    },
-                    {
-                        code: "invalid_type",
-                        expected: "string",
-                        received: "undefined",
-                        path: ["genre"],
-                        message: "Required"
-                    },
-                    {
-                        code: "invalid_type",
-                        expected: "string",
-                        received: "undefined",
-                        path: ["publishedDate"],
-                        message: "Required"
-                    },
-                    {
-                        code: "invalid_type",
-                        expected: "number",
-                        received: "undefined",
-                        path: ["pageCount"],
-                        message: "Required"
-                    }
-                ])
+                expect(erro).toEqual({ message: 'Invalid input type provided.' })
 
             })
 
     })
 
     afterAll(async () => {
+
         HTTPAdapter.close()
 
     })

@@ -29,7 +29,7 @@ describe('## GET ##', () => {
             username: "admin_bookgenre",
             email: "admin_bookgenre@gmail.com",
             password: "123.aB",
-            telephone: "5833458800"
+            telephone: "5833346800"
         } 
 
         await request(app)
@@ -85,7 +85,6 @@ describe('## GET ##', () => {
             .expect(404)
             .then(response => {
 
-             
                 expect(response.body).toEqual({ message: `The genre of this book was not found.` })
 
             })
