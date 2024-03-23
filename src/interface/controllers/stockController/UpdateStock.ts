@@ -1,8 +1,8 @@
-import { HttpNext, HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
+import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { searchBookById } from "../../../adapters/ormAdapter/protocols/bookProtocols";
 import { updateStock } from "../../../adapters/ormAdapter/protocols/stockProtocols";
 import { Book, IBook } from "../../../entities/Book";
-import { IStock, Stock } from "../../../entities/Stock";
+import {  Stock } from "../../../entities/Stock";
 import { SearchBookByIdUseCase } from "../../../usecases/book/SearchBookByIdUseCase";
 import { UpdateStockUseCase } from "../../../usecases/stock/UpdateStockUseCase";
 import { IController } from "../IController";
@@ -42,13 +42,7 @@ class UpdateStock implements IController {
                 )
             }
 
-
         }
-
-
-
-
-
     }
 }
 

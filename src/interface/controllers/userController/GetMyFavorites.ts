@@ -6,6 +6,7 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
+
 class GetMyFavorites implements IController {
 
     async handle(req: HttpRequest, res: HttpResponse) {
@@ -31,7 +32,6 @@ class GetMyFavorites implements IController {
         return serverResponse.ok(favoriteList)
 
     }
-
 }
 
 const getMyFavoritesController = new GetMyFavorites()

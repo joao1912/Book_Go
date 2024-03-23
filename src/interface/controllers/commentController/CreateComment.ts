@@ -9,6 +9,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IComment { }
 
+
 class CreateComment implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {

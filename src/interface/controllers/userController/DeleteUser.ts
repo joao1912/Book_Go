@@ -21,9 +21,7 @@ class DeleteUser implements IController {
                 return serverResponse.ok(result)
 
             })
-
     }
-
 }
 
 const deleteUserController = new DeleteUser()

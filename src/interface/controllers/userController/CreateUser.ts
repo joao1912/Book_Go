@@ -1,5 +1,4 @@
 import { authAdapter } from "../../../adapters/authAdapter/protocol";
-import { encryptorAdapter } from "../../../adapters/encryptorAdapter/protocol";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
 import { createUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser, User } from "../../../entities/User";
@@ -9,6 +8,7 @@ import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IUser { }
+
 
 export class CreateUser implements IController {
 
@@ -26,8 +26,6 @@ export class CreateUser implements IController {
         } = req.body
 
         const createUserUseCase = new CreateUserUseCase(createUser)
-
-        // const passwordHash = encryptorAdapter.hash(password)
 
         const userInstance = await createUserUseCase.execute({
             email,
@@ -52,9 +50,7 @@ export class CreateUser implements IController {
         return serverResponse.ok(
             response
         )
-
     }
-
 }
 
 const createUserController = new CreateUser()

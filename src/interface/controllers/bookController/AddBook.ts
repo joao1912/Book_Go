@@ -8,6 +8,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IBook { }
 
+
 class AddBook implements IController {
 
     async handle(req: HttpRequest<{}, {}, IBody>, res: HttpResponse) {

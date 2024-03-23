@@ -8,6 +8,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends IBook { }
 
+
 class UpdateBook implements IController {
 
     async handle(req: HttpRequest<{ id: any }, {}, IBody>, res: HttpResponse) {
@@ -38,11 +39,8 @@ class UpdateBook implements IController {
                 pageCount
             })
 
-            if(response instanceof Book)
-                serverResponse.ok(Formatter.handle<Book>(response))
+            serverResponse.ok(Formatter.handle<Book>(response))
 
-
-        
         }
 
 }

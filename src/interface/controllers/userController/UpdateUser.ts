@@ -1,6 +1,5 @@
 import { User } from "../../../entities/User";
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import AuthJwt from "../../../adapters/authAdapter/jwtAdapter";
 import { updateUser } from "../../../adapters/ormAdapter/protocols/userProtocols";
 import { IUser } from "../../../entities/User";
 import { UpdateUserUseCase } from "../../../usecases/user/UpdateUserUseCase";
@@ -9,6 +8,7 @@ import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
 interface IBody extends Partial<IUser> { }
+
 
 class UpdateUser implements IController {
     

@@ -3,13 +3,13 @@ import { getAllComments } from "../../../adapters/ormAdapter/protocols/commentPr
 import { Comment, IComment } from "../../../entities/Comment";
 import { SearchAllCommentsUseCase } from "../../../usecases/comment/SearchAllCommentsUseCase";
 import { IController } from "../IController";
-import { CustomError } from "../utils/CustomError";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
 interface IParams {
     bookId: string;
 }
+
 
 class GetAllCommentsByBookId implements IController {
 
