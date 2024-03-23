@@ -1,15 +1,14 @@
 import { ICreateFavorite, IFavoriteCreated } from "../../adapters/ormAdapter/repositories/favorite/ICreateFavorite";
 import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
-import { Book } from "../../entities/Book";
-import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 
 
 export class FavoriteBookUseCase {
 
-    protected createFavoriteAdapter: ICreateFavorite
+    protected createFavoriteService: ICreateFavorite
+
     constructor(ormAdapter: ICreateFavorite) {
 
-        this.createFavoriteAdapter = ormAdapter
+        this.createFavoriteService = ormAdapter
 
     }
 
@@ -18,7 +17,7 @@ export class FavoriteBookUseCase {
         const validatedUserId = validatorAdapter.validateId(userId) 
         const validatedBookId = validatorAdapter.validateId(bookId) 
 
-        const bookFavorited = await this.createFavoriteAdapter.execute(validatedUserId, validatedBookId)
+        const bookFavorited = await this.createFavoriteService.execute(validatedUserId, validatedBookId)
 
         return bookFavorited
 

@@ -6,9 +6,9 @@ import { IReservation, Reservation } from "../../entities/Reservation"
 
 export class MakeReservationUseCase {
 
-    protected reservationService: IMakeReservation
+    protected makeReservationService: IMakeReservation
     constructor(ormAdapter: IMakeReservation){
-        this.reservationService = ormAdapter
+        this.makeReservationService = ormAdapter
 
     }
 
@@ -18,7 +18,7 @@ export class MakeReservationUseCase {
 
         const reservationInstance = new Reservation(validatedData)
         
-        return await this.reservationService.execute(reservationInstance)
+        return await this.makeReservationService.execute(reservationInstance)
     }
 
 } 

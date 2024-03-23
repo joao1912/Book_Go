@@ -1,20 +1,19 @@
 import { IGetAllFinances } from "../../adapters/ormAdapter/repositories/finance/IGetAllFinances";
 
+
 export class GetAllFinanceUseCase {
 
-    protected getAllFinanceAdapter: IGetAllFinances
+    protected getAllFinanceService: IGetAllFinances
 
     constructor(ormAdapter: IGetAllFinances) {
 
-        this.getAllFinanceAdapter = ormAdapter
+        this.getAllFinanceService = ormAdapter
 
     }
 
     async execute() {
 
-        const finance = await this.getAllFinanceAdapter.execute()
-
-        return finance
+        return await this.getAllFinanceService.execute()
 
     }
 

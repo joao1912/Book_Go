@@ -4,17 +4,17 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 export class DeleteBookUseCase {
 
-    protected bookService: IDeleteBook
+    protected deleteBookService: IDeleteBook
 
     constructor(ormAdapter: IDeleteBook) {
-        this.bookService = ormAdapter
+        this.deleteBookService = ormAdapter
     }
 
     async execute(id: string | undefined) {
 
         const validatedId = validatorAdapter.validateId(id)
 
-        return await this.bookService.execute(validatedId)
+        return await this.deleteBookService.execute(validatedId)
 
     }
 

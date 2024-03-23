@@ -4,18 +4,17 @@ import ServerResponse from "../../interface/controllers/utils/ServerResponse"
 
 export class SearchBookByTitleUseCase {
 
-    protected bookService: ISearchBookByTitle
+    protected getBookByTitleService: ISearchBookByTitle
     constructor(ormAdapter: ISearchBookByTitle) {
-        this.bookService = ormAdapter
+        this.getBookByTitleService = ormAdapter
     }
 
     async execute(bookTitle: string) {
 
-        if (!bookTitle) ServerResponse.missingParameters('BookError', 'Precisa do titulo em string')
+        if (!bookTitle) ServerResponse.missingParameters('BookError', 'This requires the title as a string.')
 
-        return await this.bookService.execute(bookTitle)
+        return await this.getBookByTitleService.execute(bookTitle)
 
     }
 
 }
-

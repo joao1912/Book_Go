@@ -6,11 +6,11 @@ import { Comment, IComment } from "../../entities/Comment";
 
 export class EditMyCommentUseCase {
 
-    protected updateComment: IUpdateComment
+    protected updateCommentService: IUpdateComment
 
     constructor(ormAdapter: IUpdateComment) {
 
-        this.updateComment = ormAdapter
+        this.updateCommentService = ormAdapter
 
     }
 
@@ -20,7 +20,7 @@ export class EditMyCommentUseCase {
 
         const commentInstance = new Comment(validatedData)
 
-        return await this.updateComment.execute(commentInstance)
+        return await this.updateCommentService.execute(commentInstance)
 
     }
 

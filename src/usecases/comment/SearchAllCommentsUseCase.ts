@@ -4,11 +4,11 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 export class SearchAllCommentsUseCase {
 
-    protected getAllCommentsAdapter: IGetAllComments;
+    protected getAllCommentsService: IGetAllComments;
 
     constructor(ormAdapter: IGetAllComments) {
 
-        this.getAllCommentsAdapter = ormAdapter
+        this.getAllCommentsService = ormAdapter
 
     }
 
@@ -16,7 +16,7 @@ export class SearchAllCommentsUseCase {
 
         const validatedId = validatorAdapter.validateId(bookId)
 
-        return await this.getAllCommentsAdapter.execute(validatedId)
+        return await this.getAllCommentsService.execute(validatedId)
             
     }
 

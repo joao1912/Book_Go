@@ -5,11 +5,15 @@ import { SchemaKey } from "../../adapters/validatorAdapter/repository/IValidator
 import { IUser, User } from "../../entities/User"
 import { GetUserByIdUseCase } from "./GetUserByIdUseCase"
 
+
 export class UpdateUserUseCase {
 
-    protected userService: IUpdateUser
+    protected updateUserService: IUpdateUser
+
     constructor(ormAdapter: IUpdateUser) {
-        this.userService = ormAdapter
+
+        this.updateUserService = ormAdapter
+
     }
 
     async execute(userData: Partial<IUser>) {
@@ -23,7 +27,7 @@ export class UpdateUserUseCase {
 
         const userInstance = new User(userDataToUpdate)
 
-        return await this.userService.execute(userInstance)
+        return await this.updateUserService.execute(userInstance)
 
     }
 

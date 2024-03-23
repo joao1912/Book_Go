@@ -3,15 +3,19 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 
 export class GetReservationByBookIdUseCase {
-    protected reserveService: IGetReservationByBookId
+
+    protected getReservationByBookIdService: IGetReservationByBookId
+
     constructor(ormAdapater: IGetReservationByBookId){
-        this.reserveService = ormAdapater
+
+        this.getReservationByBookIdService = ormAdapater
+
     }
 
     async execute(bookId: string | undefined){
 
         const validatedId = validatorAdapter.validateId(bookId)
 
-        return await this.reserveService.execute(validatedId)
+        return await this.getReservationByBookIdService.execute(validatedId)
     }
 }

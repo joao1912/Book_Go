@@ -7,9 +7,9 @@ import { Book, IBook } from "../../entities/Book"
 
 export class UpdateBookUseCase {
 
-    protected bookService: IUpdateBook
+    protected updateBookService: IUpdateBook
     constructor(ormAdapter: IUpdateBook) {
-        this.bookService = ormAdapter
+        this.updateBookService = ormAdapter
     }
 
     async execute(bookData: IBook) {
@@ -23,7 +23,7 @@ export class UpdateBookUseCase {
         
         const bookInstance = new Book(bookDataToUpdate)
 
-        return await this.bookService.execute(bookInstance)
+        return await this.updateBookService.execute(bookInstance)
 
     }
 

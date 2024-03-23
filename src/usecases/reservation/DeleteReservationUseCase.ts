@@ -4,15 +4,15 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 export class DeleteReservationUseCase {
 
-    protected reserveService: IDeleteReservation
+    protected deleteReserveService: IDeleteReservation
     constructor(ormAdapter: IDeleteReservation){
-        this.reserveService = ormAdapter
+        this.deleteReserveService = ormAdapter
     }
 
     async execute (reserveId: string | undefined) {
 
         const validatedId = validatorAdapter.validateId(reserveId)
 
-        return await this.reserveService.execute(validatedId)
+        return await this.deleteReserveService.execute(validatedId)
     }
 }
