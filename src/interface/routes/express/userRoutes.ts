@@ -11,6 +11,7 @@ import loginController from '../../controllers/userController/Login';
 
 import Auth from '../../middlewares/Auth';
 
+
 const userRouter = Router();
 
 userRouter.get('/', Auth.execute, getAllUsersController.handle);
@@ -25,12 +26,9 @@ userRouter.post('/addFavorite/:bookId', Auth.execute, createFavoriteController.h
 
 userRouter.put('/update', Auth.execute, updateUserController.handle);
 
-userRouter.delete(
-  '/removeFavorite/:favoriteId',
-  Auth.execute,
-  deleteFavoriteController.handle
-);
+userRouter.delete('/removeFavorite/:favoriteId', Auth.execute, deleteFavoriteController.handle);
 
 userRouter.delete('/deleteUser/', Auth.execute, deleteUserController.handle);
+
 
 export default userRouter;
