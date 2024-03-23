@@ -6,8 +6,8 @@ import { IController } from "../IController";
 import Formatter from "../utils/Formatter";
 import ServerResponse from "../utils/ServerResponse";
 
-export class CreateFavorite implements IController {
 
+export class CreateFavorite implements IController {
 
     async handle(req: HttpRequest<{bookId: string}>, res: HttpResponse) {
 
@@ -26,9 +26,7 @@ export class CreateFavorite implements IController {
             book,
             favoriteId: favorite.favoriteId
         })
-
     }
-
 }
 
 const createFavoriteController = new CreateFavorite()

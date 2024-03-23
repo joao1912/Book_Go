@@ -3,16 +3,18 @@ import { IGetAllStock } from "../../adapters/ormAdapter/repositories/stock/IGetA
 
 export class GetAllStockUseCase {
 
-    protected stockService: IGetAllStock
+    protected getAllStockService: IGetAllStock
+
     constructor(ormAdapter: IGetAllStock) {
-        this.stockService = ormAdapter
+
+        this.getAllStockService = ormAdapter
+        
     }
 
     async execute() {
 
-        return await this.stockService.execute()
+        return await this.getAllStockService.execute()
 
     }
 
 }
-

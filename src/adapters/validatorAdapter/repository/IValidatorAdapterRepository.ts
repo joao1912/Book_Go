@@ -12,5 +12,9 @@ export interface IValidatorAdapterRepository {
 
     validateSchema<T>(data: T, schemaKey: SchemaKey): T
 
+    validateId(id: string | undefined): string 
+
+    validatePartial<T extends object>(data: T, schemaKey: SchemaKey): T
+
 }
 

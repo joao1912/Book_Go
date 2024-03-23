@@ -21,9 +21,7 @@ class DeleteFavorite implements IController {
                 return serverResponse.ok(result)
 
             })
-
     }
-
 }
 
 const deleteFavoriteController = new DeleteFavorite()

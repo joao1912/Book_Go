@@ -35,6 +35,7 @@ class GetReservationByBookId implements IController {
                 )
 
             }
+            
             return serverResponse.ok(reservationList)
         }
     }

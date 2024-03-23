@@ -5,14 +5,13 @@ import ServerResponse from "../../interface/controllers/utils/ServerResponse";
 import { GetOneCommentUseCase } from "./GetOneCommentUseCase";
 
 
-
 export class DeleteMyCommentUseCase {
 
-    protected deleteComment: IDeleteComment;
+    protected deleteCommentService: IDeleteComment;
 
     constructor(ormAdapter: IDeleteComment) {
 
-        this.deleteComment = ormAdapter
+        this.deleteCommentService = ormAdapter
 
     }
 
@@ -27,11 +26,11 @@ export class DeleteMyCommentUseCase {
 
         if (comment.props.userId !== validateduserId) {
 
-            ServerResponse.notAuthorized('CommentError', 'Bad Request: you dont have access to delete this comment.')
+            ServerResponse.notAuthorized('CommentError', 'You dont have access to delete this comment.')
 
         }
 
-        return await this.deleteComment.execute(validatedCommentId)
+        return await this.deleteCommentService.execute(validatedCommentId)
 
     }
 

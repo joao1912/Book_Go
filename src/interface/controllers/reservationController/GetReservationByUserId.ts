@@ -35,11 +35,6 @@ class GetReservationByUserId implements IController {
     
                 return serverResponse.ok(reservationList)    
             }
-           
-
-       
-
-
     }
 }
 

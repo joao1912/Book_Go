@@ -6,9 +6,12 @@ import { IStock, Stock } from "../../entities/Stock"
 
 export class UpdateStockUseCase {
 
-    protected stockService: IUpdateStock
+    protected updateStockService: IUpdateStock
+
     constructor(ormAdapter: IUpdateStock) {
-        this.stockService = ormAdapter
+
+        this.updateStockService = ormAdapter
+
     }
 
     async execute(stockData: IStock) {
@@ -17,8 +20,7 @@ export class UpdateStockUseCase {
 
         const stockInstance = new Stock(validatedData)
 
-        return await this.stockService.execute(stockInstance)
+        return await this.updateStockService.execute(stockInstance)
 
     }
-
 }

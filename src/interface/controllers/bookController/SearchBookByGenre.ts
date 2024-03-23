@@ -6,6 +6,7 @@ import { IController } from "../IController";
 import { Book, IBook } from "../../../entities/Book";
 import Formatter from "../utils/Formatter";
 
+
 class SearchBookByGenre implements IController {
 
     async handle(req: HttpRequest<{},{},{},{genre: string }>, res: HttpResponse) {
@@ -28,8 +29,6 @@ class SearchBookByGenre implements IController {
         }
 
         return serverResponse.ok(bookList)
-
-
 
     }
 }

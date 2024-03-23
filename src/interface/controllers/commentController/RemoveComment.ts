@@ -1,13 +1,13 @@
 import { HttpRequest, HttpResponse } from "../../../adapters/HTTPAdapter/protocol";
-import { deleteComment, getCommentById } from "../../../adapters/ormAdapter/protocols/commentProtocols";
+import { deleteComment } from "../../../adapters/ormAdapter/protocols/commentProtocols";
 import { DeleteMyCommentUseCase } from "../../../usecases/comment/DeleteMyCommentUseCase";
-import { GetOneCommentUseCase } from "../../../usecases/comment/GetOneCommentUseCase";
 import { IController } from "../IController";
 import ServerResponse from "../utils/ServerResponse";
 
 interface IParams {
     commentId: string;
 }
+
 
 class RemoveComment implements IController {
 

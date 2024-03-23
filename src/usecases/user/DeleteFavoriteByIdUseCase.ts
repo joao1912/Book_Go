@@ -5,11 +5,11 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol";
 
 export class DeleteFavoriteByIdUseCase {
 
-    protected deleteFavoriteAdapter: IDeleteFavorite
+    protected deleteFavoriteService: IDeleteFavorite
 
     constructor(ormAdapter: IDeleteFavorite) {
 
-        this.deleteFavoriteAdapter = ormAdapter
+        this.deleteFavoriteService = ormAdapter
 
     }
 
@@ -17,7 +17,7 @@ export class DeleteFavoriteByIdUseCase {
 
         const validatedId = validatorAdapter.validateId(favoriteId) 
    
-        return await this.deleteFavoriteAdapter.execute(validatedId)
+        return await this.deleteFavoriteService.execute(validatedId)
 
     }
 

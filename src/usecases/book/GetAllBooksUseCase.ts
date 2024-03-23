@@ -1,14 +1,15 @@
 import { IGetAllBooks } from "../../adapters/ormAdapter/repositories/book/IGetAllBooks"
 
+
 export class GetAllBooksUseCase {
 
-    protected bookService: IGetAllBooks
+    protected getAllBooksService: IGetAllBooks
     constructor(ormAdapter: IGetAllBooks){
-        this.bookService = ormAdapter
+        this.getAllBooksService = ormAdapter
     }
 
     async execute (){
-        return await this.bookService.execute()
+        return await this.getAllBooksService.execute()
     
     }
 

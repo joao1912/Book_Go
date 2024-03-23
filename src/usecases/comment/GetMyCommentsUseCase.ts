@@ -4,11 +4,11 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 
 export class GetMyCommentsUseCase {
 
-    protected getAllCommentsAdapter: IGetAllCommentsByUserId
+    protected getAllCommentsService: IGetAllCommentsByUserId
 
     constructor(ormAdapter: IGetAllCommentsByUserId) {
 
-        this.getAllCommentsAdapter = ormAdapter
+        this.getAllCommentsService = ormAdapter
             
     }
 
@@ -16,7 +16,7 @@ export class GetMyCommentsUseCase {
 
         const validatedId = validatorAdapter.validateId(userId)
 
-        const comments = await this.getAllCommentsAdapter.execute(validatedId)
+        const comments = await this.getAllCommentsService.execute(validatedId)
 
         if (comments == null) {
             return []

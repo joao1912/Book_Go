@@ -4,18 +4,17 @@ import { validatorAdapter } from "../../adapters/validatorAdapter/protocol"
 
 export class SearchBookByIdUseCase {
 
-    protected bookService: ISearchBookById
+    protected getBookByBookIdService: ISearchBookById
     constructor(ormAdapter: ISearchBookById) {
-        this.bookService = ormAdapter
+        this.getBookByBookIdService = ormAdapter
     }
 
     async execute(id: string | undefined) {
 
         const validatedId = validatorAdapter.validateId(id)
 
-        return await this.bookService.execute(validatedId)
+        return await this.getBookByBookIdService.execute(validatedId)
 
     }
 
 }
-

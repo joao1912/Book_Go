@@ -33,11 +33,6 @@ class Login implements IController {
 
             return serverReponse.ok({ token: userToken })
         }
-
-
-
-
-
     }
 }
 

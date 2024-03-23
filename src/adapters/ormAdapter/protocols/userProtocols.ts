@@ -2,6 +2,7 @@ import { CreateUser } from "../prismaAdapter/user/CreateUser";
 import { DeleteAllUsers } from "../prismaAdapter/user/DeleteAllUsers";
 import { DeleteUser } from "../prismaAdapter/user/DeleteUser";
 import { GetAllUsers } from "../prismaAdapter/user/GetAllUsers";
+import { GetById } from "../prismaAdapter/user/GetById";
 import {GetUser } from "../prismaAdapter/user/GetUser";
 import { UpdateUser } from "../prismaAdapter/user/UpdateUser";
 
@@ -12,6 +13,8 @@ export const deleteUser = new DeleteUser()
 export const getAllUsers = new GetAllUsers()
 
 export const getUser = new GetUser()
+
+export const getUserById = new GetById()
 
 export const updateUser = new UpdateUser()
 

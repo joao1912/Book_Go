@@ -6,7 +6,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 class GetAllFinance implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse) {
+    async handle(__: HttpRequest, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 

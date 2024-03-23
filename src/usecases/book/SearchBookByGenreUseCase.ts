@@ -2,21 +2,19 @@ import { ISearchBookByGenre } from "../../adapters/ormAdapter/repositories/book/
 import ServerResponse from "../../interface/controllers/utils/ServerResponse"
 
 
-
 export class SearchBookByGenreUseCase {
 
-    protected bookService: ISearchBookByGenre
+    protected getBookByGenreService: ISearchBookByGenre
     constructor(ormAdapter: ISearchBookByGenre) {
-        this.bookService = ormAdapter
+        this.getBookByGenreService = ormAdapter
     }
 
     async execute(bookGenre: string) {
 
-        if (!bookGenre) ServerResponse.missingParameters('BookError', 'Precisa do genero em string')
+        if (!bookGenre) ServerResponse.missingParameters('BookError', 'This requires the gender as a string.')
 
-        return await this.bookService.execute(bookGenre)
+        return await this.getBookByGenreService.execute(bookGenre)
 
     }
 
 }
-

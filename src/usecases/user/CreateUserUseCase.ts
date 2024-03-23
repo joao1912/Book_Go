@@ -7,9 +7,12 @@ import { IUser, User } from "../../entities/User"
 
 export class CreateUserUseCase {
 
-    protected userService: ICreateUser
+    protected createUserService: ICreateUser
+
     constructor(ormAdapter: ICreateUser) {
-        this.userService = ormAdapter
+
+        this.createUserService = ormAdapter
+
     }
 
     async execute(userData: IUser) {
@@ -21,7 +24,7 @@ export class CreateUserUseCase {
         data.password = passwordHash
 
         const userInstance = new User(data)
-        const user = await this.userService.execute(userInstance)
+        const user = await this.createUserService.execute(userInstance)
 
         return user
 

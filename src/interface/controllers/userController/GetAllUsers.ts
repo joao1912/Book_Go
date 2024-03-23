@@ -7,9 +7,10 @@ import { User } from "../../../entities/User";
 import { IUser } from "../../../entities/User";
 import ServerResponse from "../utils/ServerResponse";
 
+
 class GetAllUsers implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse) {
+    async handle(__: HttpRequest, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 
@@ -30,7 +31,6 @@ class GetAllUsers implements IController {
         return serverResponse.ok(usersList)
 
     }
-
 }
 
 const getAllUsersController = new GetAllUsers()

@@ -9,7 +9,7 @@ import ServerResponse from "../utils/ServerResponse";
 
 class GetAllStock implements IController {
 
-    async handle(req: HttpRequest, res: HttpResponse) {
+    async handle(__: HttpRequest, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
 

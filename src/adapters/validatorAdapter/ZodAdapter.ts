@@ -44,6 +44,30 @@ export class ZodAdapter implements IValidatorAdapterRepository {
 
     }
 
+    validatePartial<T extends object>(data: T, schemaKey: SchemaKey): T {
+
+        const schema = schemaMap[schemaKey];
+
+        const propsSchema: string[] = Object.keys({ ...schema.shape });
+
+        for (let propSchema of propsSchema) {
+
+            for (let propData in data) {
+
+                if (propSchema === propData) {
+
+                    return data
+
+                }
+
+            }
+
+        }
+
+        ServerResponse.badRequest('ValidatorError', 'No valid properties were sent.')
+
+    }
+
     validateId(id: string | undefined): string {
 
         const idZod = z.string().uuid({message: 'O id está inválido'})

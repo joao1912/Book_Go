@@ -1,9 +1,11 @@
 import { Router } from "express";
+
 import makeReservationController from "../../controllers/reservationController/MakeReservation";
 import getReservationByUserIdController from "../../controllers/reservationController/GetReservationByUserId";
 import getReservationByBookIdController from "../../controllers/reservationController/GetReservationByBookId";
 import deleteReservationController from "../../controllers/reservationController/DeleteReservation";
 import getAllReservationsController from "../../controllers/reservationController/GetAllReservations";
+
 import Auth from "../../middlewares/Auth";
 
 
@@ -18,5 +20,7 @@ reservationRouter.get('/user/:userId', Auth.execute, getReservationByUserIdContr
 reservationRouter.post('/user/:userId/book/:bookId', Auth.execute, makeReservationController.handle)
 
 reservationRouter.delete('/delete/:reservationId', Auth.execute, deleteReservationController.handle)
+
+
 
 export default reservationRouter
