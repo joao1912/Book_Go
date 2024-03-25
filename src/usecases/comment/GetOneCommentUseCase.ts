@@ -18,8 +18,6 @@ export class GetOneCommentUseCase {
         const validatedId = validatorAdapter.validateId(commentId)
 
         const comment = await this.getOneCommentService.execute(validatedId)
-
-        if (!comment) ServerResponse.notFound('CommentError', 'this comment dont exists.')
             
         return comment
         
