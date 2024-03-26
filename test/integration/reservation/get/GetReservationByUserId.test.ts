@@ -30,21 +30,33 @@ describe('## GET ##', () => {
             username: "getuserreserve",
             email: "getauserreserve@gmail.com",
             password: "Teste_123",
-            telephone: "98340244567"
+            telephone: "4498340244567"
         }
+        const adminBook: IUser = {
+            username: "admin_reservationuser",
+            email: "admin_reservationuser@gmail.com",
+            password: "123.aB",
+            telephone: "5833346800"
+        } 
+
+        await request(app)
+            .post('/v1/users/signIn')
+            .send(adminBook)
+            .expect(200) 
+            
 
         await request(app)
             .post("/v1/users/login")
             .send({
-                email: "admin_teste@gmail.com",
+                email: "admin_reservationuser@gmail.com",
                 password: "123.aB",
             })
             .expect(200)
             .then(response => {
 
-                const tokenJSONAdmin = response.body;
-                expect(tokenJSONAdmin).toHaveProperty('token');
-                tokenAdmin = tokenJSONAdmin.token;
+                const tokenJSON = response.body;
+                expect(tokenJSON).toHaveProperty('token');
+                tokenAdmin = tokenJSON.token;
 
             })
 
@@ -102,13 +114,25 @@ describe('## GET ##', () => {
 
     it("Deve listar todas as reservas de um usuario", async () => {
 
-        await request(app)
+        const a = await request(app)
             .get(`/v1/reservation/user/${userId}`)
             .set('Authorization', `${tokenUser}`)
             .expect(200)
             .then(response => {
-
+                console.log(response.body)
                 expect(response.body[0]).toHaveProperty("id");
+      
+            })
+       
+    })
+    it("Deve tentar ver todas as reservas de um usuario sem token", async () => {
+
+        await request(app)
+            .get(`/v1/reservation/user/${userId}`)
+            .expect(401)
+            .then(response => {
+                expect(response.body).toEqual({ message: 'Must have an authorization token' })
+
 
             })
        

@@ -12,7 +12,7 @@ class GetReservationByBookId implements IController {
     async handle(req: HttpRequest<{ bookId: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
-
+        
         const bookId = req.params.bookId
 
         const getReservationByUserIdUseCase = new GetReservationByBookIdUseCase(getReservationByBookId)
@@ -27,7 +27,7 @@ class GetReservationByBookId implements IController {
             
         }
 
-        if (response instanceof Reservation && Array.isArray(response)) {
+       
             for (let reservation of response) {
 
                 reservationList.push(
@@ -37,7 +37,7 @@ class GetReservationByBookId implements IController {
             }
             
             return serverResponse.ok(reservationList)
-        }
+        
     }
 }
 

@@ -42,7 +42,6 @@ export class GetAllStock implements IGetAllStock {
   
    
       }
-      
       return stock;
       
     } catch (error) {

@@ -14,12 +14,10 @@ class GetStockByBookTitle implements IController {
         const serverResponse = new ServerResponse(res)
 
             let titleText = req.query.title
-
             const getStockByBookTitleUseCase = new GetStockByBookTitleUseCase(getStockByBookTitle)
 
             const response = await getStockByBookTitleUseCase.execute(titleText)
 
-            if (response instanceof Stock && Array.isArray(response)){
                 let stockList: Array<IStock> = []
 
                 for (let item of response) {
@@ -28,7 +26,7 @@ class GetStockByBookTitle implements IController {
                         Formatter.handle<Stock>(item)
                     )
 
-                }
+
 
                 return serverResponse.ok(stockList)
             }

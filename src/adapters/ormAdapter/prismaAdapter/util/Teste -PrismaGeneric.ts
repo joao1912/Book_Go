@@ -3,13 +3,10 @@ import { Prisma } from "@prisma/client"
 import handlePrismaError from "./handlePrismaError";
 
 
-export class BasePrisma {
-    async execute() {
-
-    prisma.$extends({
+const prismaGeneric =  prisma.$extends({
             model: {
                 $allModels: {
-                    async findsUnique<T>(
+                    async findOne<T>(
                         this: T,
                         where: Prisma.Args<T, 'findUnique'>['where']
                     ): Promise<boolean> {
@@ -50,5 +47,4 @@ export class BasePrisma {
         //     return handlePrismaError("adminError", error)
 
         // }
-    }
-}
+export default prismaGeneric

@@ -23,7 +23,7 @@ class GetStockByQuantity implements IController {
             return serverResponse.ok(response)
         }
 
-        if (response instanceof Stock && Array.isArray(response)) {
+        
             let stockList: Array<IStock> = []
 
             for (let item of response) {
@@ -35,7 +35,7 @@ class GetStockByQuantity implements IController {
             }
 
             return serverResponse.ok(stockList)
-        }
+        
     }
 }
 

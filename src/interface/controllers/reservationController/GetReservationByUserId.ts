@@ -8,33 +8,35 @@ import ServerResponse from "../utils/ServerResponse";
 
 
 class GetReservationByUserId implements IController {
-    
-    async handle(req: HttpRequest<{ userId: string }>, res: HttpResponse){
+
+    async handle(req: HttpRequest<{ userId: string }>, res: HttpResponse) {
 
         const serverResponse = new ServerResponse(res)
-     
-            const userId = req.params.userId
-            const getReservationByUserIdUseCase = new GetReservationByUserIdUseCase(getReservationByUserId)
 
-            const response = await getReservationByUserIdUseCase.execute(userId)
+        const userId = req.params.userId
+        console.log(userId)
+        const getReservationByUserIdUseCase = new GetReservationByUserIdUseCase(getReservationByUserId)
 
-            let reservationList: Array<IReservation> = []
-            
-            if (response.length == 0) {
-                return serverResponse.ok(response)
-            }
+        const response = await getReservationByUserIdUseCase.execute(userId)
+        console.log(response)
+        let reservationList: Array<IReservation> = []
 
-            if (response instanceof Reservation && Array.isArray(response)){
-                for (let reservation of response) {
-    
-                    reservationList.push(
-                        Formatter.handle<Reservation>(reservation)
-                    )
-    
-                }
-    
-                return serverResponse.ok(reservationList)    
-            }
+        if (response.length == 0) {
+      
+            return serverResponse.ok(response)
+        }
+
+
+        for (let reservation of response) {
+
+            reservationList.push(
+                Formatter.handle<Reservation>(reservation)
+            )
+
+
+
+            return serverResponse.ok(reservationList)
+        }
     }
 }
 
