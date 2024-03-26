@@ -76,4 +76,31 @@ describe('## POST ##', () => {
             })
     })
 
+    it('Deve retornar um erro ao tentar criar um comentário sem o texto', async () => {
+
+        const commentData: Omit<IComment,'comment'> = {
+            bookId: bookId,
+            userId: userId,
+        }
+
+        await request(app)
+            .post('/v1/comment/createComment')
+            .set('Authorization', token)
+            .send(commentData)
+            .expect(400)
+            .then(response => {
+
+                const erro = JSON.parse(response.body.message)
+                
+                expect(erro).toEqual([{
+                    code:"invalid_type",
+                    expected:"string",
+                    received:"undefined",
+                    path:["comment"],
+                    message:"Required"}])
+            })
+    })
+
+
+
 })

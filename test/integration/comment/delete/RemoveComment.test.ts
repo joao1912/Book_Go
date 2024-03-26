@@ -87,4 +87,18 @@ describe('## DELETE ##', () => {
 
     })
 
+    it('Deve entregar um erro ao tentar deletar um comentário passando um id que não existe', async () => {
+
+        await request(app)
+            .delete(`/v1/comment/removeComment/9b932598-0127-4eaa-aa81-4c91a0969eac`)
+            .set('Authorization', token)
+            .expect(404)
+            .then(response => {
+
+                expect(response.body.message).toBe('This comment dont exists.')
+
+            })
+
+    })
+
 })

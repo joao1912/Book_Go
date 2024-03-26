@@ -2,6 +2,7 @@ import { prisma } from "../db";
 import { Comment } from "../../../../entities/Comment";
 import { IGetCommentById } from "../../repositories/comment/IGetCommentById";
 import handlePrismaError from "../util/handlePrismaError";
+import ServerResponse from "../../../../interface/controllers/utils/ServerResponse";
 
 export class GetCommentById implements IGetCommentById {
     //@ts-ignore
@@ -15,6 +16,12 @@ export class GetCommentById implements IGetCommentById {
                 }
             })
 
+            if (!comment) {
+
+                ServerResponse.notFound('CommentError', 'This comment dont exists.')
+
+            }
+
             const commentInstance = new Comment({
                 id: comment!.id,
                 bookId: comment!.fk_id_book,
@@ -23,11 +30,11 @@ export class GetCommentById implements IGetCommentById {
             })
 
             return commentInstance
-            
+
         } catch (error) {
 
             handlePrismaError("CommentError", error)
-            
+
         }
     }
 }

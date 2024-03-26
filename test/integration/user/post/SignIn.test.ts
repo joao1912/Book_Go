@@ -23,7 +23,7 @@ describe("## POST ##", () => {
             telephone: "48998553785"
         }
 
-        const teste = await request(app)
+        await request(app)
             .post('/v1/users/signIn')
             .send({...userData,  password: "Joanir_123",})
             .expect(200)
