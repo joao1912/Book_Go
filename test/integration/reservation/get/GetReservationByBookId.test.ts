@@ -126,6 +126,20 @@ describe('## GET ##', () => {
             })
         
     })
+    it("Deve tentar ver a reserva de um livro com id não existente", async () => {
+
+        await request(app)
+            .get(`/v1/reservation/book/8suad9d8as98sad`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(400)
+            // .then(response => {
+
+            //     console.log(response.body)
+            //     expect(response.body.message.message).toEqual("Invalid ID provided.");
+
+            // })
+        
+    })
     it("Deve tentar ver todas as reservas sem token", async () => {
 
         await request(app)

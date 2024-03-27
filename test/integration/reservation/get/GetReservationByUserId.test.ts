@@ -125,6 +125,19 @@ describe('## GET ##', () => {
             })
        
     })
+    it("Deve tentar ver as reservas de um usuario com id não existente", async () => {
+
+        const a = await request(app)
+            .get(`/v1/reservation/user/audjadjaoisjdoajdoa`)
+            .set('Authorization', `${tokenUser}`)
+            .expect(400)
+            // .then(response => {
+            //     console.log(response.body)
+            //     expect(response.body[0]).toHaveProperty("id");
+      
+            // })
+       
+    })
     it("Deve tentar ver todas as reservas de um usuario sem token", async () => {
 
         await request(app)

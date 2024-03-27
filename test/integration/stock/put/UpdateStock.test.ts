@@ -67,6 +67,21 @@ describe('## PUT ##', () => {
             })
         
     })
+    it("Deve tentar atualizar o estoque com string", async () => {
+        
+        await request(app)
+            .put(`/v1/stock/update/book/${bookId}`)
+            .set('Authorization', `${tokenAdmin}`)
+            .send({ quantity: "20" })
+            .expect(400)
+            // .then(response => {
+                
+            //     expect(response.body).toHaveProperty("quantity");
+            //     expect(response.body.quantity).toBe(20)
+
+            // })
+        
+    })
 
     it("Deve tentar atualizar o stock sem token", async () => {
 

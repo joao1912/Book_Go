@@ -1,4 +1,5 @@
 import { Stock } from "../../../../entities/Stock";
+import ServerResponse from "../../../../interface/controllers/utils/ServerResponse";
 import { IGetStockByBookTitle } from "../../repositories/stock/IGetStockByBookTitle";
 import { prisma } from "../db";
 import handlePrismaError from "../util/handlePrismaError";
@@ -25,6 +26,8 @@ export class GetStockByBookTitle implements IGetStockByBookTitle {
           }
         },
       });
+     
+      if (BooksStock.length !== 0) {
 
       let stock: Stock[] = [];
       for (let bookProp of BooksStock) {
@@ -46,6 +49,9 @@ export class GetStockByBookTitle implements IGetStockByBookTitle {
       }
 
       return stock;
+    }
+      ServerResponse.notFound('BookError', 'No results.')
+
 
     } catch (error) {
       handlePrismaError("StockError", error)

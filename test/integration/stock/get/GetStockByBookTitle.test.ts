@@ -53,19 +53,18 @@ describe('## GET ##', () => {
             })
         
 
-       const a =  await request(app)
+        await request(app)
             .post(`/v1/book/add`)
             .set('Authorization', `${tokenAdmin}`)
             .send(addingBook)
             .expect(200)
-            console.log("aaaaaa", a)
            
     })
 
     it("Deve mostrar o estoque de um livro", async () => {
 
         await request(app)
-            .get(`/v1/stock/book/title?title=Route%20stock%20title`)
+            .get(`/v1/stock/book/title?title=${addingBook.title}`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(200)
             .then(response => {
@@ -91,13 +90,14 @@ describe('## GET ##', () => {
 
     it("Deve tentar ver stock de um livro inexistente", async () => {
 
+        const noexistent = "esse livro nao existe" 
         const a = await request(app)
-            .get(`/v1/stock/book/title?title=esse livro nao existe`)
+            .get(`/v1/stock/book/title?title=esse%20livro%20nao%20existe`)
             .set('Authorization', `${tokenAdmin}`)
             .expect(404)
             .then(response => {
                 console.log(response.body)
-                // expect(response.body).toEqual('No results.')
+                expect(response.body.message).toEqual("No results.")
 
             })
 

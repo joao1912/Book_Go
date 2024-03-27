@@ -89,15 +89,19 @@ describe('## GET ##', () => {
 
     })
 
-    // it("Deve tentar ver stock com quantidade inexistente", async () => {
-    //     const result = await request.agent(app)
-    //         .get(`/v1/stock/book/quantity/1000`)
-    //         .set('Authorization', `${tokenAdmin}`)
-    //         .expect(404)
-    //     expect(result.body).toEqual('No books found with this quantity.');
+    it("Deve tentar ver stock com quantidade inexistente", async () => {
+        const result = await request.agent(app)
+            .get(`/v1/stock/book/quantity?quantity=1000`)
+            .set('Authorization', `${tokenAdmin}`)
+            .expect(404)
+            .then(response => {
+                console.log(response.body)
+                expect(response.body.message).toEqual("No results.")
+
+            })
 
 
-    // })
+    })
 
     afterAll(async () => {
         
