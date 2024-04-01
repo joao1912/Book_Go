@@ -1,19 +1,26 @@
-import axios from "axios";
+import { httpClientAdapterRepository } from "../adapters/httpClientAdapter/repository/httpClientAdapterRepository";
 
 class ApiBookGoogle {
 
+    httpClient: httpClientAdapterRepository
+    constructor(httpClientAdapter: httpClientAdapterRepository) {
+
+        this.httpClient = httpClientAdapter;
+
+    }
+
     async findBook(title: string) {
 
-        const books = await axios.get(`https://www.googleapis.com/books/v1/volumes`, {
-            params: {
-                q: title,
-                //inauthor: 'keyes',
-                maxResults: 30,
-                //subject: 'Gardening',
-                key: process.env.API_GOOGLE_KEY
-            }
-        });
 
+        const params = {
+            q: title,
+            //inauthor: 'keyes',
+            maxResults: 30,
+            //subject: 'Gardening',
+            key: process.env.API_GOOGLE_KEY
+        }
+
+        const books = this.httpClient.get(params)
 
         return books
 
