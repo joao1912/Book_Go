@@ -24,17 +24,55 @@ class AxiosAdapter implements httpClientAdapterRepository {
         return this.httpClient
     }
 
-    async get(params: ISearch): IBook[] {
+    async get(params: ISearch): Promise<IBook[]> {
 
         if (!params) {
             throw new CustomError('ApiGoogleError', 'Needs params to search.', 400)
         }
         
-        const books = await this.httpClient.get('/volumes', params)
+        const booksData = await this.httpClient.get('/volumes', params)
 
-        const data = books.data.itens
+        const everyBooks: IBook[] = []
 
-        
+        const data = booksData.data.itens
+
+        for (let item of data) {
+
+            const id = item.id
+
+            const {
+                title,
+                authors,
+                publishedDate,
+                description,
+                pageCount,
+                categories,
+                imageLinks
+            } = item.volumeInfo
+
+            const {
+                smallThumbnail,
+                thumbnail
+            } = imageLinks
+
+            //vamos sincronizar os ids das api?(entidade book)
+
+            const FormatedBook: IBook = {
+                //id: id, talvez problema
+                title: title,
+                author: authors[0], //problema
+                synopsis: description,
+                price: item.saleInfo.listPrice.amount,
+                genre: categories[0], //problema
+                publishedDate: publishedDate,
+                pageCount: pageCount,
+                image: thumbnail
+            }
+
+            everyBooks.push(FormatedBook)
+        }
+
+        return everyBooks
 
     }
 

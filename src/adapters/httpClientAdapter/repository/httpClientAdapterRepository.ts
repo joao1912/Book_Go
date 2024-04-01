@@ -5,6 +5,6 @@ export interface httpClientAdapterRepository {
 
     getHttpClient(): any 
 
-    get(params: any): IBook[]
+    get(params: any): Promise<IBook[]>
 
 }
