@@ -55,10 +55,7 @@ class AxiosAdapter implements httpClientAdapterRepository {
                 thumbnail
             } = imageLinks
 
-            //vamos sincronizar os ids das api?(entidade book)
-
             const FormatedBook: IBook = {
-                //id: id, talvez problema
                 title: title,
                 author: authors[0], //problema
                 synopsis: description,

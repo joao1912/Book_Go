@@ -7,7 +7,7 @@ export interface IBook {
     author: string;
     synopsis: string;
     price: number;
-    genre: string;
+    genre: string | string[];
     publishedDate: string;
     pageCount: number;
     image?: any
@@ -26,7 +26,7 @@ export const bookSchema = z.object({
    
     synopsis: z.string()
         .min(20, { message: "The synopsis must be at least 20 characters long." })
-        .max(400, { message: "The synopsis must be at most 200 characters long." }),
+        .max(1000, { message: "The synopsis must be at most 200 characters long." }),
     price: z.number(),
     genre: z.string()
     .min(3, { message: "The genre must be at least 3 characters long." })
