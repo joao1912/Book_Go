@@ -6,15 +6,16 @@ import { AddBookUseCase } from "../../../../src/usecases/book/AddBookUseCase"
 describe("Adicionar um livro", ()=>{
 
     it("Criar um livro",async () => {
-        
+        const jsonAuthor = ("Jupiter, Author 2")
+        const jsonGenre = ("Biography, Genre2")
         const addingBook: IBook = {
             title: "New book to add",
             synopsis: "This is a new bookkk",
             price: 20,
-            author: "Jupiter",
+            author: jsonAuthor,
             pageCount: 23,
             publishedDate: '1999-10-09',
-            genre: "Biography"
+            genre: jsonGenre
         }
        
         

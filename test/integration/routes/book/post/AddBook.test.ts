@@ -1,6 +1,7 @@
-import request from "supertest"
-import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { IBook } from "../../../../src/entities/Book";
+import request from "supertest";
+import HTTPAdapter from "../../../../../src/adapters/HTTPAdapter/protocol";
+import { IBook } from "../../../../../src/entities/Book";
+
 
 describe('## POST ##', () => {
 

@@ -2,6 +2,7 @@ import { prisma } from "../db";
 import { Book } from "../../../../entities/Book";
 import { IAddBook } from "../../repositories/book/IAddBook";
 import handlePrismaError from "../util/handlePrismaError";
+import { string } from "zod";
 
 
 export class AddBook implements IAddBook {
@@ -9,6 +10,22 @@ export class AddBook implements IAddBook {
   async execute({ props }: Book): Promise<Book> {
 
     const { title, price, genre, synopsis, author, publishedDate, pageCount, image } = props
+  
+    const parseAuthor = JSON.parse(author)
+    const parseGenre = JSON.parse(genre)
+
+    const authorConnectOrCreate = parseAuthor.map((authors: string)  => ({
+      connectOrCreate: {
+        where: { name: authors },
+        create: { name: authors },
+      },
+    }));
+    const genreConnectOrCreate = parseGenre.map((genres: string)  => ({
+      connectOrCreate: {
+        where: { name: genres },
+        create: { name: genres },
+      },
+    }));
    
     try {
       const book = await prisma.book.create({
@@ -20,25 +37,21 @@ export class AddBook implements IAddBook {
           pageCount: pageCount,
           image: image,
           author: {
-            connectOrCreate: {
-              where: {
-                name: author,
-              },
-              create: {
-                name: author,
-              },
-            },
+            create: authorConnectOrCreate,
           },
           tag: {
-            connectOrCreate: {
-              where: {
-                genre: genre,
-              },
-              create: {
-                genre: genre,
-              },
-            },
+            create: authorConnectOrCreate,
           },
+          // tag: {
+          //   connectOrCreate: {
+          //     where: {
+          //       genre: genre,
+          //     },
+          //     create: {
+          //       genre: genre,
+          //     },
+          //   },
+          // },
           stock: {
             create: {
               quantity: 1

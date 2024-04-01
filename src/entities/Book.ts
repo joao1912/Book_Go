@@ -7,7 +7,7 @@ export interface IBook {
     author: string;
     synopsis: string;
     price: number;
-    genre: string | string[];
+    genre: string;
     publishedDate: string;
     pageCount: number;
     image?: any
