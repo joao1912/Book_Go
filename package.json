@@ -12,12 +12,12 @@
     "test:unit:orm": "jest ./test/unit/ormRepositories",
     "test:unit:usecases": "jest --testPathPattern=./test/unit/useCases",
     "test:int": "jest ./test/integration/ --runInBand",
-    "test:int:book": "jest ./test/integration/book --runInBand",
-    "test:int:finance": "jest ./test/integration/finance --runInBand",
-    "test:int:reservation": "jest ./test/integration/reservation --runInBand",
-    "test:int:stock": "jest ./test/integration/stock --runInBand",
-    "test:int:user": "jest ./test/integration/user --runInBand",
-    "test:int:comment": "jest ./test/integration/comment --runInBand"
+    "test:int:book": "jest ./test/integration/routes/book --runInBand",
+    "test:int:finance": "jest ./test/integration/routes/finance --runInBand",
+    "test:int:reservation": "jest ./test/integration/routes/reservation --runInBand",
+    "test:int:stock": "jest ./test/integration/routes/stock --runInBand",
+    "test:int:user": "jest ./test/integration/routes/user --runInBand",
+    "test:int:comment": "jest ./test/integration/routes/comment --runInBand"
   },
   "author": "",
   "license": "MIT",
