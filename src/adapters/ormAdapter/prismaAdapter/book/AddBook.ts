@@ -10,23 +10,10 @@ export class AddBook implements IAddBook {
   async execute({ props }: Book): Promise<Book> {
 
     const { title, price, genre, synopsis, author, publishedDate, pageCount, image } = props
-  
-    const parseAuthor = JSON.parse(author)
-    const parseGenre = JSON.parse(genre)
+    
+    const arrayGenre = genre.split(",")
+    const arrayAuthor = author.split(",")
 
-    const authorConnectOrCreate = parseAuthor.map((authors: string)  => ({
-      connectOrCreate: {
-        where: { name: authors },
-        create: { name: authors },
-      },
-    }));
-    const genreConnectOrCreate = parseGenre.map((genres: string)  => ({
-      connectOrCreate: {
-        where: { name: genres },
-        create: { name: genres },
-      },
-    }));
-   
     try {
       const book = await prisma.book.create({
         data: {
@@ -37,21 +24,21 @@ export class AddBook implements IAddBook {
           pageCount: pageCount,
           image: image,
           author: {
-            create: authorConnectOrCreate,
+            connectOrCreate: arrayAuthor.map(author => ({
+              where: { name: author },
+              create: { name: author },
+            })),
           },
           tag: {
-            create: authorConnectOrCreate,
+            connectOrCreate: arrayGenre.map(genre => ({
+              where: {
+                genre: genre,
+              },
+              create: {
+                genre: genre,
+              },
+            })),
           },
-          // tag: {
-          //   connectOrCreate: {
-          //     where: {
-          //       genre: genre,
-          //     },
-          //     create: {
-          //       genre: genre,
-          //     },
-          //   },
-          // },
           stock: {
             create: {
               quantity: 1
