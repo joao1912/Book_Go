@@ -45,10 +45,15 @@ export default class expressAdapter implements HTTPAdapterRepository {
 
     config(): void {
 
+        const corsOptions: cors.CorsOptions = {
+            methods: "GET, POST, PUT, DELETE",
+            origin: process.env.ALLOW_ORIGIN || "*"
+        }
+
         this.app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }))
-        this.app.use(cors())
+        this.app.use(cors( corsOptions ))
         this.setRoutes()
         this.app.use(ErrorHandler.execute)
 
