@@ -1,17 +1,19 @@
-FROM node:latest as build
+FROM alpine:latest as builder
+
+RUN apk add --no-cache bash nano
+
+FROM node:latest
+
+RUN npm install -g npm && \
+    npm install -g pm2 && \
+    mkdir /app
 
 WORKDIR /app
 
-COPY package*.json .
-
-RUN npm install
-
 COPY . .
 
-RUN npm run build
+RUN npm install && \
+    npm run build && \
+    npx prisma db push
 
-FROM nginx:latest
-
-COPY dist/ /usr/share/nginx/html
-
-EXPOSE 80
+CMD ["pm2-runtime", "start", "./pm2/pm2-development.json"]
