@@ -1,6 +1,7 @@
-import request from "supertest"
-import HTTPAdapter from "../../../../src/adapters/HTTPAdapter/protocol"
-import { IBook } from "../../../../src/entities/Book";
+import request from "supertest";
+import HTTPAdapter from "../../../../../src/adapters/HTTPAdapter/protocol";
+import { IBook } from "../../../../../src/entities/Book";
+
 
 describe('## POST ##', () => {
 
@@ -11,7 +12,7 @@ describe('## POST ##', () => {
         title: "A Route too add book",
         synopsis: "I just got lost in the mountain while I was travelling to...",
         price: 80,
-        author: "Coldplay",
+        author: "Coldplay, Queen",
         pageCount: 23,
         publishedDate: '2012-10-09',
         genre: "Music"

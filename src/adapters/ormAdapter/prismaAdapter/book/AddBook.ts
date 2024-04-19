@@ -2,6 +2,7 @@ import { prisma } from "../db";
 import { Book } from "../../../../entities/Book";
 import { IAddBook } from "../../repositories/book/IAddBook";
 import handlePrismaError from "../util/handlePrismaError";
+import { string } from "zod";
 
 
 export class AddBook implements IAddBook {
@@ -9,7 +10,10 @@ export class AddBook implements IAddBook {
   async execute({ props }: Book): Promise<Book> {
 
     const { title, price, genre, synopsis, author, publishedDate, pageCount, image } = props
-   
+    
+    const arrayGenre = genre.split(",")
+    const arrayAuthor = author.split(",")
+
     try {
       const book = await prisma.book.create({
         data: {
@@ -20,24 +24,20 @@ export class AddBook implements IAddBook {
           pageCount: pageCount,
           image: image,
           author: {
-            connectOrCreate: {
-              where: {
-                name: author,
-              },
-              create: {
-                name: author,
-              },
-            },
+            connectOrCreate: arrayAuthor.map(author => ({
+              where: { name: author },
+              create: { name: author },
+            })),
           },
           tag: {
-            connectOrCreate: {
+            connectOrCreate: arrayGenre.map(genre => ({
               where: {
                 genre: genre,
               },
               create: {
                 genre: genre,
               },
-            },
+            })),
           },
           stock: {
             create: {

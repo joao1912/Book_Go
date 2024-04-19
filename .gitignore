@@ -7,3 +7,5 @@ package-lock.json
 coverage
 
 dist
+
+docker-compose.yml
