@@ -50,7 +50,7 @@ export const handlePrismaError = (name: string, error: any) => {
                   
             }
 
-            ServerResponse.notFound(name, "No results.")
+            ServerResponse.notFound(name, JSON.stringify(error))
     }
 };
 

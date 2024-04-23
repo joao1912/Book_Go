@@ -13,7 +13,6 @@ WORKDIR /app
 COPY . .
 
 RUN npm install && \
-    npm run build && \
-    npx prisma db push
+    npm run build
 
 CMD ["pm2-runtime", "start", "./pm2/pm2-development.json"]
