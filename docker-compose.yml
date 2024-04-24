@@ -1,0 +1,67 @@
+services:
+  
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      PGUSER: ${DB_USER}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: "pg_isready -q -h db"
+      interval: 10s
+      retries: 5
+      timeout: 10s
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: senha
+    ports:
+      - 8085:80
+    
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    volumes:
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
+
+    depends_on:
+      - book-node1
+      - book-node2
+      - db
+
+  book-node1:
+    
+    depends_on:
+      db:
+        condition: service_healthy
+  
+    build: .
+    container_name: book-node1  
+    command: ["npx", "prisma", "db", "push", "&&", "pm2-runtime", "start", "./pm2/pm2-development.json"]
+
+  
+
+  book-node2:
+    
+    depends_on:
+      db:
+        condition: service_healthy
+    build: .
+    container_name: book-node2 
+    command: ["npx", "prisma", "db", "push", "&&", "pm2-runtime", "start", "./pm2/pm2-development.json"]
+  
