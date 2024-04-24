@@ -52,8 +52,7 @@ services:
   
     build: .
     container_name: book-node1  
-    command: ["npx", "prisma", "db", "push", "&&", "pm2-runtime", "start", "./pm2/pm2-development.json"]
-
+    restart: always
   
 
   book-node2:
@@ -63,5 +62,4 @@ services:
         condition: service_healthy
     build: .
     container_name: book-node2 
-    command: ["npx", "prisma", "db", "push", "&&", "pm2-runtime", "start", "./pm2/pm2-development.json"]
-  
+    restart: always
