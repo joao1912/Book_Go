@@ -18,8 +18,6 @@ RUN npm run build
 
 RUN npm install @prisma/client@latest
 
-#RUN npx prisma generate
-
 EXPOSE 80
 
 CMD ["pm2-runtime", "start", "./pm2/pm2-development.json"]
