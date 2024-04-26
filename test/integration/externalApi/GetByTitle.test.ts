@@ -8,7 +8,7 @@ describe('## GET ##', () => {
 
         const apiBookGoogle = new ApiBookGoogle(httpClientAdapter)
 
-        const book = await apiBookGoogle.findBook('Harry Potter')
+        const book = await apiBookGoogle.findBook('Harry Potter', 'Colin')
 
         const data = book
 

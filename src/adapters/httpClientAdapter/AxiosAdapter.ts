@@ -53,10 +53,13 @@ class AxiosAdapter implements httpClientAdapterRepository {
                 smallThumbnail,
                 thumbnail
             } = imageLinks
-
+            
+            if(!authors){
+                    continue;
+                }
             const FormatedBook: IBook = {
                 title: title,
-                author: authors.toString(), //problema
+                author: authors.toString(), 
                 synopsis: description,
                 price: item.saleInfo.listPrice? item.saleInfo.listPrice.amount : 0,
                 genre: categories.toString(), //problema

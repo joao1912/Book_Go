@@ -9,15 +9,17 @@ class ApiBookGoogle {
 
     }
 
-    async findBook(title: string) {
+    async findBook(title: string, author?:string) {
 
-
+        if(author){
+            author = 'inauthor:' + author
+        }
         const params = {
-            q: title,
-            //inauthor: 'keyes',
+            q: title + author,
             maxResults: 10,
-            // langRestrict: 'en',
-            //subject: 'Gardening',
+            langRestrict: 'en', //nao funcionou ainda
+            // startIndex: 0 //para paginar ainda nao testei
+            //subject: 'Gardening', //nao testado
             key: process.env.API_GOOGLE_KEY
         }
 
