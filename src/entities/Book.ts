@@ -18,7 +18,7 @@ export const bookSchema = z.object({
     id: z.string().uuid().optional(),
     title: z.string()
         .min(1, { message: "The title must be at least 1 character long." })
-        .max(50, { message: "The title must be a maximum of 50 characters in length.'." }),
+        .max(100, { message: "The title must be a maximum of 100 characters in length.'." }),
 
     author: z.string()
         .min(3, { message: 'The author name must be at least 3 character long.' })
@@ -26,7 +26,7 @@ export const bookSchema = z.object({
    
     synopsis: z.string()
         .min(20, { message: "The synopsis must be at least 20 characters long." })
-        .max(1000, { message: "The synopsis must be at most 200 characters long." }),
+        .max(5000, { message: "The synopsis must be at most 5000 characters long." }),
     price: z.number(),
     genre: z.string()
     .min(3, { message: "The genre must be at least 3 characters long." })

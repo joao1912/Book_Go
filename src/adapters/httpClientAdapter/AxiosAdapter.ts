@@ -30,12 +30,11 @@ class AxiosAdapter implements httpClientAdapterRepository {
             throw new CustomError('ApiGoogleError', 'Needs params to search.', 400)
         }
         
-        const booksData = await this.httpClient.get('/volumes', params)
+        const booksData = await this.httpClient.get('/volumes', {params})
 
         const everyBooks: IBook[] = []
 
-        const data = booksData.data.itens
-
+        const data = booksData.data.items
         for (let item of data) {
 
             const id = item.id
@@ -57,10 +56,10 @@ class AxiosAdapter implements httpClientAdapterRepository {
 
             const FormatedBook: IBook = {
                 title: title,
-                author: authors[0], //problema
+                author: authors.toString(), //problema
                 synopsis: description,
-                price: item.saleInfo.listPrice.amount,
-                genre: categories[0], //problema
+                price: item.saleInfo.listPrice? item.saleInfo.listPrice.amount : 0,
+                genre: categories.toString(), //problema
                 publishedDate: publishedDate,
                 pageCount: pageCount,
                 image: thumbnail

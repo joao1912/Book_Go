@@ -15,7 +15,8 @@ class ApiBookGoogle {
         const params = {
             q: title,
             //inauthor: 'keyes',
-            maxResults: 30,
+            maxResults: 10,
+            // langRestrict: 'en',
             //subject: 'Gardening',
             key: process.env.API_GOOGLE_KEY
         }

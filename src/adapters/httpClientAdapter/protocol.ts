@@ -1,3 +1,3 @@
-import AxiosAdapter from "./axiosAdapter";
+import AxiosAdapter from "./AxiosAdapter";
 
 export const httpClientAdapter = new AxiosAdapter()
