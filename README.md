@@ -1,9 +1,9 @@
 # Book&Go
-- Este projeto visa criar um sistema para gerenciar uma biblioteca física, permitindo aos usuários visualizar os livros disponíveis, favoritar obras, reservar livros e desfrutar de outras funcionalidades, tornando a gestão de livros mais eficiente e acessível.
+Este projeto visa criar um sistema para gerenciar uma biblioteca física, permitindo aos usuários visualizar os livros disponíveis, favoritar obras, reservar livros e desfrutar de outras funcionalidades, tornando a gestão de livros mais eficiente e acessível.
 
-##Funcionalidades
+## Funcionalidades
 
-**Visualização de Livros: ** Os usuários podem visualizar todos os livros disponíveis na biblioteca, incluindo informações como título, autor, gênero e outros.
+**Visualização de Livros:** Os usuários podem visualizar todos os livros disponíveis na biblioteca, incluindo informações como título, autor, gênero e outros.
 
 **Favoritos:** Os usuários têm a capacidade de favoritar livros de seu interesse para acessá-los facilmente mais tarde.
 
@@ -37,7 +37,7 @@ Adotamos a arquitetura limpa para garantir a separação clara de responsabilida
 
 **tests:** Contém todos os testes unitários e de integração, garantindo a qualidade e confiabilidade do código.
 
-##Observações
+## Observações
 - Este projeto ainda está em desenvolvimento. 
 
 - Há um arquivo exemplo .env (.env.example) disponível para fornecer um guia sobre as variáveis de ambiente necessárias para configurar a aplicação.
