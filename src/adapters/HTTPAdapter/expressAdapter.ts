@@ -15,7 +15,6 @@ import stockRouter from "../../interface/routes/express/stockRoutes";
 import commentRouter from "../../interface/routes/express/commentRoutes";
 import financeRouter from "../../interface/routes/express/financeRoutes";
 import ErrorHandler from "../../interface/middlewares/ErrorHandler";
-import SyncDb from '../../../config/sync/SyncDb';
 
 export default class expressAdapter implements HTTPAdapterRepository {
 
@@ -57,8 +56,6 @@ export default class expressAdapter implements HTTPAdapterRepository {
         this.app.use(cors( corsOptions ))
         this.setRoutes()
         this.app.use(ErrorHandler.execute)
-
-        SyncDb.execute()
 
     }
 

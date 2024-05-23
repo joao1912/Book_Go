@@ -53,8 +53,9 @@ services:
     build: .
     container_name: book-node1  
     restart: always
+    command: >
+      /bin/bash -c "npx prisma db push && pm2-runtime start /app/pm2/pm2-development.json"
   
-
   book-node2:
     
     depends_on:
@@ -63,3 +64,5 @@ services:
     build: .
     container_name: book-node2 
     restart: always
+    command: >
+      /bin/bash -c "npx prisma db push && pm2-runtime start /app/pm2/pm2-development.json"
