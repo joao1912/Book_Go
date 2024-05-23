@@ -51,7 +51,7 @@ services:
         condition: service_healthy
   
     build: .
-    container_name: book-node1  
+    container_name: book_go1  
     restart: always
     command: >
       /bin/bash -c "npx prisma db push && pm2-runtime start /app/pm2/pm2-development.json"
@@ -62,7 +62,7 @@ services:
       db:
         condition: service_healthy
     build: .
-    container_name: book-node2 
+    container_name: book_go2 
     restart: always
     command: >
       /bin/bash -c "npx prisma db push && pm2-runtime start /app/pm2/pm2-development.json"
